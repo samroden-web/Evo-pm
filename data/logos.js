@@ -12,7 +12,10 @@ export const clientLogos = [
   { name: 'British Land', src: '/images/logos/clients/british-land.png', width: 189, height: 95 },
   { name: 'Capital Letters', src: '/images/logos/clients/capital-letters.png', width: 247, height: 164 },
   { name: 'Resonance', src: '/images/logos/clients/resonance.png', width: 320, height: 133 },
-  // The Storm logo has been removed on purpose (brief HOME-04). Do not add it back.
+  // Added 24 Sep 2026 (addendum v2, section 1): recent wins.
+  { name: 'Greenhill Housing', src: null, tbc: 'logo file to follow' },
+  { name: 'Storm Housing Group', src: null, tbc: 'logo file to follow' },
+  { name: 'J49', src: null, tbc: 'logo file to follow' },
 ];
 
 export const frameworkLogos = [

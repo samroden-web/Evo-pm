@@ -1,20 +1,20 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Figures from '@/components/Figures';
-import Laptop from '@/components/Laptop';
-import VideoTestimonials from '@/components/VideoTestimonials';
 import LogoStrip from '@/components/LogoStrip';
-import ProblemSection from '@/components/ProblemSection';
-import SolutionSection from '@/components/SolutionSection';
+import WhyNow from '@/components/WhyNow';
+import ProblemAnswer from '@/components/ProblemAnswer';
+import Caretaker from '@/components/Caretaker';
 import PlansTeaser from '@/components/PlansTeaser';
 import CaseStudyCards from '@/components/CaseStudyCards';
-import PilotSection from '@/components/PilotSection';
-import SectorTiles from '@/components/SectorTiles';
+import VideoTestimonials from '@/components/VideoTestimonials';
+import ComplianceBand from '@/components/ComplianceBand';
+import WhoStrip from '@/components/WhoStrip';
+import TrustBlock from '@/components/TrustBlock';
 import LatestInsights from '@/components/LatestInsights';
-import ClosingCta from '@/components/ClosingCta';
+import GettingStarted from '@/components/GettingStarted';
 import Quote from '@/components/Quote';
-import Tbc from '@/components/Tbc';
-import { clientLogos, frameworkLogos, accreditationLogos } from '@/data/logos';
+import { clientLogos } from '@/data/logos';
 import { testimonials } from '@/data/testimonials';
 import { cta } from '@/data/site';
 
@@ -25,18 +25,36 @@ export const metadata = {
   alternates: { canonical: '/' },
 };
 
+// Rebuilt 24 September 2026 to the agreed homepage mockup.
+//
+// What changed from the draft:
+//  - The regulatory context is its own thin band ("Why repairs matter more than ever")
+//    rather than sitting under "the problem". It sets the stakes before anyone is told
+//    they have a problem, which is the right order for a housing director.
+//  - Problem and answer line up row by row, replacing the four numbered solution
+//    points. Same job, half the space, and each objection answered beside it.
+//  - Video testimonials move down into the proof block. They were second on the page,
+//    above the problem and the solution, so a first-time visitor was asked to watch a
+//    video before knowing what EVO is.
+//  - The founder quote moves to /about. Mark explaining why EVO exists is an About
+//    question, not a buying one.
+//  - New: the Caretaker, the compliance split, the trust block and the See it / Try it /
+//    Start it ladder, which merges the old pilot section and closing CTA.
+
 export default function HomePage() {
   return (
     <>
-      {/* HOME-01 Hero */}
+      {/* 1. Hero */}
       <section className="home-hero">
         <div className="container home-hero__grid">
           <div className="home-hero__copy">
             <p className="eyebrow">Fully managed repairs for housing landlords</p>
-            <h1>A fully managed, fixed-price repairs service for housing landlords.</h1>
+            <h1>
+              A fully managed, <em>fixed-price</em> repairs service for housing landlords.
+            </h1>
             <p className="lead">
-              We combine purpose-built technology, repairs expertise and a fully managed service to give landlords greater control
-              and residents a better repairs experience.
+              Purpose-built technology, repairs expertise and a fully managed service, so landlords get control and residents get a
+              repair that actually happens.
             </p>
             <div className="btn-row">
               <Link href={cta.review.href} className="btn btn-primary">
@@ -46,44 +64,35 @@ export default function HomePage() {
                 See plans and pricing
               </Link>
             </div>
-            {/* GLOBAL-06: interim combined badge. Each award is labelled with the client it was won with. */}
-            <div className="award-strip">
-              <Image
-                src="/images/awards/award-badges-interim.png"
-                alt="Housing Executive Awards 2025 winner and Housing Digital Innovation Awards 2024 winner badges"
-                width={684}
-                height={99}
-                style={{ height: 52, width: 'auto' }}
-                priority
-              />
-              <p>
-                Housing Executive Awards 2025, Partnership of the Year, with IDS. Housing Digital Innovation Awards 2024, Best
-                Repairs and Maintenance Innovation, with B&amp;D Reside.
-              </p>
-            </div>
+            {/* GLOBAL-06: each award is only ever shown against the client it was won with. */}
+            <ul className="ev2-awards">
+              <li>Housing Executive Awards 2025 &middot; Partnership of the Year, with IDS</li>
+              <li>Housing Digital Innovation Awards 2024 &middot; with B&amp;D Reside</li>
+            </ul>
           </div>
-          <div className="home-hero__visual" aria-hidden="true">
-            <Laptop alt="" priority sizes="(min-width: 960px) 470px, 80vw" />
-            <Image
-              className="home-hero__phone"
-              src="/images/app/living-app-home-framed.webp"
-              alt=""
-              width={652}
-              height={1271}
-              priority
-              sizes="190px"
-            />
+          <div className="home-hero__visual">
+            <figure className="ev2-heroimg">
+              <Image
+                src="/images/photos/evo-resident-living-app.webp"
+                alt="An EVO team member showing a resident how to report a repair on the Living App"
+                width={1400}
+                height={933}
+                priority
+                sizes="(min-width: 960px) 46vw, 92vw"
+              />
+              <figcaption>
+                <span>Reported in</span>
+                <strong>under 30 seconds, from the sofa</strong>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      {/* HOME-02 Figures */}
+      {/* 2. Figures */}
       <Figures />
 
-      {/* HOME-03 Video testimonials */}
-      <VideoTestimonials />
-
-      {/* HOME-04 Client logos */}
+      {/* 3. Client logos */}
       <section className="section section--tight" aria-labelledby="clients-title">
         <div className="container">
           <h2 id="clients-title" className="center" style={{ fontSize: '1.4rem' }}>
@@ -95,40 +104,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOME-05 The problem */}
-      <div className="section--grey">
-        <ProblemSection />
-      </div>
+      {/* 4. Why repairs matter more than ever */}
+      <WhyNow />
 
-      {/* HOME-06 The solution */}
-      <SolutionSection />
+      {/* 5. The problem, and the answer */}
+      <ProblemAnswer />
 
-      {/* HOME-07 Founder quote */}
-      <section className="section section--tight section--grey" aria-label="From our co-founder">
-        <div className="container">
-          <div className="founder">
-            <Tbc block>Mark Iandoli portrait</Tbc>
-            <Quote
-              large
-              t={{
-                quote:
-                  'I spent twenty-five years in UK property maintenance and kept seeing the same gap. Add up the helpdesk, the chasing, the compliance reporting and the mark-up on every job, and repairs were costing landlords close to double what they thought. Residents could not get a repair done easily, and good contractors spent more time quoting than working. One broken system, and nothing built to fix it. So we built EVO.',
-                name: 'Mark Iandoli',
-                role: 'Co-founder and COO',
-              }}
-            />
-          </div>
-        </div>
-      </section>
+      {/* 6. The Caretaker */}
+      <Caretaker />
 
-      {/* HOME-08 Plans teaser */}
+      {/* 7. Plans teaser */}
       <PlansTeaser grey={false} />
 
-      {/* HOME-09 Proof */}
+      {/* 8. Proof: case studies, then the video testimonials */}
       <section className="section section--grey" aria-labelledby="proof-title">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">Proven in practice</p>
+            <p className="eyebrow">Proof</p>
             <h2 id="proof-title">Already delivering for social landlords.</h2>
           </div>
           <CaseStudyCards />
@@ -136,38 +128,23 @@ export default function HomePage() {
             <Quote t={testimonials.garethBrown} />
           </div>
         </div>
+        <VideoTestimonials />
       </section>
 
-      {/* HOME-10 Pilot */}
-      <PilotSection />
+      {/* 9. Compliance, both kinds */}
+      <ComplianceBand />
 
-      {/* HOME-11 Who we help, and HOME-12 Frameworks and accreditations in the same band */}
-      <section className="section section--grey" aria-labelledby="who-title">
-        <div className="container">
-          <div className="section-head">
-            <h2 id="who-title">Who we help</h2>
-          </div>
-          <SectorTiles />
-          <hr className="band-divider" />
-          <h2 id="frameworks-title" className="center" style={{ fontSize: '1.3rem' }}>
-            Frameworks and accreditations
-          </h2>
-          <div className="mt-2">
-            <LogoStrip logos={[...frameworkLogos, ...accreditationLogos]} color label="Frameworks and accreditations" swipe />
-          </div>
-          <p className="center mt-2 mb-0">
-            <Link href="/about/trust" className="text-link">
-              Clients, frameworks and accreditations
-            </Link>
-          </p>
-        </div>
-      </section>
+      {/* 10. Who we help */}
+      <WhoStrip />
 
-      {/* HOME-13 Insights */}
+      {/* 11. Trust */}
+      <TrustBlock />
+
+      {/* 12. Insights */}
       <LatestInsights />
 
-      {/* HOME-14 Closing CTA */}
-      <ClosingCta />
+      {/* 13. See it. Try it. Start it. */}
+      <GettingStarted />
     </>
   );
 }

@@ -70,10 +70,14 @@ export const mainNav = [
       { label: 'Landlords & managing agents', href: '/who-we-help/landlords-and-agents' },
     ],
   },
-  // Patch 2 replaces this with { label: 'Compliance', href: '/compliance' },
-  // with damp and mould kept underneath it. Left as-is until that page exists,
-  // so the nav never points at a 404.
-  { label: 'Damp & mould', href: '/damp-and-mould' },
+  {
+    label: 'Compliance',
+    href: '/compliance',
+    children: [
+      { label: 'Statutory and regulatory', href: '/compliance' },
+      { label: 'Damp & mould', href: '/damp-and-mould' },
+    ],
+  },
   {
     label: 'Case studies',
     href: '/case-studies',
@@ -103,6 +107,7 @@ export const footerNav = [
     links: [
       { label: 'How it works', href: '/how-it-works' },
       { label: 'Plans & pricing', href: '/pricing' },
+      { label: 'Compliance', href: '/compliance' },
       { label: 'Damp & mould', href: '/damp-and-mould' },
       { label: 'Case studies', href: '/case-studies' },
       { label: 'Products', href: '/products' },

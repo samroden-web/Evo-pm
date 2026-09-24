@@ -9,6 +9,7 @@ const staticRoutes = [
   '/who-we-help/housing',
   '/who-we-help/build-to-rent',
   '/who-we-help/landlords-and-agents',
+  '/compliance',
   '/damp-and-mould',
   '/case-studies',
   '/case-studies/ids',
