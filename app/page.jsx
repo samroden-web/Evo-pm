@@ -60,7 +60,7 @@ export default function HomePage() {
               <Link href={cta.review.href} className="btn btn-primary">
                 {cta.review.label}
               </Link>
-              <Link href="/pricing" className="btn btn-secondary btn-on-dark">
+              <Link href="/pricing" className="btn btn-secondary">
                 See plans and pricing
               </Link>
             </div>
@@ -92,15 +92,15 @@ export default function HomePage() {
       {/* 2. Figures */}
       <Figures />
 
-      {/* 3. Client logos */}
-      <section className="section section--tight" aria-labelledby="clients-title">
+      {/* 3. Client logos — warm band, per the mockup, sitting between the orange
+           figures band and the warm "why now" band so the page has rhythm rather
+           than an unbroken run of white. */}
+      <section className="ev3-logoband" aria-labelledby="clients-title">
         <div className="container">
-          <h2 id="clients-title" className="center" style={{ fontSize: '1.4rem' }}>
+          <h2 id="clients-title" className="ev3-logoband-hd">
             Trusted by housing providers across London
           </h2>
-          <div className="mt-2">
-            <LogoStrip logos={clientLogos} label="Clients" row />
-          </div>
+          <LogoStrip logos={clientLogos} label="Clients" row />
         </div>
       </section>
 
