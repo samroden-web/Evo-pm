@@ -11,9 +11,35 @@ const nextConfig = {
       { source: '/faqs', destination: '/faqs/residents', statusCode: 301 },
       { source: '/faqs/landlords', destination: '/faqs/landlords-and-property-managers', statusCode: 301 },
       { source: '/faqs/property-managers', destination: '/faqs/landlords-and-property-managers', statusCode: 301 },
-      { source: '/products/overview', destination: '/products', statusCode: 301 },
       { source: '/download-sign-up', destination: '/renters-rights-guide', statusCode: 301 },
       { source: '/sectors/private-landlords-and-agents', destination: '/who-we-help/landlords-and-agents', statusCode: 301 },
+
+      // Products absorbed into How it works (map, page 01). The three app pages were
+      // 95 to 122 words each and repeated the cards they linked from; the hub carried
+      // the same H1 as How it works, word for word.
+      { source: '/products', destination: '/how-it-works', statusCode: 301 },
+      { source: '/products/overview', destination: '/how-it-works', statusCode: 301 },
+      { source: '/products/living-app', destination: '/how-it-works#living-app', statusCode: 301 },
+      { source: '/products/dashboard', destination: '/how-it-works#dashboard', statusCode: 301 },
+      { source: '/products/trades-app', destination: '/how-it-works#trades-app', statusCode: 301 },
+
+      // Five About pages become one. The four children are now sections with anchors,
+      // so an old link still lands on the right part of the page.
+      { source: '/about/what-we-do', destination: '/how-it-works', statusCode: 301 },
+      { source: '/about/why-we-do-it', destination: '/about', statusCode: 301 },
+      { source: '/about/who-we-are', destination: '/about#who-we-are', statusCode: 301 },
+      { source: '/about/trust', destination: '/about#trust', statusCode: 301 },
+
+      // Three case study pages become one scrolling page with deep anchors, so a
+      // prospect can still be sent straight to IDS.
+      { source: '/case-studies/ids', destination: '/case-studies#ids', statusCode: 301 },
+      { source: '/case-studies/bd-reside', destination: '/case-studies#bd-reside', statusCode: 301 },
+
+      // Careers, Investors and Partners were eighteen words each. An empty page reads
+      // worse than no page. Off until there is something to say.
+      { source: '/careers', destination: '/about', statusCode: 301 },
+      { source: '/investors', destination: '/about', statusCode: 301 },
+      { source: '/partners', destination: '/contact', statusCode: 301 },
 
       // Six sector pages become three under /who-we-help (addendum v2, section 3).
       { source: '/sectors', destination: '/who-we-help/housing', statusCode: 301 },

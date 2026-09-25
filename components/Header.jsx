@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { mainNav, cta } from '@/data/site';
+import { mainNav, utilityNav, cta } from '@/data/site';
 import { CaretIcon, MenuIcon } from './Icons';
 
 function isActive(pathname, href) {
@@ -76,6 +76,22 @@ export default function Header() {
           </ul>
         </nav>
 
+        {/* Site map: Residents, Trades and Client login sit off the buying nav, top
+            right. Client login goes out to app.evo-pm.com. */}
+        <div className="ev3-util">
+          {utilityNav.map((u) =>
+            u.external ? (
+              <a key={u.href} href={u.href} className="ev3-util-login" rel="noopener">
+                {u.label}
+              </a>
+            ) : (
+              <Link key={u.href} href={u.href} aria-current={isActive(pathname, u.href) ? 'page' : undefined}>
+                {u.label}
+              </Link>
+            )
+          )}
+        </div>
+
         <Link href={cta.review.href} className="btn btn-primary btn-small header-cta">
           {cta.review.label}
         </Link>
@@ -112,6 +128,19 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          <div className="ev3-util-mobile">
+            {utilityNav.map((u) =>
+              u.external ? (
+                <a key={u.href} href={u.href} rel="noopener">
+                  {u.label}
+                </a>
+              ) : (
+                <Link key={u.href} href={u.href}>
+                  {u.label}
+                </Link>
+              )
+            )}
+          </div>
           <Link href={cta.review.href} className="btn btn-primary">
             {cta.review.label}
           </Link>
