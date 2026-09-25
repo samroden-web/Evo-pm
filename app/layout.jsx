@@ -26,7 +26,14 @@ export const metadata = {
     type: 'website',
     siteName: 'EVO',
     locale: 'en_GB',
-    images: [{ url: '/images/photos/evo-operations-team.webp', width: 1600, height: 945, alt: 'The EVO operations team' }],
+    images: [
+      {
+        url: '/images/photos/evo-operations-team.webp',
+        width: 1600,
+        height: 945,
+        alt: 'The EVO operations team',
+      },
+    ],
   },
   twitter: { card: 'summary_large_image', site: '@evo_pm' },
 };
@@ -42,7 +49,12 @@ const organization = {
   legalName: company.legalName,
   url: SITE_URL,
   logo: `${SITE_URL}/images/brand/evo-logo-horizontal.svg`,
-  email: contact.sales.email,
+  email: contact.salesEmail,
+  telephone: '+44 20 8691 9293',
+  vatID: company.vatNumber,
+  // Schema.org's `address` is the business address, so the head office is right here.
+  // The registered office is a filing address and belongs in the footer text, not in
+  // structured data that feeds a Google knowledge panel.
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'STC House, 7 Elmfield Road',
@@ -50,6 +62,15 @@ const organization = {
     postalCode: 'BR1 1LT',
     addressCountry: 'GB',
   },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+44 20 8691 9293',
+      contactType: 'customer service',
+      areaServed: 'GB',
+      availableLanguage: 'English',
+    },
+  ],
   sameAs: social.map((s) => s.href),
 };
 

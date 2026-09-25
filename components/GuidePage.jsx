@@ -4,7 +4,7 @@ import PageHero from './PageHero';
 import AppBadges from './AppBadges';
 import JsonLd from './JsonLd';
 import Tbc from './Tbc';
-import { SITE_URL } from '@/data/site';
+import { SITE_URL, contact } from '@/data/site';
 
 // Rebuilt resident guide (brief 6.7) with HowTo structured data.
 export default function GuidePage({ guide, imagePrefix, emergencyPanel = false, children }) {
@@ -27,7 +27,11 @@ export default function GuidePage({ guide, imagePrefix, emergencyPanel = false, 
         eyebrow="How-to guide"
         title={guide.title}
         lead={guide.intro}
-        crumbs={[{ href: '/residents', label: 'Residents' }, { href: '/how-to-guides', label: 'How-to guides' }, { label: guide.title }]}
+        crumbs={[
+          { href: '/residents', label: 'Residents' },
+          { href: '/how-to-guides', label: 'How-to guides' },
+          { label: guide.title },
+        ]}
       >
         <div className="btn-row">
           <a href={guide.pdf} className="btn btn-secondary">
@@ -64,8 +68,8 @@ export default function GuidePage({ guide, imagePrefix, emergencyPanel = false, 
             <div className="callout mt-3">
               <h2 style={{ fontSize: '1.2rem' }}>What counts as an emergency?</h2>
               <p>
-                An emergency is a sudden state of danger that needs immediate attention, such as a burst pipe or flooding, a total loss
-                of power or heating, your only toilet not working, or a home you cannot secure.
+                An emergency is a sudden state of danger that needs immediate attention, such as a burst pipe or
+                flooding, a total loss of power or heating, your only toilet not working, or a home you cannot secure.
               </p>
               <Link href="/faqs/residents" className="text-link">
                 See the full list in the resident FAQs
@@ -79,7 +83,8 @@ export default function GuidePage({ guide, imagePrefix, emergencyPanel = false, 
             <div className="card card--grey">
               <h2 style={{ fontSize: '1.2rem' }}>Cannot use the app?</h2>
               <p className="mb-0">
-                Call us on <Tbc>resident phone number</Tbc>. For help using the app, email <Tbc>resident email address</Tbc>.
+                Call us on {contact.residentPhone}. For help using the app, email{' '}
+                <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>.
               </p>
             </div>
             <div className="card card--grey">

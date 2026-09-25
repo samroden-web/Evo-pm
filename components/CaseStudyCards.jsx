@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const caseStudies = [
   {
     id: 'ids',
-    href: '/case-studies/ids',
+    href: '/case-studies#ids',
     client: 'Industrial Dwellings Society (IDS)',
     summary: 'Repair resolution times halved. 95% first-time fix. 1,414 homes, from a 25% pilot.',
     stat: { value: 'Halved', label: 'Repair resolution times' },
@@ -13,7 +13,7 @@ export const caseStudies = [
   },
   {
     id: 'bd-reside',
-    href: '/case-studies/bd-reside',
+    href: '/case-studies#bd-reside',
     client: 'B&D Reside, Barking and Dagenham',
     summary: '96% first-time fix in the pilot. From 380 pilot homes to more than 4,500 contracted.',
     stat: { value: '96%', label: 'First-time fix in the pilot' },

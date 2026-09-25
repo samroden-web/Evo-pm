@@ -3,6 +3,7 @@ import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
 import EveryPlan from '@/components/EveryPlan';
 import Tbc from '@/components/Tbc';
+import Photo from '@/components/Photo';
 import { cta } from '@/data/site';
 
 export const metadata = {
@@ -27,6 +28,13 @@ export default function BuildToRentPage() {
         title="Your residents judge you on repairs."
         lead="The repair is the part of the building your residents actually interact with. It gets talked about in the lift, written into a review, and remembered when the renewal lands."
         crumbs={[{ label: 'Who we help' }, { label: 'Build to Rent & institutional PRS' }]}
+        image="/images/photos/evo-operative-radiator-repair.webp"
+        imageAlt="An EVO operative repairing a radiator in a modern flat"
+        imageWidth={1074}
+        imageHeight={807}
+        priority
+        captionLabel="In the flat"
+        caption="Newer stock, fewer exceptions, one fixed price"
       >
         <div className="btn-row mt-3">
           <Link href={cta.review.href} className="btn btn-primary">
@@ -79,11 +87,35 @@ export default function BuildToRentPage() {
           <div className="steps-row mt-3">
             {STEPS.map(([t, d], i) => (
               <div className="step-card" key={t}>
-                <span className="step-label">{i + 1}</span>
+                <span className="num">{i + 1}</span>
                 <h3>{t}</h3>
                 <p className="mb-0">{d}</p>
               </div>
             ))}
+          </div>
+          <div className="ev3-screens mt-3" style={{ maxWidth: '420px' }}>
+            <figure>
+              <img
+                src="/images/app/living-app-home.webp"
+                alt="The EVO Living App home screen"
+                width="420"
+                height="884"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Your building, in their pocket</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="/images/app/living-app-report-a-problem.webp"
+                alt="Reporting a problem in the EVO Living App"
+                width="420"
+                height="884"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Reported without a phone call</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -95,7 +127,17 @@ export default function BuildToRentPage() {
             title="Communal areas and plant, not just the flats."
             lead="Lifts, plant rooms, amenity space, car parks and roofs, reactive and planned, on the same contract as the homes. One supplier for the whole building rather than a reactive contractor, a planned maintenance contractor and a compliance consultant who never speak to each other."
           />
-          <Tbc block>Confirm which communal and plant works are in scope, and how planned maintenance is priced.</Tbc>
+          <div className="ev3-split ev3-split--reverse mt-3">
+            <Photo
+              src="/images/photos/evo-engineer-gas-safety-check.webp"
+              alt="An EVO engineer completing a gas safety check on a tablet at a boiler"
+              caption="Statutory checks recorded on the job, not written up afterwards."
+              width={900}
+              height={675}
+              sizes="(min-width: 880px) 46vw, 100vw"
+            />
+            <Tbc block>Confirm which communal and plant works are in scope, and how planned maintenance is priced.</Tbc>
+          </div>
         </div>
       </section>
 
@@ -131,7 +173,7 @@ export default function BuildToRentPage() {
         </div>
       </section>
 
-      <section className="section section--navy">
+      <section className="section section--warm">
         <div className="container">
           <SectionHead
             eyebrow="Next step"

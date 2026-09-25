@@ -2,10 +2,34 @@ import Image from 'next/image';
 
 // Brief 6.6: four-step strip using the phone screens from the resident guide.
 const steps = [
-  { n: 1, title: 'Report', text: 'Choose the problem and add a photo.', img: '/images/guides/living-app-step-3.webp', alt: 'EVO Living App screen describing a problem with a photo attached' },
-  { n: 2, title: 'Book', text: 'Pick the time slots that suit you.', img: '/images/guides/living-app-step-5.webp', alt: 'EVO Living App screen for choosing appointment time slots' },
-  { n: 3, title: 'Track', text: 'See who is coming and when they will arrive.', img: '/images/guides/living-app-step-8.webp', alt: 'EVO Living App map showing the tradesperson on the way' },
-  { n: 4, title: 'Rate', text: 'Tell us how it went.', img: '/images/guides/living-app-step-4.webp', alt: 'EVO Living App screen with a thumbs-up and the job reference number' },
+  {
+    n: 1,
+    title: 'Report',
+    text: 'Choose the problem and add a photo.',
+    img: '/images/guides/living-app-step-3.webp',
+    alt: 'EVO Living App screen describing a problem with a photo attached',
+  },
+  {
+    n: 2,
+    title: 'Book',
+    text: 'Pick the time slots that suit you.',
+    img: '/images/guides/living-app-step-5.webp',
+    alt: 'EVO Living App screen for choosing appointment time slots',
+  },
+  {
+    n: 3,
+    title: 'Track',
+    text: 'See who is coming and when they will arrive.',
+    img: '/images/guides/living-app-step-8.webp',
+    alt: 'EVO Living App map showing the tradesperson on the way',
+  },
+  {
+    n: 4,
+    title: 'Rate',
+    text: 'Tell us how it went.',
+    img: '/images/guides/living-app-step-4.webp',
+    alt: 'EVO Living App screen with a thumbs-up and the job reference number',
+  },
 ];
 
 export default function PhoneStepStrip() {

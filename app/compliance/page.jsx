@@ -7,7 +7,7 @@ import { cta } from '@/data/site';
 export const metadata = {
   title: 'Compliance: statutory and regulatory | EVO',
   description:
-    "Statutory compliance is work we do: gas safety, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you — consumer standards, Tenant Satisfaction Measures, Awaab's Law and the Ombudsman — and we hold the evidence.",
+    'Statutory compliance is work we do — gas, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you, and we hold the evidence for it.',
   alternates: { canonical: '/compliance' },
 };
 
@@ -39,7 +39,10 @@ const RECORDED = [
   ['At triage', 'The priority applied, the timescale that follows from it, and who made the call.'],
   ['On attendance', 'Arrival time, the trade who attended, and photographs before work starts.'],
   ['On completion', 'What was done, what was used, photographs after, and the resident’s rating.'],
-  ['On no access', 'The visit, the evidence of attendance, and the attempt to make contact. The record landlords most often cannot produce.'],
+  [
+    'On no access',
+    'The visit, the evidence of attendance, and the attempt to make contact. The record landlords most often cannot produce.',
+  ],
   ['On repeat', 'Any return visit linked to the original job, so repeat work is visible rather than buried.'],
 ];
 
@@ -69,8 +72,8 @@ export default function CompliancePage() {
               <p className="eyebrow">Statutory</p>
               <h2 style={{ fontSize: '1.5rem' }}>Gas, electrical, alarms.</h2>
               <p>
-                <strong>We do the work.</strong> Inspection, certification and the remedials that follow, carried out by the same
-                trades who do your repairs — so a failed check becomes a job rather than a letter.
+                <strong>We do the work.</strong> Inspection, certification and the remedials that follow, carried out by
+                the same trades who do your repairs — so a failed check becomes a job rather than a letter.
               </p>
               <p className="mb-0">Available as an add-on to any plan, or as variable works.</p>
             </div>
@@ -78,8 +81,8 @@ export default function CompliancePage() {
               <p className="eyebrow">Regulatory</p>
               <h2 style={{ fontSize: '1.5rem' }}>The Regulator, TSMs, Awaab&rsquo;s Law.</h2>
               <p>
-                <strong>You hold the duty. We hold the proof.</strong> The duty never transfers and we will not pretend otherwise.
-                What changes is whether the evidence exists when someone asks for it.
+                <strong>You hold the duty. We hold the proof.</strong> The duty never transfers and we will not pretend
+                otherwise. What changes is whether the evidence exists when someone asks for it.
               </p>
               <p className="mb-0">Recorded as the work happens, not assembled afterwards.</p>
             </div>
@@ -170,15 +173,11 @@ export default function CompliancePage() {
           <div className="figures mt-3">
             <div className="stat stat--orange">
               <span className="num">1,000+</span>
-              <span className="stat-label">
-                Cases handled in 18 months <Tbc>verify</Tbc>
-              </span>
+              <span className="stat-label">Cases handled in 18 months</span>
             </div>
             <div className="stat stat--orange">
               <span className="num">6&ndash;7 days</span>
-              <span className="stat-label">
-                Average resolution, against 28-plus across the sector <Tbc>verify</Tbc>
-              </span>
+              <span className="stat-label">Average damp and mould resolution</span>
             </div>
             <div className="stat stat--orange">
               <span className="num">20%</span>
@@ -213,7 +212,9 @@ export default function CompliancePage() {
             <div className="card card--grey">
               <h3>What stays with you</h3>
               <ul className="mb-0">
-                <li>The legal duty, in every case. It does not transfer to a supplier and nobody can take it from you.</li>
+                <li>
+                  The legal duty, in every case. It does not transfer to a supplier and nobody can take it from you.
+                </li>
                 <li>The decision on what work is done, and when</li>
                 <li>Your relationship with the Regulator and the Ombudsman</li>
                 <li>The consumer standards judgement itself</li>
@@ -223,7 +224,7 @@ export default function CompliancePage() {
         </div>
       </section>
 
-      <section className="section section--navy">
+      <section className="section section--warm">
         <div className="container">
           <SectionHead
             eyebrow="Before 30 November"

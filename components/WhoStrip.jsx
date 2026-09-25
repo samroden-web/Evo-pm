@@ -7,7 +7,7 @@ export default function WhoStrip() {
   return (
     <section className="ev2-whostrip" aria-label="Who we help">
       <div className="container">
-        <span className="ev2-whostrip-t">Built for landlords with 300 to 5,000 homes.</span>
+        <span className="ev2-whostrip-t">Built for landlords with 100 to 5,000 homes.</span>
         <span className="ev2-whostrip-links">
           {sectors.map((s) => (
             <Link key={s.href} href={s.href}>
