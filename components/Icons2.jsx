@@ -51,3 +51,19 @@ export function QualityIcon() {
     </svg>
   );
 }
+
+// The award mark. The awarding bodies do not publish a winner badge we are licensed to
+// use, so this is drawn in EVO's own hand. A rosette rather than a wreath: at 26px a
+// laurel turns into a squiggle, and a rosette still reads as "this was won".
+export function LaurelIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="9" r="6" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="m12 6.2 1.05 2.02 2.25.32-1.65 1.57.4 2.23L12 11.29l-2.05 1.05.4-2.23L8.7 8.54l2.25-.32L12 6.2Z"
+        fill="currentColor"
+      />
+      <path d="M8.6 14.4 7 22l5-2.4 5 2.4-1.6-7.6" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  );
+}

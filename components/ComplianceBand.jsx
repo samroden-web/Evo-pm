@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Tbc from './Tbc';
 
 // Homepage, section 9. Sam's own distinction: statutory compliance is work EVO does;
 // regulatory compliance is a duty that never transfers, where EVO holds the evidence.
@@ -13,8 +12,8 @@ export default function ComplianceBand() {
           Two kinds of compliance. We help with <em>both</em>.
         </h2>
         <p className="ev2-compliance-lead">
-          One is a certificate with a date on it. The other is a judgement the Regulator makes about you. Suppliers who blur the two
-          are usually overclaiming on the second.
+          One is a certificate with a date on it. The other is a judgement the Regulator makes about you. Suppliers who
+          blur the two are usually overclaiming on the second.
         </p>
 
         <div className="ev2-halves">
@@ -22,32 +21,32 @@ export default function ComplianceBand() {
             <span className="ev2-half-k">Statutory</span>
             <strong>We do the work.</strong>
             <p>
-              Gas safety and boiler servicing, EICRs, PAT, smoke and heat alarms. Inspection, certification and the remedials, by
-              the same trades who do your repairs.
+              Gas safety and boiler servicing, EICRs, PAT, smoke and heat alarms. Inspection, certification and the
+              remedials, by the same trades who do your repairs.
             </p>
           </div>
           <div className="ev2-half ev2-half--regulatory">
             <span className="ev2-half-k">Regulatory</span>
             <strong>You hold the duty. We hold the proof.</strong>
             <p>
-              Consumer standards, Tenant Satisfaction Measures, Awaab&rsquo;s Law and the Ombudsman. The duty never transfers. The
-              evidence trail is what changes.
+              Consumer standards, Tenant Satisfaction Measures, Awaab&rsquo;s Law and the Ombudsman. The duty never
+              transfers. The evidence trail is what changes.
             </p>
           </div>
         </div>
 
+        {/* 25 September 2026: both figures are EVO's own operational numbers and stay.
+            What has gone is "against 28-plus across the sector" — somebody else's data
+            with no source behind it, and the only line here anyone could challenge.
+            EVO's own number does the work without the comparison. */}
         <div className="ev2-compliance-dates">
           <div>
-            <b>
-              1,000+ <Tbc>verify</Tbc>
-            </b>
+            <b>1,000+</b>
             <span>Damp and mould cases handled in the last 18 months</span>
           </div>
           <div>
-            <b>
-              6 to 7 days <Tbc>verify</Tbc>
-            </b>
-            <span>Average damp and mould resolution, against 28-plus across the sector</span>
+            <b>6 to 7 days</b>
+            <span>Average damp and mould resolution</span>
           </div>
           <div>
             <b>30 Nov 2026</b>

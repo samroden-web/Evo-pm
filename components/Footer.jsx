@@ -2,7 +2,19 @@ import Link from 'next/link';
 import { footerNav, company, social, awards, contact } from '@/data/site';
 import { frameworkLogos, accreditationLogos } from '@/data/logos';
 import LogoStrip from './LogoStrip';
-import Tbc from './Tbc';
+import { LaurelIcon } from './Icons2';
+
+// Rebuilt 25 September 2026 (Sam, point 13).
+//
+// Three things were wrong with it. It was the largest block of navy left on the site,
+// which cut against the whole reason Treatment B went warm. Its columns were a shape
+// invented for the footer rather than the agreed site map. And its logo strip mixed real
+// logos at four different optical sizes with four yellow TBC tags, which would have left
+// four holes the moment TBC was switched off.
+//
+// Now: a warm dark ground that belongs to the palette, columns that mirror the header,
+// logos normalised to one height with the unavailable ones simply not listed, and the
+// awards carrying the same laurel mark as the hero.
 
 export default function Footer() {
   return (
@@ -17,10 +29,23 @@ export default function Footer() {
               <br />
               Residents: <a href="/residents">get help with a repair</a>
             </p>
+            {/* One main number, confirmed from EVO's own company-information page. Voice
+                calls to the SMS line divert here, so there is nothing else to list. */}
             <p>
-              Phone: <Tbc>sales and resident numbers</Tbc>
+              Phone:{' '}
+              <a href={`tel:+44${contact.salesPhone.replace(/\D/g, '').replace(/^0/, '')}`}>{contact.salesPhone}</a>
+              <br />
+              WhatsApp: {contact.whatsappNumber}
             </p>
-            <ul className="footer-social" style={{ listStyle: 'none', padding: 0, display: 'flex', gap: 16 }}>
+            <ul
+              className="footer-social"
+              style={{
+                listStyle: 'none',
+                padding: 0,
+                display: 'flex',
+                gap: 16,
+              }}
+            >
               {social.map((s) => (
                 <li key={s.href}>
                   <a href={s.href} target="_blank" rel="noopener noreferrer">
@@ -49,26 +74,32 @@ export default function Footer() {
         <div className="footer-awards" aria-label="Awards">
           {awards.map((a) => (
             <Link key={a.id} href={a.href}>
-              <strong>{a.name}</strong>
-              {a.category}, won with {a.client}
+              <LaurelIcon />
+              <span>
+                <strong>{a.name}</strong>
+                {a.category}, won with {a.client}
+              </span>
             </Link>
           ))}
         </div>
 
         <div className="footer-logos">
-          <LogoStrip logos={[...frameworkLogos, ...accreditationLogos]} color label="Frameworks and accreditations" swipe />
+          <LogoStrip
+            logos={[...frameworkLogos, ...accreditationLogos]}
+            color
+            label="Frameworks and accreditations"
+            swipe
+            hideMissing
+          />
         </div>
 
         <div className="footer-bottom">
           <p className="mb-0">
-            © {new Date().getFullYear()} {company.legalName}, company number {company.companyNumber}.{' '}
-            {company.registeredOfficeConfirmed ? (
-              <>Registered office: {company.address}.</>
-            ) : (
-              <>
-                {company.address}. <Tbc>registered office</Tbc>
-              </>
-            )}
+            {/* The registered office and the head office are different addresses, and the
+                Bromley one is by appointment only. Both belong here, labelled, rather than
+                one standing in for the other. */}
+            © {new Date().getFullYear()} {company.legalName}, company number {company.companyNumber}. VAT{' '}
+            {company.vatNumber}. Registered office: {company.registeredOffice}. Head office: {company.address}.
           </p>
           <ul>
             <li>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PageHero from '@/components/PageHero';
 import Tbc from '@/components/Tbc';
+import Blocks from '@/components/Blocks';
 import JsonLd, { faqJsonLd } from '@/components/JsonLd';
 import { faqCategories, faqs, faqsPendingMigration } from '@/data/faqs';
 import { contact } from '@/data/site';
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }) {
   if (!cat) return {};
   return {
     title: `FAQs: ${cat.label} | EVO`,
-    description: `Answers to common questions from ${cat.label.toLowerCase()} about EVO.`,
+    description: `Answers to common questions from ${cat.label.toLowerCase()} about EVO: the repairs service, the apps, how jobs are handled and what is covered.`,
     alternates: { canonical: `/faqs/${category}` },
   };
 }
@@ -42,7 +43,11 @@ export default async function FaqPage({ params }) {
 
   return (
     <>
-      <PageHero eyebrow="FAQs" title={`Frequently asked questions: ${cat.label.toLowerCase()}`} crumbs={[{ label: 'FAQs' }, { label: cat.label }]} />
+      <PageHero
+        eyebrow="FAQs"
+        title={`Frequently asked questions: ${cat.label.toLowerCase()}`}
+        crumbs={[{ label: 'FAQs' }, { label: cat.label }]}
+      />
       <section className="section">
         <div className="container">
           <div className="split split--top split--wide-right">
@@ -50,7 +55,11 @@ export default async function FaqPage({ params }) {
               <ul className="tag-list" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                 {faqCategories.map((c) => (
                   <li key={c.slug}>
-                    <Link href={`/faqs/${c.slug}`} className="tag" aria-current={c.slug === category ? 'page' : undefined}>
+                    <Link
+                      href={`/faqs/${c.slug}`}
+                      className="tag"
+                      aria-current={c.slug === category ? 'page' : undefined}
+                    >
                       {c.label}
                     </Link>
                   </li>
@@ -58,14 +67,20 @@ export default async function FaqPage({ params }) {
               </ul>
             </nav>
             <div>
-              {pending && <Tbc block>{`Content to be migrated from the current site (evo-pm.com/faqs/${category})`}</Tbc>}
+              {pending && (
+                <Tbc block>{`Content to be migrated from the current site (evo-pm.com/faqs/${category})`}</Tbc>
+              )}
               {items.length > 0 && (
                 <div className="accordion">
                   {items.map((f) => (
                     <details key={f.q}>
                       <summary>{f.q}</summary>
                       <div className="accordion__body">
-                        <p>{f.a}</p>
+                        {/* Short answers are a single string. The longer ones migrated from the
+                            current site carry a `body` block array instead, rendered the same way
+                            article and legal text is. */}
+                        {f.a && <p>{f.a}</p>}
+                        {f.body && <Blocks body={f.body} headingLevel={3} />}
                         {f.list && (
                           <ul className="tick-list tick-list--compact">
                             {f.list.map((l) => (
@@ -96,8 +111,8 @@ export default async function FaqPage({ params }) {
               )}
               {category === 'residents' && (
                 <div className="note mt-2">
-                  Helpdesk hours: {contact.helpdeskHours || <Tbc>Monday to Friday, 8am or 9am to 5pm</Tbc>}. Emergencies: 24 hours a
-                  day.
+                  Helpdesk hours: {contact.helpdeskHours || <Tbc>Monday to Friday, 8am or 9am to 5pm</Tbc>}.
+                  Emergencies: 24 hours a day.
                 </div>
               )}
             </div>

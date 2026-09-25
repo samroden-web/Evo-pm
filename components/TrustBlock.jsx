@@ -1,19 +1,14 @@
 import Link from 'next/link';
 import Tbc from './Tbc';
+import LogoStrip from './LogoStrip';
+import { frameworkLogos, accreditationLogos } from '@/data/logos';
 
 // Homepage, section 11. Kate Davies is the strongest credibility signal EVO has for a
 // housing director, and the old Who we are section was 123 words that never mentioned her.
-const ACCREDITATIONS = [
-  'G-Cloud',
-  'Crown Commercial Service',
-  'ISO 9001 / 14001 / 45001',
-  'ISO 27001',
-  'Cyber Essentials',
-  'Constructionline',
-  'Acclaim',
-  'Property Redress Scheme',
-  'Living Wage Employer',
-];
+// 25 September 2026 (Sam, point 12): these were nine text pills while the actual logo
+// files sat in /public and were already being used in the footer. Now the logos, with
+// the text list kept underneath as the accessible name for each one — a logo strip with
+// no words is useless to a screen reader and to anyone who does not recognise the mark.
 
 export default function TrustBlock() {
   return (
@@ -31,9 +26,9 @@ export default function TrustBlock() {
           <div>
             <h3>Kate Davies CBE joined our board.</h3>
             <p>
-              Chief Executive of Notting Hill Genesis for 18 years, and a long-standing champion of innovation in housing. Our
-              chairman is Steve Norris FRICS, a former Government Minister for Transport. We are also members of the CIH Repairs and
-              Maintenance Community and the PropTech Peer Group.
+              Chief Executive of Notting Hill Genesis for 18 years, and a long-standing champion of innovation in
+              housing. Our chairman is Steve Norris FRICS, a former Government Minister for Transport. We are also
+              members of the CIH Repairs and Maintenance Community and the PropTech Peer Group.
             </p>
             <p className="mb-0">
               <Link href="/about" className="text-link">
@@ -43,15 +38,18 @@ export default function TrustBlock() {
           </div>
         </div>
 
-        <ul className="tag-list mt-3">
-          {ACCREDITATIONS.map((a) => (
-            <li className="tag" key={a}>
-              {a}
-            </li>
-          ))}
-        </ul>
+        <div className="ev3-accreds mt-3">
+          <LogoStrip
+            logos={[...frameworkLogos, ...accreditationLogos]}
+            color
+            label="Frameworks and accreditations"
+            swipe
+            hideMissing
+          />
+        </div>
         <p className="mt-2 mb-0 muted">
-          Five years of operation with no serious health and safety incident. Every contractor re-checked annually. Net zero by 2030.
+          Five years of operation with no serious health and safety incident. Every contractor re-checked annually. Net
+          zero by 2030.
         </p>
       </div>
     </section>

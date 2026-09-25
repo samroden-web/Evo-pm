@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
-import Tbc from '@/components/Tbc';
 import { contact, company } from '@/data/site';
 
 export const metadata = {
@@ -33,18 +32,33 @@ export default function ContactPage() {
                   <br />
                   <a href={`mailto:${contact.sales.email}`}>{contact.sales.email}</a>
                   <br />
-                  Phone: <Tbc>sales phone number</Tbc>
+                  Phone: <a href="tel:+442086919293">{contact.salesPhone}</a>
                 </p>
               </div>
+              {/* All of this was TBC until EVO's own company-information page was migrated
+                  on 25 September 2026. That page is the authority on it. */}
               <div className="card card--grey">
                 <h2 style={{ fontSize: '1.1rem' }}>General enquiries</h2>
                 <p>
-                  Email: <Tbc>sales@ or hello@evo-pm.com</Tbc>
+                  Email: <a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a>
+                  <br />
+                  Phone: <a href="tel:+442086919293">{contact.salesPhone}</a>
+                  <br />
+                  WhatsApp: {contact.whatsappNumber}
+                  <br />
+                  SMS: {contact.smsNumber}
+                </p>
+                <p className="small muted">
+                  Calls to and from our offices may be recorded for quality and training purposes.
                 </p>
                 <p className="mb-0">
                   {company.legalName}
                   <br />
                   {company.address}
+                  <br />
+                  <span className="muted">Head office, visits by appointment only.</span>
+                  <br />
+                  <span className="muted">Registered office: {company.registeredOffice}.</span>
                 </p>
               </div>
               <div className="card card--grey">
