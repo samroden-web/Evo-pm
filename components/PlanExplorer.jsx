@@ -11,12 +11,18 @@ import {
   planScope,
   commonToAllPlans,
   formatPrice,
+  priceCaveat,
+  clientStandingCharge,
+  priceReview,
 } from '@/data/plans';
 import Tbc from './Tbc';
 
 // Brief 6.2: the interactive plan explorer, rebuilt natively.
-// Server-rendered with the Affordable Housing prices so every price is crawlable text.
-// ?type=ah|prs|btr pre-selects the organisation type.
+// Server-rendered so every price is crawlable text.
+//
+// 25 September 2026: one price list. The organisation-type step is gone (see the note
+// at the top of data/plans.js), and the summary now shows the client account charge
+// beside the per-home figure, because a per-home number on its own is not the bill.
 
 function Drawer({ open, onClose, title, children }) {
   const ref = useRef(null);
@@ -59,7 +65,8 @@ function ScopeDetail({ plan }) {
         <strong>Common to all plans:</strong> {commonToAllPlans}
       </p>
       <p className="muted mt-2">
-        The trade categories are the same on every plan. Only the threshold changes: {plan.thresholdLabel.toLowerCase()}.
+        The trade categories are the same on every plan. Only the threshold changes: {plan.thresholdLabel.toLowerCase()}
+        .
       </p>
       <div className="accordion">
         {planScope.map((c) => (
@@ -143,36 +150,18 @@ export default function PlanExplorer() {
 
   return (
     <div className="explorer">
-      {/* PRICE-02 Step 1 */}
+      {/* The organisation-type step is gone: there is one price list now, and what
+          actually moves a price is the stock review rather than the kind of landlord.
+          The caveat that replaces it is doing real work, so it leads. */}
+      <p className="explorer-caveat">{priceCaveat}</p>
+
+      {/* PRICE-03 Step 1 */}
       <section className="explorer-step" aria-labelledby="step1">
         <div className="step-label">
           <span className="num" aria-hidden="true">
             1
           </span>
-          <h2 id="step1">Choose your organisation type</h2>
-        </div>
-        <fieldset className="segmented">
-          <legend className="visually-hidden">Organisation type</legend>
-          {orgTypes.map((t) => (
-            <label key={t.id}>
-              <input type="radio" name="orgType" value={t.id} checked={typeId === t.id} onChange={() => setTypeId(t.id)} />
-              <strong>{t.label}</strong>
-              <span>{t.description}</span>
-            </label>
-          ))}
-        </fieldset>
-        <p className="muted mt-1 mb-0" aria-live="polite">
-          Showing prices for {type.label}. All prices are per home per month, plus VAT.
-        </p>
-      </section>
-
-      {/* PRICE-03 Step 2 */}
-      <section className="explorer-step" aria-labelledby="step2">
-        <div className="step-label">
-          <span className="num" aria-hidden="true">
-            2
-          </span>
-          <h2 id="step2">Managed Technology</h2>
+          <h2 id="step1">Managed Technology</h2>
         </div>
         <div className="mt-panel">
           <div>
@@ -209,13 +198,13 @@ export default function PlanExplorer() {
         </div>
       </section>
 
-      {/* PRICE-04 Step 3 */}
-      <section className="explorer-step" aria-labelledby="step3">
+      {/* PRICE-04 Step 2 */}
+      <section className="explorer-step" aria-labelledby="step2">
         <div className="step-label">
           <span className="num" aria-hidden="true">
-            3
+            2
           </span>
-          <h2 id="step3">Add your repair plan</h2>
+          <h2 id="step2">Add your repair plan</h2>
         </div>
         <div className="plan-cards">
           {plans.map((p) => {
@@ -233,7 +222,10 @@ export default function PlanExplorer() {
                   {combined == null ? (
                     <>
                       <div className="plan-card__poa">{p.priceLabel}</div>
-                      <p className="plan-card__breakdown">Managed Technology {formatPrice(type.managedTechnology)} plus a Home Trust plan priced for your portfolio.</p>
+                      <p className="plan-card__breakdown">
+                        Managed Technology {formatPrice(type.managedTechnology)} plus a Home Trust plan priced for your
+                        portfolio.
+                      </p>
                     </>
                   ) : (
                     <>
@@ -255,11 +247,18 @@ export default function PlanExplorer() {
                   >
                     {selected ? 'Selected' : `Choose ${p.name}`}
                   </button>
-                  <button type="button" className="btn btn-small btn-secondary" onClick={() => setDrawer({ kind: 'plan', id: p.id })}>
+                  <button
+                    type="button"
+                    className="btn btn-small btn-secondary"
+                    onClick={() => setDrawer({ kind: 'plan', id: p.id })}
+                  >
                     What&apos;s included
                   </button>
                   {combined == null && (
-                    <Link href={`/contact?enquiry=review&type=${typeId}&plan=${p.id}`} className="btn btn-small btn-secondary">
+                    <Link
+                      href={`/contact?enquiry=review&type=${typeId}&plan=${p.id}`}
+                      className="btn btn-small btn-secondary"
+                    >
                       Talk to us
                     </Link>
                   )}
@@ -269,19 +268,19 @@ export default function PlanExplorer() {
           })}
         </div>
         <p className="mt-2 max-640">
-          One fixed monthly fee per property, with no limit on the number of repairs in your plan, so your costs stay fixed even when
-          repair volumes rise. The plans differ only by the repair value threshold. The trade categories covered are the same, and a
-          higher threshold means fewer jobs fall outside the plan.
+          One fixed monthly fee per property, with no limit on the number of repairs in your plan, so your costs stay
+          fixed even when repair volumes rise. The plans differ only by the repair value threshold. The trade categories
+          covered are the same, and a higher threshold means fewer jobs fall outside the plan.
         </p>
       </section>
 
-      {/* PRICE-05 Step 4 */}
-      <section className="explorer-step" aria-labelledby="step4">
+      {/* PRICE-05 Step 3 */}
+      <section className="explorer-step" aria-labelledby="step3">
         <div className="step-label">
           <span className="num" aria-hidden="true">
-            4
+            3
           </span>
-          <h2 id="step4">Optional compliance cover</h2>
+          <h2 id="step3">Optional compliance cover</h2>
         </div>
         <div className="grid-2">
           {addons.map((a) => {
@@ -313,7 +312,11 @@ export default function PlanExplorer() {
                     <span className="switch__track" aria-hidden="true" />
                     Add {a.name}
                   </button>
-                  <button type="button" className="btn btn-small btn-secondary" onClick={() => setDrawer({ kind: 'addon', id: a.id })}>
+                  <button
+                    type="button"
+                    className="btn btn-small btn-secondary"
+                    onClick={() => setDrawer({ kind: 'addon', id: a.id })}
+                  >
                     What&apos;s included
                   </button>
                 </div>
@@ -332,8 +335,10 @@ export default function PlanExplorer() {
               {total == null ? <strong>Price on application</strong> : <strong>{formatPrice(total)}</strong>}{' '}
               {total != null && 'plus VAT'}
             </div>
+            <div className="summary-bar__plus">
+              plus {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.per}
+            </div>
             <ul className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`} id="summary-lines">
-              <li>{type.label}</li>
               <li>Managed Technology {formatPrice(type.managedTechnology)}</li>
               <li>
                 {plan.name} {planPrice == null ? plan.priceLabel : formatPrice(planPrice)}
@@ -343,7 +348,11 @@ export default function PlanExplorer() {
                   {a.name} {formatPrice(type.addons[a.id])}
                 </li>
               ))}
+              <li>
+                {clientStandingCharge.label} {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.per}
+              </li>
             </ul>
+            <p className="summary-bar__note">{priceReview}</p>
           </div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
             <button
@@ -362,7 +371,11 @@ export default function PlanExplorer() {
         </div>
       </div>
 
-      <Drawer open={!!drawer} onClose={() => setDrawer(null)} title={drawerPlan ? `${drawerPlan.name}: what's included` : drawerAddon ? drawerAddon.name : ''}>
+      <Drawer
+        open={!!drawer}
+        onClose={() => setDrawer(null)}
+        title={drawerPlan ? `${drawerPlan.name}: what's included` : drawerAddon ? drawerAddon.name : ''}
+      >
         {drawerPlan && <ScopeDetail plan={drawerPlan} />}
         {drawerAddon && <AddonDetail addon={drawerAddon} />}
       </Drawer>

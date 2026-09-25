@@ -10,7 +10,7 @@ import Link from 'next/link';
 // GDPR marketing permissions, replace MARKETING_EMAIL with the gdpr[...] name from the embed code.
 const ACTION = process.env.NEXT_PUBLIC_MAILCHIMP_ACTION;
 
-export default function MailingListForm() {
+export default function MailingListForm({ cta = 'Subscribe and get the guide' }) {
   const [done, setDone] = useState(false);
 
   if (done) {
@@ -37,7 +37,10 @@ export default function MailingListForm() {
       }}
     >
       <p className="muted mb-0" style={{ fontSize: '0.9rem' }}>
-        <span className="req" style={{ color: 'var(--orange-ink)' }}>*</span> indicates required
+        <span className="req" style={{ color: 'var(--orange-ink)' }}>
+          *
+        </span>{' '}
+        indicates required
       </p>
       <div className="field">
         <label htmlFor="ml-email">
@@ -66,12 +69,12 @@ export default function MailingListForm() {
         </fieldset>
       </div>
       <p className="muted" style={{ fontSize: '0.88rem' }}>
-        You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy
-        practices, see our <Link href="/privacy-policy">privacy policy</Link>.
+        You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our
+        privacy practices, see our <Link href="/privacy-policy">privacy policy</Link>.
       </p>
       <p className="muted" style={{ fontSize: '0.88rem' }}>
-        We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be
-        transferred to Mailchimp for processing.{' '}
+        We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your
+        information will be transferred to Mailchimp for processing.{' '}
         <a href="https://mailchimp.com/legal/terms" target="_blank" rel="noopener noreferrer">
           Learn more about Mailchimp&apos;s privacy practices
         </a>
@@ -79,7 +82,7 @@ export default function MailingListForm() {
       </p>
       <div>
         <button type="submit" className="btn btn-primary">
-          Subscribe and get the guide
+          {cta}
         </button>
       </div>
     </form>

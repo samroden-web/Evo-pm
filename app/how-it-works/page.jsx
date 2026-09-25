@@ -6,6 +6,7 @@ import FullJourney from '@/components/FullJourney';
 import ComparisonTable from '@/components/ComparisonTable';
 import VimeoFacade from '@/components/VimeoFacade';
 import Tbc from '@/components/Tbc';
+import Photo from '@/components/Photo';
 import ClosingCta from '@/components/ClosingCta';
 import { explainerVideo } from '@/data/testimonials';
 
@@ -40,11 +41,43 @@ export default function HowItWorksPage() {
         title="One platform, built for the three people a repair involves."
         lead="Nothing on the market did what we needed, so we built it. Every report, message, appointment, photograph and sign-off lives in one system, which is what makes a fixed price possible in the first place."
         crumbs={[{ label: 'How it works' }]}
+        image="/images/photos/evo-team-member-helping-resident.webp"
+        imageAlt="An EVO team member helping a resident use the Living App"
+        imageWidth={1400}
+        imageHeight={787}
+        priority
+        captionLabel="One system"
+        caption="Three apps, one record, one supplier"
       />
 
       <section className="section" aria-label="EVO Living App, EVO Dashboard and EVO Trades App">
         <div className="container">
           <Audiences />
+        </div>
+      </section>
+
+      <section className="ev2-band" aria-label="What owning the system makes possible">
+        <div className="container">
+          <p className="eyebrow">Why we built it ourselves</p>
+          <h2>Owning the system is what lets us fix the price.</h2>
+          <div className="ev2-band-grid">
+            <div className="ev2-band-item">
+              <h3>Nothing is re-keyed</h3>
+              <p>The resident&rsquo;s report becomes the job, the appointment, the evidence and the invoice. No handoffs between systems that do not speak.</p>
+            </div>
+            <div className="ev2-band-item">
+              <h3>We can see the cost as it happens</h3>
+              <p>Every job, every part and every return visit, in one place. That is the only way anyone can quote a fixed monthly price and stand behind it.</p>
+            </div>
+            <div className="ev2-band-item">
+              <h3>The evidence is a by-product</h3>
+              <p>Photographs, timestamps and notes are captured because the work needs them, not because a regulator asked afterwards.</p>
+            </div>
+            <div className="ev2-band-item">
+              <h3>The trade sees what the resident said</h3>
+              <p>Description, photographs and service history arrive with the job, which is most of the difference between a first-time fix and a second visit.</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -93,10 +126,74 @@ export default function HowItWorksPage() {
               </ul>
             </div>
           </div>
+          <div className="ev3-split mt-3">
+            <Photo
+              src="/images/photos/evo-trades-two-operatives-van.webp"
+              alt="Two tradesmen at the back of their own van on a residential street"
+              caption="Mostly small regional firms, working in their own area."
+              width={1500}
+              height={843}
+              sizes="(min-width: 880px) 46vw, 100vw"
+            />
+            <Photo
+              src="/images/photos/evo-operative-at-front-door.webp"
+              alt="A tradesman arriving at a resident's front door, phone in hand"
+              caption="Arriving in a slot the resident picked, with the history already on the phone."
+              width={1500}
+              height={843}
+              sizes="(min-width: 880px) 46vw, 100vw"
+            />
+          </div>
+          <p className="mt-3 mb-0">
+            <Link href="/trades" className="text-link">
+              How firms join the network, and what we ask of them
+            </Link>
+          </p>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="compare-title">
+      {/* ISHA deck, gap E. The deck sells a materially wider service than the site has
+          ever admitted to, and the map called that "a revenue line the site is hiding".
+          Scope and pricing are flagged rather than invented. */}
+      <section className="section" aria-labelledby="wider-title">
+        <div className="container">
+          <div className="section-head">
+            <p className="eyebrow">Beyond reactive repairs</p>
+            <h2 id="wider-title">The plan covers the homes. We can cover the rest of the building too.</h2>
+            <p className="lead">
+              Reactive repairs inside the plan is where most clients start. It is not the limit of what we run, and putting the
+              rest with the same supplier is usually the point at which the coordination overhead disappears.
+            </p>
+          </div>
+          <div className="grid-4 mt-3 swipe-mobile">
+            <div className="card">
+              <h3>Communal areas and plant</h3>
+              <p className="mb-0">Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.</p>
+            </div>
+            <div className="card">
+              <h3>Compliance, including building safety</h3>
+              <p className="mb-0">
+                Gas, electrical, alarms and PAT as add-ons to any plan, alongside the building safety obligations that sit with
+                higher-risk blocks.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Voids</h3>
+              <p className="mb-0">Turnaround works between tenancies, on the same trades network and the same record.</p>
+            </div>
+            <div className="card">
+              <h3>Capital works projects</h3>
+              <p className="mb-0">Defined projects quoted openly, scheduled and evidenced the same way a repair is.</p>
+            </div>
+          </div>
+          <Tbc block>
+            Confirm the scope and pricing model for communal PPM, voids, building safety and capital works before this goes live.
+            The claim is from Steve&rsquo;s ISHA deck; the commercial detail is not yet written down anywhere public.
+          </Tbc>
+        </div>
+      </section>
+
+      <section className="section section--grey" aria-labelledby="compare-title">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">The comparison</p>
@@ -121,7 +218,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="section section--grey" aria-labelledby="video-title">
+      <section className="section" aria-labelledby="video-title">
         <div className="container container--narrow">
           <h2 id="video-title">Watch: EVO in 90 seconds</h2>
           <p>

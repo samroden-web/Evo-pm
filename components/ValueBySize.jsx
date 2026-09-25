@@ -28,9 +28,9 @@ export default function ValueBySize() {
             <p className="eyebrow">Value for money</p>
             <h2 id="value-title">Value goes beyond the repairs line.</h2>
             <p className="lead">
-              A fair comparison looks at the full cost of running a repairs service, not just the contractor invoice. EVO brings
-              together the technology, helpdesk, contractor management and service oversight that would otherwise sit across
-              several budgets.
+              A fair comparison looks at the full cost of running a repairs service, not just the contractor invoice.
+              EVO brings together the technology, helpdesk, contractor management and service oversight that would
+              otherwise sit across several budgets.
             </p>
           </div>
           <div className="grid-3 swipe-mobile">
@@ -43,7 +43,8 @@ export default function ValueBySize() {
             ))}
           </div>
           <p className="mt-2 mb-0">
-            B&amp;D Reside has its own teams and started with a 380-home pilot. Using EVO has never meant replacing anyone.
+            B&amp;D Reside has its own teams and started with a 380-home pilot. Using EVO has never meant replacing
+            anyone.
           </p>
         </div>
       </section>
@@ -53,8 +54,8 @@ export default function ValueBySize() {
             <div>
               <h2 id="outcomes-title">What good repairs are worth.</h2>
               <p className="lead">
-                Residents who are happy with repairs stay longer, complain less and are easier to work with. That is where the
-                value stops being about the repairs budget.
+                Residents who are happy with repairs stay longer, complain less and are easier to work with. That is
+                where the value stops being about the repairs budget.
               </p>
               <span className="stat stat--orange" style={{ fontSize: 'clamp(3rem,7vw,4.5rem)' }}>
                 30%

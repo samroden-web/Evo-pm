@@ -4,15 +4,16 @@ import SectionHead from '@/components/SectionHead';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
 import Quote from '@/components/Quote';
+import Photo from '@/components/Photo';
 import Tbc from '@/components/Tbc';
 import { cta } from '@/data/site';
-import { clientLogos } from '@/data/logos';
-import { testimonials } from '@/data/testimonials';
+import { clientLogos, withFiles } from '@/data/logos';
+import { testimonials, landlordTestimonials } from '@/data/testimonials';
 
 export const metadata = {
   title: 'Repairs for landlords and managing agents | EVO',
   description:
-    'A fixed-price repairs service for landlords and managing agents: accredited trades, out-of-hours cover, and one live record that the tenant, the agent and the landlord can all see.',
+    'A fixed-price repairs service for landlords and managing agents: accredited trades, out-of-hours cover, and one live record all three parties can see.',
   alternates: { canonical: '/who-we-help/landlords-and-agents' },
 };
 
@@ -49,6 +50,13 @@ export default function LandlordsAndAgentsPage() {
         title="Repairs, handled. Without the phone calls."
         lead="Your tenant reports it on the app. An accredited trade is matched, priced and dispatched. Everyone who needs to see it can — without a single round of email and telephone tennis."
         crumbs={[{ label: 'Who we help' }, { label: 'Landlords & managing agents' }]}
+        image="/images/photos/evo-operative-at-front-door.webp"
+        imageAlt="A tradesman arriving at a resident's front door, phone in hand"
+        imageWidth={1500}
+        imageHeight={843}
+        priority
+        captionLabel="Booked by the tenant"
+        caption="A slot they chose, so the door gets answered"
       >
         <div className="btn-row mt-3">
           <Link href={cta.review.href} className="btn btn-primary">
@@ -95,6 +103,17 @@ export default function LandlordsAndAgentsPage() {
               </div>
             ))}
           </div>
+          <figure className="photo mt-3">
+            <img
+              src="/images/app/evo-dashboard-job-record.webp"
+              alt="The EVO Dashboard showing a job record with costs, timings and property details"
+              width="1100"
+              height="782"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>One job record, open to the landlord, the agent and us at the same time.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -185,7 +204,20 @@ export default function LandlordsAndAgentsPage() {
             <Quote t={testimonials.craigJackson} large />
           </div>
           <div className="mt-3">
-            <LogoStrip logos={clientLogos} label="EVO clients" color />
+            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" color />
+          </div>
+
+          <h3 className="ev3-team-head mt-4">What landlords and agents say</h3>
+          <div className="ev3-quotes">
+            {landlordTestimonials.map((t) => (
+              <blockquote className="ev3-quote" key={t.name + t.role}>
+                <p>{t.quote}</p>
+                <footer>
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </footer>
+              </blockquote>
+            ))}
           </div>
         </div>
       </section>

@@ -39,8 +39,8 @@ export default function ProblemSection() {
           <p className="eyebrow">The problem</p>
           <h2 id="problem-title">Repairs stopped being a maintenance line. It became a governance one.</h2>
           <p className="lead">
-            For most landlords it is still run the way it was ten years ago: a contractor or two, a spreadsheet, an inbox, and a
-            small team holding it together. What has changed is everything around it.
+            For most landlords it is still run the way it was ten years ago: a contractor or two, a spreadsheet, an
+            inbox, and a small team holding it together. What has changed is everything around it.
           </p>
         </div>
         <div className="grid-3 swipe-mobile">
@@ -60,7 +60,9 @@ export default function ProblemSection() {
             </div>
           ))}
         </div>
-        <p className="source">Source: Regulator of Social Housing, 2025 Global Accounts. MHCLG, Awaab&apos;s Law guidance.</p>
+        <p className="source">
+          Source: Regulator of Social Housing, 2025 Global Accounts. MHCLG, Awaab&apos;s Law guidance.
+        </p>
         <div className="problem-panel">
           <h3 className="visually-hidden">Four problems</h3>
           <ProblemList />

@@ -3,14 +3,17 @@ import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
+import Photo from '@/components/Photo';
+import Quote from '@/components/Quote';
 import Tbc from '@/components/Tbc';
 import { cta } from '@/data/site';
-import { clientLogos } from '@/data/logos';
+import { clientLogos, withFiles } from '@/data/logos';
+import { testimonials } from '@/data/testimonials';
 
 export const metadata = {
   title: 'Repairs for housing associations and councils | EVO',
   description:
-    "A fully managed, fixed-price repairs service for housing associations and councils, with the evidence for the consumer standards, Tenant Satisfaction Measures and Awaab's Law recorded as the work happens.",
+    "Fixed-price repairs for housing associations and councils, with the evidence for consumer standards, TSMs and Awaab's Law recorded as the work happens.",
   alternates: { canonical: '/who-we-help/housing' },
 };
 
@@ -59,6 +62,13 @@ export default function HousingPage() {
         title="Repairs, compliance and the evidence — from one supplier."
         lead="For housing associations and councils working to the consumer standards, Awaab's Law and the Housing Ombudsman."
         crumbs={[{ label: 'Who we help' }, { label: 'Housing associations & councils' }]}
+        image="/images/photos/evo-operative-arriving-terraced-street.webp"
+        imageAlt="An EVO operative walking up the path of a brick terraced home"
+        imageWidth={1600}
+        imageHeight={685}
+        priority
+        captionLabel="On site"
+        caption="Directly employed, DBS-checked, in EVO uniform"
       >
         <div className="btn-row mt-3">
           <Link href={cta.review.href} className="btn btn-primary">
@@ -184,7 +194,10 @@ export default function HousingPage() {
             </div>
           </div>
           <div className="mt-3">
-            <LogoStrip logos={clientLogos} label="EVO clients" color />
+            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" color />
+          </div>
+          <div className="mt-3 max-640">
+            <Quote t={testimonials.richardSmith} large />
           </div>
           <p className="mt-3 mb-0">
             <Link href="/case-studies" className="text-link">
@@ -201,6 +214,21 @@ export default function HousingPage() {
             title="The audit trail, shown rather than described."
             lead="Every case carries its own record: the reading that triggered the work, the treatment, and the state it was left in. It is the same evidence an Ombudsman determination turns on."
           />
+          <figure className="ev3-triptych mt-3">
+            <img
+              src="/images/photos/evo-damp-before-during-after.webp"
+              alt="The same bedroom corner photographed before treatment, during treatment and after"
+              width="1500"
+              height="500"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span>Before &mdash; moisture reading taken</span>
+              <span>During &mdash; three-stage treatment</span>
+              <span>After &mdash; made good, and recorded</span>
+            </figcaption>
+          </figure>
           <p className="mt-2">
             <Link href="/damp-and-mould" className="text-link">
               The damp and mould procedure
@@ -235,6 +263,27 @@ export default function HousingPage() {
             <li className="tag">Work experience</li>
             <li className="tag">Residents joining the trade network</li>
           </ul>
+          <div className="ev3-split ev3-split--narrow mt-3">
+            <Photo
+              src="/images/photos/evo-resident-engagement-session.webp"
+              alt="EVO running a resident engagement session on an estate"
+              caption="Resident session, run on site."
+              width={900}
+              height={1200}
+              sizes="(min-width: 880px) 40vw, 100vw"
+            />
+            <div>
+              <h3>The one that is unusual</h3>
+              <p>
+                Most of our network is small regional firms, by design. That gives sole traders and micro businesses a route into
+                a supply chain they could not otherwise reach, because they cannot meet a tier-one PQQ on their own.
+              </p>
+              <p className="mb-0">
+                We also find tradespeople living in the homes we look after. Giving them work in their own community is the most
+                direct social value there is, and it is the item an evaluation panel remembers.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -283,6 +332,20 @@ export default function HousingPage() {
             title="Someone who is actually there."
             lead="A named EVO caretaker on the scheme, who residents recognise and can stop on the path. Not a number that routes to a call centre, and not a supplier who appears only when something has already gone wrong."
           />
+          <div className="ev3-split mt-3">
+            <Photo
+              src="/images/photos/evo-caretaker-on-estate.webp"
+              alt="An EVO caretaker talking with an older resident outside low-rise brick flats"
+              width={1100}
+              height={618}
+            />
+            <Photo
+              src="/images/photos/evo-operative-resident-doorstep.webp"
+              alt="An EVO operative talking with a resident on her doorstep"
+              width={900}
+              height={675}
+            />
+          </div>
           <div className="btn-row mt-3">
             <Link href={cta.review.href} className="btn btn-primary">
               {cta.review.label}
