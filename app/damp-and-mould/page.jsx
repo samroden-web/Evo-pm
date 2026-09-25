@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import Tbc from '@/components/Tbc';
-import { cta } from '@/data/site';
+import { cta, contact } from '@/data/site';
 
 export const metadata = {
   title: 'Damp and mould service for social landlords | EVO',
@@ -16,7 +16,11 @@ const MHCLG_URL = 'https://www.gov.uk/government/publications/awaabs-law-guidanc
 const timescales = [
   { hazard: 'Emergency', what: 'Investigate and make safe', when: 'Within 24 hours' },
   { hazard: 'Significant', what: 'Investigate', when: 'Within 10 working days of becoming aware' },
-  { hazard: 'Significant', what: 'Written summary to the resident', when: 'Within 3 working days of the investigation ending' },
+  {
+    hazard: 'Significant',
+    what: 'Written summary to the resident',
+    when: 'Within 3 working days of the investigation ending',
+  },
   { hazard: 'Significant', what: 'Safety works', when: 'Within 5 working days of the investigation ending' },
   {
     hazard: 'Significant',
@@ -57,7 +61,10 @@ const treatment = [
 ];
 
 const kpis = [
-  { value: '100%', body: "Damp and mould inspections attended within 10 working days of the report, in line with Awaab's Law" },
+  {
+    value: '100%',
+    body: "Damp and mould inspections attended within 10 working days of the report, in line with Awaab's Law",
+  },
   { value: '100%', body: 'Remedial works completed within the prescribed timescale' },
   { value: 'Below 5%', body: 'Repeat cases within six months' },
 ];
@@ -89,10 +96,10 @@ export default function DampAndMouldPage() {
             <p className="eyebrow">Why it matters now</p>
             <h2 id="why-title">Awaab&apos;s Law sets fixed timescales.</h2>
             <p className="lead">
-              Awaab&apos;s Law sets fixed timescales for social landlords to investigate and fix hazards. It has applied to damp and
-              mould and to emergency hazards since 27 October 2025. From 30 November 2026 it extends to further hazards including
-              excess cold and heat, falls, fire, electrical and structural hazards. The government plans to extend it to the
-              remaining hazards in 2027.
+              Awaab&apos;s Law sets fixed timescales for social landlords to investigate and fix hazards. It has applied
+              to damp and mould and to emergency hazards since 27 October 2025. From 30 November 2026 it extends to
+              further hazards including excess cold and heat, falls, fire, electrical and structural hazards. The
+              government plans to extend it to the remaining hazards in 2027.
             </p>
           </div>
           <h3>The timescales</h3>
@@ -106,10 +113,14 @@ export default function DampAndMouldPage() {
             ))}
           </ul>
           <p className="source">
-            Source: MHCLG, Awaab&apos;s Law: guidance for social landlords. <Tbc>re-check timescales against the guidance on launch day</Tbc>
+            Source: MHCLG, Awaab&apos;s Law: guidance for social landlords.{' '}
+            <Tbc>re-check timescales against the guidance on launch day</Tbc>
           </p>
           <div className="callout mt-2">
-            <p>The legal duty stays with the landlord. EVO&apos;s job is to help you meet the timescales and hold the evidence that you did.</p>
+            <p>
+              The legal duty stays with the landlord. EVO&apos;s job is to help you meet the timescales and hold the
+              evidence that you did.
+            </p>
           </div>
         </div>
       </section>
@@ -155,15 +166,15 @@ export default function DampAndMouldPage() {
           </ol>
           <div className="callout mt-3">
             <p>
-              <strong>We do not paint over damp.</strong> Before stages 2 and 3, the surface is checked with a moisture meter. We only
-              continue once it reads 20% or below. If it is wetter than that, it is left to dry further.
+              <strong>We do not paint over damp.</strong> Before stages 2 and 3, the surface is checked with a moisture
+              meter. We only continue once it reads 20% or below. If it is wetter than that, it is left to dry further.
             </p>
           </div>
         </div>
       </section>
 
       {/* DM-05 */}
-      <section className="section section--navy" aria-labelledby="measure-title">
+      <section className="section section--warm" aria-labelledby="measure-title">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">What we measure</p>
@@ -179,8 +190,8 @@ export default function DampAndMouldPage() {
             ))}
           </div>
           <p className="mt-3 max-640">
-            Every report, reading, photograph and action is recorded in the EVO Dashboard as it happens, in a form you can use for your
-            statutory reporting, Tenant Satisfaction Measures and Housing Ombudsman requirements.
+            Every report, reading, photograph and action is recorded in the EVO Dashboard as it happens, in a form you
+            can use for your statutory reporting, Tenant Satisfaction Measures and Housing Ombudsman requirements.
           </p>
           <div className="mt-2">
             <Tbc block>EVO Dashboard screenshot: a damp and mould case view</Tbc>
@@ -198,9 +209,9 @@ export default function DampAndMouldPage() {
             </div>
             <div>
               <p className="lead">
-                Damp and mould sits outside the repair plans, so it is never squeezed into a threshold. The initial visit (survey,
-                moisture readings, the first treatment stage and a written report) is a fixed charge. Any further treatment or
-                remediation is scoped and quoted, and only goes ahead with your approval.
+                Damp and mould sits outside the repair plans, so it is never squeezed into a threshold. The initial
+                visit (survey, moisture readings, the first treatment stage and a written report) is a fixed charge. Any
+                further treatment or remediation is scoped and quoted, and only goes ahead with your approval.
               </p>
               <p>
                 <Tbc>initial visit price (not published unless EVO says so)</Tbc>
@@ -220,8 +231,9 @@ export default function DampAndMouldPage() {
                 Seeing damp or mould at home?
               </h2>
               <p>
-                Report it in the EVO Living App. Choose the category, describe what you can see and add a photo. You will get a reference
-                number straight away. If you cannot use the app, call us on <Tbc>resident phone number</Tbc>.
+                Report it in the EVO Living App. Choose the category, describe what you can see and add a photo. You
+                will get a reference number straight away. If you cannot use the app, call us on {contact.residentPhone}
+                .
               </p>
               <Link href="/residents" className="text-link">
                 Residents: get help with a repair

@@ -42,7 +42,8 @@ export default function GettingStarted() {
           See it. Try it. <em>Or start straight away.</em>
         </h2>
         <p className="ev2-start-lead">
-          However you want to begin, you see the results on your own homes, with your own residents and your own numbers.
+          However you want to begin, you see the results on your own homes, with your own residents and your own
+          numbers.
         </p>
 
         <div className="ev2-doors">

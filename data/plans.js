@@ -1,37 +1,58 @@
 // Plan explorer data (brief Appendix A). This is the single place prices live.
 // Update a price here and it changes everywhere on the site.
 // All prices are per home per month, plus VAT. null = Price on application.
+//
+// ONE PRICE LIST, 25 September 2026.
+// The site used to show three price columns — affordable housing, PRS, Build to Rent —
+// and a switcher to move between them. Two problems with that. It invited a reader to
+// work out which column they were in and why someone else paid less, and it did not
+// match practice: the September 2026 managed services agreement charges the affordable
+// housing rates, and B&D Reside is all new stock on the same rates. What actually moves
+// a price is the stock review, not the badge on the landlord.
+//
+// So there is now one published list, at the affordable housing rates — the highest of
+// the three — with the caveat below carrying the real variables. Nobody is ever quoted
+// upwards from the website, and the conversation about their stock happens in the room
+// where it belongs.
+//
+// orgTypes is kept, with a single entry, so nothing that imports it breaks and a second
+// list can come back if EVO ever wants one.
 
 export const vatNote = 'All prices are per home per month, plus VAT.';
 
+// Shown at the top of the pricing page and under the homepage figure. Deliberately does
+// NOT promise that newer stock is cheaper: B&D Reside is entirely new stock and pays the
+// standard rate, and very old stock can move the other way.
+export const priceCaveat =
+  'These are our standard prices. Your own price is set after a stock review \u2014 the age and condition of the homes, and the size of the portfolio, can all move it.';
+
 export const orgTypes = [
   {
-    id: 'ah',
-    label: 'Affordable Housing',
-    description: 'Housing associations and local authorities',
+    id: 'standard',
+    label: 'Standard',
+    description: 'All landlords',
     managedTechnology: 23.0,
     plans: { home500: 25.0, home1000: 32.0, homeTrust: null },
     addons: { electrical: 19.0, gasBoiler: 18.0 },
   },
-  {
-    id: 'prs',
-    label: 'Private Rental Sector',
-    description: 'Private landlords and letting agents',
-    managedTechnology: 22.0,
-    plans: { home500: 24.0, home1000: 29.0, homeTrust: null },
-    addons: { electrical: 18.0, gasBoiler: 17.0 },
-  },
-  {
-    id: 'btr',
-    label: 'Build to Rent',
-    description: 'Build to Rent operators and new-build portfolios',
-    managedTechnology: 18.0,
-    plans: { home500: 19.0, home1000: 25.0, homeTrust: null },
-    addons: { electrical: 15.0, gasBoiler: 14.0 },
-  },
 ];
 
-export const defaultOrgType = 'ah';
+// Charged once per client rather than per home, so it has to be shown separately or the
+// per-home figure reads as the whole bill. It is in Schedule 4 of the managed services
+// agreement and a client finds out about it at contract stage otherwise.
+export const clientStandingCharge = {
+  amount: 400,
+  label: 'Client account charge',
+  per: 'per client, per month',
+  covers: 'A named account manager, a monthly KPI pack, quarterly service reviews and an annual data audit.',
+};
+
+// Answers the obvious objection to a fixed price: fixed for how long? The cap is good
+// news, so it is stated rather than buried.
+export const priceReview =
+  'Your price is fixed for the first 12 months. Any annual review after that is capped at CPI plus 1%, and takes effect on 1 April.';
+
+export const defaultOrgType = 'standard';
 
 export const plans = [
   {

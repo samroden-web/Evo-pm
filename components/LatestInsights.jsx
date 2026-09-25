@@ -11,7 +11,17 @@ export default function LatestInsights({ tag, title = 'Latest insights', grey = 
   return (
     <section className={`section ${grey ? 'section--grey' : ''}`} aria-labelledby="insights-title">
       <div className="container">
-        <div className="section-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexWrap: 'wrap', gap: 16, maxWidth: 'none' }}>
+        <div
+          className="section-head"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'end',
+            flexWrap: 'wrap',
+            gap: 16,
+            maxWidth: 'none',
+          }}
+        >
           <div>
             <h2 id="insights-title" className="mb-0">
               {title}

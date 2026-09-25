@@ -30,13 +30,13 @@ export default function SolutionSection({ showPhoto = true }) {
               <p className="eyebrow">The solution</p>
               <h2 id="solution-title">EVO takes the repairs function off your hands and runs it end to end.</h2>
               <p>
-                EVO provides a fully managed, end-to-end repairs and maintenance service. The helpdesk, contractor management,
-                resident communication and performance oversight come together in one service, from one supplier, for one fixed
-                monthly price per property.
+                EVO provides a fully managed, end-to-end repairs and maintenance service. The helpdesk, contractor
+                management, resident communication and performance oversight come together in one service, from one
+                supplier, for one fixed monthly price per property.
               </p>
               <p>
-                We take responsibility for managing and delivering every repair, supported by our own technology, our operations
-                team and our approved contractor network. We are not a software company.
+                We take responsibility for managing and delivering every repair, supported by our own technology, our
+                operations team and our approved contractor network. We are not a software company.
               </p>
               {showPhoto && (
                 <div className="mt-2 photo--banner">

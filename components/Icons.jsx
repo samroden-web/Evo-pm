@@ -1,6 +1,14 @@
 export function TickIcon({ color = 'white' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="3.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -9,7 +17,14 @@ export function TickIcon({ color = 'white' }) {
 export function CaretIcon() {
   return (
     <svg className="caret" viewBox="0 0 12 12" aria-hidden="true">
-      <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M2 4l4 4 4-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
