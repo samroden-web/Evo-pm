@@ -5494,3 +5494,165 @@ textarea {
   max-height: 26px;
   width: auto;
 }
+
+/* ==========================================================================
+   The icon system
+   --------------------------------------------------------------------------
+   Icons existed on the homepage and nowhere else: every other page rendered three SVGs,
+   which were the header logo and the footer chrome. These rules are what make one icon
+   look the same wherever it lands, including on the orange and navy bands, which is why
+   everything here inherits currentColor rather than setting a colour of its own.
+   ========================================================================== */
+.icon {
+  flex: 0 0 auto;
+  display: block;
+}
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--orange-soft);
+  color: var(--orange-ink);
+  margin-bottom: 12px;
+}
+/* On a coloured ground the disc would fight the background, so the icon stands alone and
+   takes the band's own text colour. */
+.ev2-band .icon-badge,
+.section--navy .icon-badge {
+  background: transparent;
+  width: auto;
+  height: auto;
+  margin-bottom: 8px;
+}
+.ev2-band .icon-badge {
+  color: var(--on-orange);
+}
+/* Without the disc behind it an icon has to carry itself, so it grows. At badge size on
+   the orange it read as a smudge rather than a mark. */
+.ev2-band .icon-badge .icon,
+.section--navy .icon-badge .icon {
+  width: 29px;
+  height: 29px;
+}
+.section--navy .icon-badge {
+  color: var(--orange);
+}
+.card--grey .icon-badge {
+  background: var(--white);
+}
+
+/* ==========================================================================
+   Card lift
+   --------------------------------------------------------------------------
+   Every page outside the three we rebuilt was a row of flat boxes: a border, a heading and
+   a paragraph, at one weight, with nothing for the eye to enter on. These rules apply to
+   every .card on the site at once.
+   ========================================================================== */
+.card h3 {
+  font-size: 1.08rem;
+  margin: 0 0 7px;
+  line-height: 1.3;
+}
+.card > p {
+  font-size: 0.95rem;
+}
+.card > p:last-child,
+.card > ul:last-child {
+  margin-bottom: 0;
+}
+/* Cards in a grid all reach the same depth, and the shortest no longer floats. */
+.grid-2 > .card,
+.grid-3 > .card,
+.grid-4 > .card {
+  display: flex;
+  flex-direction: column;
+}
+.grid-2 > .card > p:last-of-type,
+.grid-3 > .card > p:last-of-type,
+.grid-4 > .card > p:last-of-type {
+  margin-bottom: 0;
+}
+/* The link on a card sits at the bottom whatever the length of the body above it. */
+.card .card-foot {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+/* ==========================================================================
+   Section heads
+   --------------------------------------------------------------------------
+   Two pages hand-rolled this markup instead of using the SectionHead component, and the
+   lead line ran the full container width, which is why some pages read as denser than
+   others at the same word count.
+   ========================================================================== */
+.section-head .lead {
+  max-width: 68ch;
+}
+.section-head h2 {
+  max-width: 24ch;
+}
+.section-head h2.h2--wide {
+  max-width: 34ch;
+}
+
+/* ==========================================================================
+   Numbered items on the orange band
+   --------------------------------------------------------------------------
+   Same treatment as /how-it-works: the numeral is decorative and aria-hidden, which is the
+   only reason it can be white on this orange (2.94:1, below the 3:1 large-text floor).
+   Nothing that carries meaning is white on this band.
+   ========================================================================== */
+.ev2-band-item .icon-badge + h3 {
+  margin-top: 0;
+}
+
+/* A list that deliberately is not a tick list. Used where the paired card opposite ticks
+   things EVO does, and ticking these would read as claiming them. */
+.plain-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+}
+.plain-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.plain-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 1.75px;
+  background: var(--muted);
+}
+
+/* A section-level h2 that sits inside a card or a split column, where the full display
+   size would overpower the box it is in. Replaces four separate inline font-size overrides
+   that had been written three different ways across three pages. */
+.h2--card {
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+}
+/* The two app-screen figures are a fixed pair and were being held at 420px by an inline
+   style on two pages and by nothing at all on a third. */
+.ev3-screens--narrow {
+  max-width: 420px;
+}
+
+/* The add-on card heading carries its icon inline rather than in a badge: these cards
+   already have a price block competing for the top-right, and a 42px disc would push the
+   two apart. */
+.addon-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.addon-icon {
+  color: var(--orange-ink);
+}

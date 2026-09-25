@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import { IconBadge } from '@/components/Icon';
 import AppBadges from '@/components/AppBadges';
 import Photo from '@/components/Photo';
 import Tbc from '@/components/Tbc';
@@ -13,15 +14,25 @@ export const metadata = {
 };
 
 const WHY = [
-  ['Paid in 14 days', 'Not 30, not 60, and not when the client finally settles. Fourteen days, every time.'],
-  ['Guaranteed work, not leads', 'You are not bidding against five other firms for the same job. Work is offered to you because it is yours to do.'],
+  ['wallet', 'Paid in 14 days', 'Not 30, not 60, and not when the client finally settles. Fourteen days, every time.'],
   [
+    'warranty',
+    'Guaranteed work, not leads',
+    'You are not bidding against five other firms for the same job. Work is offered to you because it is yours to do.',
+  ],
+  [
+    'calendar',
     'You set your own availability',
     'Your diary stays yours. Tell the app when you are working and we offer jobs into the time you have made available, not around it.',
   ],
-  ['Only your trade, only your area', 'No plumbing jobs sent to an electrician, and nothing forty miles away. You stop declining work that was never suitable.'],
-  ['No admin at all', 'No quotes for standard work, no invoices to raise, no month-end chasing. We self-bill and pay.'],
   [
+    'pin',
+    'Only your trade, only your area',
+    'No plumbing jobs sent to an electrician, and nothing forty miles away. You stop declining work that was never suitable.',
+  ],
+  ['route', 'No admin at all', 'No quotes for standard work, no invoices to raise, no month-end chasing. We self-bill and pay.'],
+  [
+    'phoneApp',
     'You see it before you go',
     "The resident's photographs and the property's repair history, in the app, before you accept. So you arrive with the right parts and do it in one visit.",
   ],
@@ -42,10 +53,26 @@ const RULES = [
 ];
 
 const PRACTICAL = [
-  ['We invoice ourselves', 'Self-billing, set up when you join. You never raise an invoice to EVO, and payment runs to 14 days.'],
-  ['Parking sorted', "Your vehicle registrations go on the client's exemption list before you attend, so you are not collecting tickets on their estates."],
-  ['Materials covered', 'Materials are paid on top of labour with an uplift, and we will compare against the main merchants if a price needs checking.'],
-  ['You meet Mark', 'Every firm sits down with our director before the first job. You hear how EVO works from the person who built it, and we hear about your trade.'],
+  [
+    'file',
+    'We invoice ourselves',
+    'Self-billing, set up when you join. You never raise an invoice to EVO, and payment runs to 14 days.',
+  ],
+  [
+    'van',
+    'Parking sorted',
+    "Your vehicle registrations go on the client's exemption list before you attend, so you are not collecting tickets on their estates.",
+  ],
+  [
+    'wallet',
+    'Materials covered',
+    'Materials are paid on top of labour with an uplift, and we will compare against the main merchants if a price needs checking.',
+  ],
+  [
+    'users',
+    'You meet Mark',
+    'Every firm sits down with our director before the first job. You hear how EVO works from the person who built it, and we hear about your trade.',
+  ],
 ];
 
 export default function TradesPage() {
@@ -76,8 +103,9 @@ export default function TradesPage() {
           <p className="eyebrow">Why firms join</p>
           <h2>Six things that are different from the work you are doing now.</h2>
           <div className="ev2-band-grid">
-            {WHY.map(([t, d]) => (
+            {WHY.map(([icon, t, d]) => (
               <div className="ev2-band-item" key={t}>
+                <IconBadge name={icon} />
                 <h3>{t}</h3>
                 <p>{d}</p>
               </div>
@@ -142,8 +170,9 @@ export default function TradesPage() {
         <div className="container">
           <SectionHead eyebrow="The practical things" title="The bits that cost you a day a month." />
           <div className="grid grid-2 mt-3">
-            {PRACTICAL.map(([t, d]) => (
+            {PRACTICAL.map(([icon, t, d]) => (
               <div className="card" key={t}>
+                <IconBadge name={icon} />
                 <h3>{t}</h3>
                 <p className="mb-0">{d}</p>
               </div>

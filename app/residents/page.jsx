@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import ClosingCta from '@/components/ClosingCta';
 import SectionHead from '@/components/SectionHead';
+import { IconBadge } from '@/components/Icon';
 import AppBadges from '@/components/AppBadges';
 import Tbc, { TbcValue } from '@/components/Tbc';
 import Photo from '@/components/Photo';
@@ -27,10 +29,10 @@ const STEPS = [
 ];
 
 const HELP = [
-  { title: 'How to use the app', body: 'A step-by-step guide with pictures, from registering to reporting and tracking a repair.', href: '/how-to-guides/using-the-evo-living-app', link: 'Read the guide' },
-  { title: 'How to report an emergency', body: 'What counts as an emergency, what to do first, and what happens once you have reported it.', href: '/how-to-guides/reporting-an-emergency', link: 'Read the guide' },
-  { title: 'Damp and mould', body: 'How to report it, what we check when we visit, and what we do about it. Please report it early — it is easier to treat.', href: '/damp-and-mould', link: 'Damp and mould' },
-  { title: 'Questions', body: 'How long repairs take, what is and is not covered, appointments, access, and what to do if something goes wrong.', href: '/faqs/residents', link: 'Resident questions' },
+  { icon: 'phoneApp', title: 'How to use the app', body: 'A step-by-step guide with pictures, from registering to reporting and tracking a repair.', href: '/how-to-guides/using-the-evo-living-app', link: 'Read the guide' },
+  { icon: 'alert', title: 'How to report an emergency', body: 'What counts as an emergency, what to do first, and what happens once you have reported it.', href: '/how-to-guides/reporting-an-emergency', link: 'Read the guide' },
+  { icon: 'droplet', title: 'Damp and mould', body: 'How to report it, what we check when we visit, and what we do about it. Please report it early — it is easier to treat.', href: '/damp-and-mould', link: 'Damp and mould' },
+  { icon: 'help', title: 'Questions', body: 'How long repairs take, what is and is not covered, appointments, access, and what to do if something goes wrong.', href: '/faqs/residents', link: 'Resident questions' },
 ];
 
 export default function ResidentsPage() {
@@ -93,7 +95,7 @@ export default function ResidentsPage() {
               </div>
             ))}
           </div>
-          <div className="ev3-screens mt-3" style={{ maxWidth: '420px' }}>
+          <div className="ev3-screens ev3-screens--narrow mt-3">
             <figure>
               <img
                 src="/images/app/living-app-home.webp"
@@ -160,6 +162,7 @@ export default function ResidentsPage() {
           <div className="grid grid-2 mt-3">
             {HELP.map((h) => (
               <div className="card" key={h.title}>
+                <IconBadge name={h.icon} />
                 <h3>{h.title}</h3>
                 <p>{h.body}</p>
                 <p className="mb-0">
@@ -182,6 +185,7 @@ export default function ResidentsPage() {
           />
           <div className="grid grid-2 mt-3">
             <div className="card">
+              <IconBadge name="phone" />
               <h3>Phone</h3>
               <p className="mb-0">
                 <TbcValue
@@ -194,6 +198,7 @@ export default function ResidentsPage() {
               </p>
             </div>
             <div className="card">
+              <IconBadge name="mail" />
               <h3>Email</h3>
               <p className="mb-0">
                 <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>{' '}
@@ -201,6 +206,7 @@ export default function ResidentsPage() {
               </p>
             </div>
             <div className="card">
+              <IconBadge name="clock" />
               <h3>Helpdesk hours</h3>
               <p className="mb-0">
                 <TbcValue value={contact.helpdeskHours} label="Monday to Friday, 8am or 9am to 5pm" />
@@ -209,6 +215,7 @@ export default function ResidentsPage() {
               </p>
             </div>
             <div className="card">
+              <IconBadge name="bell" />
               <h3>Not for repairs</h3>
               <p className="mb-0">
                 <strong>Please do not use the contact form on this website to report a repair.</strong> It does not reach the repairs team.
@@ -217,6 +224,7 @@ export default function ResidentsPage() {
           </div>
         </div>
       </section>
+      <ClosingCta />
     </>
   );
 }

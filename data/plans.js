@@ -23,8 +23,12 @@ export const vatNote = 'All prices are per home per month, plus VAT.';
 // Shown at the top of the pricing page and under the homepage figure. Deliberately does
 // NOT promise that newer stock is cheaper: B&D Reside is entirely new stock and pays the
 // standard rate, and very old stock can move the other way.
+// Direction matters here, and it is deliberately left open. Naming a factor without
+// naming which way it pushes is honest and keeps the negotiation where it belongs, in the
+// portfolio review. It must never read as a promise that newer stock, or any particular
+// part of the country, is cheaper.
 export const priceCaveat =
-  'These are our standard prices. Your own price is set after a stock review \u2014 the age and condition of the homes, and the size of the portfolio, can all move it.';
+  'These are our standard prices, based on London. Your own price is set after a stock review \u2014 the age and condition of the homes, the size of the portfolio and where they are can all move it, up or down.';
 
 export const orgTypes = [
   {
@@ -285,6 +289,7 @@ export const planScope = [
 export const addons = [
   {
     id: 'electrical',
+    icon: 'bolt',
     name: 'Electrical Compliance Cover',
     note: 'Minimum three-year term.',
     intro:
@@ -365,6 +370,7 @@ export const addons = [
   },
   {
     id: 'communal',
+    icon: 'building',
     name: 'Communal reporting',
     note: 'Charged in two parts: per home for the software, and per block. The per-block charge is shown separately because it is not a per-home cost.',
     intro:
@@ -385,6 +391,7 @@ export const addons = [
   },
   {
     id: 'gasBoiler',
+    icon: 'flame',
     name: 'Gas Boiler Cover',
     note: null,
     intro:

@@ -93,7 +93,7 @@ export default function BuildToRentPage() {
               </div>
             ))}
           </div>
-          <div className="ev3-screens mt-3" style={{ maxWidth: '420px' }}>
+          <div className="ev3-screens ev3-screens--narrow mt-3">
             <figure>
               <img
                 src="/images/app/living-app-home.webp"

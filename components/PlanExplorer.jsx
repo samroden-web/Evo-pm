@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Icon from './Icon';
 import {
   orgTypes,
   defaultOrgType,
@@ -299,7 +300,10 @@ export default function PlanExplorer() {
             return (
               <div key={a.id} className={`addon-card ${on ? 'addon-card--on' : ''}`}>
                 <div className="addon-head">
-                  <h3 className="mb-0">{a.name}</h3>
+                  <h3 className="mb-0">
+                    <Icon name={a.icon} size={20} className="addon-icon" />
+                    {a.name}
+                  </h3>
                   <div className="addon-price">
                     {formatPrice(type.addons[a.id])}
                     <br />

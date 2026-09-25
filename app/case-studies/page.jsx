@@ -2,10 +2,9 @@ import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import Photo from '@/components/Photo';
 import Quote from '@/components/Quote';
-import Tbc from '@/components/Tbc';
 import PilotSection from '@/components/PilotSection';
 import ClosingCta from '@/components/ClosingCta';
-import { testimonials, regulatorQuote, internalAudit } from '@/data/testimonials';
+import { testimonials, regulatorQuote } from '@/data/testimonials';
 
 export const metadata = {
   title: 'Case studies: IDS and B&D Reside | EVO',

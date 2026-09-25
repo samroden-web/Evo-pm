@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
 import Tbc from '@/components/Tbc';
+import { IconBadge } from '@/components/Icon';
 import { cta } from '@/data/site';
 
 export const metadata = {
@@ -13,21 +14,25 @@ export const metadata = {
 
 const REGULATORY = [
   {
+    icon: 'shieldCheck',
     k: 'Consumer standards',
     h: 'Graded C1 to C4, and published.',
     b: 'The Safety and Quality Standard covers repairs and stock condition. Inspections look for evidence that the standard is met, not assurances that it is.',
   },
   {
+    icon: 'chart',
     k: 'Tenant Satisfaction Measures',
     h: 'Reported annually, compared across the sector.',
     b: 'Repairs satisfaction and time taken are two of the measures. Both are outcomes of how repairs actually run, not of how they are reported.',
   },
   {
+    icon: 'clock',
     k: "Awaab's Law",
     h: 'Fixed timescales, widening on 30 November 2026.',
     b: 'In force for damp and mould today. Phase 2 extends to cold, heat, fire, electrical and structural hazards. Meeting the timescale is one job; evidencing it is another.',
   },
   {
+    icon: 'scales',
     k: 'The Housing Ombudsman',
     h: 'Determinations turn on the record.',
     b: 'Complaint handling is judged on whether you can show what happened and when — not on whether the repair was eventually done.',
@@ -69,8 +74,9 @@ export default function CompliancePage() {
         <div className="container">
           <div className="grid-2">
             <div className="card">
+              <IconBadge name="wrench" />
               <p className="eyebrow">Statutory</p>
-              <h2 style={{ fontSize: '1.5rem' }}>Gas, electrical, alarms.</h2>
+              <h3>Gas, electrical, alarms.</h3>
               <p>
                 <strong>We do the work.</strong> Inspection, certification and the remedials that follow, carried out by
                 the same trades who do your repairs — so a failed check becomes a job rather than a letter.
@@ -78,8 +84,9 @@ export default function CompliancePage() {
               <p className="mb-0">Available as an add-on to any plan, or as variable works.</p>
             </div>
             <div className="card card--grey">
+              <IconBadge name="clipboard" />
               <p className="eyebrow">Regulatory</p>
-              <h2 style={{ fontSize: '1.5rem' }}>The Regulator, TSMs, Awaab&rsquo;s Law.</h2>
+              <h3>The Regulator, TSMs, Awaab&rsquo;s Law.</h3>
               <p>
                 <strong>You hold the duty. We hold the proof.</strong> The duty never transfers and we will not pretend
                 otherwise. What changes is whether the evidence exists when someone asks for it.
@@ -99,6 +106,7 @@ export default function CompliancePage() {
           />
           <div className="grid-2 mt-3">
             <div className="card">
+              <IconBadge name="flame" />
               <h3>Gas</h3>
               <ul className="tick-list mb-0">
                 <li>Annual gas safety inspection and certificate</li>
@@ -108,6 +116,7 @@ export default function CompliancePage() {
               </ul>
             </div>
             <div className="card">
+              <IconBadge name="bolt" />
               <h3>Electrical</h3>
               <ul className="tick-list mb-0">
                 <li>EICR inspection and certification</li>
@@ -135,6 +144,7 @@ export default function CompliancePage() {
           <div className="grid-2 mt-3">
             {REGULATORY.map((r) => (
               <div className="card" key={r.k}>
+                <IconBadge name={r.icon} />
                 <p className="eyebrow">{r.k}</p>
                 <h3>{r.h}</h3>
                 <p className="mb-0">{r.b}</p>
@@ -201,6 +211,7 @@ export default function CompliancePage() {
           />
           <div className="grid-2 mt-3">
             <div className="card">
+              <IconBadge name="shieldCheck" />
               <h3>What we take on</h3>
               <ul className="tick-list mb-0">
                 <li>Carrying out statutory inspections and the remedials that follow</li>
@@ -210,8 +221,12 @@ export default function CompliancePage() {
               </ul>
             </div>
             <div className="card card--grey">
+              <IconBadge name="scales" />
               <h3>What stays with you</h3>
-              <ul className="mb-0">
+              {/* This list deliberately has no ticks. The paired card opposite is a list of
+                  things EVO does; ticking the duties that stay with the landlord would read
+                  as though we were claiming them. */}
+              <ul className="plain-list mb-0">
                 <li>
                   The legal duty, in every case. It does not transfer to a supplier and nobody can take it from you.
                 </li>

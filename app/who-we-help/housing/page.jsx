@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import { IconBadge } from '@/components/Icon';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
 import Photo from '@/components/Photo';
@@ -95,6 +96,7 @@ export default function HousingPage() {
           <h2>Four things you are now graded on, and repairs sits under all of them.</h2>
           <div className="ev2-band-grid">
             <div className="ev2-band-item">
+              <IconBadge name="shieldCheck" />
               <h3>Consumer standards</h3>
               <p>
                 The Safety and Quality Standard covers repairs and stock condition. Gradings are published, and they are
@@ -102,14 +104,17 @@ export default function HousingPage() {
               </p>
             </div>
             <div className="ev2-band-item">
+              <IconBadge name="chart" />
               <h3>Tenant Satisfaction Measures</h3>
               <p>Repairs satisfaction and time taken are reported every year and compared across the sector.</p>
             </div>
             <div className="ev2-band-item">
+              <IconBadge name="clock" />
               <h3>Awaab&rsquo;s Law</h3>
               <p>In force for damp and mould, and widening to further hazards on 30 November 2026.</p>
             </div>
             <div className="ev2-band-item">
+              <IconBadge name="scales" />
               <h3>The Ombudsman</h3>
               <p>
                 Determinations turn on whether you can show what happened and when, not on whether the repair was
@@ -171,7 +176,7 @@ export default function HousingPage() {
       <section className="section">
         <div className="container">
           <SectionHead eyebrow="Scale" title="What EVO replaces depends on your size." />
-          <div className="grid grid-3 mt-3">
+          <div className="grid-3 mt-3">
             {SIZES.map((s) => (
               <div className="card" key={s.when}>
                 <p className="eyebrow">{s.when}</p>
@@ -305,8 +310,9 @@ export default function HousingPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="Procurement" title="The parts an evaluation panel scores." />
-          <div className="grid grid-2 mt-3">
+          <div className="grid-2 mt-3">
             <div className="card">
+              <IconBadge name="handshake" />
               <h3>Frameworks</h3>
               <p className="mb-0">
                 South East Consortium DPS. Social Housing Emerging Disruptors 3. Procurement for Housing.{' '}
@@ -314,12 +320,14 @@ export default function HousingPage() {
               </p>
             </div>
             <div className="card">
+              <IconBadge name="warranty" />
               <h3>Accreditation</h3>
               <p className="mb-0">
                 Constructionline, ISO 9001, ISO 14001 and ISO 45001. <Tbc>Gold or Silver</Tbc>
               </p>
             </div>
             <div className="card">
+              <IconBadge name="hardHat" />
               <h3>Health and safety</h3>
               <p className="mb-0">
                 Five years with no serious incident. An external health and safety advisor, annual PQQ re-checks on
@@ -327,6 +335,7 @@ export default function HousingPage() {
               </p>
             </div>
             <div className="card">
+              <IconBadge name="leaf" />
               <h3>Net zero</h3>
               <p className="mb-0">
                 Net zero by 2030, an all-electric vehicle fleet, and ISO 14001 targets. Fewer wasted journeys is the

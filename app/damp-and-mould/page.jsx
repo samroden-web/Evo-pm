@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import ClosingCta from '@/components/ClosingCta';
 import Tbc from '@/components/Tbc';
 import { cta, contact } from '@/data/site';
 
@@ -92,7 +93,7 @@ export default function DampAndMouldPage() {
       {/* DM-02 */}
       <section className="section" aria-labelledby="why-title">
         <div className="container">
-          <div className="section-head" style={{ maxWidth: 860 }}>
+          <div className="section-head">
             <p className="eyebrow">Why it matters now</p>
             <h2 id="why-title">Awaab&apos;s Law sets fixed timescales.</h2>
             <p className="lead">
@@ -227,7 +228,7 @@ export default function DampAndMouldPage() {
           <div className="split split--top">
             <div className="card card--shadow">
               <p className="eyebrow">For residents</p>
-              <h2 id="residents-title" style={{ fontSize: '1.6rem' }}>
+              <h2 id="residents-title" className="h2--card">
                 Seeing damp or mould at home?
               </h2>
               <p>
@@ -273,6 +274,7 @@ export default function DampAndMouldPage() {
           </div>
         </div>
       </section>
+      <ClosingCta />
     </>
   );
 }

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import { IconBadge } from '@/components/Icon';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
 import Quote from '@/components/Quote';
-import Photo from '@/components/Photo';
 import Tbc from '@/components/Tbc';
 import { cta } from '@/data/site';
 import { clientLogos, withFiles } from '@/data/logos';
@@ -18,26 +18,42 @@ export const metadata = {
 };
 
 const TIME = [
-  ['Finding someone', 'Ringing round for a trade who is free, qualified and willing to travel. We match by skill and area from an accredited network, so that call never happens.'],
-  ['Chasing', 'Scheduling, rescheduling, and finding out afterwards that nobody was in. Booked to a slot the tenant picked, tracked, and no-access recorded rather than argued about.'],
-  ['Explaining', 'The tenant rings because they do not know what is happening. Now they can see it happening, so they stop ringing.'],
-  ['Proving', 'Digging through old emails when a deposit, a dispute or an inspection asks what was done. Every job leaves its own record as it happens.'],
+  [
+    'search',
+    'Finding someone',
+    'Ringing round for a trade who is free, qualified and willing to travel. We match by skill and area from an accredited network, so that call never happens.',
+  ],
+  [
+    'calendar',
+    'Chasing',
+    'Scheduling, rescheduling, and finding out afterwards that nobody was in. Booked to a slot the tenant picked, tracked, and no-access recorded rather than argued about.',
+  ],
+  [
+    'chat',
+    'Explaining',
+    'The tenant rings because they do not know what is happening. Now they can see it happening, so they stop ringing.',
+  ],
+  [
+    'camera',
+    'Proving',
+    'Digging through old emails when a deposit, a dispute or an inspection asks what was done. Every job leaves its own record as it happens.',
+  ],
 ];
 
 const SEEN = [
   {
     who: 'The tenant',
-    title: 'Knows where it is up to',
+    icon: 'dashboard', title: 'Knows where it is up to',
     items: ['Reports it in about thirty seconds, with a photograph', 'Picks an appointment slot that suits them', 'Sees who is coming and when', 'Rates the job once it is done'],
   },
   {
     who: 'The managing agent',
-    title: 'Sees every property at once',
+    icon: 'building', title: 'Sees every property at once',
     items: ['Every open job across every property, live', 'Full service history by address', 'Invoices and job reports to download', "No compiling an update from three contractors' emails"],
   },
   {
     who: 'The landlord',
-    title: 'Sees their own, in full',
+    icon: 'home', title: 'Sees their own, in full',
     items: ['The same live record for their properties', 'What was reported, what was done, what it cost', 'As much or as little involvement as they want', 'No need to ask the agent what is happening'],
   },
 ];
@@ -73,8 +89,9 @@ export default function LandlordsAndAgentsPage() {
           <p className="eyebrow">Where the time actually goes</p>
           <h2>Repairs are rarely difficult. They are just relentless.</h2>
           <div className="ev2-band-grid">
-            {TIME.map(([t, d]) => (
+            {TIME.map(([icon, t, d]) => (
               <div className="ev2-band-item" key={t}>
+                <IconBadge name={icon} />
                 <h3>{t}</h3>
                 <p>{d}</p>
               </div>
@@ -93,9 +110,10 @@ export default function LandlordsAndAgentsPage() {
           <div className="ev2-seen mt-3">
             {SEEN.map((c) => (
               <div className="ev2-seen-col" key={c.who}>
+                <IconBadge name={c.icon} />
                 <p className="eyebrow mb-0">{c.who}</p>
                 <h3>{c.title}</h3>
-                <ul>
+                <ul className="plain-list">
                   {c.items.map((i) => (
                     <li key={i}>{i}</li>
                   ))}
@@ -124,8 +142,9 @@ export default function LandlordsAndAgentsPage() {
             title="What the fee covers, and what it does not."
             lead="One fixed price per home, per month. The scope is identical across Home 500, Home 1000 and Home Trust — only the repair threshold changes. Anything outside it is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
           />
-          <div className="grid grid-2 mt-3">
+          <div className="grid-2 mt-3">
             <div className="card">
+              <IconBadge name="shieldCheck" />
               <p className="eyebrow">In the plan — covered by the monthly fee</p>
               <ul className="tick-list mb-0">
                 <li>Reactive repairs up to the plan threshold, parts and labour</li>
@@ -136,8 +155,9 @@ export default function LandlordsAndAgentsPage() {
               </ul>
             </div>
             <div className="card card--grey">
+              <IconBadge name="file" />
               <p className="eyebrow">Outside the plan — quoted before any work</p>
-              <ul className="mb-0">
+              <ul className="plain-list mb-0">
                 <li>Anything above the plan threshold for that repair</li>
                 <li>Planned improvement and refurbishment works</li>
                 <li>Damage beyond fair wear and tear</li>
