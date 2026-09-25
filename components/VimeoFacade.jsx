@@ -21,11 +21,19 @@ export default function VimeoFacade({ vimeoId, title, poster, rounded = false })
     );
   }
   return (
-    <button type="button" className={`video-facade ${rounded ? 'video-facade--rounded' : ''}`} onClick={() => setPlaying(true)}>
+    <button
+      type="button"
+      className={`video-facade ${rounded ? 'video-facade--rounded' : ''}`}
+      onClick={() => setPlaying(true)}
+    >
       {poster ? (
         <img src={poster} alt="" loading="lazy" decoding="async" />
       ) : (
-        <img src="/images/brand/evo-logomark.svg" alt="" style={{ width: 70, height: 'auto', margin: '0 auto', position: 'absolute', top: 24, left: 24, opacity: 0.9 }} />
+        <img
+          src="/images/brand/evo-logomark.svg"
+          alt=""
+          style={{ width: 70, height: 'auto', margin: '0 auto', position: 'absolute', top: 24, left: 24, opacity: 0.9 }}
+        />
       )}
       <span className="video-facade__play">
         <PlayIcon />

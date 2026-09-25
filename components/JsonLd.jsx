@@ -10,7 +10,14 @@ export function faqJsonLd(items) {
     mainEntity: items.map((f) => ({
       '@type': 'Question',
       name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: [f.a, ...(f.list || [])].join(' ') },
+      // An answer is either a single string (`a`) or a block array (`body`). Blocks are
+      // flattened to plain sentences: Google wants the answer text, not our markup keys.
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: [f.a, ...(f.body || []).map((b) => b.replace(/^(#{2,3} |- |\d+\.\s)/, '')), ...(f.list || [])]
+          .filter(Boolean)
+          .join(' '),
+      },
     })),
   };
 }

@@ -8,8 +8,8 @@ const CONTEXT = [
   {
     value: 'C1 to C4',
     label: 'Regulatory grading',
-    head: 'You are graded on it now.',
-    body: 'Published since April 2024 for anyone to read, with repairs and damp and mould at the centre.',
+    head: 'Your grade turns on repairs.',
+    body: 'Tenant Satisfaction Measures and damp and mould sit at the centre of it, and the result is published for anyone to read.',
   },
   {
     value: '30 Nov 2026',
@@ -41,8 +41,13 @@ export default function WhyNow() {
             </div>
           ))}
         </div>
+        {/* The citation was two bare document titles, which did not read as a sentence.
+            It stays, though — the £10bn, the 13% and the 87p are exactly the kind of
+            figure we strip out elsewhere when it is unsourced, and the source is what
+            makes them safe to publish. */}
         <p className="source">
-          Regulator of Social Housing, 2025 Global Accounts. MHCLG, Awaab&rsquo;s Law guidance.{' '}
+          Figures from the Regulator of Social Housing&rsquo;s 2025 Global Accounts and MHCLG&rsquo;s Awaab&rsquo;s Law
+          guidance.{' '}
           <Link href="/damp-and-mould" className="text-link">
             How we handle damp, mould and hazards
           </Link>

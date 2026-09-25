@@ -112,7 +112,11 @@ export default function ContactForm() {
   const hasPlan = selections.orgType || selections.plan || selections.addons;
 
   if (HS_PORTAL && HS_FORM) {
-    return <HubSpotEmbed selections={{ ...selections, enquiry: enquiryOptions.find((o) => o.id === enquiry)?.label || '' }} />;
+    return (
+      <HubSpotEmbed
+        selections={{ ...selections, enquiry: enquiryOptions.find((o) => o.id === enquiry)?.label || '' }}
+      />
+    );
   }
 
   if (submitted) {
@@ -121,7 +125,9 @@ export default function ContactForm() {
         <p>
           <strong>Thank you.</strong> <Tbc>form not connected yet: HubSpot portal and form IDs to be added</Tbc>
         </p>
-        <p className="mb-0">Nothing has been sent. Once HubSpot is connected, this message will confirm the enquiry has been received.</p>
+        <p className="mb-0">
+          Nothing has been sent. Once HubSpot is connected, this message will confirm the enquiry has been received.
+        </p>
       </div>
     );
   }
@@ -164,7 +170,8 @@ export default function ContactForm() {
 
       {hasPlan && (
         <div className="selection-summary">
-          <strong>Your plan explorer selection:</strong> {[selections.orgType, selections.plan, selections.addons].filter(Boolean).join(', ')}
+          <strong>Your plan explorer selection:</strong>{' '}
+          {[selections.orgType, selections.plan, selections.addons].filter(Boolean).join(', ')}
         </div>
       )}
       <input type="hidden" name="organisation_type" value={selections.orgType} />

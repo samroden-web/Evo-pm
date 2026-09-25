@@ -6,22 +6,21 @@ import WhyNow from '@/components/WhyNow';
 import ProblemAnswer from '@/components/ProblemAnswer';
 import Caretaker from '@/components/Caretaker';
 import PlansTeaser from '@/components/PlansTeaser';
-import CaseStudyCards from '@/components/CaseStudyCards';
-import VideoTestimonials from '@/components/VideoTestimonials';
+import ProofBlock from '@/components/ProofBlock';
+import ResidentVideo from '@/components/ResidentVideo';
 import ComplianceBand from '@/components/ComplianceBand';
 import WhoStrip from '@/components/WhoStrip';
 import TrustBlock from '@/components/TrustBlock';
 import LatestInsights from '@/components/LatestInsights';
 import GettingStarted from '@/components/GettingStarted';
-import Quote from '@/components/Quote';
-import { clientLogos } from '@/data/logos';
-import { testimonials } from '@/data/testimonials';
+import { LaurelIcon } from '@/components/Icons2';
+import { clientLogos, withFiles } from '@/data/logos';
 import { cta } from '@/data/site';
 
 export const metadata = {
   title: 'EVO | Fully managed, fixed-price repairs for housing landlords',
   description:
-    'A fully managed, fixed-price repairs service for housing associations, local authorities and Build to Rent. One monthly price per home, a 12-month warranty on every job and 24/7 emergency cover.',
+    'A fully managed, fixed-price repairs service for housing associations, councils and Build to Rent. One monthly price per home, and a 12-month warranty on every job.',
   alternates: { canonical: '/' },
 };
 
@@ -53,21 +52,34 @@ export default function HomePage() {
               A fully managed, <em>fixed-price</em> repairs service for housing landlords.
             </h1>
             <p className="lead">
-              Purpose-built technology, repairs expertise and a fully managed service, so landlords get control and residents get a
-              repair that actually happens.
+              Purpose-built technology, repairs expertise and a fully managed service, so landlords get control and
+              residents get a repair that actually happens.
             </p>
             <div className="btn-row">
               <Link href={cta.review.href} className="btn btn-primary">
                 {cta.review.label}
               </Link>
-              <Link href="/pricing" className="btn btn-secondary btn-on-dark">
+              <Link href="/pricing" className="btn btn-secondary">
                 See plans and pricing
               </Link>
             </div>
-            {/* GLOBAL-06: each award is only ever shown against the client it was won with. */}
+            {/* GLOBAL-06: each award is only ever shown against the client it was won with,
+                which is why the "with" line is part of the mark rather than a footnote. */}
             <ul className="ev2-awards">
-              <li>Housing Executive Awards 2025 &middot; Partnership of the Year, with IDS</li>
-              <li>Housing Digital Innovation Awards 2024 &middot; with B&amp;D Reside</li>
+              <li>
+                <LaurelIcon />
+                <span>
+                  <span className="ev2-award-name">Housing Executive Awards 2025</span>
+                  <span className="ev2-award-with">Won with IDS</span>
+                </span>
+              </li>
+              <li>
+                <LaurelIcon />
+                <span>
+                  <span className="ev2-award-name">Housing Digital Innovation Awards 2024</span>
+                  <span className="ev2-award-with">Won with B&amp;D Reside</span>
+                </span>
+              </li>
             </ul>
           </div>
           <div className="home-hero__visual">
@@ -81,8 +93,7 @@ export default function HomePage() {
                 sizes="(min-width: 960px) 46vw, 92vw"
               />
               <figcaption>
-                <span>Reported in</span>
-                <strong>under 30 seconds, from the sofa</strong>
+                A repair, reported in <strong>under 30 seconds</strong>
               </figcaption>
             </figure>
           </div>
@@ -92,15 +103,15 @@ export default function HomePage() {
       {/* 2. Figures */}
       <Figures />
 
-      {/* 3. Client logos */}
-      <section className="section section--tight" aria-labelledby="clients-title">
+      {/* 3. Client logos — warm band, per the mockup, sitting between the orange
+           figures band and the warm "why now" band so the page has rhythm rather
+           than an unbroken run of white. */}
+      <section className="ev3-logoband" aria-labelledby="clients-title">
         <div className="container">
-          <h2 id="clients-title" className="center" style={{ fontSize: '1.4rem' }}>
-            Trusted by housing providers across London
+          <h2 id="clients-title" className="ev3-logoband-hd">
+            Trusted by housing providers and institutional landlords
           </h2>
-          <div className="mt-2">
-            <LogoStrip logos={clientLogos} label="Clients" row />
-          </div>
+          <LogoStrip logos={withFiles(clientLogos)} label="Clients" row hideMissing />
         </div>
       </section>
 
@@ -116,20 +127,12 @@ export default function HomePage() {
       {/* 7. Plans teaser */}
       <PlansTeaser grey={false} />
 
-      {/* 8. Proof: case studies, then the video testimonials */}
-      <section className="section section--grey" aria-labelledby="proof-title">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Proof</p>
-            <h2 id="proof-title">Already delivering for social landlords.</h2>
-          </div>
-          <CaseStudyCards />
-          <div className="mt-3 max-640">
-            <Quote t={testimonials.garethBrown} />
-          </div>
-        </div>
-        <VideoTestimonials />
-      </section>
+      {/* 8. Proof: case studies, each with its photograph, its client's logo and that
+             client's own words, then three shorter voices. */}
+      <ProofBlock />
+
+      {/* 8b. Residents, on camera */}
+      <ResidentVideo />
 
       {/* 9. Compliance, both kinds */}
       <ComplianceBand />

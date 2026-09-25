@@ -36,7 +36,9 @@ export default function ComparisonTable() {
     <>
       <div className="table-wrap">
         <table className="data compare">
-          <caption className="visually-hidden">EVO compared with the main alternatives across nine capabilities</caption>
+          <caption className="visually-hidden">
+            EVO compared with the main alternatives across nine capabilities
+          </caption>
           <thead>
             <tr>
               <th scope="col">Capability</th>

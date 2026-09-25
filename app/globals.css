@@ -5,28 +5,50 @@
    on light backgrounds uses --orange-ink, and bright orange is kept for large
    figures on navy, accents and button fills (with dark text). */
 
-/* Warm rebalance, 24 September 2026.
-   The draft was built on blue-biased neutrals (#f5f7f9, #eaeef2, #d9e0e6) and a navy
-   structural colour, so the site read blue even in its white sections. A marketer's
-   note that blue is overused in the sector is answered here rather than by changing
-   the accent: the neutrals and the dark bands move to warm equivalents, orange stays
-   exactly as it was, and every page shifts together because nothing else references
-   a raw colour. The --navy names are kept so no component has to change; only the
-   values are warm now. To revert, restore the block in git history. */
+/* TREATMENT B, 24 September 2026 — the palette agreed on the homepage mockup.
+   Written on the mockup's own swatch strip: "Orange leads, navy is text only, and the
+   cold greys are replaced with warm ones. Three full orange bands break up the page:
+   the figures, the pilot and the close."
+
+   Three rules follow from that, and they are the whole system:
+     1. ORANGE LEADS. It is a field colour, not a highlighter. Three full-bleed orange
+        bands on the homepage (figures, statutory panel, getting started) plus the
+        buttons. Everything else on the page is quiet so those three land.
+     2. NAVY IS TEXT ONLY. It stays cool — #2B3A47 for type, #1C2833 for the dark
+        bands. An earlier pass warmed it to brown; that was wrong. Warm brown type on
+        warm grey has no separation and reads muddy rather than warm.
+     3. THE GREYS ARE WARM. #FBF8F5 / #F3EDE7 / #E6DCD3 replace the blue-biased
+        #f5f7f9 / #eaeef2 / #d9e0e6. This is what takes the blue cast out of the white
+        sections, without touching the type colour.
+
+   The --navy-* names are kept so no component has to change; only the values move. */
 
 :root {
+  /* Vertical rhythm. See .section below. */
+  --sec-y: clamp(40px, 4.4vw, 64px);
+  --sec-y-tight: clamp(28px, 2.8vw, 44px);
+  --head-gap: clamp(16px, 1.8vw, 24px);
+
+  --footer-bg: #231a15;
+
   --orange: #ff6600;
-  --orange-ink: #b84a00;
-  --orange-soft: #fff0e5;
-  --navy: #2f2822;
-  --navy-deep: #241e19;
-  --navy-darker: #1a1512;
-  --text: #2f2822;
-  --muted: #6e6055;
+  --orange-ink: #b34700;
+  --orange-soft: #fff2e8;
+  --orange-dark: #b34700;
+  --navy: #2b3a47;
+  --navy-deep: #1c2833;
+  --navy-darker: #141d26;
+  --text: #2b3a47;
+  --muted: #5d6b78;
   --grey-50: #fbf8f5;
-  --grey-100: #f2ebe4;
-  --line: #e5dace;
+  --grey-100: #f3ede7;
+  --line: #e6dcd3;
   --white: #ffffff;
+  /* Text used ON a bright orange field. White small text on #ff6600 is only 2.9:1,
+     so anything under 18.66px bold uses this instead: 5.3:1 on the same orange, and
+     it keeps the band bright rather than deepening it. */
+  --on-orange: #3a1c00;
+  --on-orange-soft: #4a2400;
   --tbc-bg: #fff3bf;
   --tbc-line: #c99a00;
   --tbc-text: #5c4400;
@@ -64,7 +86,13 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-quicksand), 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    var(--font-quicksand),
+    'Quicksand',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
   font-size: 17px;
   font-weight: 500;
   line-height: 1.6;
@@ -172,11 +200,16 @@ ol {
   max-width: 820px;
 }
 
+/* ONE VERTICAL RHYTHM.
+   Every section used to set its own padding: .section ran to 104px top while the
+   bands beside it ran 40 to 54px, so the page changed pace every time it changed
+   background and the headings sat at a different height in each one. These four
+   values are now the only ones, and every band below uses them. */
 .section {
-  padding: clamp(56px, 8vw, 104px) 0;
+  padding: var(--sec-y) 0;
 }
 .section--tight {
-  padding: clamp(40px, 5vw, 64px) 0;
+  padding: var(--sec-y-tight) 0;
 }
 .section--grey {
   background: var(--grey-50);
@@ -204,7 +237,14 @@ ol {
 
 .section-head {
   max-width: 760px;
-  margin-bottom: clamp(28px, 4vw, 48px);
+  margin-bottom: var(--head-gap);
+}
+/* The eyebrow belongs to the heading under it, so it sits close. */
+.section-head .eyebrow {
+  margin-bottom: 8px;
+}
+.section-head h2 {
+  margin-bottom: 0.35em;
 }
 .section-head--center {
   margin-left: auto;
@@ -226,9 +266,9 @@ ol {
 
 .eyebrow {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.73rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--orange-ink);
   margin: 0 0 12px;
@@ -311,7 +351,11 @@ ol {
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
   text-align: center;
 }
 .btn:hover {
@@ -404,7 +448,13 @@ ol {
   justify-content: center;
   text-align: center;
   gap: 8px;
-  background: repeating-linear-gradient(45deg, var(--grey-50), var(--grey-50) 10px, var(--grey-100) 10px, var(--grey-100) 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--grey-50),
+    var(--grey-50) 10px,
+    var(--grey-100) 10px,
+    var(--grey-100) 20px
+  );
   border: 2px dashed var(--tbc-line);
   border-radius: var(--radius);
   padding: 24px;
@@ -506,7 +556,10 @@ ol {
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
-  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  transition:
+    opacity 0.15s,
+    transform 0.15s,
+    visibility 0.15s;
 }
 .main-nav li:hover > .submenu,
 .main-nav li:focus-within > .submenu {
@@ -604,6 +657,31 @@ ol {
 .page-hero h1 {
   max-width: 900px;
 }
+/* Split hero: copy left, photograph right, same proportions as the homepage. */
+.page-hero--split {
+  padding-bottom: clamp(36px, 4.5vw, 56px);
+}
+.page-hero__grid {
+  display: grid;
+  gap: 36px;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width: 960px) {
+  .page-hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 44px;
+  }
+}
+.page-hero--split h1 {
+  max-width: 16ch;
+}
+.page-hero--split .lead {
+  max-width: 52ch;
+}
+.page-hero__visual {
+  min-width: 0;
+}
 .page-hero .lead {
   max-width: 760px;
 }
@@ -643,29 +721,38 @@ ol {
 
 /* ---------- Home hero ---------- */
 
+/* Treatment B hero: a soft orange wash fading to white, with dark type on it.
+   The draft's dark navy radial gradient was the single biggest reason the site read
+   blue — it is the first screen anyone sees, and no amount of warming further down
+   the page can undo it. */
 .home-hero {
-  background: radial-gradient(1200px 500px at 85% 0%, #2c4157 0%, var(--navy-deep) 55%, var(--navy-darker) 100%);
-  color: #d6dee6;
-  padding: clamp(48px, 7vw, 96px) 0 0;
+  background: linear-gradient(170deg, var(--orange-soft) 0%, var(--white) 88%);
+  color: var(--text);
+  padding: clamp(44px, 6vw, 80px) 0 clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 .home-hero h1 {
-  color: var(--white);
-  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  color: var(--navy-deep);
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
   max-width: 18ch;
 }
+.home-hero h1 em {
+  font-style: normal;
+  color: var(--orange-ink);
+}
 .home-hero .eyebrow {
-  color: var(--orange);
+  color: var(--orange-ink);
 }
 .home-hero .lead {
-  color: #d6dee6;
+  color: var(--muted);
   max-width: 560px;
 }
 .home-hero__grid {
   display: grid;
   gap: 40px;
   grid-template-columns: 1fr;
-  align-items: end;
+  align-items: center;
 }
 @media (min-width: 960px) {
   .home-hero__grid {
@@ -673,7 +760,7 @@ ol {
   }
 }
 .home-hero__copy {
-  padding-bottom: clamp(32px, 5vw, 72px);
+  padding-bottom: 0;
 }
 .home-hero__visual {
   position: relative;
@@ -719,10 +806,13 @@ ol {
 
 /* ---------- Figures ---------- */
 
+/* Orange band 1 of 3. This is the first thing under the hero and the biggest single
+   field of colour on the page, so moving it off navy does most of the work on the
+   "blue is overused in this sector" note by itself. */
 .figures {
-  background: var(--navy-darker);
+  background: var(--orange);
   color: var(--white);
-  padding: 32px 0 28px;
+  padding: 30px 0 0;
 }
 .figures__list {
   display: grid;
@@ -742,18 +832,32 @@ ol {
   font-size: clamp(1.9rem, 3.8vw, 2.8rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--orange);
+  color: var(--white);
 }
 .figures__label {
   display: block;
   font-size: 0.95rem;
-  color: #d6dee6;
+  font-weight: 600;
+  color: var(--on-orange);
   margin-top: 4px;
 }
+/* Full-bleed deeper-orange footer strip, so the qualifier is attached to the figures
+   rather than floating under them. GLOBAL: the four figures never appear without it. */
 .figures__note {
-  margin: 18px 0 0;
-  font-size: 0.82rem;
-  color: #a9b6c3;
+  margin: 26px 0 0;
+  background: var(--orange-dark);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 0;
+}
+.figures__note span {
+  display: block;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 /* ---------- Cards ---------- */
@@ -783,7 +887,9 @@ ol {
   display: block;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .card-link:hover {
   transform: translateY(-2px);
@@ -1016,17 +1122,26 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 72px;
+  height: 88px;
+}
+/* B&D Reside and IDS came off the old site flattened onto opaque white, while the other
+   seven are transparent — so on a warm band those two rendered as white rectangles.
+   Multiply drops white out against any light ground and leaves the greys alone, which
+   also covers whatever we are sent next. */
+.logo-strip img {
+  mix-blend-mode: multiply;
 }
 .logo-strip img {
-  max-height: 56px;
-  max-width: 150px;
+  max-height: 84px;
+  max-width: 190px;
   width: auto;
   height: auto;
   object-fit: contain;
   filter: grayscale(1);
   opacity: 0.8;
-  transition: filter 0.2s, opacity 0.2s;
+  transition:
+    filter 0.2s,
+    opacity 0.2s;
 }
 .logo-strip img:hover {
   filter: none;
@@ -1035,8 +1150,8 @@ ol {
 .logo-strip--color img {
   filter: none;
   opacity: 1;
-  max-height: 64px;
-  max-width: 170px;
+  max-height: 72px;
+  max-width: 180px;
 }
 .logo-placeholder {
   display: flex;
@@ -1196,7 +1311,9 @@ ol {
   cursor: pointer;
   background: var(--white);
   position: relative;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 .segmented input {
   position: absolute;
@@ -1849,7 +1966,9 @@ table.data tbody th {
   text-decoration: none;
   color: var(--text);
   min-height: 190px;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .sector-tile:hover {
   transform: translateY(-2px);
@@ -2060,7 +2179,9 @@ table.data tbody th {
   text-decoration: none;
   color: var(--text);
   height: 100%;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .insight-card:hover {
   transform: translateY(-2px);
@@ -2318,14 +2439,18 @@ table.data tbody th {
 
 /* ---------- Footer ---------- */
 
+/* The footer was the largest block of navy left on the site, which is the colour
+   Treatment B exists to move away from. It stays dark — a footer should anchor the page
+   — but on a warm ground taken from the same family as --orange-ink, so it reads as part
+   of the brand rather than as a default. */
 .site-footer {
-  background: var(--navy-darker);
-  color: #b8c4cf;
-  padding: 64px 0 32px;
+  background: var(--footer-bg);
+  color: #cbbcae;
+  padding: var(--sec-y) 0 28px;
   font-size: 0.95rem;
 }
 .site-footer a {
-  color: #dfe6ed;
+  color: #f0e6dc;
   text-decoration: none;
 }
 .site-footer a:hover {
@@ -2381,9 +2506,13 @@ table.data tbody th {
   }
 }
 .footer-awards a {
-  display: block;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 12px;
   padding: 14px 16px;
   border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 3px solid var(--orange);
   border-radius: var(--radius-sm);
 }
 .footer-awards strong {
@@ -2986,6 +3115,9 @@ textarea {
 }
 
 /* Client logos: one tidy row, scrolls sideways if they don't all fit */
+/* Nine logos at the larger size no longer fit one line on a desktop, and a row that
+   silently scrolls hides clients. So it wraps to two rows where there is room, and keeps
+   the sideways scroll only on narrow screens where wrapping would make a tall stack. */
 .logo-strip--row {
   flex-wrap: nowrap !important;
   justify-content: flex-start !important;
@@ -2995,9 +3127,21 @@ textarea {
   scrollbar-width: thin;
   position: relative;
 }
+@media (min-width: 880px) {
+  .logo-strip--row {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    overflow-x: visible;
+    gap: 10px 34px;
+  }
+  .logo-strip--row > li:first-child,
+  .logo-strip--row > li:last-child {
+    margin-inline: 0;
+  }
+}
 .logo-strip--row > li {
   flex: 0 0 auto;
-  height: 64px;
+  height: 92px;
 }
 /* Centre the row when everything fits, scroll from the left when it doesn't */
 .logo-strip--row > li:first-child {
@@ -3006,9 +3150,11 @@ textarea {
 .logo-strip--row > li:last-child {
   margin-right: auto;
 }
+/* The files are 320x200 with generous built-in padding, so the visible mark is a good
+   deal smaller than the box. These caps are set against the artwork, not the canvas. */
 .logo-strip--row img {
-  max-height: 52px;
-  max-width: 140px;
+  max-height: 86px;
+  max-width: 190px;
 }
 @media (max-width: 719px) {
   .logo-strip--row {
@@ -3034,9 +3180,11 @@ textarea {
 .ev2-band {
   background: var(--orange);
   color: #fff;
-  padding: 44px 0 48px;
+  padding: var(--sec-y) 0;
 }
-.ev2-band .eyebrow { color: #ffe2cc; }
+.ev2-band .eyebrow {
+  color: var(--on-orange-soft);
+}
 .ev2-band h2 {
   color: #fff;
   max-width: 24ch;
@@ -3048,9 +3196,20 @@ textarea {
   gap: 24px;
   margin-top: 28px;
 }
-.ev2-band-item { border-top: 2px solid rgba(255, 255, 255, 0.42); padding-top: 14px; }
-.ev2-band-item h3 { color: #fff; font-size: 1.05rem; margin: 0 0 4px; }
-.ev2-band-item p { color: #ffede0; margin: 0; font-size: 0.97rem; }
+.ev2-band-item {
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  padding-top: 14px;
+}
+.ev2-band-item h3 {
+  color: #fff;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+.ev2-band-item p {
+  color: var(--on-orange);
+  margin: 0;
+  font-size: 0.97rem;
+}
 .ev2-band-item .ev2-figure {
   color: #fff;
   font-size: 2.4rem;
@@ -3067,9 +3226,17 @@ textarea {
   overflow: hidden;
   background: var(--white);
 }
-.ev2-pair { display: grid; grid-template-columns: 1fr 1fr; }
-.ev2-pair > div { padding: 15px 18px; border-top: 1px solid var(--line); }
-.ev2-pair:first-child > div { border-top: 0; }
+.ev2-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ev2-pair > div {
+  padding: 15px 18px;
+  border-top: 1px solid var(--line);
+}
+.ev2-pair:first-child > div {
+  border-top: 0;
+}
 .ev2-pair-head > div {
   background: var(--grey-100);
   font-size: 0.78rem;
@@ -3078,10 +3245,21 @@ textarea {
   color: var(--muted);
   padding: 11px 18px;
 }
-.ev2-pair-head > div + div { background: var(--orange-soft); color: var(--orange-ink); }
-.ev2-pair .ev2-a { color: var(--muted); }
-.ev2-pair .ev2-b { background: var(--orange-soft); font-weight: 600; }
-.ev2-pair--total > div { border-top: 2px solid var(--orange); font-weight: 700; }
+.ev2-pair-head > div + div {
+  background: var(--orange-soft);
+  color: var(--orange-ink);
+}
+.ev2-pair .ev2-a {
+  color: var(--muted);
+}
+.ev2-pair .ev2-b {
+  background: var(--orange-soft);
+  font-weight: 600;
+}
+.ev2-pair--total > div {
+  border-top: 2px solid var(--orange);
+  font-weight: 700;
+}
 
 /* Three-column "who sees what". */
 .ev2-seen {
@@ -3101,8 +3279,13 @@ textarea {
   padding-bottom: 12px;
   border-bottom: 2px solid var(--orange);
 }
-.ev2-seen-col ul { margin: 0; padding-left: 18px; }
-.ev2-seen-col li { margin-bottom: 8px; }
+.ev2-seen-col ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.ev2-seen-col li {
+  margin-bottom: 8px;
+}
 
 /* The seven contractor rules. */
 .ev2-rules {
@@ -3116,9 +3299,18 @@ textarea {
   border-radius: var(--radius-sm);
   padding: 18px;
 }
-.ev2-rule h3 { font-size: 1rem; margin: 0 0 5px; }
-.ev2-rule h3 span { color: var(--orange); }
-.ev2-rule p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+.ev2-rule h3 {
+  font-size: 1rem;
+  margin: 0 0 5px;
+}
+.ev2-rule h3 span {
+  color: var(--orange);
+}
+.ev2-rule p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
 
 /* "In every plan" strip, shared by all three who-we-help pages. */
 .ev2-everyplan {
@@ -3142,8 +3334,15 @@ textarea {
   gap: 1px;
   background: var(--line);
 }
-.ev2-ep { background: var(--grey-50); padding: 18px 20px; }
-.ev2-ep strong { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+.ev2-ep {
+  background: var(--grey-50);
+  padding: 18px 20px;
+}
+.ev2-ep strong {
+  display: block;
+  font-size: 1.02rem;
+  margin-bottom: 4px;
+}
 .ev2-ep .ev2-ep-figure {
   display: block;
   color: var(--orange-ink);
@@ -3152,7 +3351,11 @@ textarea {
   line-height: 1;
   margin-bottom: 4px;
 }
-.ev2-ep p { margin: 0; font-size: 0.93rem; color: var(--muted); }
+.ev2-ep p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: var(--muted);
+}
 
 /* Residents: emergency block. Red is deliberately outside the brand palette so
    safety information never reads as marketing. */
@@ -3163,8 +3366,13 @@ textarea {
   border-radius: var(--radius);
   padding: 24px 22px;
 }
-.ev2-emergency .eyebrow { color: #8e1c13; }
-.ev2-emergency h2 { color: #8e1c13; margin: 0 0 10px; }
+.ev2-emergency .eyebrow {
+  color: #8e1c13;
+}
+.ev2-emergency h2 {
+  color: #8e1c13;
+  margin: 0 0 10px;
+}
 .ev2-emergency ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -3181,7 +3389,10 @@ textarea {
   padding-top: 16px;
   border-top: 1px solid rgba(192, 42, 30, 0.25);
 }
-.ev2-emergency-alt .ev2-num { font-size: 1.2rem; font-weight: 700; }
+.ev2-emergency-alt .ev2-num {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 
 /* Dark "get the app" block. */
 .ev2-getapp {
@@ -3194,12 +3405,24 @@ textarea {
   align-items: center;
   justify-content: space-between;
 }
-.ev2-getapp h2 { color: #fff; margin: 0; }
-.ev2-getapp p { color: #ddd3ca; margin: 7px 0 0; max-width: 40ch; }
+.ev2-getapp h2 {
+  color: #fff;
+  margin: 0;
+}
+.ev2-getapp p {
+  color: #ddd3ca;
+  margin: 7px 0 0;
+  max-width: 40ch;
+}
 
 @media (max-width: 700px) {
-  .ev2-pair, .ev2-pair-head { grid-template-columns: 1fr; }
-  .ev2-pair .ev2-b { border-top: 0; }
+  .ev2-pair,
+  .ev2-pair-head {
+    grid-template-columns: 1fr;
+  }
+  .ev2-pair .ev2-b {
+    border-top: 0;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -3207,95 +3430,364 @@ textarea {
    --------------------------------------------------------------------------- */
 
 /* Hero: award lines as text, not a badge image, and the hero photo carries a chip. */
-.ev2-awards { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.ev2-awards li {
-  font-size: 0.82rem;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: inherit;
-  border-radius: 999px;
-  padding: 6px 13px;
+/* ---------- Awards in the hero ----------
+   The awarding bodies do not publish winner badges we can use, so the award is
+   drawn rather than stamped: a laurel mark, the award over the year, and the client
+   it was won with underneath. The client line is not decoration — an award is only
+   ever shown against the client it was won with, and that rule holds here.
+   Two awards, side by side, reading as a pair of seals rather than two tags. */
+.ev2-awards {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px 14px;
+  max-width: 560px;
 }
-.ev2-heroimg { margin: 0; position: relative; }
-.ev2-heroimg img { border-radius: var(--radius); width: 100%; height: auto; }
+.ev2-awards li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px 9px 12px;
+  box-shadow: 0 1px 2px rgba(43, 58, 71, 0.05);
+}
+.ev2-awards svg {
+  width: 26px;
+  height: 26px;
+  color: var(--orange);
+  flex: none;
+}
+.ev2-award-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--navy-deep);
+}
+.ev2-award-with {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.ev2-heroimg {
+  margin: 0;
+  position: relative;
+}
+.ev2-heroimg img {
+  border-radius: var(--radius);
+  width: 100%;
+  height: auto;
+}
+/* The caption was a large white block covering a quarter of the photograph, and it
+   did not say what was being reported (Sam, point 1). Now one line, inset, sized to
+   its text, and it names the subject. */
 .ev2-heroimg figcaption {
   position: absolute;
-  left: 14px;
-  bottom: 14px;
-  background: var(--white);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  box-shadow: var(--shadow);
-  max-width: 78%;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(3px);
+  border-radius: 999px;
+  padding: 7px 15px 7px 12px;
+  box-shadow: 0 2px 10px rgba(43, 58, 71, 0.16);
+  max-width: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  line-height: 1.3;
+  color: var(--text);
 }
-.ev2-heroimg figcaption span { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.ev2-heroimg figcaption strong { display: block; font-size: 0.95rem; color: var(--text); }
+.ev2-heroimg figcaption::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex: none;
+}
+.ev2-heroimg figcaption strong {
+  font-weight: 700;
+  color: var(--navy-deep);
+}
 
 /* Why repairs matter more than ever. */
-.ev2-whynow { background: var(--grey-100); padding: 40px 0 44px; border-block: 1px solid var(--line); }
-.ev2-whynow h2 { margin: 6px 0 0; max-width: 26ch; }
-.ev2-whynow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-top: 26px; }
-.ev2-whynow-item { border-top: 3px solid var(--orange); padding-top: 14px; }
-.ev2-whynow-num { display: block; font-size: 1.8rem; font-weight: 700; line-height: 1.05; color: var(--orange-ink); }
-.ev2-whynow-label { display: block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
-.ev2-whynow-item h3 { font-size: 1.05rem; margin: 10px 0 4px; }
-.ev2-whynow-item p { margin: 0; font-size: 0.95rem; color: var(--muted); }
-
-/* Problem and answer, row by row. */
-.ev2-pa { margin-top: 26px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--white); }
-.ev2-pa-head, .ev2-pa-row { display: grid; grid-template-columns: 1fr 128px 1fr; align-items: stretch; }
-.ev2-pa-head > div {
+.ev2-whynow {
   background: var(--grey-100);
-  padding: 11px 18px;
-  font-size: 0.76rem;
-  letter-spacing: 0.1em;
+  padding: var(--sec-y) 0;
+  border-block: 1px solid var(--line);
+}
+.ev2-whynow h2 {
+  margin: 0;
+  max-width: 26ch;
+}
+.ev2-whynow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px 28px;
+  margin-top: var(--head-gap);
+}
+.ev2-whynow-item {
+  display: grid;
+  grid-template-columns: minmax(96px, auto) 1fr;
+  column-gap: 14px;
+  align-items: start;
+}
+.ev2-whynow-num {
+  grid-row: 1 / span 4;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--orange-ink);
+}
+.ev2-whynow-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--muted);
 }
-.ev2-pa-head > div:last-child { background: var(--orange-soft); color: var(--orange-ink); }
-.ev2-pa-row > div { border-top: 1px solid var(--line); padding: 16px 18px; display: flex; gap: 10px; align-items: flex-start; }
-.ev2-pa-bad { color: var(--muted); }
-.ev2-pa-good { background: var(--orange-soft); font-weight: 600; }
-.ev2-pa-x { color: #c02a1e; font-weight: 700; }
-.ev2-pa-t { color: var(--orange-ink); font-weight: 700; }
-.ev2-pa-mid { justify-content: center; align-items: center; background: var(--grey-50); }
-.ev2-pa-dot { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--orange-ink); }
-.ev2-pa-dot svg { width: 24px; height: 24px; }
-.ev2-pa-dot i { font-style: normal; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.ev2-whynow-item h3 {
+  font-size: 1rem;
+  margin: 3px 0 3px;
+}
+.ev2-whynow-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---------- Problem and solution ----------
+   Drawn as two lanes rather than a table. The point of the block is movement: a
+   reader should see the problem lose weight and the solution gain it as their eye
+   crosses the row. A bordered grid says "specification"; lanes say "before, after".
+
+   Left lane recedes — cooler, lighter, smaller. Right lane carries the weight —
+   warm tint, darker ink, heavier. The centre is a continuous spine with the theme
+   named on it, so the four themes can be scanned straight down without reading a
+   word of either lane. The tick and cross glyphs are gone: the lanes carry that
+   meaning already, and two columns of symbols was the main thing making it look
+   like a spreadsheet. */
+.ev2-pa {
+  margin-top: var(--head-gap);
+  border-radius: var(--radius-lg, 20px);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+.ev2-pa-head,
+.ev2-pa-row {
+  display: grid;
+  grid-template-columns: 1fr 150px 1fr;
+  align-items: stretch;
+}
+.ev2-pa-head > div {
+  padding: 14px 22px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--grey-100);
+  color: var(--muted);
+}
+.ev2-pa-head > div:last-child {
+  background: var(--orange);
+  color: var(--on-orange);
+}
+.ev2-pa-head > div:nth-child(2) {
+  background: var(--grey-100);
+}
+.ev2-pa-row > div {
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+/* The problem lane. Recessive by design. */
+.ev2-pa-bad {
+  color: var(--muted);
+  font-size: 0.97rem;
+  background: var(--grey-50);
+}
+/* The solution lane. Everything a notch heavier. */
+.ev2-pa-good {
+  background: var(--orange-soft);
+  color: var(--navy-deep);
+  font-weight: 600;
+  font-size: 1.04rem;
+}
+.ev2-pa-row:last-child > div {
+  padding-bottom: 24px;
+}
+
+/* The spine. A continuous rule down the centre with the theme sitting on it, and a
+   chevron under each one giving the row its direction. */
+.ev2-pa-mid {
+  position: relative;
+  background: var(--white);
+  justify-content: center;
+  padding: 22px 0 34px;
+  flex-direction: column;
+  gap: 6px;
+}
+.ev2-pa-mid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(var(--line), var(--line));
+}
+.ev2-pa-dot {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--navy-deep);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 7px var(--white);
+}
+.ev2-pa-dot svg {
+  width: 22px;
+  height: 22px;
+}
+/* The theme name, promoted out of the disc so it is readable at a glance. */
+.ev2-pa-dot i {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-style: normal;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--white);
+  padding: 0 7px;
+  white-space: nowrap;
+}
+/* Direction. Small, and it does more work than any amount of colour. */
+.ev2-pa-arrow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 1px;
+  pointer-events: none;
+}
+.ev2-pa-arrow::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--orange);
+  border-right: 2px solid var(--orange);
+  transform: rotate(45deg);
+}
+.ev2-pa-x,
+.ev2-pa-t {
+  display: none;
+}
 
 /* Caretaker. */
-.ev2-caretaker { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-.ev2-caretaker img { border-radius: var(--radius); width: 100%; height: auto; }
+/* The Caretaker card. The thin orange border is what makes this read as the
+   differentiator rather than another paragraph on a grey section. */
+.ev2-caretaker {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 26px;
+  align-items: center;
+  background: var(--white);
+  border: 1.5px solid var(--orange);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.ev2-caretaker img {
+  border-radius: var(--radius-sm);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.ev2-caretaker h2 {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin-bottom: 10px;
+}
+.ev2-caretaker p {
+  color: var(--muted);
+}
 
 /* Compliance band. */
-.ev2-compliance { background: var(--navy-deep); color: #fff; padding: 52px 0 56px; }
-.ev2-compliance .eyebrow { color: #ff9a4d; }
-.ev2-compliance h2 { color: #fff; margin: 8px 0 0; max-width: 22ch; }
-.ev2-compliance h2 em { color: var(--orange); font-style: normal; }
-.ev2-compliance-lead { color: #ddd3ca; max-width: 62ch; margin-top: 12px; }
-.ev2-halves { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin-top: 28px; }
-.ev2-half { border-radius: var(--radius); padding: 22px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.14); }
-.ev2-half--regulatory { background: var(--orange); border-color: var(--orange); }
-.ev2-half-k { display: block; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffbe8c; }
-.ev2-half--regulatory .ev2-half-k { color: #fff2e8; }
-.ev2-half strong { display: block; font-size: 1.25rem; margin: 8px 0 10px; color: #fff; }
-.ev2-half p { margin: 0; color: #ddd3ca; font-size: 0.97rem; }
-.ev2-half--regulatory p { color: #fff2e8; }
-.ev2-compliance-dates { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; margin-top: 30px; }
-.ev2-compliance-dates b { display: block; font-size: 1.5rem; color: var(--orange); line-height: 1.1; }
-.ev2-compliance-dates span { display: block; font-size: 0.92rem; color: #ddd3ca; margin-top: 4px; }
-.ev2-compliance a { color: #fff; }
+/* The old navy compliance band and its halves were removed on 25 September 2026 when
+   the section was rebuilt light (see .ev3-compliance). Nothing references these. */
+
+.ev2-halves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+/* Orange band 2 of 3 — and the orange goes on STATUTORY, not regulatory.
+   Statutory is work EVO actually does, so it gets the solid colour. Regulatory is a
+   duty that never transfers, so it sits in the quiet panel. Built the other way round
+   first, which painted "you hold the duty" in EVO orange — exactly the overclaim this
+   block exists to avoid. */
 
 /* Who we help strip. */
-.ev2-whostrip { background: var(--grey-100); border-block: 1px solid var(--line); padding: 20px 0; }
-.ev2-whostrip .container { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: baseline; }
-.ev2-whostrip-t { font-weight: 600; }
-.ev2-whostrip-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.ev2-whostrip-links a { color: var(--orange-ink); font-weight: 600; text-decoration: none; }
-.ev2-whostrip-links a::after { content: ' \2192'; }
+.ev2-whostrip {
+  background: var(--white);
+  border-block: 1px solid var(--line);
+  padding: 20px 0;
+}
+.ev2-whostrip .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  align-items: baseline;
+}
+.ev2-whostrip-t {
+  font-weight: 600;
+}
+.ev2-whostrip-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.ev2-whostrip-links a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.ev2-whostrip-links a::after {
+  content: ' \2192';
+}
 
 /* Trust. */
-.ev2-board { display: grid; grid-template-columns: 180px 1fr; gap: 26px; align-items: center; }
+.ev2-board {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 26px;
+  align-items: center;
+}
 .ev2-board-photo {
   aspect-ratio: 1;
   border-radius: var(--radius);
@@ -3306,15 +3798,48 @@ textarea {
   justify-content: center;
   text-align: center;
   padding: 12px;
+  overflow: hidden;
+}
+.ev2-board-photo:has(img) {
+  padding: 0;
+}
+.ev2-board-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
 }
 
 /* See it. Try it. Start it. */
-.ev2-start { background: var(--orange); color: #fff; padding: 54px 0 58px; }
-.ev2-start .eyebrow { color: rgba(255, 255, 255, 0.85); }
-.ev2-start h2 { color: #fff; margin: 8px 0 0; }
-.ev2-start h2 em { font-style: normal; color: var(--navy-deep); }
-.ev2-start-lead { color: #fff0e5; max-width: 60ch; margin-top: 12px; }
-.ev2-doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 16px; margin-top: 28px; }
+.ev2-start {
+  background: var(--orange);
+  color: #fff;
+  padding: var(--sec-y) 0;
+}
+.ev2-start .eyebrow {
+  color: var(--on-orange-soft);
+}
+.ev2-start h2 {
+  color: #fff;
+  margin: 0;
+}
+.ev2-start h2 em {
+  font-style: normal;
+  color: #2b1400;
+}
+.ev2-start-lead {
+  color: var(--on-orange);
+  font-weight: 600;
+  max-width: 60ch;
+  margin-top: 12px;
+}
+.ev2-doors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
 .ev2-door {
   background: var(--white);
   border-radius: var(--radius);
@@ -3325,16 +3850,39 @@ textarea {
   text-decoration: none;
   color: var(--text);
 }
-.ev2-door--mid { outline: 4px solid var(--navy-deep); }
-.ev2-door-step { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--orange-ink); }
-.ev2-door-name { font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
-.ev2-door-body { font-size: 0.95rem; color: var(--muted); }
-.ev2-door-go { margin-top: auto; font-weight: 600; color: var(--orange-ink); }
-.ev2-door-go::after { content: ' \2192'; }
+.ev2-door--mid {
+  outline: 3px solid #2b1400;
+  outline-offset: -1px;
+}
+.ev2-door-step {
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+.ev2-door-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.ev2-door-body {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.ev2-door-go {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--orange-ink);
+}
+.ev2-door-go::after {
+  content: ' \2192';
+}
+/* Sits inside the orange band. A dark overlay rather than a light one, so the white
+   step text on it clears AA (5.4:1) instead of failing on bright orange. */
 .ev2-pilotstrip {
   margin-top: 26px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(0, 0, 0, 0.16);
   border-radius: var(--radius);
   padding: 22px;
   display: grid;
@@ -3342,15 +3890,1215 @@ textarea {
   gap: 26px;
   align-items: center;
 }
-.ev2-pilotstrip .eyebrow { color: #fff; }
-.ev2-pilotstrip img { border-radius: var(--radius-sm); width: 100%; height: auto; }
-.ev2-pilot-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 12px; }
-.ev2-pilot-steps b { display: block; color: #fff; font-size: 1.05rem; }
-.ev2-pilot-steps span { display: block; font-size: 0.9rem; color: #fff0e5; }
+.ev2-pilotstrip .eyebrow {
+  color: #fff;
+}
+.ev2-pilotstrip img {
+  border-radius: var(--radius-sm);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.ev2-pilot-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+.ev2-pilot-steps b {
+  display: block;
+  color: #fff;
+  font-size: 1.05rem;
+}
+.ev2-pilot-steps span {
+  display: block;
+  font-size: 0.9rem;
+  color: #fff0e5;
+}
 
 @media (max-width: 860px) {
-  .ev2-caretaker, .ev2-pilotstrip { grid-template-columns: 1fr; }
-  .ev2-board { grid-template-columns: 120px 1fr; gap: 18px; }
-  .ev2-pa-head, .ev2-pa-row { grid-template-columns: 1fr; }
-  .ev2-pa-mid { display: none; }
+  .ev2-caretaker,
+  .ev2-pilotstrip {
+    grid-template-columns: 1fr;
+  }
+  .ev2-board {
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+  }
+  /* On a phone the two lanes stack, so the spine has nothing to run down. The
+     theme becomes a small label on its own row instead, which keeps the four
+     themes scannable without the centre column. */
+  .ev2-pa-head,
+  .ev2-pa-row {
+    grid-template-columns: 1fr;
+  }
+  .ev2-pa-head > div:nth-child(2) {
+    display: none;
+  }
+  .ev2-pa-mid {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 12px 22px 0;
+    border-top: 1px solid var(--line);
+    background: var(--grey-50);
+  }
+  .ev2-pa-mid::before,
+  .ev2-pa-arrow {
+    display: none;
+  }
+  .ev2-pa-dot {
+    width: 34px;
+    height: 34px;
+    box-shadow: none;
+  }
+  .ev2-pa-dot svg {
+    width: 16px;
+    height: 16px;
+  }
+  .ev2-pa-dot i {
+    position: static;
+    transform: none;
+    background: none;
+    padding: 0;
+  }
+  .ev2-pa-bad {
+    border-top: 0;
+    padding-top: 10px;
+  }
+}
+
+/* ==========================================================================
+   Treatment B, part 2 — 24 September 2026
+   The blocks below finish the port of the agreed mockups. Everything here is
+   prefixed ev3- (or overrides an existing class by name) so it can be lifted
+   out in one piece if any of it is wrong.
+   ========================================================================== */
+
+/* ---------- Client logo band (mockup .logos) ----------
+   Warm band rather than plain white, and the three new names carry an orange
+   outline so EVO can see at a glance which logo files are still outstanding. */
+.ev3-logoband {
+  background: var(--grey-50);
+  border-block: 1px solid var(--line);
+  padding: var(--sec-y-tight) 0;
+}
+.ev3-logoband-hd {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+/* ---------- Plans teaser tiers (mockup .plans) ----------
+   Three tiers, a coloured cap on each, the real monthly price, the coverage
+   percentage and a five-segment fill meter. Home 1000 is the one we want
+   chosen, so it is the only one in brand orange. */
+.ev3-tiers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 26px;
+  align-items: end;
+}
+@media (min-width: 820px) {
+  .ev3-tiers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.ev3-tier {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.ev3-tier-bar {
+  height: 6px;
+  background: var(--line);
+}
+.ev3-tier-in {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.ev3-tier-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ev3-tier-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  line-height: 1.15;
+}
+.ev3-tier-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  line-height: 1.1;
+  margin-top: 4px;
+}
+.ev3-tier-price small {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ev3-tier-price--poa {
+  font-size: 1.25rem;
+}
+.ev3-tier-cover {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+/* The threshold is the thing that separates the three plans, so it carries the weight
+   the price used to carry now that the prices have moved to /pricing. */
+.ev3-tier-thr {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  line-height: 1.2;
+  margin-top: 4px;
+}
+.ev3-tiers--noprice .ev3-tier-in {
+  gap: 5px;
+}
+
+/* ---------- The one price on the homepage ----------
+   Set on its own line between the argument and the plans, so it reads as the proof of
+   "one fixed price" rather than as one price among three. */
+.ev3-from {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0 0 var(--head-gap);
+}
+.ev3-from-k {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ev3-from-v {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--orange-ink);
+  letter-spacing: -0.02em;
+}
+.ev3-from-u {
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+.ev3-meter {
+  display: flex;
+  gap: 3px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.ev3-meter i {
+  height: 5px;
+  flex: 1;
+  border-radius: 3px;
+  background: var(--grey-100);
+}
+
+.ev3-tier--t1 .ev3-tier-bar {
+  background: #c9bcaf;
+}
+.ev3-tier--t1 .ev3-meter i:nth-child(-n + 3) {
+  background: #c9bcaf;
+}
+
+.ev3-tier--t2 {
+  border-color: var(--orange);
+  border-width: 1.5px;
+  box-shadow: 0 8px 26px rgba(255, 102, 0, 0.16);
+}
+.ev3-tier--t2 .ev3-tier-bar {
+  background: var(--orange);
+  height: 7px;
+}
+.ev3-tier--t2 .ev3-tier-tag {
+  color: var(--orange-ink);
+}
+.ev3-tier--t2 .ev3-meter i:nth-child(-n + 4) {
+  background: var(--orange);
+}
+
+.ev3-tier--t3 .ev3-tier-bar {
+  background: var(--navy-deep);
+}
+.ev3-tier--t3 .ev3-meter i {
+  background: var(--navy-deep);
+}
+
+/* ---------- Header utility links (site map: Residents, Trades, Client login) ----------
+   Three links the buying nav should not carry, but which the site cannot be
+   without. Client login is app.evo-pm.com — the thing existing clients use,
+   and it was missing from the site entirely. */
+.ev3-util {
+  display: none;
+}
+.ev3-util a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 8px;
+  white-space: nowrap;
+}
+.ev3-util a:hover {
+  color: var(--orange-ink);
+}
+.ev3-util a.ev3-util-login {
+  color: var(--navy-deep);
+  font-weight: 700;
+}
+@media (min-width: 1180px) {
+  .ev3-util {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 10px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line);
+  }
+  .main-nav {
+    margin-left: auto;
+  }
+}
+.ev3-util-mobile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--grey-100);
+  margin-top: 6px;
+}
+.ev3-util-mobile a {
+  font-weight: 700;
+  color: var(--navy-deep);
+  text-decoration: none;
+  padding: 6px 0;
+}
+@media (min-width: 1180px) {
+  .ev3-util-mobile {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Photography, 25 September 2026
+   The mockups placed 17 images; three of them made it into the first build.
+   These are the patterns the other fourteen need.
+   ========================================================================== */
+
+/* Image beside text. Reverse puts the photograph on the right. */
+.ev3-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .ev3-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .ev3-split--narrow {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+  .ev3-split--reverse > *:first-child {
+    order: 2;
+  }
+}
+.ev3-split img {
+  border-radius: var(--radius);
+  width: 100%;
+  height: auto;
+}
+.ev3-split .photo {
+  margin: 0;
+}
+
+/* Before / during / after. One image, three labels under it, so the reader is told
+   what they are looking at without three separate crops drifting apart. */
+.ev3-triptych {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.ev3-triptych img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.ev3-triptych figcaption {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+}
+.ev3-triptych figcaption span {
+  background: var(--grey-50);
+  padding: 10px 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+@media (max-width: 640px) {
+  .ev3-triptych figcaption {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Phone screens shown in a row, for the app pages. */
+.ev3-screens {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  align-items: end;
+}
+.ev3-screens figure {
+  margin: 0;
+}
+.ev3-screens img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+.ev3-screens figcaption {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* A full-bleed photograph used as a band between sections. */
+.ev3-bandimg {
+  margin: 0;
+}
+.ev3-bandimg img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.ev3-bandimg figcaption {
+  background: var(--grey-50);
+  border-top: 1px solid var(--line);
+  padding: 10px var(--gutter);
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* On a dark band the split image keeps its rounding but loses the light border. */
+.section--navy .ev3-split img {
+  border: 0;
+}
+
+/* ---------- Orange band text rule ----------
+   On a bright orange field only a top-level H2 is white; it is large enough to pass
+   AA at 3:1. Everything smaller uses the dark ink, which is 5.3:1 on the same orange.
+   This is what stops the bands looking like two unrelated decisions. */
+.ev2-band-item h3 {
+  color: var(--on-orange);
+}
+
+/* ---------- Anchor targets ----------
+   Case studies and How it works are now single pages with deep anchors, and the header
+   is sticky, so a linked section would otherwise land underneath it. */
+:target,
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+/* Hero award chips: two lines each on a phone pushed the hero photograph below the
+   fold. Smaller type and tighter padding keeps them to one line at 390px. */
+@media (max-width: 560px) {
+  .ev2-awards {
+    gap: 6px;
+  }
+  .ev2-awards li {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+  }
+}
+
+/* ---------- Hero caption chip on a phone ----------
+   Floated over the photograph it ate most of the image at 390px, and on the team shot
+   it sat across people's faces. Below 760px it drops underneath, as the mockups had it. */
+@media (max-width: 760px) {
+  .ev2-heroimg figcaption {
+    position: static;
+    max-width: none;
+    margin-top: 10px;
+    box-shadow: none;
+    border: 1px solid var(--line);
+  }
+  .home-hero__grid,
+  .page-hero__grid {
+    gap: 24px;
+  }
+}
+
+/* ---------- Migrated article bodies ----------
+   Tables, lists and images inside an insight article. The articles came across from
+   the old site verbatim, and several of them use tables heavily (the Tenant
+   Satisfaction Measures guide has twenty-two rows), so they need styling of their own
+   rather than borrowing the pricing table's. */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.95rem;
+}
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.prose thead th {
+  background: var(--grey-50);
+  font-weight: 700;
+  color: var(--navy-deep);
+}
+.prose ol {
+  padding-left: 1.2em;
+  margin: 14px 0;
+}
+.prose ol li {
+  margin-bottom: 8px;
+}
+.prose .tick-list {
+  margin: 14px 0;
+}
+.prose img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- The team ----------
+   Board members get a wide card with their biography; everyone else gets a compact
+   card. Both work with or without a photograph — no photo shows the person's initials
+   on a warm tile, which reads as deliberate rather than as a broken image. */
+.ev3-team-head {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+  margin: 34px 0 16px;
+}
+.ev3-team-head:first-child {
+  margin-top: 0;
+}
+
+.ev3-team {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+.ev3-team--board {
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 720px) {
+  .ev3-team--board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ev3-person {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ev3-person-photo {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--grey-100);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ev3-person-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.ev3-person-photo span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--orange-ink);
+  letter-spacing: 0.02em;
+}
+.ev3-person h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+.ev3-person-role {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 2px 0 0;
+}
+.ev3-person-bio {
+  font-size: 0.92rem;
+  margin: 8px 0 0;
+}
+
+/* Board cards run photo beside text. */
+.ev3-person--large {
+  flex-direction: row;
+  gap: 18px;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.ev3-person--large .ev3-person-photo {
+  flex: 0 0 110px;
+  width: 110px;
+}
+.ev3-person--large .ev3-person-text {
+  min-width: 0;
+}
+.ev3-person--large h3 {
+  font-size: 1.1rem;
+}
+
+/* Newsletter archive list. */
+.ev3-issues {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px 20px;
+}
+.ev3-issues li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ev3-issue-n {
+  flex: 0 0 auto;
+  min-width: 2ch;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--orange-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Resident vox pop ----------
+   A vertical 9:16 reel beside the argument. The video is capped in height so a portrait
+   clip cannot run away with the page, and the whole thing stacks on a phone with the
+   player first — which is the right order there, because the video IS the point. */
+.ev3-voxpop {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .ev3-voxpop {
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    gap: 44px;
+  }
+}
+.ev3-voxpop-player {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  max-width: 320px;
+  width: 100%;
+  justify-self: center;
+}
+.ev3-voxpop-player video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #000;
+}
+
+/* Short published testimonials, shown together. Volume is part of the signal for this
+   audience, so they sit in a masonry-ish grid rather than a carousel. */
+.ev3-quotes {
+  columns: 1;
+  column-gap: 20px;
+}
+@media (min-width: 720px) {
+  .ev3-quotes {
+    columns: 2;
+  }
+}
+@media (min-width: 1040px) {
+  .ev3-quotes {
+    columns: 3;
+  }
+}
+.ev3-quote {
+  break-inside: avoid;
+  margin: 0 0 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.ev3-quote p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+.ev3-quote footer {
+  margin-top: 12px;
+  font-size: 0.85rem;
+}
+.ev3-quote footer strong {
+  display: block;
+  color: var(--navy-deep);
+}
+.ev3-quote footer span {
+  color: var(--muted);
+}
+
+/* Dated-article notice. Deliberately quiet — a note, not a warning. It appears on every
+   article older than eighteen months, because EVO has been publishing since 2022 when it
+   was a lighter product, and old posts describe plans and prices that no longer match the
+   rest of the site. */
+.ev3-dated {
+  background: var(--grey-50);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin: 0 0 24px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.ev3-dated a {
+  color: var(--orange-ink);
+}
+
+/* ---------- Homepage proof block (25 September 2026) ----------
+   Replaces two flat cards and a stranded quote. Photograph on top, client logo sitting
+   on it, then the statistic and that client's own words in the same card. */
+.ev3-proof {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+}
+.ev3-proof-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 22px rgba(43, 58, 71, 0.06);
+}
+.ev3-proof-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--grey-100);
+}
+.ev3-proof-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.ev3-proof-card:hover .ev3-proof-media img {
+  transform: scale(1.03);
+}
+/* The logo sits on the photograph on a white chip, so it stays legible whatever the
+   photograph is doing behind it. */
+.ev3-proof-logo {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  box-shadow: 0 2px 10px rgba(43, 58, 71, 0.2);
+  display: flex;
+  align-items: center;
+}
+.ev3-proof-logo img {
+  max-height: 30px;
+  max-width: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.ev3-proof-body {
+  padding: clamp(18px, 2.2vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.ev3-proof-body h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+.ev3-proof-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 8px;
+}
+.ev3-proof-stat strong {
+  font-size: clamp(2rem, 3.4vw, 2.6rem);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--orange-ink);
+  letter-spacing: -0.02em;
+}
+.ev3-proof-stat span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ev3-proof-sum {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+/* The client's own words, in their own card, against a warm ground so the quote reads
+   as evidence attached to the statistic above it rather than as a pull-out. */
+.ev3-proof-quote {
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  background: var(--orange-soft);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--orange);
+}
+.ev3-proof-quote p {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--navy-deep);
+}
+.ev3-proof-quote cite,
+.ev3-voices cite {
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  display: block;
+}
+.ev3-proof-quote cite span,
+.ev3-voices cite span {
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.ev3-proof-body .text-link {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Three shorter voices. Landlord, residents' association, resident. */
+.ev3-voices {
+  list-style: none;
+  margin: clamp(18px, 2.4vw, 28px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+.ev3-voices li {
+  border-top: 2px solid var(--orange);
+  padding-top: 14px;
+}
+.ev3-voices p {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--navy-deep);
+}
+
+/* Footer detail. */
+.footer-awards a svg {
+  width: 26px;
+  height: 26px;
+  color: var(--orange);
+}
+.footer-awards a:hover {
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+}
+/* The logo panel: one optical height for every mark, so the strip reads as a row rather
+   than a jumble. Logos with no file are not listed at all (hideMissing). */
+.footer-logos {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.footer-logos .logo-strip {
+  gap: 10px 30px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.footer-logos .logo-strip li {
+  height: 46px;
+  display: flex;
+  align-items: center;
+}
+.footer-logos .logo-strip img {
+  max-height: 40px;
+  max-width: 116px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.site-footer .footer-cols h2 {
+  color: #fff;
+  font-size: 0.74rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.footer-bottom {
+  color: #a3948a;
+}
+
+/* The accreditation strip on the homepage trust block, same treatment as the footer
+   panel so the two read as the same object in two places. */
+.ev3-accreds .logo-strip {
+  gap: 12px 30px;
+  align-items: center;
+}
+.ev3-accreds .logo-strip li {
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+.ev3-accreds .logo-strip img {
+  max-height: 46px;
+  max-width: 130px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* The trust block's copy is left-aligned, so its logo strip is too. */
+.ev3-accreds .logo-strip {
+  justify-content: flex-start;
+}
+
+/* ==========================================================================
+   Homepage review, 25 September 2026 — second pass
+   ========================================================================== */
+
+/* ---------- The price split under the headline figure ----------
+   Two smaller numbers make the total easier to take, and the composition says you are
+   buying a platform AND a repairs service. Shown UNDER the total, never instead of it. */
+.ev3-from {
+  margin-bottom: 6px;
+}
+.ev3-from-split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0 0 var(--head-gap);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.ev3-from-split b {
+  color: var(--navy-deep);
+  font-weight: 700;
+}
+.ev3-from-split span[aria-hidden] {
+  color: var(--line);
+}
+
+/* ---------- Video: a poster with an obvious play button ----------
+   A bare <video poster> draws a different affordance in every browser and none at all on
+   iOS, so the one piece of resident footage EVO has was reading as a photograph. */
+.ev3-player {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+.ev3-player video,
+.ev3-player-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ev3-player-poster {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.ev3-player-poster::after {
+  /* A slight wash so a white button stays legible over any frame. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.32));
+  transition: background 0.25s;
+}
+.ev3-player-poster:hover::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.26));
+}
+.ev3-player-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.42);
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.ev3-player-poster:hover .ev3-player-btn {
+  transform: translate(-50%, -50%) scale(1.07);
+}
+.ev3-player-poster:focus-visible .ev3-player-btn {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+.ev3-player-btn svg {
+  width: 34px;
+  height: 34px;
+  margin-left: 4px; /* optical centring: a triangle's mass sits left of its bounding box */
+}
+
+/* ---------- Compliance, rebuilt light ----------
+   It was navy directly under the navy video band. The video keeps the dark ground; this
+   goes light, and the two halves become opposed cards so the colour carries the
+   argument: orange for the work EVO does, neutral for the duty that stays with you. */
+.ev3-compliance {
+  background: var(--grey-50);
+  border-block: 1px solid var(--line);
+}
+.ev3-comp-halves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+.ev3-comp {
+  padding: clamp(22px, 2.6vw, 30px);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ev3-comp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.ev3-comp-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.ev3-comp-k {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.ev3-comp h3 {
+  margin: 2px 0 8px;
+  font-size: 1.25rem;
+}
+
+/* The work EVO does. EVO's own colour. */
+.ev3-comp--ours {
+  background: var(--orange);
+  color: var(--on-orange);
+}
+.ev3-comp--ours h3 {
+  color: var(--on-orange);
+}
+.ev3-comp--ours .ev3-comp-k {
+  color: var(--on-orange-soft);
+}
+.ev3-comp--ours .ev3-comp-icon {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--orange-dark);
+}
+
+/* The duty that stays with the landlord. Deliberately not EVO's colour. */
+.ev3-comp--yours {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--navy);
+  color: var(--text);
+}
+.ev3-comp--yours .ev3-comp-k {
+  color: var(--muted);
+}
+.ev3-comp--yours .ev3-comp-icon {
+  background: var(--grey-100);
+  color: var(--navy);
+}
+
+.ev3-comp-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: clamp(20px, 2.4vw, 30px);
+  padding-top: clamp(18px, 2.2vw, 26px);
+  border-top: 1px solid var(--line);
+}
+.ev3-comp-stats b {
+  display: block;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.1;
+  color: var(--orange-ink);
+  letter-spacing: -0.01em;
+}
+.ev3-comp-stats span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+/* ---------- The three shorter voices ----------
+   They were a top rule and a block of text, and the three quotes are different lengths,
+   so the row looked ragged — which is why the shortest available quote had been dropped
+   in rather than the best one. As cards with the attribution pinned to the bottom, the
+   lengths stop mattering and the real names go back. */
+.ev3-voices {
+  list-style: none;
+  margin: clamp(18px, 2.4vw, 28px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 2vw, 22px);
+}
+.ev3-voices li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 44px 22px 20px;
+  border-top: 0;
+}
+.ev3-voices li::before {
+  content: '\201C';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 3.4rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--orange);
+  opacity: 0.55;
+}
+.ev3-voices p {
+  margin: 0 0 16px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--navy-deep);
+}
+.ev3-voices cite {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Footer detail after the trim ---------- */
+.footer-awards {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width: 760px) {
+  .footer-awards {
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 32px;
+  }
+}
+.footer-awards img {
+  max-width: 340px;
+  width: 100%;
+  height: auto;
+}
+.footer-awards ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.88rem;
+}
+.footer-awards a {
+  display: inline;
+  border: 0;
+  padding: 0;
+  background: none;
+}
+.footer-awards a strong {
+  color: #fff;
 }

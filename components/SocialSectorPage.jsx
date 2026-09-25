@@ -15,12 +15,17 @@ import { cta } from '@/data/site';
 export default function SocialSectorPage({ eyebrow, title, lead, crumbLabel, leadCase }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} lead={lead} crumbs={[{ href: '/sectors', label: 'Who we help' }, { label: crumbLabel }]}>
+      <PageHero
+        eyebrow={eyebrow}
+        title={title}
+        lead={lead}
+        crumbs={[{ href: '/sectors', label: 'Who we help' }, { label: crumbLabel }]}
+      >
         <div className="btn-row">
           <Link href={cta.review.href} className="btn btn-primary">
             {cta.review.label}
           </Link>
-          <Link href="/pricing?type=ah" className="btn btn-secondary">
+          <Link href="/pricing" className="btn btn-secondary">
             See plans and pricing
           </Link>
         </div>
@@ -50,16 +55,17 @@ export default function SocialSectorPage({ eyebrow, title, lead, crumbLabel, lea
             </div>
             <div>
               <p>
-                The Regulator&apos;s consumer standards have been in force since April 2024, with gradings C1 to C4 published for
-                anyone to read. Repairs and damp and mould are at the centre of them.
+                The Regulator&apos;s consumer standards have been in force since April 2024, with gradings C1 to C4
+                published for anyone to read. Repairs and damp and mould are at the centre of them.
               </p>
               <p>
-                Every report, message, appointment, photograph and sign-off lives in one system. Live repairs, compliance and the
-                full history of every home sit in the EVO Dashboard, with the audit trail recorded as the work happens.
+                Every report, message, appointment, photograph and sign-off lives in one system. Live repairs,
+                compliance and the full history of every home sit in the EVO Dashboard, with the audit trail recorded as
+                the work happens.
               </p>
               <p>
-                Damp and mould follows its own defined process, from the first report to the final check, so you can show what was
-                done and when against the Awaab&apos;s Law timescales.
+                Damp and mould follows its own defined process, from the first report to the final check, so you can
+                show what was done and when against the Awaab&apos;s Law timescales.
               </p>
               <Link href="/damp-and-mould" className="text-link">
                 How we handle damp and mould
@@ -71,7 +77,7 @@ export default function SocialSectorPage({ eyebrow, title, lead, crumbLabel, lea
 
       <ValueBySize />
 
-      <PlansTeaser type="ah" grey={false} />
+      <PlansTeaser grey={false} />
       <PilotSection grey />
       <ClosingCta />
     </>

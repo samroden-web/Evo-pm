@@ -7,7 +7,7 @@ import { cta } from '@/data/site';
 export const metadata = {
   title: 'Compliance: statutory and regulatory | EVO',
   description:
-    "Statutory compliance is work we do: gas safety, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you — consumer standards, Tenant Satisfaction Measures, Awaab's Law and the Ombudsman — and we hold the evidence.",
+    'Statutory compliance is work we do — gas, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you, and we hold the evidence for it.',
   alternates: { canonical: '/compliance' },
 };
 

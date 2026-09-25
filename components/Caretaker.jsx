@@ -18,9 +18,14 @@ export default function Caretaker() {
           <div>
             <p className="eyebrow">The part software cannot do</p>
             <h2 id="caretaker-title">And someone actually there.</h2>
+            {/* Qualified 25 September 2026. Caretakers are a large-site service — a single
+                block of 33 homes does not get a dedicated one — and the page was promising
+                it to everybody. Saying so makes scale a reason to grow the contract rather
+                than something a client discovers later. */}
             <p>
-              A community engagement officer on the estate, who residents recognise and can stop on the path. Not a number that
-              routes to a call centre, and not a supplier who appears only when something has already gone wrong.
+              On larger sites, a community engagement officer based on the estate, who residents recognise and can stop
+              on the path. Not a number that routes to a call centre, and not a supplier who appears only when something
+              has already gone wrong.
             </p>
             <p className="mb-0">
               <Link href="/how-it-works" className="text-link">

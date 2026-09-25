@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
 import AppBadges from '@/components/AppBadges';
+import Photo from '@/components/Photo';
 import Tbc from '@/components/Tbc';
 
 export const metadata = {
@@ -55,6 +56,13 @@ export default function TradesPage() {
         title="Turn up, fix it, get paid in 14 days."
         lead="Guaranteed reactive work for housing associations, councils and Build to Rent — in your area, for your trade, in the hours you make available. Priced before you set off, and no invoice to raise."
         crumbs={[{ label: 'Trades' }]}
+        image="/images/photos/evo-trades-two-operatives-van.webp"
+        imageAlt="Two tradesmen at the back of their own van on a residential street"
+        imageWidth={1500}
+        imageHeight={843}
+        priority
+        captionLabel="Your firm, your van"
+        caption="Small regional firms, by design"
       >
         <div className="btn-row mt-3">
           <Link href="/contact?enquiry=trades" className="btn btn-primary">
@@ -107,6 +115,26 @@ export default function TradesPage() {
               <strong>Completion notes and photographs in the app.</strong> No paperwork afterwards.
             </li>
           </ul>
+          <div className="ev3-split ev3-split--narrow mt-3">
+            <Photo
+              src="/images/photos/evo-trades-accepting-job-in-van.webp"
+              alt="A contractor accepting a job in the EVO Trades App from his van"
+              caption="Accepting a job before setting off."
+              width={900}
+              height={675}
+              sizes="(min-width: 880px) 40vw, 100vw"
+            />
+            <div>
+              <h3>No quoting, and no chasing</h3>
+              <p>
+                The price is agreed before you travel, against a rate card you have already seen. There is no estimate to write,
+                no client to chase for approval, and no invoice to raise afterwards.
+              </p>
+              <p className="mb-0">
+                Good firms tell us they were spending more time quoting than working. That is the part this removes.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -203,8 +231,38 @@ export default function TradesPage() {
             title="Get the EVO Trades App."
             lead="Free. You will need an account from us before you can log in, which comes with your welcome email."
           />
-          <div className="mt-3">
-            <AppBadges app="trades" />
+          <div className="ev3-split ev3-split--reverse mt-3">
+            <div className="ev3-screens">
+              <figure>
+                <img
+                  src="/images/app/trades-app-home.webp"
+                  alt="The EVO Trades App home screen, showing new jobs, upcoming jobs, completed jobs and pending quotes"
+                  width="420"
+                  height="884"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Your jobs, in one place</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/images/app/trades-app-emergency-job.webp"
+                  alt="A new emergency job in the EVO Trades App, with a two-hour attendance window"
+                  width="420"
+                  height="747"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Accept, or decline. Nothing happens if you decline.</figcaption>
+              </figure>
+            </div>
+            <div>
+              <AppBadges app="trades" />
+              <p className="mt-2 mb-0 muted">
+                Everything runs through the app: the offer, the access details, the service history, the photographs and the
+                completion notes. There is no separate portal and no paperwork to post.
+              </p>
+            </div>
           </div>
         </div>
       </section>
