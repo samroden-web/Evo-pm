@@ -13,6 +13,8 @@ import {
   formatPrice,
   priceCaveat,
   clientStandingCharge,
+  communalBlockCharge,
+  visitCharges,
   priceReview,
 } from '@/data/plans';
 import Tbc from './Tbc';
@@ -122,7 +124,7 @@ function AddonDetail({ addon }) {
 export default function PlanExplorer() {
   const [typeId, setTypeId] = useState(defaultOrgType);
   const [planId, setPlanId] = useState('home1000');
-  const [addonOn, setAddonOn] = useState({ electrical: false, gasBoiler: false });
+  const [addonOn, setAddonOn] = useState({ electrical: false, gasBoiler: false, communal: false });
   const [drawer, setDrawer] = useState(null); // { kind: 'plan'|'addon', id }
   const [linesOpen, setLinesOpen] = useState(false);
 
@@ -138,6 +140,15 @@ export default function PlanExplorer() {
   const selectedAddons = addons.filter((a) => addonOn[a.id]);
   const addonTotal = selectedAddons.reduce((sum, a) => sum + type.addons[a.id], 0);
   const total = planPrice == null ? null : type.managedTechnology + planPrice + addonTotal;
+
+  // Monthly charges that are NOT per home, so they can never be added to the figure above.
+  // The client standing charge always applies - it is in Schedule 4 and is not optional, so
+  // it is shown as a fact rather than as a switch. The block charge appears only if communal
+  // reporting is selected, because it is the other half of that add-on.
+  const separateCharges = [
+    clientStandingCharge,
+    ...(addonOn.communal ? [communalBlockCharge] : []),
+  ];
 
   const contactHref = useMemo(() => {
     const p = new URLSearchParams({ enquiry: 'review', type: typeId, plan: planId });
@@ -293,6 +304,14 @@ export default function PlanExplorer() {
                     {formatPrice(type.addons[a.id])}
                     <br />
                     <small>per home per month, plus VAT</small>
+                    {a.id === 'communal' && (
+                      <>
+                        <br />
+                        <small>
+                          plus {formatPrice(communalBlockCharge.amount)} {communalBlockCharge.per}
+                        </small>
+                      </>
+                    )}
                   </div>
                 </div>
                 <p className="mb-0">{a.intro}</p>
@@ -336,22 +355,52 @@ export default function PlanExplorer() {
               {total != null && 'plus VAT'}
             </div>
             <div className="summary-bar__plus">
-              plus {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.per}
+              Plus a {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.label.toLowerCase()} &mdash; once
+              for the whole contract, not per home
             </div>
-            <ul className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`} id="summary-lines">
-              <li>Managed Technology {formatPrice(type.managedTechnology)}</li>
-              <li>
-                {plan.name} {planPrice == null ? plan.priceLabel : formatPrice(planPrice)}
-              </li>
-              {selectedAddons.map((a) => (
-                <li key={a.id}>
-                  {a.name} {formatPrice(type.addons[a.id])}
+            <div className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`} id="summary-lines">
+              <ul className="summary-bar__group">
+                <li>Managed Technology {formatPrice(type.managedTechnology)}</li>
+                <li>
+                  {plan.name} {planPrice == null ? plan.priceLabel : formatPrice(planPrice)}
                 </li>
-              ))}
-              <li>
-                {clientStandingCharge.label} {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.per}
-              </li>
-            </ul>
+                {selectedAddons.map((a) => (
+                  <li key={a.id}>
+                    {a.name} {formatPrice(type.addons[a.id])}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Charges that are NOT per home live in their own block, with their own
+                  heading, below the per-home breakdown. This used to be a bare
+                  "plus GBP400" line directly under the per-home figure, which reads as
+                  though every property costs GBP400 more. It does not: it is charged once
+                  for the whole client. */}
+              <div className="summary-bar__separate">
+                <p className="summary-bar__separate-head">
+                  Charged once for the contract, not per home
+                </p>
+                <ul className="summary-bar__group">
+                  {separateCharges.map((c) => (
+                    <li key={c.label}>
+                      <span>{c.label}</span>
+                      <strong>
+                        {formatPrice(c.amount)} {c.per}
+                      </strong>
+                    </li>
+                  ))}
+                </ul>
+                <p className="summary-bar__separate-head">Charged only when they happen</p>
+                <ul className="summary-bar__group">
+                  {visitCharges.map((v) => (
+                    <li key={v.label}>
+                      <span>{v.label}</span>
+                      <strong>{formatPrice(v.amount)} per visit</strong>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             <p className="summary-bar__note">{priceReview}</p>
           </div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>

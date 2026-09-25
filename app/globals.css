@@ -1503,15 +1503,52 @@ ol {
   color: var(--orange);
   font-weight: 700;
 }
+/* The breakdown is now a container, not a list: per-home lines first, then the charges
+   that are not per home in a block of their own. */
 .summary-bar__lines {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #c7d1db;
+}
+.summary-bar__group {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 18px;
-  font-size: 0.88rem;
-  color: #c7d1db;
+}
+.summary-bar__separate .summary-bar__group {
+  display: grid;
+  gap: 3px;
+  max-width: 58ch;
+}
+.summary-bar__separate .summary-bar__group li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.summary-bar__separate .summary-bar__group strong {
+  color: var(--white);
+  white-space: nowrap;
+}
+/* Ruled off and labelled, so nothing here can be read as part of the per-home figure.
+   A bare "plus GBP400" line under a per-home price invites exactly that misreading. */
+.summary-bar__separate {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.summary-bar__separate-head {
+  margin: 0 0 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.summary-bar__separate .summary-bar__group + .summary-bar__separate-head {
+  margin-top: 12px;
 }
 .summary-bar__toggle {
   background: none;
@@ -1524,15 +1561,10 @@ ol {
   font-weight: 700;
   cursor: pointer;
 }
-@media (min-width: 860px) {
-  .summary-bar__toggle {
-    display: none;
-  }
+.summary-bar__lines--collapsed {
+  display: none;
 }
 @media (max-width: 859px) {
-  .summary-bar__lines--collapsed {
-    display: none;
-  }
   .summary-bar .btn {
     width: 100%;
   }

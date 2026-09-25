@@ -33,7 +33,7 @@ export const orgTypes = [
     description: 'All landlords',
     managedTechnology: 23.0,
     plans: { home500: 25.0, home1000: 32.0, homeTrust: null },
-    addons: { electrical: 19.0, gasBoiler: 18.0 },
+    addons: { electrical: 19.0, gasBoiler: 18.0, communal: 6.0 },
   },
 ];
 
@@ -42,33 +42,26 @@ export const orgTypes = [
 // agreement and a client finds out about it at contract stage otherwise.
 export const clientStandingCharge = {
   amount: 400,
-  label: 'Client account charge',
+  label: 'Client standing charge',
   per: 'per client, per month',
   covers: 'A named account manager, a monthly KPI pack, quarterly service reviews and an annual data audit.',
 };
 
-// Communal reporting, from Schedule 4. Cleared for publication 25 September.
+// Communal block charge, from Schedule 4. The other half of communal reporting (the £6
+// per home software fee) is a normal per-home add-on and lives in orgTypes.addons.
 //
-// WHY THESE ARE PUBLISHED. Most housing association stock has blocks, so a director
-// budgeting from the pricing page comes out short whether or not we print these, and
-// finding out at contract stage is the version that costs trust. Same reasoning as the
-// client account charge above.
-export const communalCharges = [
-  {
-    label: 'Communal reporting, per block',
-    amount: 100,
-    per: 'per block, per month',
-    covers: 'Communal issues logged, tracked and reported against the block rather than a home.',
-  },
-  {
-    label: 'Communal reporting, software',
-    amount: 6,
-    per: 'per home, per month',
-    covers: 'Residents report communal issues themselves, in the same app they use for their own home.',
-  },
-];
+// WHY THIS IS SEPARATE. A per-home price and a per-block price cannot be added together.
+// Putting "plus £100" under a per-home figure invites the reader to think every home costs
+// £100 more, which is the same trap the £400 standing charge was falling into.
+export const communalBlockCharge = {
+  amount: 100,
+  label: 'Communal reporting, per block',
+  per: 'per block, per month',
+  covers: 'Communal issues logged, tracked and reported against the block rather than a home.',
+};
 
-// Charged on attendance rather than monthly. Normal in this sector, and printing them
+// Charged on attendance rather than monthly, so they can never sit in a running total.
+// Normal in this sector, and printing them signals that EVO expects access to be arranged. Normal in this sector, and printing them
 // signals that EVO expects access to be arranged.
 export const visitCharges = [
   {
@@ -367,6 +360,26 @@ export const addons = [
           'Testing of tenant-owned appliances',
           'Works needing specialist access equipment beyond standard safe access',
         ],
+      },
+    ],
+  },
+  {
+    id: 'communal',
+    name: 'Communal reporting',
+    note: 'Charged in two parts: per home for the software, and per block. The per-block charge is shown separately because it is not a per-home cost.',
+    intro:
+      'Residents report communal issues \u2014 lighting, doors, lifts, bin stores, grounds \u2014 in the same app they use for their own home, and those reports are tracked and evidenced against the block rather than against a tenancy. Block managers and housing officers see the position for the whole building in one place.',
+    includes: [
+      'Residents report communal issues themselves, in the EVO Living App',
+      'Reports tracked against the block, not against a home',
+      'Photographs, timestamps and job history on every communal report',
+      'Block-level reporting alongside your home-level reporting',
+      'Repairs to communal areas quoted as variable works before they start',
+    ],
+    detail: [
+      {
+        heading: 'How the charge works',
+        body: 'The software fee is charged per home per month, alongside your plan. The block standing charge is charged per block per month and is not a per-home cost, so it is shown separately in your summary rather than added to the per-home figure. Communal repairs themselves are quoted and approved before any work starts.',
       },
     ],
   },
