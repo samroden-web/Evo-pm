@@ -1,90 +1,161 @@
-import { TickIcon } from './Icons';
+import {
+  competitors,
+  comparisonBands,
+  comparisonFootnotes,
+  comparisonSource,
+  comparisonVerdicts,
+} from '@/data/competitors';
 
-// Brief 6.6 (brochure page 9). Categories only: no competitor names or logos.
-const cols = ['Repairs platforms', 'Repairs software', 'Trades marketplaces', 'Home emergency cover'];
-// Y = yes, S = some providers in that category, '' = no
-const rows = [
-  ['An app for residents', 'Y', 'Y', 'Y', 'Y'],
-  ['AI-assisted triage', 'Y', '', '', ''],
-  ['Enriched property data', 'Y', 'S', '', ''],
-  ['A trades network', 'Y', 'S', 'Y', 'Y'],
-  ['Budget certainty', '', '', 'Y', ''],
-  ['Carries out the repair itself', '', '', '', ''],
-  ['12-month warranty on the work', '', '', '', ''],
-  ['24/7 emergency response', '', '', '', ''],
-  ['Fully managed, end to end', '', '', '', ''],
-];
+// The comparison, rebuilt from the verification study. Addendum v2 section 2.
+//
+// WHAT CHANGED AND WHY IT MATTERS. This replaced a categories-only table whose headline
+// was "Four things you cannot buy anywhere else". That headline was untrue - HomeServe
+// does four of them - and the "Home emergency cover" column was wrong on five of nine
+// rows. The argument is now two groups rather than four exclusives: software manages a
+// whole portfolio but does not mend; home emergency cover mends but only three trades,
+// one property at a time. EVO is the only supplier in both halves. Every cell in this
+// version is defensible, which is the only reason it can carry competitors' logos.
+//
+// THREE STATES, NEVER TWO. 'y' evidenced, 'n' evidenced absent, 'u' unverified. A blank
+// cell in a published table reads as "no", so 'u' gets its own mark and the key is
+// printed on the face of the table. Rendering an unverified as a blank would assert
+// something EVO cannot stand behind, next to that company's own mark.
+//
+// THE LOGOS NEVER CARRY MEANING ALONE. Every column shows the company name whether or not
+// its mark downloaded, the marks have empty alt text so screen readers hear the name once,
+// and a failed fetch costs polish rather than comprehension.
+
+// Equal AREA, not equal height - the same rule as the client logo strip. A wide wordmark
+// and a square app icon capped at one height look nothing like the same size.
+const MARK_AREA = 760;
+
+function markHeight(c) {
+  if (!c.width || !c.height) return undefined;
+  return Math.round(Math.sqrt(MARK_AREA / (c.width / c.height)));
+}
 
 function Cell({ v }) {
-  if (v === 'Y')
+  if (v === 'y') {
     return (
-      <span className="tick" role="img" aria-label="Yes">
-        <TickIcon />
-      </span>
+      <>
+        <span className="cmp-y" aria-hidden="true">
+          &#10003;
+        </span>
+        <span className="visually-hidden">Yes</span>
+      </>
     );
-  if (v === 'S')
+  }
+  if (v === 'u') {
     return (
-      <span className="tick tick--some" role="img" aria-label="Some providers">
-        <TickIcon color="currentColor" />
-      </span>
+      <>
+        <span className="cmp-u" aria-hidden="true">
+          &ndash;
+        </span>
+        <span className="visually-hidden">Not published by that supplier</span>
+      </>
     );
-  return <span className="visually-hidden">No</span>;
+  }
+  if (v && typeof v === 'object' && v.q) {
+    return <span className="cmp-q">{v.q}</span>;
+  }
+  return <span className="visually-hidden">Does not offer it</span>;
 }
 
 export default function ComparisonTable() {
   return (
     <>
-      <div className="table-wrap">
-        <table className="data compare">
+      <div className="cmp-wrap" tabIndex={0} role="group" aria-label="Comparison table, scrolls sideways">
+        <table className="cmp">
           <caption className="visually-hidden">
-            EVO compared with the main alternatives across nine capabilities
+            EVO compared with five named suppliers across eleven capabilities, grouped into what most
+            suppliers give you, where home emergency cover stops, and where software stops.
           </caption>
           <thead>
             <tr>
-              <th scope="col">Capability</th>
-              <th scope="col" className="col-evo">
+              <th scope="col" className="cmp-cap">
+                Capability
+              </th>
+              <th scope="col" className="cmp-evo">
                 EVO
               </th>
-              {cols.map((c) => (
-                <th scope="col" key={c}>
-                  {c}
+              {competitors.map((c) => (
+                <th scope="col" key={c.key}>
+                  <span className="cmp-grp">{c.group}</span>
+                  {c.src ? (
+                    <span className="cmp-mark">
+                      <img
+                        src={c.src}
+                        alt=""
+                        width={c.width}
+                        height={c.height}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ maxHeight: markHeight(c), maxWidth: 58 }}
+                      />
+                    </span>
+                  ) : null}
+                  <span className="cmp-name">{c.name}</span>
+                  {c.note ? <span className="cmp-note">{c.note}</span> : null}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
-            {rows.map(([cap, ...vals], i) => (
-              <tr key={cap} className={i >= 5 ? 'shaded' : ''}>
-                <th scope="row">{cap}</th>
-                <td className="col-evo">
-                  <Cell v="Y" />
-                </td>
-                {vals.map((v, j) => (
-                  <td key={j}>
-                    <Cell v={v} />
-                  </td>
-                ))}
+          {comparisonBands.map((band) => (
+            <tbody key={band.label}>
+              <tr className="cmp-band">
+                <th scope="rowgroup">{band.label}</th>
+                <td className="cmp-evo" />
+                <td colSpan={competitors.length} />
               </tr>
-            ))}
-          </tbody>
+              {band.rows.map((row) => (
+                <tr key={row.capability}>
+                  <th scope="row">{row.capability}</th>
+                  <td className="cmp-evo">
+                    <Cell v="y" />
+                  </td>
+                  {competitors.map((c) => (
+                    <td key={c.key}>
+                      <Cell v={row.cells[c.key]} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          ))}
         </table>
       </div>
-      <div className="legend">
+
+      <div className="cmp-key">
         <span>
-          <span className="tick">
-            <TickIcon />
+          <span className="cmp-y" aria-hidden="true">
+            &#10003;
           </span>
-          Offered
+          Evidenced
         </span>
         <span>
-          <span className="tick tick--some">
-            <TickIcon color="currentColor" />
+          <span className="cmp-u" aria-hidden="true">
+            &ndash;
           </span>
-          Offered by some providers in the category
+          Not published by that supplier
         </span>
-        <span>Shaded rows: only EVO delivers these.</span>
+        <span>Blank: does not offer it</span>
       </div>
-      <p className="source">Source: EVO competitor analysis, March 2026.</p>
+
+      <div className="cmp-foot">
+        {comparisonFootnotes.map((f) => (
+          <p key={f}>{f}</p>
+        ))}
+        <p className="source">{comparisonSource}</p>
+      </div>
+
+      <div className="cmp-verdicts">
+        {comparisonVerdicts.map((v) => (
+          <div className={`cmp-verdict ${v.win ? 'cmp-verdict--win' : ''}`} key={v.title}>
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </div>
+        ))}
+      </div>
     </>
   );
 }

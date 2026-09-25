@@ -4,11 +4,9 @@ import Audiences from '@/components/Audiences';
 import PhoneStepStrip from '@/components/PhoneStepStrip';
 import FullJourney from '@/components/FullJourney';
 import ComparisonTable from '@/components/ComparisonTable';
-import VimeoFacade from '@/components/VimeoFacade';
-import Tbc from '@/components/Tbc';
 import Photo from '@/components/Photo';
 import ClosingCta from '@/components/ClosingCta';
-import { explainerVideo } from '@/data/testimonials';
+import { orgTypes, addons, communalCharges, defaultOrgType } from '@/data/plans';
 
 export const metadata = {
   title: 'How EVO works | One platform for residents, landlords and trades',
@@ -17,19 +15,87 @@ export const metadata = {
   alternates: { canonical: '/how-it-works' },
 };
 
-const fourPoints = [
-  { title: 'We do the work.', body: 'Everyone else connects you to somebody who does.' },
+// Numbered rather than four equal blocks of text. The four reasons were previously all one
+// weight - dark ink heading, dark ink body, thin rule - so there was nothing for the eye to
+// enter on. The numeral is also the only element on the bright orange that can be white and
+// still pass AA, so it is doing contrast work as well as design work.
+const whyOwnIt = [
   {
-    title: 'A twelve-month warranty on every job.',
-    body: 'Not on the software, on the repair. If it fails inside the year we come back and it costs you nothing.',
+    title: 'Nothing is re-keyed',
+    body: 'The resident’s report becomes the job, the appointment, the evidence and the invoice. No handoffs between systems that do not speak.',
   },
   {
-    title: '24/7 emergency response.',
-    body: 'A real out-of-hours service with trades attached to it, not a number that logs a ticket until Monday morning.',
+    title: 'We can see the cost as it happens',
+    body: 'Every job, every part and every return visit, in one place. That is the only way anyone can quote a fixed monthly price and stand behind it.',
   },
   {
-    title: 'Fully managed, end to end.',
-    body: 'Report, triage, dispatch, contractor, evidence, invoice and reporting. One supplier for the whole of it, not a platform you still have to run.',
+    title: 'The evidence is a by-product',
+    body: 'Photographs, timestamps and notes are captured because the work needs them, not because a regulator asked afterwards.',
+  },
+  {
+    title: 'The trade sees what the resident said',
+    body: 'Description, photographs and service history arrive with the job, which is most of the difference between a first-time fix and a second visit.',
+  },
+];
+
+// Everything beyond in-plan reactive repairs, in the two states it can be in. The layout
+// is the answer to the question a housing director is actually asking, which is not "can
+// you do it" but "what does it cost".
+//
+// Prices come from data/plans.js and nowhere else. The communal charges are Schedule 4 and
+// were cleared for publication on 25 September.
+const org = orgTypes.find((o) => o.id === defaultOrgType) || orgTypes[0];
+
+// Whole pounds lose the .00: a column reading 19.00 / 18.00 / 100 / 6 looks like two
+// different kinds of number.
+const money = (n) => `\u00a3${Number.isInteger(n) ? n : n.toFixed(2)}`;
+
+const priced = [
+  {
+    what: 'Electrical Compliance Cover',
+    sub: 'EICRs, fixed installation and safety devices, to BS 7671. Minimum three-year term.',
+    price: money(org.addons.electrical),
+    unit: 'per home, per month',
+  },
+  {
+    what: 'Gas Boiler Cover',
+    sub: 'Annual service, safety certification and breakdown cover on the boiler itself.',
+    price: money(org.addons.gasBoiler),
+    unit: 'per home, per month',
+  },
+  ...communalCharges.map((c) => ({
+    what: c.label,
+    sub: c.covers,
+    price: money(c.amount),
+    unit: c.per,
+  })),
+];
+
+const quoted = [
+  {
+    what: 'Communal areas and plant',
+    sub: 'Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.',
+  },
+  {
+    what: 'Voids',
+    sub: 'Turnaround works between tenancies, on the same trades network and the same record.',
+  },
+  {
+    what: 'Capital and retrofit works',
+    sub: 'Defined projects, scoped and scheduled, evidenced the same way a repair is.',
+  },
+  {
+    what: 'Insurance works',
+    sub: 'Escape of water, fire and impact damage, managed alongside the reactive service.',
+  },
+  {
+    what: 'Damp and mould programmes',
+    sub: 'A defined three-stage procedure that sits outside every plan.',
+    price: '£129 initial visit',
+  },
+  {
+    what: 'Any repair above your plan threshold',
+    sub: 'Scoped and quoted before anything starts, and only done with your approval.',
   },
 ];
 
@@ -61,22 +127,15 @@ export default function HowItWorksPage() {
           <p className="eyebrow">Why we built it ourselves</p>
           <h2>Owning the system is what lets us fix the price.</h2>
           <div className="ev2-band-grid">
-            <div className="ev2-band-item">
-              <h3>Nothing is re-keyed</h3>
-              <p>The resident&rsquo;s report becomes the job, the appointment, the evidence and the invoice. No handoffs between systems that do not speak.</p>
-            </div>
-            <div className="ev2-band-item">
-              <h3>We can see the cost as it happens</h3>
-              <p>Every job, every part and every return visit, in one place. That is the only way anyone can quote a fixed monthly price and stand behind it.</p>
-            </div>
-            <div className="ev2-band-item">
-              <h3>The evidence is a by-product</h3>
-              <p>Photographs, timestamps and notes are captured because the work needs them, not because a regulator asked afterwards.</p>
-            </div>
-            <div className="ev2-band-item">
-              <h3>The trade sees what the resident said</h3>
-              <p>Description, photographs and service history arrive with the job, which is most of the difference between a first-time fix and a second visit.</p>
-            </div>
+            {whyOwnIt.map((item, i) => (
+              <div className="ev2-band-item" key={item.title}>
+                <span className="ev2-band-num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -152,9 +211,17 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ISHA deck, gap E. The deck sells a materially wider service than the site has
-          ever admitted to, and the map called that "a revenue line the site is hiding".
-          Scope and pricing are flagged rather than invented. */}
+      {/* ISHA deck, gap E: the deck sells a materially wider service than the site admitted
+          to. The TBC that used to sit here asked for "the scope and pricing model" as though
+          nobody knew it. It was in Schedule 4 and in the brief all along - everything beyond
+          in-plan reactive repairs is quoted before work starts, and the compliance and
+          communal charges have real published prices. So this is two lanes now, priced
+          against quoted, rather than four cards that dodge the question.
+
+          The old "building safety" card claimed EVO covers "the building safety obligations
+          that sit with higher-risk blocks". That is not confirmed (open item G) and clause
+          6.4 says the opposite about the duty itself, so the claim is gone and the carve-out
+          is stated instead. */}
       <section className="section" aria-labelledby="wider-title">
         <div className="container">
           <div className="section-head">
@@ -162,71 +229,97 @@ export default function HowItWorksPage() {
             <h2 id="wider-title">The plan covers the homes. We can cover the rest of the building too.</h2>
             <p className="lead">
               Reactive repairs inside the plan is where most clients start. It is not the limit of what we run, and putting the
-              rest with the same supplier is usually the point at which the coordination overhead disappears.
+              rest with the same supplier is usually the point at which the coordination overhead disappears. Everything here
+              is in one of two states, and both are on the table before you sign anything.
             </p>
           </div>
-          <div className="grid-4 mt-3 swipe-mobile">
-            <div className="card">
-              <h3>Communal areas and plant</h3>
-              <p className="mb-0">Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.</p>
-            </div>
-            <div className="card">
-              <h3>Compliance, including building safety</h3>
-              <p className="mb-0">
-                Gas, electrical, alarms and PAT as add-ons to any plan, alongside the building safety obligations that sit with
-                higher-risk blocks.
+
+          <div className="lanes">
+            <div className="lane lane--priced">
+              <span className="lane-head">Priced, per month</span>
+              <h3>Add it to the plan</h3>
+              <p>A published price you can put straight into a budget, on the same invoice as the plan.</p>
+              <ul className="lane-list">
+                {priced.map((r) => (
+                  <li key={r.what}>
+                    <span className="lane-what">
+                      {r.what}
+                      <span className="lane-sub">{r.sub}</span>
+                    </span>
+                    <span className="lane-price">
+                      {r.price}
+                      <span className="lane-sub">{r.unit}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="lane-note">
+                All prices are plus VAT. Electrical Compliance Cover carries a minimum three-year term. Remedial works found
+                during an inspection are quoted separately.
               </p>
             </div>
-            <div className="card">
-              <h3>Voids</h3>
-              <p className="mb-0">Turnaround works between tenancies, on the same trades network and the same record.</p>
-            </div>
-            <div className="card">
-              <h3>Capital works projects</h3>
-              <p className="mb-0">Defined projects quoted openly, scheduled and evidenced the same way a repair is.</p>
+
+            <div className="lane lane--quoted">
+              <span className="lane-head">Quoted before we start</span>
+              <h3>Scoped, priced and approved by you</h3>
+              <p>
+                Never absorbed into the monthly fee and never started without your sign-off. Major works are not hidden in a
+                subscription.
+              </p>
+              <ul className="lane-list">
+                {quoted.map((r) => (
+                  <li key={r.what}>
+                    <span className="lane-what">
+                      {r.what}
+                      <span className="lane-sub">{r.sub}</span>
+                    </span>
+                    {r.price ? <span className="lane-price">{r.price}</span> : null}
+                  </li>
+                ))}
+              </ul>
+              <p className="lane-note">
+                On building safety, nothing we do transfers your statutory duties as landlord or accountable person. We hold the
+                evidence; the duty stays with you. See{' '}
+                <Link href="/compliance" className="text-link">
+                  compliance
+                </Link>{' '}
+                and{' '}
+                <Link href="/damp-and-mould" className="text-link">
+                  damp and mould
+                </Link>
+                .
+              </p>
             </div>
           </div>
-          <Tbc block>
-            Confirm the scope and pricing model for communal PPM, voids, building safety and capital works before this goes live.
-            The claim is from Steve&rsquo;s ISHA deck; the commercial detail is not yet written down anywhere public.
-          </Tbc>
         </div>
       </section>
 
+      {/* The old headline here was "Four things you cannot buy anywhere else", which was
+          untrue: HomeServe does all four, from its own published terms. The argument is now
+          two groups instead of four exclusives, which is both honest and stronger - it is
+          the only version where every cell survives being read next to that company's own
+          mark. Addendum v2 section 2. */}
       <section className="section section--grey" aria-labelledby="compare-title">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">The comparison</p>
-            <h2 id="compare-title">Four things you cannot buy anywhere else.</h2>
+            <h2 id="compare-title">Two kinds of supplier exist. Neither of them does both.</h2>
             <p className="lead">
-              We compared EVO with the main alternatives across nine capabilities. Most offer an app, and several offer trades, AI or
-              property data. Four things only EVO delivers, shaded below.
+              Most of what housing providers are offered is <strong>software to manage repairs across a portfolio</strong>, which
+              does not do the repair. The alternative is <strong>home emergency cover</strong>, which does the repair but only for
+              heating, plumbing and electrics, one property at a time. EVO is the only one that does both.
             </p>
           </div>
           <ComparisonTable />
-          <div className="grid-4 mt-3 swipe-mobile">
-            {fourPoints.map((p) => (
-              <div key={p.title}>
-                <h3 style={{ fontSize: '1.1rem' }}>{p.title}</h3>
-                <p className="mb-0">{p.body}</p>
-              </div>
-            ))}
-          </div>
           <p className="lead mt-3" style={{ fontWeight: 700, color: 'var(--navy-deep)' }}>
             Most alternatives help you manage the problem. We take it off your hands.
           </p>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="video-title">
-        <div className="container container--narrow">
-          <h2 id="video-title">Watch: EVO in 90 seconds</h2>
-          <p>
-            <Tbc>EVO to decide whether this explainer video stays</Tbc>
-          </p>
-          <VimeoFacade vimeoId={explainerVideo.vimeoId} title={explainerVideo.title} rounded />
-        </div>
-      </section>
+      {/* The EVO explainer video was removed on 25 September: it is out of date and shows
+          an older model. VimeoFacade and the explainerVideo entry in data/testimonials.js
+          are deliberately left in place so a new film drops straight back in here. */}
 
       <ClosingCta />
     </>

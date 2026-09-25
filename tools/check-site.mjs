@@ -37,6 +37,10 @@ const BANNED_TEXT = [
   '+30%', // out-of-hours uplifts, not cleared for publication
   '+40%',
   'abortive fee',
+  // Retired 25 September with the rebuilt comparison table.
+  'Four things you cannot buy anywhere else', // untrue: HomeServe does all four
+  'shaded below', // the old table's shaded-rows device went with it
+  'British Gas', // named in a draft but never verified, so it must not reappear in a cell
 ];
 
 const fail = [];

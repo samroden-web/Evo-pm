@@ -1703,27 +1703,10 @@ table.data tbody th {
   color: var(--navy-deep);
 }
 
-.compare th,
-.compare td {
-  text-align: center !important;
-}
-.compare tbody th {
-  text-align: left !important;
-}
-.compare .col-evo {
-  background: rgba(255, 102, 0, 0.08);
-}
-.compare thead .col-evo {
-  background: var(--orange);
-  color: var(--navy-deep);
-}
-.compare tr.shaded th,
-.compare tr.shaded td {
-  background: var(--orange-soft);
-}
-.compare tr.shaded .col-evo {
-  background: #ffe0cc;
-}
+/* The old categories-only comparison table lived here (.compare, .col-evo, tr.shaded).
+   It was replaced by the named-supplier table - see .cmp below - and its rules are gone
+   rather than left to rot, because this stylesheet has form for accumulating dead
+   generations of the same block. */
 .tick {
   display: inline-flex;
   width: 24px;
@@ -1736,14 +1719,6 @@ table.data tbody th {
 .tick svg {
   width: 14px;
   height: 14px;
-}
-.tick--some {
-  background: transparent;
-  border: 2px solid var(--navy);
-}
-.tick--some svg path,
-.tick--some svg polyline {
-  stroke: var(--navy);
 }
 .legend {
   display: flex;
@@ -3215,13 +3190,32 @@ textarea {
   border-top: 2px solid rgba(255, 255, 255, 0.55);
   padding-top: 14px;
 }
+/* Colour is decided HERE and nowhere else - this rule used to be set twice, in two places,
+   with different values.
+
+   CONTRAST, MEASURED. On #ff6600: white is 2.94:1, --on-orange (#3a1c00) is 5.31:1 and
+   --on-orange-soft (#4a2400) is 4.64:1. So no TEXT in this band is white - white fails
+   even the 3:1 large-text threshold, which is also true of the white H2 above and is
+   flagged for the accessibility pass. The numeral is decorative: it is aria-hidden, the
+   four points have no inherent order, and it conveys nothing a reader needs. That is what
+   lets it be white, and white is what gives the band a second level of hierarchy without
+   putting any information out of reach. */
 .ev2-band-item h3 {
-  color: #fff;
+  color: var(--on-orange);
   font-size: 1.05rem;
   margin: 0 0 4px;
 }
+.ev2-band-num {
+  display: block;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: #fff;
+  margin: 0 0 10px;
+  font-variant-numeric: tabular-nums;
+}
 .ev2-band-item p {
-  color: var(--on-orange);
+  color: var(--on-orange-soft);
   margin: 0;
   font-size: 0.97rem;
 }
@@ -4341,14 +4335,6 @@ textarea {
   border: 0;
 }
 
-/* ---------- Orange band text rule ----------
-   On a bright orange field only a top-level H2 is white; it is large enough to pass
-   AA at 3:1. Everything smaller uses the dark ink, which is 5.3:1 on the same orange.
-   This is what stops the bands looking like two unrelated decisions. */
-.ev2-band-item h3 {
-  color: var(--on-orange);
-}
-
 /* ---------- Anchor targets ----------
    Case studies and How it works are now single pages with deep anchors, and the header
    is sticky, so a linked section would otherwise land underneath it. */
@@ -5156,4 +5142,314 @@ textarea {
   .ev3-voices {
     grid-template-columns: 1fr 1.5fr 1fr;
   }
+}
+
+/* ==========================================================================
+   The named-supplier comparison (/how-it-works)
+   --------------------------------------------------------------------------
+   Replaces the categories-only table. Carries five competitors' own brand marks, so the
+   presentation rules matter as much as the data: no supplier is given prominence over
+   another, nothing is altered beyond uniform scaling, and every column shows the name as
+   well as the mark. See addendum v2 section 2.
+   ========================================================================== */
+.cmp-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  -webkit-overflow-scrolling: touch;
+}
+.cmp-wrap:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+.cmp {
+  border-collapse: collapse;
+  width: 100%;
+  /* Eleven rows of real capability names against six suppliers does not compress. Below
+     this the table scrolls sideways rather than wrapping every heading to four lines. */
+  min-width: 880px;
+  font-size: 0.86rem;
+}
+.cmp th,
+.cmp td {
+  padding: 10px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--grey-100);
+  vertical-align: middle;
+}
+.cmp thead th {
+  vertical-align: bottom;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.cmp th.cmp-cap {
+  text-align: left;
+  width: 30%;
+  min-width: 230px;
+}
+.cmp tbody th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--navy-deep);
+  line-height: 1.35;
+}
+/* Uniform treatment for every mark: same box, same alignment, no borders or effects that
+   could read as ranking one above another. */
+.cmp-mark {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 30px;
+  margin-bottom: 7px;
+}
+.cmp-mark img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.cmp-grp {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.cmp-name {
+  display: block;
+  font-weight: 700;
+  color: var(--navy-deep);
+  font-size: 0.86rem;
+}
+.cmp-note {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.cmp th.cmp-evo {
+  background: var(--orange);
+  color: var(--on-orange);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.cmp td.cmp-evo {
+  background: var(--orange-soft);
+}
+.cmp td.cmp-evo .cmp-y {
+  color: var(--orange-ink);
+}
+/* The band rows ARE the argument, so they get the weight of a section head rather than
+   looking like another data row.
+   Selector note: these must out-rank ".cmp tbody th" above, which is (0,1,2). Written as
+   ".cmp-band th" they lost and the white label text was repainted navy on a navy bar,
+   i.e. invisible. Caught in a screenshot, which is why the screenshots happen. */
+.cmp tbody tr.cmp-band th,
+.cmp tbody tr.cmp-band td {
+  background: var(--navy-deep);
+  border-bottom: 0;
+}
+.cmp tbody tr.cmp-band th {
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 8px;
+}
+.cmp tbody tr.cmp-band td.cmp-evo {
+  background: var(--orange-dark);
+}
+.cmp-y {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+}
+/* Unverified has to look different from both a tick and a blank. If it read as a blank it
+   would assert something EVO cannot evidence, which is the one thing this table must not
+   do next to somebody else's logo. */
+.cmp-u {
+  font-size: 1.05rem;
+  color: #b9aea4;
+}
+.cmp-q {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--orange-ink);
+  max-width: 11ch;
+}
+.cmp-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.cmp-key > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cmp-foot {
+  margin-top: 14px;
+  max-width: 78ch;
+}
+.cmp-foot p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.cmp-verdicts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(12px, 1.6vw, 18px);
+  margin-top: clamp(20px, 2.4vw, 30px);
+}
+@media (min-width: 760px) {
+  .cmp-verdicts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cmp-verdict--win {
+    grid-column: 1 / -1;
+  }
+}
+.cmp-verdict {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(16px, 2vw, 22px);
+}
+.cmp-verdict h3 {
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+}
+.cmp-verdict p {
+  margin: 0;
+  font-size: 0.93rem;
+}
+.cmp-verdict--win {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+.cmp-verdict--win h3,
+.cmp-verdict--win p {
+  color: var(--on-orange);
+}
+
+/* ==========================================================================
+   Two lanes: what is priced, and what is quoted (/how-it-works)
+   --------------------------------------------------------------------------
+   Replaces four identical cards that all said "we also do this" with no answer to the
+   question a housing director is actually asking, which is what it costs. The layout IS
+   the answer: published price on the left, quoted before we start on the right.
+   ========================================================================== */
+.lanes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.2vw, 26px);
+  margin-top: var(--head-gap);
+}
+@media (min-width: 820px) {
+  .lanes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.lane {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 2.2vw, 26px);
+  background: var(--white);
+}
+.lane--priced {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+}
+.lane-head {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+  margin-bottom: 4px;
+}
+.lane--quoted .lane-head {
+  color: var(--navy);
+}
+.lane h3 {
+  font-size: 1.15rem;
+  margin: 0 0 4px;
+}
+.lane > p {
+  font-size: 0.93rem;
+  margin: 0 0 14px;
+}
+.lane-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.lane-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.93rem;
+}
+.lane-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.lane-list .lane-what {
+  font-weight: 600;
+  color: var(--navy-deep);
+}
+.lane-list .lane-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.lane-list .lane-price {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--orange-ink);
+  white-space: nowrap;
+  font-size: 0.93rem;
+}
+.lane--quoted .lane-list .lane-price {
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.84rem;
+}
+.lane-note {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.lane-list .lane-price {
+  text-align: right;
+}
+/* The unit sits under the figure, right-aligned with it, so the eye reads amount then
+   basis rather than tripping over "per block" next to a per-home number. */
+.lane-list .lane-price .lane-sub {
+  white-space: normal;
+  max-width: 12ch;
+  margin-left: auto;
 }

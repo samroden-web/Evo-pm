@@ -47,6 +47,47 @@ export const clientStandingCharge = {
   covers: 'A named account manager, a monthly KPI pack, quarterly service reviews and an annual data audit.',
 };
 
+// Communal reporting, from Schedule 4. Cleared for publication 25 September.
+//
+// WHY THESE ARE PUBLISHED. Most housing association stock has blocks, so a director
+// budgeting from the pricing page comes out short whether or not we print these, and
+// finding out at contract stage is the version that costs trust. Same reasoning as the
+// client account charge above.
+export const communalCharges = [
+  {
+    label: 'Communal reporting, per block',
+    amount: 100,
+    per: 'per block, per month',
+    covers: 'Communal issues logged, tracked and reported against the block rather than a home.',
+  },
+  {
+    label: 'Communal reporting, software',
+    amount: 6,
+    per: 'per home, per month',
+    covers: 'Residents report communal issues themselves, in the same app they use for their own home.',
+  },
+];
+
+// Charged on attendance rather than monthly. Normal in this sector, and printing them
+// signals that EVO expects access to be arranged.
+export const visitCharges = [
+  {
+    label: 'Minimum visit charge',
+    amount: 129,
+    covers: 'Any attendance for work that is not covered by your plan.',
+  },
+  {
+    label: 'Missed appointment or abortive visit',
+    amount: 100,
+    covers: 'Where access fails for a reason within your or the resident’s control.',
+  },
+  {
+    label: 'Initial damp and mould visit',
+    amount: 129,
+    covers: 'Survey, moisture readings, Stage 1 treatment and a written report.',
+  },
+];
+
 // Answers the obvious objection to a fixed price: fixed for how long? The cap is good
 // news, so it is stated rather than buried.
 export const priceReview =
