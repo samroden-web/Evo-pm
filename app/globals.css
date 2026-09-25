@@ -5346,110 +5346,119 @@ textarea {
 }
 
 /* ==========================================================================
-   Two lanes: what is priced, and what is quoted (/how-it-works)
+   What we cover, and how: three groups (/how-it-works)
    --------------------------------------------------------------------------
-   Replaces four identical cards that all said "we also do this" with no answer to the
-   question a housing director is actually asking, which is what it costs. The layout IS
-   the answer: published price on the left, quoted before we start on the right.
+   Replaced a two-lane priced/quoted block, which in turn replaced four identical cards.
+   All pricing moved to /pricing so there is one place to keep current. The order is the
+   order a buyer thinks in: what the plan covers, what you add to it, what gets quoted.
    ========================================================================== */
-.lanes {
+.scope3 {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 2.2vw, 26px);
+  gap: clamp(14px, 1.8vw, 22px);
   margin-top: var(--head-gap);
+  /* Let each card be its own height. Stretched to the tallest, the two shorter ones carry
+     a block of empty space that reads as unfinished. */
+  align-items: start;
 }
-@media (min-width: 820px) {
-  .lanes {
-    grid-template-columns: 1fr 1fr;
+@media (min-width: 900px) {
+  .scope3 {
+    /* The plan column carries the most content and is the thing being bought, so it takes
+       the extra width rather than three equal columns making it the deepest. */
+    grid-template-columns: 1.25fr 1fr 1fr;
   }
 }
-.lane {
+.scope-col {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: clamp(18px, 2.2vw, 26px);
   background: var(--white);
 }
-.lane--priced {
+.scope-col--plan {
   background: var(--orange-soft);
   border-color: var(--orange);
 }
-.lane-head {
-  display: block;
+.scope-tag {
+  display: inline-block;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--orange-ink);
-  margin-bottom: 4px;
-}
-.lane--quoted .lane-head {
   color: var(--navy);
+  margin-bottom: 6px;
 }
-.lane h3 {
+.scope-col--plan .scope-tag {
+  color: var(--orange-ink);
+}
+.scope-col h3 {
   font-size: 1.15rem;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
 }
-.lane > p {
+.scope-col > p {
   font-size: 0.93rem;
   margin: 0 0 14px;
 }
-.lane-list {
+.scope-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: 9px;
 }
-.lane-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding-bottom: 10px;
+.scope-list li {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  padding-left: 18px;
+  position: relative;
+}
+.scope-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.scope-list--detail li {
+  padding-left: 0;
+  padding-bottom: 9px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  font-size: 0.93rem;
 }
-.lane-list li:last-child {
+.scope-list--detail li::before {
+  display: none;
+}
+.scope-list--detail li:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
-.lane-list .lane-what {
-  font-weight: 600;
-  color: var(--navy-deep);
-}
-.lane-list .lane-sub {
+.scope-list--detail strong {
   display: block;
-  font-weight: 400;
-  font-size: 0.84rem;
-  color: var(--muted);
-  margin-top: 2px;
-}
-.lane-list .lane-price {
-  flex: 0 0 auto;
-  font-weight: 700;
-  color: var(--orange-ink);
-  white-space: nowrap;
+  color: var(--navy-deep);
   font-size: 0.93rem;
 }
-.lane--quoted .lane-list .lane-price {
-  color: var(--navy);
-  font-weight: 600;
-  font-size: 0.84rem;
+.scope-list--detail span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-top: 2px;
 }
-.lane-note {
-  margin: 18px 0 0;
-  padding-top: 14px;
+.scope-note {
+  margin: 16px 0 0;
+  padding-top: 13px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   font-size: 0.86rem;
   color: var(--muted);
 }
-.lane-list .lane-price {
-  text-align: right;
+
+/* EVO's own column head carries the wordmark rather than the word. */
+.cmp-mark--evo {
+  height: auto;
+  margin-bottom: 0;
 }
-/* The unit sits under the figure, right-aligned with it, so the eye reads amount then
-   basis rather than tripping over "per block" next to a per-home number. */
-.lane-list .lane-price .lane-sub {
-  white-space: normal;
-  max-width: 12ch;
-  margin-left: auto;
+.cmp-mark--evo img {
+  max-height: 26px;
+  width: auto;
 }

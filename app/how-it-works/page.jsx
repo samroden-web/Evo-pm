@@ -6,7 +6,7 @@ import FullJourney from '@/components/FullJourney';
 import ComparisonTable from '@/components/ComparisonTable';
 import Photo from '@/components/Photo';
 import ClosingCta from '@/components/ClosingCta';
-import { orgTypes, addons, communalCharges, defaultOrgType } from '@/data/plans';
+import { plans } from '@/data/plans';
 
 export const metadata = {
   title: 'How EVO works | One platform for residents, landlords and trades',
@@ -38,40 +38,54 @@ const whyOwnIt = [
   },
 ];
 
-// Everything beyond in-plan reactive repairs, in the two states it can be in. The layout
-// is the answer to the question a housing director is actually asking, which is not "can
-// you do it" but "what does it cost".
+// ---------------------------------------------------------------------------
+// What we cover, and how.
 //
-// Prices come from data/plans.js and nowhere else. The communal charges are Schedule 4 and
-// were cleared for publication on 25 September.
-const org = orgTypes.find((o) => o.id === defaultOrgType) || orgTypes[0];
+// This section used to be "beyond reactive repairs" and jumped straight into the extras,
+// which meant the page never said what the thing you are buying actually IS - so "beyond"
+// had nothing to be beyond. It now runs in the order a buyer thinks in: what the plan
+// covers, what you can add to it, and what gets quoted separately.
+//
+// NO PRICES ON THIS PAGE. Every figure lives on /pricing, so there is one place to keep
+// current and no chance of two pages disagreeing. The repair value THRESHOLDS stay,
+// because they are scope rather than price: they are the only difference between the three
+// plans, and the sentence does not mean anything without them.
+// ---------------------------------------------------------------------------
 
-// Whole pounds lose the .00: a column reading 19.00 / 18.00 / 100 / 6 looks like two
-// different kinds of number.
-const money = (n) => `\u00a3${Number.isInteger(n) ? n : n.toFixed(2)}`;
+// Read from data/plans.js so these can never drift from the pricing page.
+const planLine = plans
+  .map((p) => `${p.name} (up to \u00a3${p.threshold.toLocaleString('en-GB')})`)
+  .join(', ');
 
-const priced = [
+const inPlan = [
+  'Heating: radiators, valves, pumps, cylinders, thermostats and controls',
+  'Plumbing and drainage: leaks, taps, showers, toilets, waste pipes and blockages',
+  'Electrical: fault finding, sockets, switches, lighting and consumer units',
+  'Locks and doors, windows and window hardware',
+  'Carpentry, tiling, flooring and localised decoration',
+  'General household fixtures and fittings',
+];
+
+const addOns = [
   {
     what: 'Electrical Compliance Cover',
-    sub: 'EICRs, fixed installation and safety devices, to BS 7671. Minimum three-year term.',
-    price: money(org.addons.electrical),
-    unit: 'per home, per month',
+    sub: 'EICRs and statutory inspection of the fixed installation, to BS 7671. Minimum three-year term.',
   },
   {
     what: 'Gas Boiler Cover',
     sub: 'Annual service, safety certification and breakdown cover on the boiler itself.',
-    price: money(org.addons.gasBoiler),
-    unit: 'per home, per month',
   },
-  ...communalCharges.map((c) => ({
-    what: c.label,
-    sub: c.covers,
-    price: money(c.amount),
-    unit: c.per,
-  })),
+  {
+    what: 'Communal reporting for blocks',
+    sub: 'Residents report communal issues in the same app, tracked against the block rather than a home.',
+  },
 ];
 
-const quoted = [
+const variable = [
+  {
+    what: 'Any repair above your plan threshold',
+    sub: 'Scoped and quoted before anything starts, and only done with your approval.',
+  },
   {
     what: 'Communal areas and plant',
     sub: 'Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.',
@@ -89,13 +103,8 @@ const quoted = [
     sub: 'Escape of water, fire and impact damage, managed alongside the reactive service.',
   },
   {
-    what: 'Damp and mould programmes',
+    what: 'Damp and mould',
     sub: 'A defined three-stage procedure that sits outside every plan.',
-    price: '£129 initial visit',
-  },
-  {
-    what: 'Any repair above your plan threshold',
-    sub: 'Scoped and quoted before anything starts, and only done with your approval.',
   },
 ];
 
@@ -107,8 +116,8 @@ export default function HowItWorksPage() {
         title="One platform, built for the three people a repair involves."
         lead="Nothing on the market did what we needed, so we built it. Every report, message, appointment, photograph and sign-off lives in one system, which is what makes a fixed price possible in the first place."
         crumbs={[{ label: 'How it works' }]}
-        image="/images/photos/evo-team-member-helping-resident.webp"
-        imageAlt="An EVO team member helping a resident use the Living App"
+        image="/images/photos/evo-trades-two-operatives-van.webp"
+        imageAlt="Two EVO operatives at the back of their van on a residential street"
         imageWidth={1400}
         imageHeight={787}
         priority
@@ -187,11 +196,11 @@ export default function HowItWorksPage() {
           </div>
           <div className="ev3-split mt-3">
             <Photo
-              src="/images/photos/evo-trades-two-operatives-van.webp"
-              alt="Two tradesmen at the back of their own van on a residential street"
+              src="/images/photos/evo-operative-radiator-repair.webp"
+              alt="An EVO operative fitting a valve to a radiator in a resident's home"
               caption="Mostly small regional firms, working in their own area."
-              width={1500}
-              height={843}
+              width={1074}
+              height={807}
               sizes="(min-width: 880px) 46vw, 100vw"
             />
             <Photo
@@ -212,74 +221,80 @@ export default function HowItWorksPage() {
       </section>
 
       {/* ISHA deck, gap E: the deck sells a materially wider service than the site admitted
-          to. The TBC that used to sit here asked for "the scope and pricing model" as though
-          nobody knew it. It was in Schedule 4 and in the brief all along - everything beyond
-          in-plan reactive repairs is quoted before work starts, and the compliance and
-          communal charges have real published prices. So this is two lanes now, priced
-          against quoted, rather than four cards that dodge the question.
+          to. The TBC that used to sit here asked EVO to confirm "the scope and pricing
+          model" as though nobody knew it - it was in Schedule 4 and in the brief all along,
+          nobody had brought it onto the page.
 
-          The old "building safety" card claimed EVO covers "the building safety obligations
-          that sit with higher-risk blocks". That is not confirmed (open item G) and clause
-          6.4 says the opposite about the duty itself, so the claim is gone and the carve-out
-          is stated instead. */}
+          Three groups rather than four cards, in the order a buyer thinks in. The old
+          "building safety" card claimed EVO covers "the building safety obligations that sit
+          with higher-risk blocks": that is not confirmed (open item G) and clause 6.4 says
+          the opposite about the duty, so the claim is gone and the carve-out is stated. */}
       <section className="section" aria-labelledby="wider-title">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">Beyond reactive repairs</p>
-            <h2 id="wider-title">The plan covers the homes. We can cover the rest of the building too.</h2>
+            <p className="eyebrow">What we cover</p>
+            <h2 id="wider-title">One fixed fee for the repairs. Everything else is quoted before it starts.</h2>
             <p className="lead">
-              Reactive repairs inside the plan is where most clients start. It is not the limit of what we run, and putting the
-              rest with the same supplier is usually the point at which the coordination overhead disappears. Everything here
-              is in one of two states, and both are on the table before you sign anything.
+              You pay one monthly fee per home and report as many repairs as you need to. There are three plans and they
+              differ in one way only: the value of repair the fee covers. The trades are the same on all three.
             </p>
           </div>
 
-          <div className="lanes">
-            <div className="lane lane--priced">
-              <span className="lane-head">Priced, per month</span>
-              <h3>Add it to the plan</h3>
-              <p>A published price you can put straight into a budget, on the same invoice as the plan.</p>
-              <ul className="lane-list">
-                {priced.map((r) => (
-                  <li key={r.what}>
-                    <span className="lane-what">
-                      {r.what}
-                      <span className="lane-sub">{r.sub}</span>
-                    </span>
-                    <span className="lane-price">
-                      {r.price}
-                      <span className="lane-sub">{r.unit}</span>
-                    </span>
-                  </li>
+          <div className="scope3">
+            <div className="scope-col scope-col--plan">
+              <span className="scope-tag">In your plan</span>
+              <h3>Reactive repairs, however many</h3>
+              <p>
+                Resident-reported, like-for-like repairs under your plan&rsquo;s value threshold. No cap on the number of
+                them, so your cost stays the same in a bad winter.
+              </p>
+              <ul className="scope-list">
+                {inPlan.map((t) => (
+                  <li key={t}>{t}</li>
                 ))}
               </ul>
-              <p className="lane-note">
-                All prices are plus VAT. Electrical Compliance Cover carries a minimum three-year term. Remedial works found
-                during an inspection are quoted separately.
+              <p className="scope-note">
+                <strong>{planLine}.</strong> Same trades on all three, and you can move up at any time.
               </p>
             </div>
 
-            <div className="lane lane--quoted">
-              <span className="lane-head">Quoted before we start</span>
-              <h3>Scoped, priced and approved by you</h3>
-              <p>
-                Never absorbed into the monthly fee and never started without your sign-off. Major works are not hidden in a
-                subscription.
-              </p>
-              <ul className="lane-list">
-                {quoted.map((r) => (
-                  <li key={r.what}>
-                    <span className="lane-what">
-                      {r.what}
-                      <span className="lane-sub">{r.sub}</span>
-                    </span>
-                    {r.price ? <span className="lane-price">{r.price}</span> : null}
+            <div className="scope-col">
+              <span className="scope-tag">Add to your plan</span>
+              <h3>Compliance and communal</h3>
+              <p>A published monthly price per home, on the same invoice as the plan.</p>
+              <ul className="scope-list scope-list--detail">
+                {addOns.map((a) => (
+                  <li key={a.what}>
+                    <strong>{a.what}</strong>
+                    <span>{a.sub}</span>
                   </li>
                 ))}
               </ul>
-              <p className="lane-note">
-                On building safety, nothing we do transfers your statutory duties as landlord or accountable person. We hold the
-                evidence; the duty stays with you. See{' '}
+              <p className="scope-note">
+                <Link href="/pricing" className="text-link">
+                  See what each one costs
+                </Link>
+              </p>
+            </div>
+
+            <div className="scope-col">
+              <span className="scope-tag">Variable works</span>
+              <h3>Quoted before we start</h3>
+              <p>
+                Scoped, priced and approved by you before anyone begins. Never absorbed into the monthly fee, and never
+                started without your sign-off.
+              </p>
+              <ul className="scope-list scope-list--detail">
+                {variable.map((v) => (
+                  <li key={v.what}>
+                    <strong>{v.what}</strong>
+                    <span>{v.sub}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="scope-note">
+                On building safety, nothing we do transfers your statutory duties as landlord or accountable person. We hold
+                the evidence; the duty stays with you. See{' '}
                 <Link href="/compliance" className="text-link">
                   compliance
                 </Link>{' '}

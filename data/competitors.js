@@ -43,6 +43,11 @@ export const competitors = [
   {
     key: 'fixflo',
     name: 'Fixflo',
+    // The published mark is a WORDMARK, not a symbol, so showing it above the name prints
+    // "Fixflo" twice. markIsWordmark tells the table to use the name alone. If a proper
+    // symbol file arrives from their brand page, drop this flag and it renders like the
+    // others.
+    markIsWordmark: true,
     // Aareon acquired Help Me Fix on 1 September 2025 and Fixflo's AI triage IS Help Me
     // Fix's Aidenn. Showing them as two independent competitors is the error an informed
     // buyer in this sector spots immediately, so they are one column with a footnote.
@@ -113,8 +118,15 @@ export const comparisonBands = [
     label: 'Where home emergency cover stops',
     rows: [
       {
-        capability: 'Covers every repair type, not only heating, plumbing and electrics',
-        cells: { plentific: 'y', askporter: 'y', fixflo: 'y', checkatrade: 'y', homeserve: 'n' },
+        capability: 'Trades it will actually attend and fix',
+        evo: { q: 'Every trade' },
+        cells: {
+          plentific: 'n',
+          askporter: 'n',
+          fixflo: 'n',
+          checkatrade: 'n',
+          homeserve: { q: 'Heating, plumbing, electrics' },
+        },
       },
       {
         capability: 'Sold as a portfolio service to landlords, not a per-property policy',
@@ -184,9 +196,7 @@ export const comparisonBands = [
 
 export const comparisonFootnotes = [
   'Help Me Fix was acquired by Aareon, Fixflo’s parent company, in September 2025, and its Aidenn technology now sits in both products. They are shown as one supplier because they are one company.',
-  'Checkatrade operates a discretionary guarantee, currently six months and capped at £1,000. It was twelve months for work completed before 13 January 2026.',
   '“A fixed price that covers the repairs themselves” is the test in the fifth row. Every supplier here has fixed pricing for its own software or policy; only EVO’s fixed price includes the cost of the repairs.',
-  'Also compared: Yardi, Salesforce Field Service, Arthur, Clixifix and OptusApp. None of them carries out repairs.',
 ];
 
 export const comparisonSource = 'EVO competitor analysis, March 2026, from each supplier’s own published material. Reviewed every six months.';

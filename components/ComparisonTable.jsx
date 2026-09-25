@@ -76,12 +76,14 @@ export default function ComparisonTable() {
                 Capability
               </th>
               <th scope="col" className="cmp-evo">
-                EVO
+                <span className="cmp-mark cmp-mark--evo">
+                  <img src="/images/brand/evo-logo-horizontal-white.png" alt="EVO" width="91" height="40" />
+                </span>
               </th>
               {competitors.map((c) => (
                 <th scope="col" key={c.key}>
                   <span className="cmp-grp">{c.group}</span>
-                  {c.src ? (
+                  {c.src && !c.markIsWordmark ? (
                     <span className="cmp-mark">
                       <img
                         src={c.src}
@@ -111,7 +113,7 @@ export default function ComparisonTable() {
                 <tr key={row.capability}>
                   <th scope="row">{row.capability}</th>
                   <td className="cmp-evo">
-                    <Cell v="y" />
+                    <Cell v={row.evo || 'y'} />
                   </td>
                   {competitors.map((c) => (
                     <td key={c.key}>
