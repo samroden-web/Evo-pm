@@ -7,14 +7,14 @@ import ProblemAnswer from '@/components/ProblemAnswer';
 import Caretaker from '@/components/Caretaker';
 import PlansTeaser from '@/components/PlansTeaser';
 import CaseStudyCards from '@/components/CaseStudyCards';
-import VideoTestimonials from '@/components/VideoTestimonials';
+import ResidentVideo from '@/components/ResidentVideo';
 import ComplianceBand from '@/components/ComplianceBand';
 import WhoStrip from '@/components/WhoStrip';
 import TrustBlock from '@/components/TrustBlock';
 import LatestInsights from '@/components/LatestInsights';
 import GettingStarted from '@/components/GettingStarted';
 import Quote from '@/components/Quote';
-import { clientLogos } from '@/data/logos';
+import { clientLogos, withFiles } from '@/data/logos';
 import { testimonials } from '@/data/testimonials';
 import { cta } from '@/data/site';
 
@@ -60,14 +60,14 @@ export default function HomePage() {
               <Link href={cta.review.href} className="btn btn-primary">
                 {cta.review.label}
               </Link>
-              <Link href="/pricing" className="btn btn-secondary btn-on-dark">
+              <Link href="/pricing" className="btn btn-secondary">
                 See plans and pricing
               </Link>
             </div>
             {/* GLOBAL-06: each award is only ever shown against the client it was won with. */}
             <ul className="ev2-awards">
-              <li>Housing Executive Awards 2025 &middot; Partnership of the Year, with IDS</li>
-              <li>Housing Digital Innovation Awards 2024 &middot; with B&amp;D Reside</li>
+              <li>Housing Executive Awards 2025, with IDS</li>
+              <li>Housing Digital Innovation Awards 2024, with B&amp;D Reside</li>
             </ul>
           </div>
           <div className="home-hero__visual">
@@ -92,15 +92,15 @@ export default function HomePage() {
       {/* 2. Figures */}
       <Figures />
 
-      {/* 3. Client logos */}
-      <section className="section section--tight" aria-labelledby="clients-title">
+      {/* 3. Client logos — warm band, per the mockup, sitting between the orange
+           figures band and the warm "why now" band so the page has rhythm rather
+           than an unbroken run of white. */}
+      <section className="ev3-logoband" aria-labelledby="clients-title">
         <div className="container">
-          <h2 id="clients-title" className="center" style={{ fontSize: '1.4rem' }}>
+          <h2 id="clients-title" className="ev3-logoband-hd">
             Trusted by housing providers across London
           </h2>
-          <div className="mt-2">
-            <LogoStrip logos={clientLogos} label="Clients" row />
-          </div>
+          <LogoStrip logos={withFiles(clientLogos)} label="Clients" row />
         </div>
       </section>
 
@@ -116,7 +116,7 @@ export default function HomePage() {
       {/* 7. Plans teaser */}
       <PlansTeaser grey={false} />
 
-      {/* 8. Proof: case studies, then the video testimonials */}
+      {/* 8. Proof: case studies and a written quote */}
       <section className="section section--grey" aria-labelledby="proof-title">
         <div className="container">
           <div className="section-head">
@@ -128,8 +128,10 @@ export default function HomePage() {
             <Quote t={testimonials.garethBrown} />
           </div>
         </div>
-        <VideoTestimonials />
       </section>
+
+      {/* 8b. Residents, on camera */}
+      <ResidentVideo />
 
       {/* 9. Compliance, both kinds */}
       <ComplianceBand />

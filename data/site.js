@@ -58,6 +58,18 @@ export const social = [
   { label: 'X (Twitter)', href: 'https://twitter.com/evo_pm' },
 ];
 
+// THE AGREED SITE MAP, 22 September, as drawn: six tabs, two dropdowns, three utility
+// links and one button. The order is the buying path — what it is, what it costs, the
+// thing you are graded on, proof, who you are.
+//
+//   How it works · Plans & pricing · Who we help ▾ · Compliance · Case studies · About ▾
+//   ... then Residents · Trades · Client login, top right, and Book a portfolio review.
+//
+// Two things the map settles that the build had drifted from:
+//   - Insights is DEMOTED under About. Every article keeps its URL and its search
+//     value; the latest three still surface on the homepage. It does not earn a tab.
+//   - Residents is a UTILITY link, not a tab. The main nav is the buying path, and a
+//     resident is not the buyer. It stays prominent in the footer.
 export const mainNav = [
   { label: 'How it works', href: '/how-it-works' },
   { label: 'Plans & pricing', href: '/pricing' },
@@ -70,35 +82,27 @@ export const mainNav = [
       { label: 'Landlords & managing agents', href: '/who-we-help/landlords-and-agents' },
     ],
   },
-  {
-    label: 'Compliance',
-    href: '/compliance',
-    children: [
-      { label: 'Statutory and regulatory', href: '/compliance' },
-      { label: 'Damp & mould', href: '/damp-and-mould' },
-    ],
-  },
-  {
-    label: 'Case studies',
-    href: '/case-studies',
-    children: [
-      { label: 'Industrial Dwellings Society (IDS)', href: '/case-studies/ids' },
-      { label: 'B&D Reside', href: '/case-studies/bd-reside' },
-    ],
-  },
+  // Flat, per the map. Damp and mould keeps its own URL and its own search ground, and
+  // is reached from inside the Compliance page rather than from a dropdown.
+  { label: 'Compliance', href: '/compliance' },
+  { label: 'Case studies', href: '/case-studies' },
   {
     label: 'About',
     href: '/about',
     children: [
-      { label: 'What we do', href: '/about/what-we-do' },
-      { label: 'Why we do it', href: '/about/why-we-do-it' },
-      { label: 'Who we are', href: '/about/who-we-are' },
-      { label: 'Trust and accreditations', href: '/about/trust' },
-      { label: 'Our products', href: '/products' },
+      { label: 'About EVO', href: '/about' },
+      { label: 'Insights', href: '/insights' },
     ],
   },
-  { label: 'Insights', href: '/insights' },
+];
+
+// Site map, "Resident zone and utility — off the main nav". Client login is on the
+// current site as "MARS" and was missing from the rebuild entirely; MARS is named
+// once, in the Dashboard block on How it works.
+export const utilityNav = [
   { label: 'Residents', href: '/residents' },
+  { label: 'Trades', href: '/trades' },
+  { label: 'Client login', href: 'https://app.evo-pm.com', external: true },
 ];
 
 export const footerNav = [
@@ -110,7 +114,6 @@ export const footerNav = [
       { label: 'Compliance', href: '/compliance' },
       { label: 'Damp & mould', href: '/damp-and-mould' },
       { label: 'Case studies', href: '/case-studies' },
-      { label: 'Products', href: '/products' },
       { label: 'Insights', href: '/insights' },
     ],
   },
@@ -135,10 +138,7 @@ export const footerNav = [
     heading: 'Company',
     links: [
       { label: 'About us', href: '/about' },
-      { label: 'Trust and accreditations', href: '/about/trust' },
-      { label: 'Partners', href: '/partners' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Investors', href: '/investors' },
+      { label: 'Client login', href: 'https://app.evo-pm.com' },
       { label: 'Contact', href: '/contact' },
     ],
   },
