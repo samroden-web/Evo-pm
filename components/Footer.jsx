@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { footerNav, company, social, awards, contact } from '@/data/site';
 import { frameworkLogos, accreditationLogos } from '@/data/logos';
 import LogoStrip from './LogoStrip';
-import Tbc from './Tbc';
 
 export default function Footer() {
   return (
@@ -17,10 +16,23 @@ export default function Footer() {
               <br />
               Residents: <a href="/residents">get help with a repair</a>
             </p>
+            {/* One main number, confirmed from EVO's own company-information page. Voice
+                calls to the SMS line divert here, so there is nothing else to list. */}
             <p>
-              Phone: <Tbc>sales and resident numbers</Tbc>
+              Phone:{' '}
+              <a href={`tel:+44${contact.salesPhone.replace(/\D/g, '').replace(/^0/, '')}`}>{contact.salesPhone}</a>
+              <br />
+              WhatsApp: {contact.whatsappNumber}
             </p>
-            <ul className="footer-social" style={{ listStyle: 'none', padding: 0, display: 'flex', gap: 16 }}>
+            <ul
+              className="footer-social"
+              style={{
+                listStyle: 'none',
+                padding: 0,
+                display: 'flex',
+                gap: 16,
+              }}
+            >
               {social.map((s) => (
                 <li key={s.href}>
                   <a href={s.href} target="_blank" rel="noopener noreferrer">
@@ -56,19 +68,21 @@ export default function Footer() {
         </div>
 
         <div className="footer-logos">
-          <LogoStrip logos={[...frameworkLogos, ...accreditationLogos]} color label="Frameworks and accreditations" swipe />
+          <LogoStrip
+            logos={[...frameworkLogos, ...accreditationLogos]}
+            color
+            label="Frameworks and accreditations"
+            swipe
+          />
         </div>
 
         <div className="footer-bottom">
           <p className="mb-0">
-            © {new Date().getFullYear()} {company.legalName}, company number {company.companyNumber}.{' '}
-            {company.registeredOfficeConfirmed ? (
-              <>Registered office: {company.address}.</>
-            ) : (
-              <>
-                {company.address}. <Tbc>registered office</Tbc>
-              </>
-            )}
+            {/* The registered office and the head office are different addresses, and the
+                Bromley one is by appointment only. Both belong here, labelled, rather than
+                one standing in for the other. */}
+            © {new Date().getFullYear()} {company.legalName}, company number {company.companyNumber}. VAT{' '}
+            {company.vatNumber}. Registered office: {company.registeredOffice}. Head office: {company.address}.
           </p>
           <ul>
             <li>

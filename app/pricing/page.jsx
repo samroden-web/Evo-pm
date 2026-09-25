@@ -8,7 +8,7 @@ import { orgTypes, plans, addons, pricingFaqs, formatPrice, combinedPrice, vatNo
 export const metadata = {
   title: 'EVO plans and pricing | Fixed-price repairs per home',
   description:
-    'One fixed price per home for the technology, the service and the repairs. Managed Technology plus Home 500, Home 1000 or Home Trust, priced per home per month, plus VAT.',
+    'One fixed price per home for the technology, the service and the repairs. Home 500, Home 1000 and Home Trust, priced per home per month, plus VAT.',
   alternates: { canonical: '/pricing' },
 };
 

@@ -10,7 +10,7 @@ import Link from 'next/link';
 // GDPR marketing permissions, replace MARKETING_EMAIL with the gdpr[...] name from the embed code.
 const ACTION = process.env.NEXT_PUBLIC_MAILCHIMP_ACTION;
 
-export default function MailingListForm() {
+export default function MailingListForm({ cta = 'Subscribe and get the guide' }) {
   const [done, setDone] = useState(false);
 
   if (done) {
@@ -79,7 +79,7 @@ export default function MailingListForm() {
       </p>
       <div>
         <button type="submit" className="btn btn-primary">
-          Subscribe and get the guide
+          {cta}
         </button>
       </div>
     </form>
