@@ -3,6 +3,7 @@ import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
 import AppBadges from '@/components/AppBadges';
 import Tbc, { TbcValue } from '@/components/Tbc';
+import Photo from '@/components/Photo';
 import { contact, apps } from '@/data/site';
 
 export const metadata = {
@@ -84,11 +85,35 @@ export default function ResidentsPage() {
           <div className="steps-row mt-3">
             {STEPS.map(([t, d], i) => (
               <div className="step-card" key={t}>
-                <span className="step-label">{i + 1}</span>
+                <span className="num">{i + 1}</span>
                 <h3>{t}</h3>
                 <p className="mb-0">{d}</p>
               </div>
             ))}
+          </div>
+          <div className="ev3-screens mt-3" style={{ maxWidth: '420px' }}>
+            <figure>
+              <img
+                src="/images/app/living-app-home.webp"
+                alt="The EVO Living App home screen, with Report a problem, Emergency, Appointments, Documents, FAQs and My profile"
+                width="420"
+                height="884"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>The home screen</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="/images/app/living-app-report-a-problem.webp"
+                alt="Reporting a problem in the EVO Living App, choosing from plumbing, heating, drainage, electrics and other categories"
+                width="420"
+                height="884"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Pick what is wrong</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -100,10 +125,26 @@ export default function ResidentsPage() {
             title="You need to register before you can report."
             lead="It takes a couple of minutes and you only do it once. You will need your address and the name of your landlord or managing agent."
           />
-          <div className="btn-row mt-3">
-            <a href={apps.living.registration} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              Register for the app
-            </a>
+          <div className="ev3-split mt-3">
+            <div>
+              <div className="btn-row">
+                <a href={apps.living.registration} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                  Register for the app
+                </a>
+              </div>
+              <p className="mt-2 mb-0">
+                If you would rather someone walked you through it, say so when you register and we will. Our team is often on
+                site, and helping people set the app up is part of the job.
+              </p>
+            </div>
+            <Photo
+              src="/images/photos/evo-team-member-helping-resident.webp"
+              alt="A resident using the EVO Living App with help from a member of the EVO team"
+              caption="Setting the app up together, on a visit."
+              width={1400}
+              height={787}
+              sizes="(min-width: 880px) 46vw, 100vw"
+            />
           </div>
         </div>
       </section>
