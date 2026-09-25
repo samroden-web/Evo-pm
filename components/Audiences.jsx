@@ -8,7 +8,7 @@ export const audiences = [
     id: 'living',
     label: 'For residents',
     product: 'EVO Living App',
-    href: '/products/living-app',
+    anchor: 'living-app',
     lead: 'A repair reported in half a minute, and the resident told what is happening until it is done.',
     points: [
       'Report a problem in under 30 seconds',
@@ -20,12 +20,17 @@ export const audiences = [
     w: 652,
     h: 1271,
     alt: 'EVO Living App home screen with Report a problem and Emergency buttons',
+    more: 'Residents can also open documents, user guides and FAQs about their home, and see their past and upcoming appointments.',
+    links: [
+      { href: '/residents', label: 'The residents hub' },
+      { href: '/how-to-guides/using-the-evo-living-app', label: 'How to use the EVO Living App' },
+    ],
   },
   {
     id: 'dashboard',
     label: 'For landlords and property managers',
     product: 'EVO Dashboard',
-    href: '/products/dashboard',
+    anchor: 'dashboard',
     lead: 'A single place for property data, compliance, repairs and full service history.',
     points: [
       'Real-time visibility on every job',
@@ -35,12 +40,14 @@ export const audiences = [
     ],
     laptop: true,
     alt: 'The EVO Dashboard showing a property record with details, location map and property attributes',
+    more: 'Clients log in to the Dashboard at app.evo-pm.com, where it is labelled MARS. It holds the property record, the compliance position and the full service history alongside the live jobs.',
+    links: [{ href: '/compliance', label: 'What the compliance view covers' }],
   },
   {
     id: 'trades',
     label: 'For accredited trades',
     product: 'EVO Trades App',
-    href: '/products/trades-app',
+    anchor: 'trades-app',
     lead: 'Skill-based job assignment with full property context, boosting first-time fix and accountability.',
     points: [
       'Skill-matched job dispatch',
@@ -52,6 +59,8 @@ export const audiences = [
     w: 652,
     h: 1271,
     alt: 'EVO Trades App home screen with new, upcoming and completed jobs',
+    more: 'Jobs are offered only into the hours a firm has made available, in their area and for their trade, and arrive with the access details and the service history attached.',
+    links: [{ href: '/trades', label: 'Join the trades network' }],
   },
 ];
 
@@ -59,7 +68,7 @@ export default function Audiences() {
   return (
     <div className="grid-3 swipe-mobile">
       {audiences.map((a) => (
-        <article className="card card--shadow" key={a.id} style={{ display: 'flex', flexDirection: 'column' }}>
+        <article className="card card--shadow" id={a.anchor} key={a.id} style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ height: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
             {a.laptop ? (
               <div style={{ width: '100%', maxWidth: 300 }}>
@@ -77,10 +86,13 @@ export default function Audiences() {
               <li key={p}>{p}</li>
             ))}
           </ul>
+          {a.more && <p>{a.more}</p>}
           <p className="mb-0" style={{ marginTop: 'auto' }}>
-            <Link href={a.href} className="text-link">
-              More about the {a.product}
-            </Link>
+            {a.links.map((l) => (
+              <Link key={l.href} href={l.href} className="text-link" style={{ display: 'block' }}>
+                {l.label}
+              </Link>
+            ))}
           </p>
         </article>
       ))}

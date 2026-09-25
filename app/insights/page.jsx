@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import InsightsList from '@/components/InsightsList';
-import Tbc from '@/components/Tbc';
 import { sortedInsights, insightTags } from '@/data/insights';
 
 export const metadata = {
@@ -27,10 +26,9 @@ export default function InsightsPage() {
       </PageHero>
       <section className="section">
         <div className="container">
+          {/* The migration is done: all 75 articles came across on 25 September, on their
+              original slugs. The note that used to sit here is no longer true. */}
           <InsightsList articles={sortedInsights()} tags={insightTags.filter((t) => t !== 'Newsletters')} />
-          <div className="mt-3">
-            <Tbc>older articles (pages 2 to 7 of the current Insights page) to be migrated</Tbc>
-          </div>
         </div>
       </section>
     </>
