@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 import PageHero from '@/components/PageHero';
 import PlanExplorer from '@/components/PlanExplorer';
 import JsonLd, { faqJsonLd } from '@/components/JsonLd';
@@ -39,27 +40,42 @@ export default function PricingPage() {
       </div>
 
       {/* PRICE-07 */}
-      <section className="section" aria-labelledby="outside-title">
+      <section className="section section--grey" aria-labelledby="outside-title">
         <div className="container">
           <div className="section-head">
             <h2 id="outside-title">What sits outside the plans</h2>
           </div>
-          <div className="grid-2">
-            <div className="card card--grey">
-              <h3>Inside the fee.</h3>
-              <p>
-                Reactive repairs under your threshold, however many: heating, plumbing, drainage, electrics, locks,
-                carpentry, tiling, windows, flooring and localised decoration. Plus the platform, the helpdesk,
-                contractor management, quality checks and reporting.
-              </p>
+          {/* Two identical grey boxes before. The whole point of this section is that one
+              of these is covered and one is quoted, so the two halves now look different -
+              the same in/out treatment the sector pages use, orange on the half the monthly
+              fee actually covers. */}
+          <div className="wwh-inout">
+            <div className="wwh-inout-col wwh-inout-col--in">
+              <h3>
+                <Icon name="shieldCheck" size={18} /> Inside the fee
+              </h3>
+              <ul className="tick-list mb-0">
+                <li>Reactive repairs under your threshold, however many</li>
+                <li>Heating, plumbing, drainage, electrics and locks</li>
+                <li>Carpentry, tiling, windows, flooring and localised decoration</li>
+                <li>The platform, the helpdesk and contractor management</li>
+                <li>Quality checks and reporting</li>
+              </ul>
             </div>
-            <div className="card card--grey">
-              <h3>Quoted openly, before we start.</h3>
-              <p>
-                Planned and cyclical work, capital and retrofit works, damp and mould programmes (see our{' '}
-                <Link href="/damp-and-mould">damp and mould page</Link>), insurance works, and any job above your
-                threshold. Major works are never hidden in the monthly fee.
-              </p>
+            <div className="wwh-inout-col wwh-inout-col--out">
+              <h3>
+                <Icon name="file" size={18} /> Quoted openly, before we start
+              </h3>
+              <ul className="tick-list tick-list--out mb-0">
+                <li>Planned and cyclical work</li>
+                <li>Capital and retrofit works</li>
+                <li>
+                  Damp and mould programmes &mdash; see our <Link href="/damp-and-mould">damp and mould page</Link>
+                </li>
+                <li>Insurance works</li>
+                <li>Any job above your threshold</li>
+              </ul>
+              <p className="wwh-inout-note mb-0">Major works are never hidden in the monthly fee.</p>
             </div>
           </div>
         </div>
@@ -68,7 +84,7 @@ export default function PricingPage() {
       {/* All prices as plain, crawlable text (brief section 7).
           Rebuilt 25 September 2026: with a single price list these tables no longer have
           an "organisation type" axis, so they now read down the items instead. */}
-      <section className="section section--grey" aria-labelledby="glance-title">
+      <section className="section" aria-labelledby="glance-title">
         <div className="container">
           <div className="section-head">
             <h2 id="glance-title">All prices at a glance</h2>
@@ -166,7 +182,7 @@ export default function PricingPage() {
       </section>
 
       {/* PRICE-09 FAQs */}
-      <section className="section" aria-labelledby="pricing-faq-title">
+      <section className="section section--grey" aria-labelledby="pricing-faq-title">
         <div className="container container--narrow">
           <h2 id="pricing-faq-title">Questions about plans and pricing</h2>
           <div className="accordion mt-2">

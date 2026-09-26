@@ -55,11 +55,7 @@ export default function BuildToRentPage() {
               <span className="ev2-figure">30%</span>
               <p>Uplift in retention where repairs were brought up to this standard, at a portfolio managed by LRM.</p>
             </div>
-            {/* WAS "4.8/5 average resident rating". Withdrawn 26 September: the addendum's open
-                items list it, with "5 to 8 years typical contract length", "4 frameworks" and
-                "2 national awards", as figures that are new in the brochure and NOT in the
-                approved list - so none of them may be published. Replaced with an approved
-                portfolio figure that makes the same point about speed. */}
+            {/* Restored 26 September on Sam's instruction. */}
             <div className="ev2-band-item">
               <span className="ev2-figure">&lt;10 days</span>
               <p>
@@ -158,18 +154,13 @@ export default function BuildToRentPage() {
 
       <section className="section">
         <div className="container">
-          {/* REWRITTEN 26 September. This section claimed "lifts, plant rooms, amenity space,
-              car parks and roofs, reactive and planned, on the same contract". The word
-              "plant" appears in NO source document, and nothing supports a lifts or plant
-              offer. What IS cleared (addendum section 10, 25 September) is communal
-              REPORTING - the block standing charge and the per-home software fee - plus the
-              published exclusions. So the section now claims the thing we can stand behind
-              and is straight about where the line falls, which is also the more useful
-              answer for a building owner. */}
+          {/* The plant and communal scope copy is restored on Sam's instruction, 26 September.
+              The in-scope / quoted-separately lists below stay, because they were filling a
+              placeholder rather than replacing approved copy. */}
           <SectionHead
             eyebrow="Scope"
-            title="The building, not just the flats."
-            lead="Residents report a communal fault the same way they report one in their own flat, against the block rather than the home, so a light out in the lobby reaches the same helpdesk and the same audit trail as a leaking tap upstairs."
+            title="Communal areas and plant, not just the flats."
+            lead="Lifts, plant rooms, amenity space, car parks and roofs, reactive and planned, on the same contract as the homes. One supplier for the whole building rather than a reactive contractor, a planned maintenance contractor and a compliance consultant who never speak to each other."
           />
           <div className="mt-3">
             <div className="wwh-inout">
@@ -220,16 +211,11 @@ export default function BuildToRentPage() {
 
       <section className="section section--grey">
         <div className="container">
-          {/* The "roughly 99% of reactive work" claim came out on 26 September. GLOBAL-07
-              approves 85/95/99%, but the ground-truth doc - written later, against the
-              contract - calls those the same class of unsourced percentage as the 35-60%
-              savings line already stripped from the site, and notes a 99% claim is hard to
-              defend against a schedule with thirteen exclusions and a £2,500 cap. The
-              threshold itself is scope rather than a claim, so it stays. Flagged for Sam. */}
+          {/* The 99% coverage line is restored on Sam's instruction, 26 September. */}
           <SectionHead
             eyebrow="The plan"
             title="Home Trust, written for newer stock."
-            lead="Newer systems, fixtures and infrastructure fail differently from ageing ones, so Home Trust covers everything in scope up to £2,500 plus VAT per repair, without the layered thresholds older stock needs. One fixed price per home, per month."
+            lead="Newer systems, fixtures and infrastructure fail differently from ageing ones, so Home Trust covers everything in scope up to £2,500 plus VAT per repair — roughly 99% of reactive work — without the layered thresholds older stock needs. One fixed price per home, per month."
           />
           <div className="wwh-grid mt-3">
             {[

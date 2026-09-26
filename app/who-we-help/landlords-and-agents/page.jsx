@@ -154,18 +154,14 @@ export default function LandlordsAndAgentsPage() {
 
       <section className="section section--grey">
         <div className="container">
-          {/* CORRECTED 26 September. This said "the scope is identical across Home 500,
-              Home 1000 and Home Trust - only the repair threshold changes". That is not
-              what the contract says. Schedule 2 states the plans differ by the threshold
-              AND the scope of works, with three inclusion schedules of increasing length
-              (Home 500: 10 heating, 13 plumbing, 10 electrics, 6 locksmith items; Home
-              1000: 18/22/17/6; Home Trust: 27/31/24/10). The old wording also under-sold
-              the two upper plans, which is the opposite of what this section is for. */}
+          {/* Restored on Sam's instruction, 26 September. I had rewritten this against
+              Schedule 2, which lists different inclusion counts per plan; Sam is content
+              the original is right. */}
           <SectionHead
             eyebrow="The price"
             title="What the fee covers, and what it does not."
 
-            lead="One fixed price per home, per month. The plans differ in two ways: the value of repair each one covers, and how much of the trade list falls inside it — Home Trust covers roughly three times as many listed items as Home 500. Anything outside your plan is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
+            lead="One fixed price per home, per month. The scope is identical across Home 500, Home 1000 and Home Trust — only the repair threshold changes. Anything outside it is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
           />
           <div className="grid-2 mt-3">
             <div className="card">

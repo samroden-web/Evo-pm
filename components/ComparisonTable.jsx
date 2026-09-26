@@ -75,10 +75,22 @@ export default function ComparisonTable() {
               <th scope="col" className="cmp-cap">
                 Capability
               </th>
+              {/* THE EVO COLUMN RENDERS THE SAME FOUR SLOTS AS EVERY OTHER COLUMN.
+                  It used to render the mark alone. With `vertical-align: bottom` on the
+                  header cells, a cell holding one 26px element sits that element at the
+                  BOTTOM of a 122px row, while every competitor's mark sits near the top of
+                  its own four-slot stack - so the EVO logo hung 52px below the rest and
+                  threw the whole bar out. Measured, not guessed.
+                  Same fix as Fixflo's: render every slot in every column, empty or not, so
+                  the row has one structure. The name slot stays empty here because the mark
+                  is a wordmark and printing "EVO" under it would say it twice. */}
               <th scope="col" className="cmp-evo">
+                <span className="cmp-grp">&nbsp;</span>
                 <span className="cmp-mark cmp-mark--evo">
                   <img src="/images/brand/evo-logo-horizontal-white.png" alt="EVO" width="91" height="40" />
                 </span>
+                <span className="cmp-name">&nbsp;</span>
+                <span className="cmp-note">&nbsp;</span>
               </th>
               {competitors.map((c) => (
                 <th scope="col" key={c.key}>

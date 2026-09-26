@@ -240,6 +240,17 @@ p.center {
   margin-inline: auto;
 }
 
+/* The band that follows a page hero was starting a full section's padding below the hero's
+   own padding: 44px under the hero plus 63px above the content, so 107px of empty band
+   between the headline and the first thing it introduces. Sam on /how-it-works: "the gap
+   between top banner and the images is too big". The hero and the section that follows it
+   are one thought, so they get tightened spacing between them. */
+.page-hero + .section,
+.page-hero + .section--grey,
+.page-hero + .section--warm {
+  padding-top: clamp(24px, 2.6vw, 36px);
+}
+
 .container--narrow {
   max-width: 820px;
 }
@@ -892,6 +903,23 @@ p.center {
 }
 .statrow > div {
   min-width: 0;
+}
+/* The orange band restored on /compliance and /who-we-help/housing, 26 September.
+   Sam wanted it back - it was the visual anchor on both pages - but NOT the markup it came
+   with, which stacked three stats full width and crammed each value into .num, the 38px
+   navy circle used for numbered process steps. Same band, laid out as a row. */
+.statrow--orange {
+  background: var(--orange);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2.6vw, 32px);
+}
+.statrow--orange .stat {
+  color: var(--white);
+}
+/* --on-orange measures 5.31:1 against the brand orange; --muted measured 1.86:1, which is
+   how this band's labels were found in the first place. */
+.statrow--orange .stat-label {
+  color: var(--on-orange);
 }
 .figures__list {
   display: grid;
@@ -3337,11 +3365,21 @@ textarea {
 }
 
 /* Two-column "today / with EVO" rows. */
+/* THE BEFORE/AFTER TABLE, rebuilt 26 September. Sam: "the tables on the who we help page
+   are v boring."
+   They were: a 1px box, a grey header, and two columns four percent apart in tone - grey-100
+   against orange-soft, which is the same near-white-against-near-white problem the homepage
+   problem/solution block had before it went dark. A table that exists to say "this, then
+   that" has to show the change, not imply it.
+   So: one navy header bar across both columns, the old way in quiet grey with a dash, the
+   EVO way on white with an orange tick and an orange spine, and the closing row in solid
+   orange because that line is the punchline of the whole section. */
 .ev2-pairs {
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--white);
+  box-shadow: 0 2px 14px rgba(28, 40, 51, 0.09);
 }
 .ev2-pair {
   display: grid;
@@ -3350,32 +3388,90 @@ textarea {
 .ev2-pair > div {
   padding: 15px 18px;
   border-top: 1px solid var(--line);
+  min-width: 0;
 }
 .ev2-pair:first-child > div {
   border-top: 0;
 }
+
+/* The header bar. One colour across both halves, with the EVO side picked out in orange so
+   the column it labels is obvious before a single row is read. */
 .ev2-pair-head > div {
-  background: var(--grey-100);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
+  background: var(--navy-deep);
+  font-size: var(--label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-  padding: 11px 18px;
+  color: rgba(255, 255, 255, 0.62);
+  padding: 13px 18px;
+  border-top: 0;
 }
 .ev2-pair-head > div + div {
-  background: var(--orange-soft);
-  color: var(--orange-ink);
+  background: var(--navy-deep);
+  color: var(--orange);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.14);
 }
+
+/* The old way. Quiet, and marked with a dash rather than a cross - a cross reads as an
+   error, and running repairs the traditional way is not an error, it is just the thing
+   that has stopped working. */
 .ev2-pair .ev2-a {
+  background: var(--grey-50);
   color: var(--muted);
+  display: flex;
+  gap: 10px;
 }
-.ev2-pair .ev2-b {
-  background: var(--orange-soft);
-  font-weight: 600;
-}
-.ev2-pair--total > div {
-  border-top: 2px solid var(--orange);
+.ev2-pair .ev2-a::before {
+  content: '\2014';
+  flex: none;
+  color: #b9aea4;
   font-weight: 700;
+}
+
+/* The EVO way. White rather than a tint, so it reads as the lit half, with an orange spine
+   down the join and a tick on every line. */
+.ev2-pair .ev2-b {
+  background: var(--white);
+  font-weight: 600;
+  color: var(--navy-deep);
+  display: flex;
+  gap: 10px;
+  box-shadow: inset 2px 0 0 var(--orange);
+}
+.ev2-pair .ev2-b::before {
+  content: '\2713';
+  flex: none;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* The closing row carries the brochure's punchline, so it gets to be loud. */
+.ev2-pair--total > div {
+  border-top: 0;
+  font-weight: 700;
+  background: var(--orange-soft);
+  color: var(--navy-deep);
+  padding-block: 18px;
+}
+.ev2-pair--total > div:first-child {
+  color: var(--on-orange-soft);
+}
+.ev2-pair--total .ev2-b {
+  background: var(--orange);
+  color: var(--white);
+  box-shadow: none;
+}
+.ev2-pair--total .ev2-b::before {
+  color: var(--white);
+}
+
+@media (max-width: 620px) {
+  .ev2-pair {
+    grid-template-columns: 1fr;
+  }
+  .ev2-pair .ev2-b {
+    box-shadow: inset 0 2px 0 var(--orange);
+  }
 }
 
 /* Three-column "who sees what". */
@@ -5125,7 +5221,12 @@ textarea {
   vertical-align: middle;
 }
 .cmp thead th {
-  vertical-align: bottom;
+  /* TOP, not bottom. Every column now renders the same four slots, so aligning their TOP
+     edges makes the marks and names line up by construction rather than by luck - with
+     bottom alignment they line up only while every stack happens to be exactly the same
+     height, and the EVO column was 3px out for reasons not worth chasing. .cmp-cap keeps
+     bottom alignment below, because a single word wants to sit on the table's baseline. */
+  vertical-align: top;
   background: var(--white);
   border-bottom: 1px solid var(--line);
 }
@@ -5136,8 +5237,10 @@ textarea {
 }
 .cmp-note {
   min-height: 1em;
+  line-height: 1.2;
 }
 .cmp th.cmp-cap {
+  vertical-align: bottom;
   text-align: left;
   width: 30%;
   min-width: 230px;
@@ -5154,8 +5257,10 @@ textarea {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  height: 30px;
-  margin-bottom: 7px;
+  /* 30px and 7px before. The header bar measured 122px deep, which Sam called too deep -
+     it is four stacked slots and every one of them was carrying slack. */
+  height: 24px;
+  margin-bottom: 5px;
 }
 /* An empty mark slot still occupies its 30px, which is the whole point. */
 .cmp-mark:empty {
@@ -5166,6 +5271,10 @@ textarea {
   height: auto;
   object-fit: contain;
 }
+.cmp-mark--evo img {
+  max-height: 24px;
+  width: auto;
+}
 .cmp-grp {
   display: block;
   font-size: var(--label-dense);
@@ -5173,7 +5282,8 @@ textarea {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 6px;
+  line-height: 1.25;
+  margin-bottom: 4px;
 }
 .cmp-name {
   display: block;
@@ -6061,4 +6171,16 @@ textarea {
   font-size: 0.94rem;
   line-height: 1.6;
   color: var(--muted);
+}
+
+/* The add-on cards. A count-agnostic row rather than a fixed two columns, so a third
+   add-on does not end up alone beside a 566px gap the way it did before 26 September. */
+.addon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: clamp(14px, 1.8vw, 20px);
+  align-items: start;
+}
+.addon-grid > * {
+  min-width: 0;
 }

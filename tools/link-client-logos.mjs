@@ -111,5 +111,51 @@ console.log(
   awardDims ? `  ok   award badges (${awardDims.width}x${awardDims.height})` : '  --   award badges — no file'
 );
 
+// REFUSE TO WRITE A WHOLESALE WIPE.
+//
+// This linker clears the `src` of any logo whose file is missing, which is correct when one
+// download has failed. It is NOT correct when EVERY file is missing, because that never
+// means "the client list changed" - it means this machine has no images, which is the
+// normal state of the working copy outside the Codespace. Running it here rewrote
+// data/logos.js with every logo cleared, which would have shipped a homepage with no client
+// strip at all. Same shape of fault as the destructive fetch: a transient environment
+// problem quietly turned into a content change.
+if (linked === 0 && cleared > 0) {
+  console.log('');
+  console.log(`  REFUSING TO WRITE. Not one of the ${cleared} logo files is present.`);
+  console.log('  That is an environment problem, not a content change - this machine simply');
+  console.log('  has no images. Writing would clear every logo in data/logos.js and take the');
+  console.log('  whole client strip off the site.');
+  console.log('  Run tools/fetch-client-logos.sh first, on a machine that can reach the web.');
+  console.log('');
+  process.exit(0);
+}
+
 writeFileSync(DATA, src);
 console.log(`\nLinked ${linked}, left unlinked ${cleared}. ${DATA} updated.`);
+
+// SAY IT LOUDLY WHEN THE STRIP HAS SHRUNK.
+//
+// The homepage strip hides a logo that has no file, which is right at launch - a missing
+// file should cost polish, not show a broken image. But it also means the strip getting
+// shorter is completely silent. When a destructive fetch deleted the committed logo files,
+// they simply disappeared from the homepage and nothing anywhere said so: the build passed,
+// all three checkers passed, and the first anyone knew was Sam looking at the live site.
+//
+// So this prints a banner rather than a line. It does not fail the build, because a
+// Codespace that genuinely cannot reach the old site should still be able to deploy - but
+// nobody gets to miss it.
+const EXPECTED = 11;
+if (linked < EXPECTED) {
+  console.log('');
+  console.log('  ' + '='.repeat(68));
+  console.log(`  WARNING: only ${linked} of ${EXPECTED} client logos have files.`);
+  console.log('  The homepage strip HIDES logos with no file, so this will not error -');
+  console.log('  the strip will just be short, and nothing else will tell you.');
+  console.log('');
+  console.log('  These files are committed to the repo. If they have gone missing, the');
+  console.log('  fetch could not reach evo-pm.com and the committed copies should still');
+  console.log('  be there - check "git status" before committing this run.');
+  console.log('  ' + '='.repeat(68));
+  console.log('');
+}

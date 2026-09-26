@@ -20,11 +20,32 @@ cd "$(dirname "$0")/.." || exit 1
 mkdir -p public/images/logos/clients public/images/logos/accreditations public/images/awards
 ok=0; fail=0
 
+# NEVER WRITE DIRECTLY TO THE DESTINATION, AND NEVER DELETE IT ON FAILURE.
+#
+# This helper used to do both: `curl -o "$2"` truncates the destination before the transfer
+# even starts, and the failure branch then ran `rm -f "$2"`. These files are COMMITTED to
+# the repo, and the deploy block runs every fetch script on every patch. So the first time
+# evo-pm.com stopped serving one of these /media/ URLs, that run deleted the good committed
+# copy, `withFiles` filtered the logo out because it had no file, and it vanished from the
+# homepage silently. No error, no failed build - the strip simply got shorter.
+#
+# That is exactly the trap the header of this file warns about, and the script walked into
+# it. Download to a temporary file; move it into place only on success; leave whatever is
+# already committed completely alone if the fetch fails.
 get() { # get <url> <destination>
-  if curl -fsSL "$1" -o "$2"; then
+  local tmp
+  tmp="$(mktemp)"
+  if curl -fsSL --max-time 30 "$1" -o "$tmp" && [ -s "$tmp" ]; then
+    mv -f "$tmp" "$2"
     ok=$((ok+1)); echo "  ok   $2"
   else
-    rm -f "$2"; fail=$((fail+1)); echo "  FAIL $1"
+    rm -f "$tmp"
+    fail=$((fail+1))
+    if [ -s "$2" ]; then
+      echo "  FAIL $1  (KEPT the committed copy at $2)"
+    else
+      echo "  FAIL $1  (and there is no committed copy - this one really is missing)"
+    fi
   fi
 }
 

@@ -180,7 +180,7 @@ export default function CompliancePage() {
             title="The one we are asked about most."
             lead="A defined procedure rather than a repaint: a moisture reading that decides whether treatment can start, a three-stage treatment, and the before, during and after evidence."
           />
-          <div className="statrow mt-3">
+          <div className="statrow statrow--orange mt-3">
             <div>
               <span className="stat stat--orange">1,000+</span>
               <span className="stat-label">Cases handled in 18 months</span>

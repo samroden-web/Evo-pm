@@ -294,7 +294,11 @@ export default function PlanExplorer() {
           </span>
           <h2 id="step3">Optional compliance cover</h2>
         </div>
-        <div className="grid-2">
+        {/* THREE addons in a TWO-column grid left the third alone on its own row beside a
+            566px hole - the largest piece of empty space on the pricing page, and a good
+            part of why Sam called it bland. The count here follows the data: it lays out as
+            one row whatever number of add-ons data/plans.js happens to hold. */}
+        <div className="addon-grid">
           {addons.map((a) => {
             const on = addonOn[a.id];
             return (

@@ -191,7 +191,7 @@ export default function HousingPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="Proof" title="Portfolios already running this way." />
-          <div className="statrow mt-3">
+          <div className="statrow statrow--orange mt-3">
             <div>
               <span className="stat stat--orange">90%+</span>
               <span className="stat-label">First-time fix across the portfolio</span>
