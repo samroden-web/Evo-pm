@@ -60,3 +60,35 @@ export const accreditationLogos = [
 ];
 
 export const awardBadges = { src: '/images/awards/award-badges-light.png', width: 684, height: 99 };
+
+// Tone correction for the client strip.
+//
+// THE FINDING. The nine logos that came off the old Umbraco site are not grey because a CSS
+// filter greys them - they are grey ARTWORK, deliberately normalised to a mid-tone of about
+// 0.7 to 0.8 luminance by whoever prepared them. Greenhill and J49 came later, from the
+// clients' own sites, and are full-strength near-black marks at about 0.32. Desaturating
+// removes hue but not tone, which is why those two still read as noticeably heavier.
+//
+// WHY OPACITY AND NOT BRIGHTNESS. brightness() was tried first and cannot do this: at the
+// multiplier Greenhill needs, 63% of J49's mark clipped to solid white. You cannot lift a
+// dark mark to a mid-tone by multiplying without destroying it. Opacity blends toward the
+// page behind it instead, which is exactly the effect wanted and has no clipping at all.
+//
+// THE NUMBERS. Solving o for  o*ink + (1-o)*background = 0.772,  where 0.772 is what a
+// normal logo renders at (its 0.75 ink at the strip's default 0.8 opacity) and the strip
+// background is about 0.97:
+//
+//   Greenhill  ink 0.32 -> 0.31      J49    ink 0.34 -> 0.32
+//   Storm      ink 0.57 -> 0.49      LRM    ink 0.65 -> 0.62
+//
+// Anything not listed is already at the right tone and keeps the default.
+//
+// TO RE-MEASURE after adding a logo: average the luminance of its non-transparent pixels,
+// ignoring anything above 0.93 (the white plate most of these sit on), then solve the line
+// above for o. If a new logo arrives already greyed to match the old set, it needs nothing.
+export const logoOpacity = {
+  'Greenhill Housing': 0.31,
+  J49: 0.32,
+  'Storm Housing Group': 0.49,
+  LRM: 0.62,
+};

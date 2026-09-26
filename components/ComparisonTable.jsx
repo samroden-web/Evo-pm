@@ -82,9 +82,19 @@ export default function ComparisonTable() {
               </th>
               {competitors.map((c) => (
                 <th scope="col" key={c.key}>
+                  {/* EVERY column renders EVERY slot, even when it is empty.
+                      Sam spotted that Fixflo's name sat out of line with the rest and it
+                      threw the whole header off. The cause: this column has no mark (its
+                      published logo is a wordmark, so printing it would say "Fixflo" twice)
+                      and it is the only one with a note. So it had two fewer pixels above
+                      and a line more below, and no amount of vertical-align could rescue
+                      that - bottom-aligning pushed the name UP on the taller cell, which is
+                      what made it the odd one out.
+                      Rendering the empty slots means every header has the same structure and
+                      the names sit on one line whatever each column happens to carry. */}
                   <span className="cmp-grp">{c.group}</span>
-                  {c.src && !c.markIsWordmark ? (
-                    <span className="cmp-mark">
+                  <span className="cmp-mark">
+                    {c.src && !c.markIsWordmark ? (
                       <img
                         src={c.src}
                         alt=""
@@ -94,10 +104,10 @@ export default function ComparisonTable() {
                         decoding="async"
                         style={{ maxHeight: markHeight(c), maxWidth: 58 }}
                       />
-                    </span>
-                  ) : null}
+                    ) : null}
+                  </span>
                   <span className="cmp-name">{c.name}</span>
-                  {c.note ? <span className="cmp-note">{c.note}</span> : null}
+                  <span className="cmp-note">{c.note || '\u00a0'}</span>
                 </th>
               ))}
             </tr>

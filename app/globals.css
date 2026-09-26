@@ -5041,6 +5041,14 @@ textarea {
   background: var(--white);
   border-bottom: 1px solid var(--line);
 }
+/* Constant slots, so the company names sit on one line across the whole header. The mark
+   slot and the note slot are rendered even when empty - see the comment in the component. */
+.cmp thead th:not(.cmp-cap):not(.cmp-evo) {
+  display: table-cell;
+}
+.cmp-note {
+  min-height: 1em;
+}
 .cmp th.cmp-cap {
   text-align: left;
   width: 30%;
@@ -5060,6 +5068,10 @@ textarea {
   justify-content: center;
   height: 30px;
   margin-bottom: 7px;
+}
+/* An empty mark slot still occupies its 30px, which is the whole point. */
+.cmp-mark:empty {
+  display: flex;
 }
 .cmp-mark img {
   width: auto;
@@ -5529,96 +5541,172 @@ textarea {
 /* ==========================================================================
    Problem and solution (homepage)
    --------------------------------------------------------------------------
-   THIRD attempt at this block, and the first two failed for the same reason, so the reason
-   is worth writing down: the pairing was spread ACROSS a layout row rather than held
-   INSIDE one element.
+   FOURTH layout, after three that failed for two distinct reasons:
 
-   As a table, then as two lanes with a spine, a problem and its answer were two cells that
-   happened to sit level with each other. That works at 1440px and falls apart everywhere
-   else. On a phone the lanes stacked, the spine had nothing to run down, the theme label
-   printed across its own icon, and the orange "EVO solution" heading was explicitly hidden
-   - so a phone reader saw alternating grey and orange blocks with nothing to say which was
-   which, for 2,500px.
+   PAIRING (a table, then two lanes with a spine). The pairing lived in the layout, so any
+   narrower screen had to break the row apart and lost it.
+   CONTRAST (one card, halves stacked). Both halves ended up the same shape and weight, so
+   it read as two related notes rather than a problem and its fix.
 
-   Now each pair is ONE card carrying both halves. The pairing cannot break, because there
-   is no arrangement in which the two halves are separated. Two columns on a laptop, one on
-   a phone, identical meaning at both.
+   This version keeps the pairing inside ONE element - so it cannot break - and puts the two
+   halves side by side on a laptop, where left-to-right does the work of saying "this, then
+   that" without any device needed to explain it. On a phone they stack under the theme, in
+   the same order.
 
-   The before-and-after is carried by the ground changing from grey to orange down the card,
-   which needs no spine, no arrow and no connecting line - the three things that kept
-   breaking.
+   Two rules for anyone editing this:
+     - the two halves must stay visually distinct (grey against orange, tag against tag);
+     - the problem stays SHORT. The brief states them as headings, not sentences. If one
+       needs three lines, the copy is wrong rather than the type size.
    ========================================================================== */
-.pa-grid {
+.pa-list {
+  list-style: none;
+  margin: var(--head-gap) 0 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(12px, 1.6vw, 16px);
+}
+.pa-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(14px, 1.8vw, 20px);
-  margin-top: var(--head-gap);
-}
-@media (min-width: 760px) {
-  .pa-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.pa-card {
-  display: flex;
-  flex-direction: column;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
 }
-.pa-card__head {
+/* Laptop: theme across the top, then problem and answer side by side. The answer takes the
+   greater share because it carries the lead-in and the supporting sentence. */
+@media (min-width: 860px) {
+  .pa-row {
+    grid-template-columns: 1fr 44px 1.25fr;
+    /* The theme sits ABOVE THE PROBLEM rather than in a bar of its own. As a full-width
+       head it left a near-empty white strip on every row - four of them down the block. */
+    grid-template-areas:
+      'head turn answer'
+      'problem turn answer';
+    align-items: start;
+  }
+  .pa-row__head {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .pa-row__problem {
+    padding-top: 10px;
+  }
+  .pa-row__turn,
+  .pa-row__answer {
+    height: 100%;
+  }
+  .pa-row__head {
+    grid-area: head;
+  }
+  .pa-row__problem {
+    grid-area: problem;
+  }
+  .pa-row__turn {
+    grid-area: turn;
+  }
+  .pa-row__answer {
+    grid-area: answer;
+  }
+}
+.pa-row__head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px clamp(16px, 2vw, 22px);
+  gap: 9px;
+  padding: 12px clamp(16px, 2vw, 22px);
   border-bottom: 1px solid var(--line);
-  color: var(--orange-ink);
+  background: var(--grey-50);
 }
-.pa-card__head h3 {
-  margin: 0;
+.pa-num {
   font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+}
+.pa-theme {
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--navy-deep);
+  color: var(--muted);
 }
-.pa-card__now,
-.pa-card__evo {
-  padding: clamp(14px, 1.8vw, 20px) clamp(16px, 2vw, 22px);
+.pa-row__problem,
+.pa-row__answer {
+  padding: clamp(16px, 1.9vw, 22px) clamp(16px, 2vw, 22px);
 }
-.pa-card__now {
+.pa-row__problem {
   background: var(--grey-50);
 }
-/* The EVO half takes the slack, so in a row of cards the orange block is always the taller
-   one. The good news gets the room. */
-.pa-card__evo {
+.pa-row__problem p {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--navy-deep);
+  max-width: 24ch;
+}
+.pa-row__answer {
   background: var(--orange-soft);
-  border-top: 1px solid rgba(255, 102, 0, 0.25);
-  flex: 1;
+}
+.pa-row__answer p {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.pa-row__answer strong {
+  color: var(--navy-deep);
+  font-weight: 700;
 }
 .pa-tag {
-  display: block;
-  font-size: 0.66rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 5px;
   color: var(--muted);
+  margin-bottom: 7px;
 }
 .pa-tag--evo {
   color: var(--orange-ink);
 }
-.pa-card__now p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
+
+/* The turn. A column between the two halves on a laptop, a strip between them on a phone,
+   with the chevron rotating so it always points the way the eye is about to travel. */
+.pa-row__turn {
+  position: relative;
+  background: var(--grey-50);
 }
-.pa-card__evo p {
-  margin: 0;
-  color: var(--navy-deep);
-  font-weight: 600;
-  font-size: 1.02rem;
-  line-height: 1.5;
+.pa-chev {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.pa-chev::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -4px 0 0 -5px;
+  border-right: 2px solid var(--on-orange);
+  border-bottom: 2px solid var(--on-orange);
+  transform: rotate(-45deg);
+}
+@media (max-width: 859px) {
+  .pa-row__turn {
+    height: 20px;
+  }
+  .pa-chev::after {
+    margin: -5px 0 0 -4px;
+    transform: rotate(45deg);
+  }
 }

@@ -1,4 +1,5 @@
 import Tbc from './Tbc';
+import { logoOpacity } from '@/data/logos';
 
 // row: keep every logo on one line, scrolling sideways if they don't all fit.
 //
@@ -14,6 +15,15 @@ import Tbc from './Tbc';
 // The target differs by strip: the accreditation marks sit small in a dense row, the
 // client wall gives each logo a whole cell. Passed in rather than fixed, because one
 // number cannot serve both.
+// Greyscale flattens colour but not tone, so a darker mark stays darker. Two of the eleven
+// client logos are full-strength artwork while the other nine are pre-greyed, so those two
+// are blended toward the page to match. See the note in data/logos.js for the measurements
+// and for why this is opacity rather than a brightness filter.
+function toneOpacity(name, color) {
+  if (color) return undefined;
+  return logoOpacity[name];
+}
+
 function normalisedHeight(l, area) {
   if (!l.width || !l.height) return undefined;
   const ratio = l.width / l.height;
@@ -48,7 +58,10 @@ export default function LogoStrip({
               height={l.height}
               loading="lazy"
               decoding="async"
-              style={normalise ? { maxHeight: normalisedHeight(l, normaliseArea), maxWidth: '100%' } : undefined}
+              style={{
+                ...(normalise ? { maxHeight: normalisedHeight(l, normaliseArea), maxWidth: '100%' } : null),
+                ...(toneOpacity(l.name, color) ? { opacity: toneOpacity(l.name, color) } : null),
+              }}
             />
           ) : (
             <Tbc>{row ? `${l.name} logo` : `${l.name}: ${l.tbc || 'logo to follow'}`}</Tbc>
