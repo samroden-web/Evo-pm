@@ -191,21 +191,21 @@ export default function HousingPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="Proof" title="Portfolios already running this way." />
-          <div className="figures mt-3">
-            <div className="stat stat--orange">
-              <span className="num">90%+</span>
+          <div className="statrow mt-3">
+            <div>
+              <span className="stat stat--orange">90%+</span>
               <span className="stat-label">First-time fix across the portfolio</span>
             </div>
-            <div className="stat stat--orange">
-              <span className="num">1,414</span>
+            <div>
+              <span className="stat stat--orange">1,414</span>
               <span className="stat-label">Homes at IDS, pilot to contract</span>
             </div>
-            <div className="stat stat--orange">
-              <span className="num">6&ndash;7 days</span>
+            <div>
+              <span className="stat stat--orange">6&ndash;7 days</span>
               <span className="stat-label">Average damp and mould resolution</span>
             </div>
-            <div className="stat stat--orange">
-              <span className="num">1,000+</span>
+            <div>
+              <span className="stat stat--orange">1,000+</span>
               <span className="stat-label">Damp and mould cases in 18 months</span>
             </div>
           </div>

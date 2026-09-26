@@ -180,17 +180,17 @@ export default function CompliancePage() {
             title="The one we are asked about most."
             lead="A defined procedure rather than a repaint: a moisture reading that decides whether treatment can start, a three-stage treatment, and the before, during and after evidence."
           />
-          <div className="figures mt-3">
-            <div className="stat stat--orange">
-              <span className="num">1,000+</span>
+          <div className="statrow mt-3">
+            <div>
+              <span className="stat stat--orange">1,000+</span>
               <span className="stat-label">Cases handled in 18 months</span>
             </div>
-            <div className="stat stat--orange">
-              <span className="num">6&ndash;7 days</span>
+            <div>
+              <span className="stat stat--orange">6&ndash;7 days</span>
               <span className="stat-label">Average damp and mould resolution</span>
             </div>
-            <div className="stat stat--orange">
-              <span className="num">20%</span>
+            <div>
+              <span className="stat stat--orange">20%</span>
               <span className="stat-label">Moisture threshold below which treatment proceeds</span>
             </div>
           </div>

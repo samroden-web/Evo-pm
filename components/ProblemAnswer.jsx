@@ -140,7 +140,7 @@ export default function ProblemAnswer() {
                   <span className="pa-chev" />
                 </span>
                 <span className="pa-tag pa-tag--evo">
-                  <Icon name={icon} size={15} />
+                  <Icon name={icon} size={17} />
                   With EVO
                 </span>
                 <p className="pa-lead">{lead}</p>

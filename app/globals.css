@@ -28,6 +28,19 @@
   --sec-y: clamp(40px, 4.4vw, 64px);
   --sec-y-tight: clamp(28px, 2.8vw, 44px);
   --head-gap: clamp(16px, 1.8vw, 24px);
+  /* ONE size for every uppercase label on the site. Added 26 September after Sam spotted
+     that "With Evo" looked small: an audit of all 27 pages found six different label sizes
+     between 9.92px and 11.68px, because each component picked its own instead of taking the
+     eyebrow's. A label size is a token, not a per-component choice. */
+  --label: 0.73rem;
+  /* The one exception. Inside the comparison table the constraint is column width, not
+     taste - six supplier columns share about 100px each, and a full-size group label would
+     wrap and throw the header names out of line again. Nothing else may use this. */
+  --label-dense: 0.68rem;
+  /* Comfortable line length for prose. The audit found paragraphs running the full 1160px
+     container at 114 characters a line on ten pages - roughly twice what is readable, and
+     more than double this site's own .lead at 47. */
+  --measure: 72ch;
 
   --footer-bg: #231a15;
 
@@ -196,6 +209,32 @@ ol {
   padding: 0 var(--gutter);
 }
 
+/* PROSE MEASURE. Added 26 September after auditing all 27 pages: prose sitting as a DIRECT
+   child of a container ran the full 1160px at 114 characters a line, on ten pages - the
+   price caveat, the health and safety note, the CIH line, the Awaab's Law source, the
+   trades payment note. Roughly twice a comfortable measure, and more than double this
+   site's own .lead at 47.
+   Direct children only, deliberately. Paragraphs inside grids, cards and columns already
+   take their width from the thing that holds them; capping those as well would fight the
+   layout rather than help it. Anything centred sets margin-inline: auto below so the cap
+   narrows the text without dragging it left. */
+.container > p,
+.container > ul,
+.container > ol,
+.callout > p,
+.callout > ul,
+.ev2-emergency > p,
+.explorer-caveat,
+.footer-bottom p {
+  max-width: var(--measure);
+}
+.text-center > p,
+.text-center > ul,
+.text-center > ol,
+p.text-center {
+  margin-inline: auto;
+}
+
 .container--narrow {
   max-width: 820px;
 }
@@ -281,7 +320,7 @@ ol {
 
 .eyebrow {
   display: inline-block;
-  font-size: 0.73rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -829,6 +868,26 @@ ol {
   color: var(--white);
   padding: 30px 0 0;
 }
+/* A ROW OF HEADLINE FIGURES on the page background. Not to be confused with .figures
+   above, which is the homepage's full-bleed ORANGE band and brings its own background,
+   its own grid and its own on-orange colours with it.
+   /compliance and /who-we-help/housing were both using .figures for what they wanted to be
+   a plain stat row, and got three faults at once: an orange band neither page asked for,
+   three stats stacked full width because .figures is display:block with no grid of its
+   own, and each value wrapped in .num - which is the 38px NAVY CIRCLE used for numbered
+   process steps - so "1,000+" and "6-7 days" were rendering crammed into and bursting out
+   of a small dark disc.
+   Neither checker could have caught it: nothing errored, nothing overflowed the viewport
+   and nothing was clipped by an ancestor. It took looking at the page. */
+.statrow {
+  display: grid;
+  /* min() rather than a bare floor - see the phone rules. */
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: clamp(18px, 2.4vw, 32px);
+}
+.statrow > div {
+  min-width: 0;
+}
 .figures__list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -945,6 +1004,10 @@ ol {
   font-weight: 700;
   color: var(--muted);
   margin: 8px 0 10px;
+  /* --muted is a grey for WHITE backgrounds. It measured 1.86:1 where these labels were
+     sitting on the orange .figures band, which is what first pointed at the .statrow bug
+     below. Anything that puts .stat on a coloured band must re-declare this, the way
+     .section--navy .stat-label does. */
 }
 .stat--orange {
   color: var(--orange-ink);
@@ -1043,6 +1106,11 @@ ol {
 }
 .quote blockquote p {
   margin: 0;
+  /* A pull quote is set large so it can be read in one look. The LRM quote on
+     /who-we-help/landlords-and-agents was running 82 characters a line at 23px, which is
+     longer than the body copy beside it - the size said "read this first" and the measure
+     said otherwise. Quotes want 40 to 55. */
+  max-width: 52ch;
 }
 .quote blockquote::before {
   content: '\201C';
@@ -3516,7 +3584,7 @@ textarea {
 }
 .ev2-award-with {
   display: block;
-  font-size: 0.7rem;
+  font-size: var(--label);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -3595,7 +3663,7 @@ textarea {
 }
 .ev2-whynow-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -3773,7 +3841,7 @@ textarea {
   outline-offset: -1px;
 }
 .ev2-door-step {
-  font-size: 0.72rem;
+  font-size: var(--label);
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--orange-ink);
@@ -3904,7 +3972,7 @@ textarea {
   flex: 1;
 }
 .ev3-tier-tag {
-  font-size: 0.7rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -5080,7 +5148,7 @@ textarea {
 }
 .cmp-grp {
   display: block;
-  font-size: 0.62rem;
+  font-size: var(--label-dense);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -5125,7 +5193,7 @@ textarea {
 }
 .cmp tbody tr.cmp-band th {
   color: #fff;
-  font-size: 0.68rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -5148,7 +5216,7 @@ textarea {
 }
 .cmp-q {
   display: inline-block;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--orange-ink);
@@ -5250,7 +5318,7 @@ textarea {
 }
 .scope-tag {
   display: inline-block;
-  font-size: 0.68rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -5587,8 +5655,11 @@ textarea {
    greater share because it carries a lead-in and a supporting sentence against the
    problem's single line. */
 @media (min-width: 860px) {
+  /* 0.91 to 1, not 0.82 to 1.3. The wider answer column ran the body to 70 characters a
+     line. Nothing else on this site runs past about 50, and long grey lines are most of
+     what "basic" looks like. This split lands the body near 58. */
   .pa-row {
-    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.3fr);
+    grid-template-columns: minmax(0, 0.91fr) minmax(0, 1fr);
   }
   /* Screen-reader only. On a laptop the dark panel, the number and the theme word say
      "problem" between them; a fourth label saying it again is the repetition that made the
@@ -5610,8 +5681,10 @@ textarea {
   gap: 11px;
   margin-bottom: 12px;
 }
+/* Smaller than the problem, not larger. At 30px against the problem's 24px the decorative
+   numeral was the biggest thing in the panel, which is the wrong thing to shout. */
 .pa-num {
-  font-size: clamp(1.5rem, 2.1vw, 1.95rem);
+  font-size: clamp(1.35rem, 1.75vw, 1.55rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -5619,7 +5692,7 @@ textarea {
   color: var(--orange);
 }
 .pa-theme {
-  font-size: 0.68rem;
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -5635,12 +5708,19 @@ textarea {
 }
 .pa-row__problem p {
   margin: 0;
-  font-size: clamp(1.18rem, 1.65vw, 1.48rem);
-  line-height: 1.24;
+  /* Raised so the problem clears the answer's lead-in. At 23.7px against a 20.8px lead the
+     two were 1.14x apart and read as competing headlines rather than as statement and
+     answer. */
+  font-size: clamp(1.22rem, 1.9vw, 1.7rem);
+  line-height: 1.22;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #fff;
-  max-width: 19ch;
+  max-width: 23ch;
+  /* Without this, two of the four broke as "The same jobs keep coming / back." and
+     "Proving what happened takes / days." - a one-word second line under a big statement.
+     Browsers without it wrap as before, so there is nothing to fall back to. */
+  text-wrap: balance;
 }
 
 /* The answer. A white card floating on the dark row rather than a second tinted panel, so
@@ -5660,28 +5740,38 @@ textarea {
     margin: 12px 12px 12px 14px;
   }
 }
+/* The answer side was under-scaled against the dark half, which is what made it look like
+   body copy sitting next to a headline. Measured against the rest of the page: the section
+   lead is 20px, so a row's answer headline belongs at about that, not at 17.3px. */
 .pa-lead {
   margin: 0;
-  font-size: clamp(1.02rem, 1.2vw, 1.14rem);
-  line-height: 1.32;
+  font-size: clamp(1.08rem, 1.42vw, 1.3rem);
+  line-height: 1.3;
   font-weight: 700;
+  letter-spacing: -0.005em;
   color: var(--navy-deep);
+  max-width: 34ch;
+  text-wrap: balance;
 }
 .pa-body {
-  margin: 8px 0 0;
-  font-size: 0.945rem;
-  line-height: 1.6;
+  margin: 10px 0 0;
+  font-size: 1rem;
+  line-height: 1.62;
   color: var(--muted);
+  max-width: 58ch;
 }
 .pa-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.64rem;
+  gap: 7px;
+  /* 11.68px, the SAME as .eyebrow, .ev2-whynow-label and .ev2-door-step. At 0.64rem this
+     was 10.24px - the only small-caps label on the site set smaller than the rest, which is
+     exactly what Sam spotted. Labels are a site-wide token, not a per-component choice. */
+  font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .pa-tag--problem {
   display: block;
