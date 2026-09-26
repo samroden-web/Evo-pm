@@ -5541,122 +5541,137 @@ textarea {
 /* ==========================================================================
    Problem and solution (homepage)
    --------------------------------------------------------------------------
-   FOURTH layout, after three that failed for two distinct reasons:
+   FIFTH treatment. The first three failed on PAIRING or on CONTRAST; the fourth got the
+   structure right - Sam confirmed it on a phone - and failed on the laptop, where it read
+   as basic. Four measurements said why, and all four are addressed here.
 
-   PAIRING (a table, then two lanes with a spine). The pairing lived in the layout, so any
-   narrower screen had to break the row apart and lost it.
-   CONTRAST (one card, halves stacked). Both halves ended up the same shape and weight, so
-   it read as two related notes rather than a problem and its fix.
+     THE PROBLEM WAS SET LARGER THAN THE ANSWER. 1.22rem bold navy against 0.96rem, so the
+     biggest type in every row was the bad news. The answer's lead-in is now a block line in
+     its own right rather than a bolded first sentence, and the two halves are ranked by
+     treatment - dark panel against white card - instead of competing on point size.
 
-   This version keeps the pairing inside ONE element - so it cannot break - and puts the two
-   halves side by side on a laptop, where left-to-right does the work of saying "this, then
-   that" without any device needed to explain it. On a phone they stack under the theme, in
-   the same order.
+     THE TWO HALVES WERE THE SAME COLOUR. #fbf8f5 against #fff2e8: two near-white warm tints
+     four percent apart, asked to carry "problem" against "solution". Now navy against white.
+
+     THE LEFT PANEL WAS 43% OF THE ROW FOR SIX WORDS. 495px of panel holding 51px of text,
+     with 22px of dead space under it, while the answer was squeezed into 619px. The split is
+     now 0.82 to 1.3, and space left over in the dark panel reads as negative space rather
+     than as a gap someone forgot to fill.
+
+     THE THEME STRIP DIED HALFWAY ACROSS THE CARD. "01 EVIDENCE" and its rule stopped at the
+     gutter, which is most of what made the block look unfinished. The number and theme now
+     sit inside the dark panel, which is the thing they label.
 
    Two rules for anyone editing this:
-     - the two halves must stay visually distinct (grey against orange, tag against tag);
-     - the problem stays SHORT. The brief states them as headings, not sentences. If one
-       needs three lines, the copy is wrong rather than the type size.
+     - the problem half stays DARK and the answer stays a light card on it. That contrast is
+       the only thing telling the reader which is which on a laptop, which is why the
+       "The problem" label is screen-reader-only there and visible on a phone.
+     - the problem stays SHORT. The brief states the problems as headings, not sentences. If
+       one needs three lines the copy is wrong, not the type size.
    ========================================================================== */
 .pa-list {
   list-style: none;
   margin: var(--head-gap) 0 0;
   padding: 0;
   display: grid;
-  gap: clamp(12px, 1.6vw, 16px);
+  gap: clamp(14px, 1.8vw, 18px);
 }
 .pa-row {
   display: grid;
   grid-template-columns: 1fr;
-  background: var(--white);
-  border: 1px solid var(--line);
+  background: var(--navy-deep);
   border-radius: var(--radius);
-  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 40, 51, 0.12);
 }
-/* Laptop: theme across the top, then problem and answer side by side. The answer takes the
-   greater share because it carries the lead-in and the supporting sentence. */
+/* Laptop: the dark half on the left, the answer card alongside it. The answer takes the
+   greater share because it carries a lead-in and a supporting sentence against the
+   problem's single line. */
 @media (min-width: 860px) {
   .pa-row {
-    grid-template-columns: 1fr 44px 1.25fr;
-    /* The theme sits ABOVE THE PROBLEM rather than in a bar of its own. As a full-width
-       head it left a near-empty white strip on every row - four of them down the block. */
-    grid-template-areas:
-      'head turn answer'
-      'problem turn answer';
-    align-items: start;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.3fr);
   }
-  .pa-row__head {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-  .pa-row__problem {
-    padding-top: 10px;
-  }
-  .pa-row__turn,
-  .pa-row__answer {
-    height: 100%;
-  }
-  .pa-row__head {
-    grid-area: head;
-  }
-  .pa-row__problem {
-    grid-area: problem;
-  }
-  .pa-row__turn {
-    grid-area: turn;
-  }
-  .pa-row__answer {
-    grid-area: answer;
+  /* Screen-reader only. On a laptop the dark panel, the number and the theme word say
+     "problem" between them; a fourth label saying it again is the repetition that made the
+     block read as a template. On a phone it comes back - see the query at the foot. */
+  .pa-tag--problem {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
 .pa-row__head {
   display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 12px clamp(16px, 2vw, 22px);
-  border-bottom: 1px solid var(--line);
-  background: var(--grey-50);
+  align-items: baseline;
+  gap: 11px;
+  margin-bottom: 12px;
 }
 .pa-num {
-  font-size: 0.72rem;
+  font-size: clamp(1.5rem, 2.1vw, 1.95rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  /* 4.3:1 on the navy - comfortably past the 3:1 floor for text this size. */
   color: var(--orange);
 }
 .pa-theme {
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.62);
 }
-.pa-row__problem,
-.pa-row__answer {
-  padding: clamp(16px, 1.9vw, 22px) clamp(16px, 2vw, 22px);
-}
+/* Centred as a group against the answer card, which is the taller half on three rows out of
+   four. Left top-aligned it produced up to 80px of empty navy under a two-line problem. */
 .pa-row__problem {
-  background: var(--grey-50);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(20px, 2.2vw, 26px) clamp(18px, 2.2vw, 28px);
 }
 .pa-row__problem p {
   margin: 0;
-  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
-  line-height: 1.3;
+  font-size: clamp(1.18rem, 1.65vw, 1.48rem);
+  line-height: 1.24;
   font-weight: 600;
-  color: var(--navy-deep);
-  max-width: 24ch;
+  letter-spacing: -0.01em;
+  color: #fff;
+  max-width: 19ch;
 }
+
+/* The answer. A white card floating on the dark row rather than a second tinted panel, so
+   the change from problem to answer is a change of material and not of hue. The margin is
+   what makes it float: the navy shows all the way round it, including in the gap that used
+   to be a 44px gutter column. */
 .pa-row__answer {
-  background: var(--orange-soft);
+  position: relative;
+  background: var(--white);
+  border-radius: calc(var(--radius) - 4px);
+  margin: 10px;
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
 }
-.pa-row__answer p {
+@media (min-width: 860px) {
+  .pa-row__answer {
+    margin: 12px 12px 12px 14px;
+  }
+}
+.pa-lead {
   margin: 0;
-  font-size: 0.96rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-.pa-row__answer strong {
-  color: var(--navy-deep);
+  font-size: clamp(1.02rem, 1.2vw, 1.14rem);
+  line-height: 1.32;
   font-weight: 700;
+  color: var(--navy-deep);
+}
+.pa-body {
+  margin: 8px 0 0;
+  font-size: 0.945rem;
+  line-height: 1.6;
+  color: var(--muted);
 }
 .pa-tag {
   display: inline-flex;
@@ -5666,47 +5681,65 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  margin-bottom: 8px;
+}
+.pa-tag--problem {
+  display: block;
+  color: rgba(255, 255, 255, 0.62);
   margin-bottom: 7px;
 }
 .pa-tag--evo {
   color: var(--orange-ink);
 }
 
-/* The turn. A column between the two halves on a laptop, a strip between them on a phone,
-   with the chevron rotating so it always points the way the eye is about to travel. */
-.pa-row__turn {
-  position: relative;
-  background: var(--grey-50);
+/* The turn. Anchored inside the answer card rather than to a column of its own, so it sits
+   exactly on the seam at any width: on the card's left edge on a laptop, on its top edge on
+   a phone, pointing the way the eye is about to travel in each case. */
+.pa-turn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
 }
 .pa-chev {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
+  inset: 0;
   border-radius: 50%;
   background: var(--orange);
+  box-shadow: 0 0 0 4px var(--navy-deep);
 }
 .pa-chev::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 6px;
-  height: 6px;
-  margin: -4px 0 0 -5px;
+  width: 7px;
+  height: 7px;
   border-right: 2px solid var(--on-orange);
   border-bottom: 2px solid var(--on-orange);
-  transform: rotate(-45deg);
 }
-@media (max-width: 859px) {
-  .pa-row__turn {
-    height: 20px;
+@media (min-width: 860px) {
+  .pa-turn {
+    left: -15px;
+    top: 50%;
+    margin-top: -15px;
   }
   .pa-chev::after {
-    margin: -5px 0 0 -4px;
+    margin: -5px 0 0 -6px;
+    transform: rotate(-45deg);
+  }
+}
+@media (max-width: 859px) {
+  .pa-turn {
+    top: -15px;
+    left: 50%;
+    margin-left: -15px;
+  }
+  .pa-chev::after {
+    margin: -6px 0 0 -5px;
     transform: rotate(45deg);
+  }
+  .pa-row__answer {
+    margin-top: 22px;
   }
 }

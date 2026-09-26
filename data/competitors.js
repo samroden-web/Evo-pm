@@ -28,8 +28,8 @@ export const competitors = [
     group: 'Platform',
     domain: 'plentific.com',
     src: '/images/logos/competitors/plentific.png',
-    width: 128,
-    height: 128,
+    width: 32,
+    height: 32,
   },
   {
     key: 'askporter',
