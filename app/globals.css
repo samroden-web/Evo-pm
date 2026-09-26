@@ -1168,8 +1168,11 @@ ol {
     filter 0.2s,
     opacity 0.2s;
 }
+/* No colour-on-hover. It looked like a nice touch and was in fact an inconsistency: nine
+   of the eleven client logos are grey ARTWORK, so removing the greyscale filter revealed
+   colour on exactly two of them. Hover now lifts the opacity only, which every logo does
+   identically. */
 .logo-strip img:hover {
-  filter: none;
   opacity: 1;
 }
 .logo-strip--color img {
@@ -3624,142 +3627,6 @@ textarea {
        drawn-in-a-spreadsheet grid. The outer border is gone in favour of a soft shadow,
        and the row rules are lighter and inset;
      - the theme label sat hard against the row divider. It has room now. */
-.ev2-pa {
-  margin-top: var(--head-gap);
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 1px 2px rgba(43, 58, 71, 0.06),
-    0 10px 34px rgba(43, 58, 71, 0.09);
-}
-.ev2-pa-head,
-.ev2-pa-row {
-  display: grid;
-  grid-template-columns: 1fr 132px 1fr;
-  align-items: stretch;
-}
-/* Two headings, not three: one for each lane. */
-.ev2-pa-head > div:first-child {
-  grid-column: 1 / span 2;
-}
-.ev2-pa-head > div {
-  padding: 15px 24px;
-  font-size: 0.71rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.ev2-pa-head > div:first-child {
-  background: var(--grey-100);
-  color: var(--muted);
-}
-.ev2-pa-head > div:last-child {
-  background: var(--orange);
-  color: var(--on-orange);
-}
-.ev2-pa-row > div {
-  padding: 26px 24px;
-  display: flex;
-  align-items: center;
-}
-/* The problem lane. Recessive by design, and its tint runs under the spine so the row
-   reads as one thing crossing a line rather than as three cells. */
-.ev2-pa-bad,
-.ev2-pa-mid {
-  background: var(--grey-50);
-}
-.ev2-pa-bad {
-  color: var(--muted);
-  font-size: 0.97rem;
-  line-height: 1.55;
-}
-.ev2-pa-row + .ev2-pa-row .ev2-pa-bad,
-.ev2-pa-row + .ev2-pa-row .ev2-pa-good {
-  border-top: 1px solid var(--line);
-}
-.ev2-pa-row + .ev2-pa-row .ev2-pa-good {
-  border-top-color: rgba(255, 102, 0, 0.16);
-}
-/* The solution lane. Everything a notch heavier. */
-.ev2-pa-good {
-  background: var(--orange-soft);
-  color: var(--navy-deep);
-  font-weight: 600;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-/* The spine: one continuous rule with the theme sitting on it. */
-.ev2-pa-mid {
-  position: relative;
-  justify-content: center;
-  padding: 24px 0 36px;
-  flex-direction: column;
-}
-.ev2-pa-mid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  margin-left: -0.5px;
-  background: var(--line);
-}
-.ev2-pa-dot {
-  position: relative;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--navy-deep);
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 8px var(--grey-50);
-}
-.ev2-pa-dot svg {
-  width: 21px;
-  height: 21px;
-}
-.ev2-pa-dot i {
-  position: absolute;
-  top: calc(100% + 13px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-style: normal;
-  font-size: 0.63rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: var(--grey-50);
-  padding: 0 8px;
-  white-space: nowrap;
-}
-/* Direction: a small chevron crossing into the solution lane. */
-.ev2-pa-arrow {
-  position: absolute;
-  right: -7px;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  margin-top: -7px;
-  border-top: 2px solid var(--orange);
-  border-right: 2px solid var(--orange);
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-.ev2-pa-arrow::after {
-  content: none;
-}
-.ev2-pa-x,
-.ev2-pa-t {
-  display: none;
-}
-
 /* Caretaker. */
 /* The Caretaker card. The thin orange border is what makes this read as the
    differentiator rather than another paragraph on a grey section. */
@@ -3976,47 +3843,6 @@ textarea {
   .ev2-board {
     grid-template-columns: 120px 1fr;
     gap: 18px;
-  }
-  /* On a phone the two lanes stack, so the spine has nothing to run down. The
-     theme becomes a small label on its own row instead, which keeps the four
-     themes scannable without the centre column. */
-  .ev2-pa-head,
-  .ev2-pa-row {
-    grid-template-columns: 1fr;
-  }
-  .ev2-pa-head > div:nth-child(2) {
-    display: none;
-  }
-  .ev2-pa-mid {
-    flex-direction: row;
-    gap: 10px;
-    justify-content: flex-start;
-    padding: 12px 22px 0;
-    border-top: 1px solid var(--line);
-    background: var(--grey-50);
-  }
-  .ev2-pa-mid::before,
-  .ev2-pa-arrow {
-    display: none;
-  }
-  .ev2-pa-dot {
-    width: 34px;
-    height: 34px;
-    box-shadow: none;
-  }
-  .ev2-pa-dot svg {
-    width: 16px;
-    height: 16px;
-  }
-  .ev2-pa-dot i {
-    position: static;
-    transform: none;
-    background: none;
-    padding: 0;
-  }
-  .ev2-pa-bad {
-    border-top: 0;
-    padding-top: 10px;
   }
 }
 
@@ -5698,4 +5524,101 @@ textarea {
   textarea {
     font-size: 16px;
   }
+}
+
+/* ==========================================================================
+   Problem and solution (homepage)
+   --------------------------------------------------------------------------
+   THIRD attempt at this block, and the first two failed for the same reason, so the reason
+   is worth writing down: the pairing was spread ACROSS a layout row rather than held
+   INSIDE one element.
+
+   As a table, then as two lanes with a spine, a problem and its answer were two cells that
+   happened to sit level with each other. That works at 1440px and falls apart everywhere
+   else. On a phone the lanes stacked, the spine had nothing to run down, the theme label
+   printed across its own icon, and the orange "EVO solution" heading was explicitly hidden
+   - so a phone reader saw alternating grey and orange blocks with nothing to say which was
+   which, for 2,500px.
+
+   Now each pair is ONE card carrying both halves. The pairing cannot break, because there
+   is no arrangement in which the two halves are separated. Two columns on a laptop, one on
+   a phone, identical meaning at both.
+
+   The before-and-after is carried by the ground changing from grey to orange down the card,
+   which needs no spine, no arrow and no connecting line - the three things that kept
+   breaking.
+   ========================================================================== */
+.pa-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 1.8vw, 20px);
+  margin-top: var(--head-gap);
+}
+@media (min-width: 760px) {
+  .pa-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pa-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pa-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px clamp(16px, 2vw, 22px);
+  border-bottom: 1px solid var(--line);
+  color: var(--orange-ink);
+}
+.pa-card__head h3 {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+}
+.pa-card__now,
+.pa-card__evo {
+  padding: clamp(14px, 1.8vw, 20px) clamp(16px, 2vw, 22px);
+}
+.pa-card__now {
+  background: var(--grey-50);
+}
+/* The EVO half takes the slack, so in a row of cards the orange block is always the taller
+   one. The good news gets the room. */
+.pa-card__evo {
+  background: var(--orange-soft);
+  border-top: 1px solid rgba(255, 102, 0, 0.25);
+  flex: 1;
+}
+.pa-tag {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: var(--muted);
+}
+.pa-tag--evo {
+  color: var(--orange-ink);
+}
+.pa-card__now p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.pa-card__evo p {
+  margin: 0;
+  color: var(--navy-deep);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.5;
 }
