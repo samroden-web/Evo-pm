@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "check": "node tools/check-site.mjs ${CHECK_URL:-http://localhost:3999}"
+    "check": "node tools/check-site.mjs ${CHECK_URL:-http://localhost:3999}",
+    "check:mobile": "node tools/check-mobile.mjs ${CHECK_URL:-http://localhost:3999}",
+    "check:all": "npm run check && npm run check:mobile"
   },
   "dependencies": {
     "next": "^15.5.0",

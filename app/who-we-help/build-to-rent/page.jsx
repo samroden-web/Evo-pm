@@ -29,9 +29,9 @@ export default function BuildToRentPage() {
         lead="The repair is the part of the building your residents actually interact with. It gets talked about in the lift, written into a review, and remembered when the renewal lands."
         crumbs={[{ label: 'Who we help' }, { label: 'Build to Rent & institutional PRS' }]}
         image="/images/photos/evo-operative-radiator-repair.webp"
-        imageAlt="An EVO operative repairing a radiator in a modern flat"
-        imageWidth={1074}
-        imageHeight={807}
+        imageAlt="An EVO operative in branded kit repairing a radiator in a modern flat"
+        imageWidth={1500}
+        imageHeight={750}
         priority
         captionLabel="In the flat"
         caption="Newer stock, fewer exceptions, one fixed price"

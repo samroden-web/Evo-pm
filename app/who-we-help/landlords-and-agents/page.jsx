@@ -224,7 +224,7 @@ export default function LandlordsAndAgentsPage() {
             <Quote t={testimonials.craigJackson} large />
           </div>
           <div className="mt-3">
-            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" color />
+            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" />
           </div>
 
           <h3 className="ev3-team-head mt-4">What landlords and agents say</h3>

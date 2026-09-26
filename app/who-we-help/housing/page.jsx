@@ -210,7 +210,7 @@ export default function HousingPage() {
             </div>
           </div>
           <div className="mt-3">
-            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" color />
+            <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" />
           </div>
           <div className="mt-3 max-640">
             <Quote t={testimonials.richardSmith} large />

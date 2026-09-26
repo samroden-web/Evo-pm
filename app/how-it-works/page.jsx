@@ -197,10 +197,10 @@ export default function HowItWorksPage() {
           <div className="ev3-split mt-3">
             <Photo
               src="/images/photos/evo-operative-radiator-repair.webp"
-              alt="An EVO operative fitting a valve to a radiator in a resident's home"
+              alt="An EVO operative in branded kit fitting a valve to a radiator in a resident's home"
               caption="Mostly small regional firms, working in their own area."
-              width={1074}
-              height={807}
+              width={1500}
+              height={750}
               sizes="(min-width: 880px) 46vw, 100vw"
             />
             <Photo
