@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
-import Tbc from '@/components/Tbc';
 import { IconBadge } from '@/components/Icon';
 import { cta } from '@/data/site';
 
@@ -151,7 +150,45 @@ export default function CompliancePage() {
               </div>
             ))}
           </div>
-          <Tbc block>Which Tenant Satisfaction Measures EVO reports against, stated precisely.</Tbc>
+          {/* The placeholder asked which Tenant Satisfaction Measures EVO reports against,
+              "stated precisely". The measures themselves are a published RSH framework, so
+              the codes and wording below are the Regulator's, checked against its own
+              guidance - not something EVO has to supply. What EVO supplies is the monthly
+              pack behind them.
+              Worth knowing: there is NO TSM for damp and mould. It reaches the framework
+              through TP04, TP05 and the complaints measures, which is why the row below says
+              so rather than inventing a code. */}
+          <div className="tsm mt-3">
+            <p className="eyebrow">The measures a repairs service moves</p>
+            <ul className="tsm-list">
+              <li>
+                <span className="tsm-code">TP02</span>
+                <span className="tsm-name">Satisfaction with the overall repairs service in the last 12 months</span>
+              </li>
+              <li>
+                <span className="tsm-code">TP03</span>
+                <span className="tsm-name">Satisfaction with the time taken to complete the most recent repair</span>
+              </li>
+              <li>
+                <span className="tsm-code">TP04</span>
+                <span className="tsm-name">Satisfaction that the landlord provides a home that is well maintained</span>
+              </li>
+              <li>
+                <span className="tsm-code">TP05</span>
+                <span className="tsm-name">Satisfaction that the landlord provides a home that is safe</span>
+              </li>
+              <li>
+                <span className="tsm-code">RP02</span>
+                <span className="tsm-name">Repairs completed within the target timescale you have set</span>
+              </li>
+            </ul>
+            <p className="tsm-note mb-0">
+              TP02 to TP05 are tenant perception measures and RP02 is management information. There is no TSM for damp
+              and mould specifically &mdash; it reaches the framework through TP04, TP05 and the complaints measures.
+              Your monthly pack carries the underlying data for each of these, by property and by month, so the annual
+              return is assembled from a record rather than reconstructed.
+            </p>
+          </div>
         </div>
       </section>
 

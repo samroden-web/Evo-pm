@@ -33,6 +33,17 @@ ok=0; fail=0
 # it. Download to a temporary file; move it into place only on success; leave whatever is
 # already committed completely alone if the fetch fails.
 get() { # get <url> <destination>
+  # AN EXISTING COMMITTED FILE WINS. These are static brand assets that do not change, and
+  # three of the accreditation badges have been hand-corrected in the repo: ISO 27001,
+  # Constructionline Gold and PRS all shipped with an OPAQUE WHITE background baked in, so
+  # they rendered as white rectangles against the warm page - Sam saw one as "blank" and one
+  # as "half complete". The fix was to flood-fill the background to transparent from the
+  # edges. Re-downloading would silently undo that every single deploy.
+  # Set REFETCH=1 to pull everything again from the old site.
+  if [ -z "${REFETCH:-}" ] && [ -s "$2" ]; then
+    ok=$((ok+1)); echo "  keep $2  (already in the repo)"
+    return 0
+  fi
   local tmp
   tmp="$(mktemp)"
   if curl -fsSL --max-time 30 "$1" -o "$tmp" && [ -s "$tmp" ]; then

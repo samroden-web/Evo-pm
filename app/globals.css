@@ -6202,3 +6202,75 @@ textarea {
 .addon-grid > * {
   min-width: 0;
 }
+
+/* Tenant Satisfaction Measures, on the Compliance page. A code-and-name list rather than a
+   paragraph, because the person reading it is checking for specific measures and wants to
+   find TP03 without reading a sentence. */
+.tsm {
+  background: var(--grey-50);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: clamp(18px, 2.2vw, 26px);
+}
+.tsm-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 10px clamp(20px, 3vw, 36px);
+}
+.tsm-list li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  min-width: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.tsm-code {
+  flex: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--orange-ink);
+  background: var(--orange-soft);
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+.tsm-name {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--navy-deep);
+}
+.tsm-note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 78ch;
+}
+
+/* The damp and mould charge line. It is the only price on the page, so it is set apart
+   rather than buried in the paragraph above it. */
+.dm-charge {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: var(--orange-soft);
+  border-radius: var(--radius-sm, 10px);
+  font-size: 0.98rem;
+}
+.dm-charge strong {
+  color: var(--navy-deep);
+  font-size: 1.1rem;
+}
+
+/* Case study photography. The B&D team shot was rendering 664px tall at full container
+   width - the largest single element on an 8,000px page, and it read as a gap rather than a
+   photograph when scrolling. Capped and cropped to a band. */
+.cs-photo .photo img {
+  max-height: 420px;
+  object-fit: cover;
+  width: 100%;
+}

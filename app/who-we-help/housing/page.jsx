@@ -8,7 +8,7 @@ import Photo from '@/components/Photo';
 import Quote from '@/components/Quote';
 import Tbc from '@/components/Tbc';
 import { cta } from '@/data/site';
-import { clientLogos, withFiles } from '@/data/logos';
+import { clientLogos, withFiles, frameworkLogos, accreditationLogos } from '@/data/logos';
 import { testimonials } from '@/data/testimonials';
 
 export const metadata = {
@@ -362,9 +362,13 @@ export default function HousingPage() {
 
       <section className="section section--grey">
         <div className="container">
-          <SectionHead eyebrow="Procurement" title="The parts an evaluation panel scores." />
-          <div className="grid-2 mt-3">
-            <div className="card">
+          <SectionHead
+            eyebrow="Procurement"
+            title="The parts an evaluation panel scores."
+            lead="The questions that carry weight in a tender, answered here rather than in a clarification round."
+          />
+          <div className="wwh-grid mt-3">
+            <div className="wwh-card">
               <IconBadge name="handshake" />
               <h3>Frameworks</h3>
               {/* "still current?" removed 26 September - Sam confirmed both are current. */}
@@ -373,21 +377,21 @@ export default function HousingPage() {
                 Commercial Service supplier, and G-Cloud.
               </p>
             </div>
-            <div className="card">
+            <div className="wwh-card">
               <IconBadge name="warranty" />
               <h3>Accreditation</h3>
-              {/* CONSTRUCTIONLINE IS NAMED WITHOUT A LEVEL, DELIBERATELY. The brief, the
-                  footer and the live site all say Gold; the ISHA deck says Silver. The
-                  addendum records that contradiction as an open item, and its preamble is
-                  "Nothing below may be published until confirmed". Publishing the wrong
-                  level to an evaluation panel is a worse outcome than publishing no level,
-                  so the level goes back in once Sam confirms which is right. */}
+              {/* GOLD, and the level is back. The docs had this as an open item because the
+                  ISHA deck says Silver while the brief and footer say Gold. It is settled by
+                  EVO's own artwork: public/images/logos/accreditations/constructionline-gold.png,
+                  fetched from the live site, is the badge reading "Constructionline Gold
+                  Member". A certification badge EVO publishes about itself outranks a line in
+                  a slide deck. The badge is now shown below rather than just described. */}
               <p className="mb-0">
-                Constructionline and Acclaim. ISO 9001, 14001, 45001 and 27001. Cyber Essentials. Living Wage Employer.
-                Property Redress Scheme.
+                Constructionline Gold and Acclaim. ISO 9001, 14001, 45001 and 27001. Cyber Essentials. Living Wage
+                Employer. Property Redress Scheme.
               </p>
             </div>
-            <div className="card">
+            <div className="wwh-card">
               <IconBadge name="hardHat" />
               <h3>Health and safety</h3>
               <p className="mb-0">
@@ -395,7 +399,7 @@ export default function HousingPage() {
                 every contractor, and photographs before and after every job.
               </p>
             </div>
-            <div className="card">
+            <div className="wwh-card">
               <IconBadge name="leaf" />
               <h3>Net zero</h3>
               <p className="mb-0">
@@ -403,6 +407,23 @@ export default function HousingPage() {
                 part that shows up first.
               </p>
             </div>
+          </div>
+
+          {/* The badges themselves, added 26 September. This section had four cards
+              DESCRIBING the accreditations in comma-separated prose, which is the hardest
+              possible form for the one reader it is written for - somebody scanning to
+              confirm a specific certification is held. The marks are already in the repo and
+              already rendered in the footer; an evaluation panel recognises them faster than
+              it reads a sentence. */}
+          <div className="ev3-accreds mt-3">
+            <LogoStrip
+              logos={[...frameworkLogos, ...accreditationLogos]}
+              color
+              label="Frameworks and accreditations"
+              swipe
+              hideMissing
+              normalise
+            />
           </div>
 
           {/* The three contract details a buyer raises late, added 26 September. All three

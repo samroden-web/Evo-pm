@@ -115,7 +115,20 @@ export const mainNav = [
   // Flat, per the map. Damp and mould keeps its own URL and its own search ground, and
   // is reached from inside the Compliance page rather than from a dropdown.
   { label: 'Compliance', href: '/compliance' },
-  { label: 'Case studies', href: '/case-studies' },
+  // Sam asked for IDS and B&D under Case studies the way Who we help has its three.
+  // These are ANCHORS, not separate pages: both case studies live on one URL today. The
+  // brief specifies /case-studies/ids and /case-studies/bd-reside as their own pages, which
+  // is the better answer for search - one title tag and one H1 per intent - but that is a
+  // page split rather than a nav change, so it is flagged rather than done here.
+  {
+    label: 'Case studies',
+    href: '/case-studies',
+    children: [
+      { label: 'All case studies', href: '/case-studies' },
+      { label: 'Industrial Dwellings Society', href: '/case-studies#ids' },
+      { label: 'B&D Reside', href: '/case-studies#bd-reside' },
+    ],
+  },
   {
     label: 'About',
     href: '/about',

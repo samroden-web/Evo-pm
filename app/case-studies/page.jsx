@@ -67,6 +67,34 @@ export default function CaseStudiesPage() {
             </p>
           </div>
 
+          {/* AT A GLANCE, moved up 26 September. Sam: the layout makes the key points hard to
+              get to while scrolling. He was right, and the two case studies were doing
+              opposite things - B&D put its figures immediately under the intro, while IDS
+              buried the same information roughly 1,800px down, after the problem list, the
+              photograph, the timeline and the Regulator quote. A reader scrolling for the
+              headline result had to travel the length of the story to find it.
+              The figures now sit here on both, in the same shape, so the two can be compared
+              at a glance and the narrative below them is optional reading rather than the
+              only route to the numbers. */}
+          <div className="statrow statrow--orange mt-3">
+            <div>
+              <span className="stat">Halved</span>
+              <span className="stat-label">Repair resolution times</span>
+            </div>
+            <div>
+              <span className="stat">95%</span>
+              <span className="stat-label">First-time fix rate</span>
+            </div>
+            <div>
+              <span className="stat">90%+</span>
+              <span className="stat-label">Resident satisfaction, regularly</span>
+            </div>
+            <div>
+              <span className="stat">1,414</span>
+              <span className="stat-label">Homes, pilot to five-year contract</span>
+            </div>
+          </div>
+
           <div className="ev3-split ev3-split--narrow mt-3">
             <Photo
               src="/images/photos/ids-resident-engagement-day.webp"
@@ -139,21 +167,10 @@ export default function CaseStudiesPage() {
             <p className="eyebrow">IDS, eighteen months later</p>
             <h2 id="ids-results">What changed.</h2>
           </div>
-          <div className="grid-3 grid-2-mobile">
-            <div className="tile">
-              <span className="stat">Halved</span>
-              <span className="stat-label">Repair resolution times</span>
-            </div>
-            <div className="tile">
-              <span className="stat">95%</span>
-              <span className="stat-label">First-time fix rate</span>
-            </div>
-            <div className="tile">
-              <span className="stat">90%+</span>
-              <span className="stat-label">Resident satisfaction, regularly</span>
-            </div>
-          </div>
-          <p className="lead mt-3 mb-0">
+          {/* The figures that were here now open the IDS section - see the note there. What
+              stays is the sentence they were illustrating, which is the part that does not
+              fit in a tile. */}
+          <p className="lead mb-0">
             Full compliance visibility, better data, more trust from residents, and a shift from reacting to planning.
           </p>
         </div>
@@ -230,25 +247,27 @@ export default function CaseStudiesPage() {
           <h2 id="bd-results" className="visually-hidden">
             B&amp;D Reside results
           </h2>
-          <div className="grid-4 grid-2-mobile">
-            <div className="tile">
+          {/* Same treatment as the IDS figures, so the two case studies can be read against
+              each other instead of in two different shapes. */}
+          <div className="statrow statrow--orange">
+            <div>
               <span className="stat">96%</span>
               <span className="stat-label">First-time fix in the pilot</span>
             </div>
-            <div className="tile">
+            <div>
               <span className="stat">Under 6 days</span>
               <span className="stat-label">Average damp and mould resolution</span>
             </div>
-            <div className="tile">
+            <div>
               <span className="stat">80%</span>
               <span className="stat-label">App adoption in nine months</span>
             </div>
-            <div className="tile">
+            <div>
               <span className="stat">380 to 4,500+</span>
               <span className="stat-label">Pilot homes to contracted homes</span>
             </div>
           </div>
-          <div className="mt-3">
+          <div className="mt-3 cs-photo">
             <Photo
               src="/images/photos/evo-bd-reside-team.webp"
               alt="The EVO and B&D Reside teams together outdoors, many wearing pink B&D Reside t-shirts"

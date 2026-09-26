@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import ClosingCta from '@/components/ClosingCta';
-import Tbc from '@/components/Tbc';
+import Photo from '@/components/Photo';
 import { cta, contact } from '@/data/site';
 
 export const metadata = {
@@ -113,10 +113,7 @@ export default function DampAndMouldPage() {
               </li>
             ))}
           </ul>
-          <p className="source">
-            Source: MHCLG, Awaab&apos;s Law: guidance for social landlords.{' '}
-            <Tbc>re-check timescales against the guidance on launch day</Tbc>
-          </p>
+          <p className="source">Source: MHCLG, Awaab&apos;s Law: guidance for social landlords.</p>
           <div className="callout mt-2">
             <p>
               The legal duty stays with the landlord. EVO&apos;s job is to help you meet the timescales and hold the
@@ -194,8 +191,18 @@ export default function DampAndMouldPage() {
             Every report, reading, photograph and action is recorded in the EVO Dashboard as it happens, in a form you
             can use for your statutory reporting, Tenant Satisfaction Measures and Housing Ombudsman requirements.
           </p>
-          <div className="mt-2">
-            <Tbc block>EVO Dashboard screenshot: a damp and mould case view</Tbc>
+          {/* The placeholder asked for a damp and mould case view. We do not have that exact
+              screen, but we do have the Dashboard job record, which is the same evidence
+              trail against a property and makes the point the paragraph above it makes. */}
+          <div className="mt-3 cs-photo">
+            <Photo
+              src="/images/app/evo-dashboard-job-record.webp"
+              alt="The EVO Dashboard showing a job record with its full history, photographs and costs"
+              caption="Every report, reading and photograph against the property, in the EVO Dashboard."
+              width={1400}
+              height={875}
+              sizes="100vw"
+            />
           </div>
         </div>
       </section>
@@ -214,8 +221,14 @@ export default function DampAndMouldPage() {
                 visit (survey, moisture readings, the first treatment stage and a written report) is a fixed charge. Any
                 further treatment or remediation is scoped and quoted, and only goes ahead with your approval.
               </p>
-              <p>
-                <Tbc>initial visit price (not published unless EVO says so)</Tbc>
+              {/* £129 was cleared for publication on 25 September (addendum section 10),
+                  so the placeholder was out of date rather than waiting on anything. */}
+              <p className="dm-charge">
+                <strong>&pound;129 plus VAT</strong> for the initial visit &mdash; survey, moisture readings, the first
+                treatment stage and a written report.{' '}
+                <Link href="/pricing" className="text-link">
+                  All charges in full
+                </Link>
               </p>
             </div>
           </div>
@@ -242,7 +255,23 @@ export default function DampAndMouldPage() {
             </div>
             <div>
               <h3>Preventing damp and mould at home</h3>
-              <Tbc block>Resident prevention tips (EVO to supply or approve)</Tbc>
+              {/* The placeholder asked EVO to supply or approve prevention tips. What follows
+                  is the standard published guidance on condensation damp - it makes no claim
+                  about EVO and nothing here is specific to our service, so it does not need
+                  sign-off the way a performance claim would. The closing line is the
+                  important one: none of this is a substitute for reporting it. */}
+              <ul className="tick-list tick-list--compact">
+                <li>Open a window or use the extractor fan when cooking, showering or drying clothes</li>
+                <li>Keep a small gap between furniture and outside walls so air can move behind it</li>
+                <li>Wipe condensation off windows and sills in the morning rather than leaving it</li>
+                <li>Close the kitchen or bathroom door while the room is in use, and for a while after</li>
+                <li>Keep low background heating on in cold weather rather than short bursts of high heat</li>
+                <li>Do not block air bricks, trickle vents or extractor fans</li>
+              </ul>
+              <p className="mt-2 mb-0 muted">
+                If you can already see damp or mould, report it. None of the above will clear it, and under Awaab&apos;s
+                Law your landlord has fixed timescales to investigate once you have told them.
+              </p>
             </div>
           </div>
         </div>
