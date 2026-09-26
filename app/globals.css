@@ -3322,6 +3322,24 @@ textarea {
   gap: 24px;
   margin-top: 28px;
 }
+/* QUANTITY QUERY, added 26 September. The /trades band is headed "Six things that are
+   different" and laid out 4 + 2, leaving half a row of solid orange empty - the same fault
+   Sam flagged on the "In every plan" strip, and just as visible because the band is a solid
+   colour rather than white.
+   A fixed column count cannot fix it: this grid carries three items on Build to Rent, four
+   on Housing and six on Trades. So the count sets the columns. Browsers without :has()
+   fall back to the auto-fit line above, which is what they render today. */
+@media (min-width: 900px) {
+  .ev2-band-grid:has(> :nth-child(6):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ev2-band-grid:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .ev2-band-grid:has(> :nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 .ev2-band-item {
   border-top: 2px solid rgba(255, 255, 255, 0.55);
   padding-top: 14px;

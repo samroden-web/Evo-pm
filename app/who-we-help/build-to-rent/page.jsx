@@ -57,11 +57,8 @@ export default function BuildToRentPage() {
             </div>
             {/* Restored 26 September on Sam's instruction. */}
             <div className="ev2-band-item">
-              <span className="ev2-figure">&lt;10 days</span>
-              <p>
-                Average repair resolution across the EVO portfolio, so a renewal conversation is never about an open
-                job.
-              </p>
+              <span className="ev2-figure">4.8/5</span>
+              <p>Average resident rating of a completed repair.</p>
             </div>
             <div className="ev2-band-item">
               <span className="ev2-figure">90%+</span>
