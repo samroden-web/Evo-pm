@@ -217,21 +217,26 @@ ol {
    Direct children only, deliberately. Paragraphs inside grids, cards and columns already
    take their width from the thing that holds them; capping those as well would fight the
    layout rather than help it. Anything centred sets margin-inline: auto below so the cap
-   narrows the text without dragging it left. */
-.container > p,
-.container > ul,
-.container > ol,
+   narrows the text without dragging it left.
+
+   NEVER PUT ul OR ol IN THIS RULE. The first version of it did, and it broke the site:
+   on this site a list is usually a LAYOUT, not prose. .pa-list, .figures__list,
+   .ev3-voices, .phone-steps, .vtimeline, .timescales, .steps-row and .guide-steps are all
+   ul or ol sitting directly in a container, and every one of them was squeezed from 1160px
+   to 736px - including the problem and solution block on the homepage. A p can be a layout
+   too, which is why the two flex paragraphs are named out below. */
+.container > p:not(.ev3-from):not(.ev3-from-split),
 .callout > p,
-.callout > ul,
 .ev2-emergency > p,
 .explorer-caveat,
 .footer-bottom p {
   max-width: var(--measure);
 }
+/* Capping a centred paragraph without this leaves it hugging the left of its container. */
 .text-center > p,
-.text-center > ul,
-.text-center > ol,
-p.text-center {
+p.text-center,
+.center > p,
+p.center {
   margin-inline: auto;
 }
 

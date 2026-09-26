@@ -8,7 +8,8 @@
     "start": "next start",
     "check": "node tools/check-site.mjs ${CHECK_URL:-http://localhost:3999}",
     "check:mobile": "node tools/check-mobile.mjs ${CHECK_URL:-http://localhost:3999}",
-    "check:all": "npm run check && npm run check:mobile"
+    "check:all": "npm run check && npm run check:layout && npm run check:mobile",
+    "check:layout": "node tools/check-layout.mjs ${CHECK_URL:-http://localhost:3999}"
   },
   "dependencies": {
     "next": "^15.5.0",
