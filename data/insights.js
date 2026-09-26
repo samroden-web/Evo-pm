@@ -332,7 +332,7 @@ export const insights = [
     date: '2026-05-01',
     excerpt: 'Tenant referencing involves verifying certain information about a resident before you agree to rent a property to them.',
     tags: ['Social housing'],
-    image: '/images/insights/tenant-checks-for-landlords-how-social-housing-providers-can-screen-residents.png',
+    image: null,
     body: [
       '## What are Tenant Checks?',
       'Tenant referencing involves verifying certain information about a resident before you agree to rent a property to them.',
@@ -1053,7 +1053,7 @@ export const insights = [
     date: '2025-10-03',
     excerpt: 'In December 2020, two-year-old Awaab Ishak died from a respiratory illness caused by damp and mould in his family\'s social housing flat.',
     tags: ['Social housing'],
-    image: '/images/insights/awaab-s-law-how-social-housing-providers-can-comply.jpg',
+    image: null,
     body: [
       '## Why Was Awaab\'s Law Introduced?',
       'In December 2020, two-year-old Awaab Ishak died from a respiratory illness caused by damp and mould in his family\'s social housing flat. The family had contacted their landlord on several occasions to report conditions in the flat. However, the landlord failed to act. An inquest concluded in November 2022 that the landlord was responsible for Awaab\'s death.',
@@ -1265,7 +1265,7 @@ export const insights = [
     date: '2025-10-03',
     excerpt: 'Building Regulations ensure the safety of your properties. Among the many things they govern is the installation of new gas appliances.',
     tags: ['Private landlords'],
-    image: '/images/insights/gas-safe-building-compliance-regulations-certificate-what-landlords-need-to-know-in-2025.jpg',
+    image: null,
     body: [
       'Building Regulations ensure the safety of your properties. Among the many things they govern is the installation of new gas appliances.',
       '- A Gas Safe Building Regulations Compliance Certificate confirms new gas installations meet building standards.',
@@ -1391,7 +1391,7 @@ export const insights = [
     date: '2025-10-03',
     excerpt: 'The Tenant Satisfaction Measures (TSMs) are a set of consumer standards set by the Regulator of Social Housing (RSH).',
     tags: ['Social housing'],
-    image: '/images/insights/tenant-satisfaction-measures-a-guide-for-housing-providers.jpg',
+    image: null,
     body: [
       '## Highlights',
       '- The Tenant Satisfaction Measures (TSMs) are a set of consumer standards set by the Regulator of Social Housing (RSH).',
@@ -1524,7 +1524,7 @@ export const insights = [
     date: '2025-08-22',
     excerpt: 'Disabled or impaired residents are more at risk of being injured in the home.',
     tags: ['Social housing'],
-    image: '/images/insights/accessible-housing-adapting-disabled-residents-properties.jpg',
+    image: null,
     body: [
       '## Highlights',
       '- Disabled or impaired residents are more at risk of being injured in the home.',
@@ -1673,7 +1673,7 @@ export const insights = [
     date: '2025-08-22',
     excerpt: 'The number of warnings before an eviction is not legally defined. Sometimes landlords don\'t need to give any warning. This guide explains the UK eviction process step-by-step.',
     tags: ['Social housing'],
-    image: '/images/insights/how-many-warnings-before-eviction-uk-a-guide-to-the-eviction-process-for-landlords-and-housing-associations.png',
+    image: null,
     body: [
       'The number of warnings before an eviction is not legally defined. Sometimes landlords don\'t need to give any warning. This guide explains the UK eviction process step-by-step.',
       '| Highlights |',
@@ -1831,7 +1831,7 @@ export const insights = [
     date: '2025-08-22',
     excerpt: 'Improving the energy efficiency of the UK\'s social housing stock is a hot topic at the moment.',
     tags: ['Social housing'],
-    image: '/images/insights/warm-homes-social-housing-fund-replaces-the-social-housing-decarbonisation-fund.png',
+    image: null,
     body: [
       'Improving the energy efficiency of the UK\'s social housing stock is a hot topic at the moment.',
       'Not only will it help the government hit its carbon-neutral targets, but it will also help lessen the impact of rising fuel costs on some of the country\'s most vulnerable people.',
@@ -2005,7 +2005,7 @@ export const insights = [
     date: '2025-08-05',
     excerpt: 'An AST is a contractual agreement between a landlord and their tenant. It sets out the terms and obligations both parties agree to during the tenancy.',
     tags: ['Private landlords'],
-    image: '/images/insights/what-is-an-assured-shorthold-tenancy.jpg',
+    image: null,
     body: [
       'An AST is a contractual agreement between a landlord and their tenant. It sets out the terms and obligations both parties agree to during the tenancy.',
       'This protects both the tenant\'s and the landlord\'s rights, and clearly sets out who is legally responsible for what at the property.',
@@ -2135,7 +2135,7 @@ export const insights = [
     date: '2025-08-05',
     excerpt: 'In the residential housing sector, planned preventative maintenance (PPM) is when a landlord takes a proactive approach to property inspection and repair.',
     tags: ['Social housing'],
-    image: '/images/insights/what-is-planned-preventative-maintenance.jpg',
+    image: null,
     body: [
       'In the residential housing sector, planned preventative maintenance (PPM) is when a landlord takes a proactive approach to property inspection and repair.',
       'It involves scheduling regular inspections and planning preventive maintenance jobs throughout a tenancy.',
@@ -2256,7 +2256,7 @@ export const insights = [
     date: '2025-07-31',
     excerpt: 'The UK is getting hotter. Met Office figures show that the number of days with temperatures 10 degrees above average quadrupled in the last 10 years, while the UK has become 8% sunnier in the same period.',
     tags: ['Social housing'],
-    image: '/images/insights/how-to-protect-your-property-during-heatwaves.jpg',
+    image: null,
     body: [
       'The UK is getting hotter. Met Office figures show that the number of days with temperatures 10 degrees above average quadrupled in the last 10 years, while the UK has become 8% sunnier in the same period.',
       'The last three springs have been among the top five hottest on record. 2024 set a new record, but was immediately surpassed by 2025 with temperatures reaching 35°C.',
@@ -2379,7 +2379,7 @@ export const insights = [
     date: '2025-07-14',
     excerpt: 'The UK\'s social housing sector is currently in crisis. To understand why, you first need to understand the country\'s wider housing issues.',
     tags: ['Social housing'],
-    image: '/images/insights/social-housing-investment-why-money-isn-t-everything.jpg',
+    image: null,
     body: [
       '## What\'s the Current State of Social Housing?',
       'The UK\'s social housing sector is currently in crisis. To understand why, you first need to understand the country\'s wider housing issues.',
@@ -2497,7 +2497,7 @@ export const insights = [
     date: '2025-07-01',
     excerpt: 'What is the Pre-Action Housing Disrepair Protocol? This article explains everything landlords need to know.',
     tags: ['Social housing'],
-    image: '/images/insights/what-is-the-pre-action-housing-disrepair-protocol.jpg',
+    image: null,
     body: [
       'What is the Pre-Action Housing Disrepair Protocol? This article explains everything landlords need to know.',
       '- The Pre-Action Housing Disrepair Protocol is a type of court action used by tenants whose landlords have failed to address poor housing.',
@@ -2666,7 +2666,7 @@ export const insights = [
     date: '2025-06-12',
     excerpt: 'This article provides Electrical Installation Condition Report guidance, covering what EICR\'s are and what landlords need to do to ensure electrical compliance.',
     tags: ['Private landlords'],
-    image: '/images/insights/electrical-installation-condition-report-eicr-guidance-what-landlords-need-to-know-in-2025.jpg',
+    image: null,
     body: [
       'This article provides Electrical Installation Condition Report guidance, covering what EICR\'s are and what landlords need to do to ensure electrical compliance.',
       '- All private rented properties in England must have a valid EICR every five years.',
@@ -2789,7 +2789,7 @@ export const insights = [
     date: '2025-06-05',
     excerpt: 'The UK government has confirmed that under the Renters\' Rights Bill it will outlaw Section 21 of the Housing Act and strengthen Section 8.',
     tags: ['Private landlords'],
-    image: '/images/insights/section-8-grounds-everything-you-need-to-know.jpg',
+    image: null,
     body: [
       'The UK government has confirmed that under the Renters\' Rights Bill it will outlaw Section 21 of the Housing Act and strengthen Section 8. The aim of these changes is to make it easier for landlords to reclaim control of their properties.',
       'Landlords will be able to regain possession of their properties from anti-social tenants and sell their properties when they need to.',
@@ -2974,7 +2974,7 @@ export const insights = [
     date: '2025-06-05',
     excerpt: 'The Property Ombudsman (TPO) Code of Practice is part of the wider Property Ombudsman scheme. It provides tenants and landlords with a redress scheme for disputes with letting agents.',
     tags: ['Private landlords'],
-    image: '/images/insights/what-is-the-property-ombudsman-code-of-practice.png',
+    image: null,
     body: [
       'The Property Ombudsman (TPO) Code of Practice is part of the wider Property Ombudsman scheme. It provides tenants and landlords with a redress scheme for disputes with letting agents.',
       'The scheme promotes fairness and accountability across the property industry.',
@@ -3063,7 +3063,7 @@ export const insights = [
     date: '2025-06-03',
     excerpt: 'At the time of writing, the Renters Rights Bill has completed the committee stage. This is where peers in the House of Lords go through the report wording line by line and propose amendments.',
     tags: ['Private landlords'],
-    image: '/images/insights/renters-rights-bill-2025-when-will-extensive-reforms-become-law.jpg',
+    image: null,
     body: [
       '## Where Is the Renters Rights Bill Up to?',
       'At the time of writing, the Renters Rights Bill has completed the committee stage. This is where peers in the House of Lords go through the report wording line by line and propose amendments.',
@@ -3170,7 +3170,7 @@ export const insights = [
     date: '2025-04-17',
     excerpt: 'A buy-to-let business plan defines your property business before you start.',
     tags: ['Private landlords'],
-    image: '/images/insights/the-ultimate-buy-to-let-strategy-and-business-plan.png',
+    image: null,
     body: [
       '## What Is a Buy-to-Let Property Business Plan?',
       'A buy-to-let business plan defines your property business before you start. You\'ll consider the decisions you\'ll make and predict their outcomes, your projected finances, the risks you are likely to face and how you will mitigate them, how you will deal with problems, and how you will manage the business on a day-to-day basis.',
@@ -3330,7 +3330,7 @@ export const insights = [
     date: '2025-04-16',
     excerpt: 'Understanding housing standards is critical for landlords. It helps them provide a good tenant experience and remain compliant with health and safety requirements.',
     tags: ['Social housing'],
-    image: '/images/insights/a-guide-to-housing-standards-in-the-uk.jpg',
+    image: null,
     body: [
       'Understanding housing standards is critical for landlords. It helps them provide a good tenant experience and remain compliant with health and safety requirements.',
       'But there are a lot of different housing standards and many are regularly updated. This makes them difficult to keep track of.',
@@ -3503,7 +3503,7 @@ export const insights = [
     date: '2025-03-30',
     excerpt: 'Asbestos poses a significant health threat in the UK, causing fatal illnesses. It is present in many 20th-century buildings.',
     tags: ['Social housing'],
-    image: '/images/insights/duty-to-manage-asbestos-everything-landlords-and-tenants-need-to-know.png',
+    image: null,
     body: [
       'Asbestos poses a significant health threat in the UK, causing fatal illnesses. It is present in many 20th-century buildings.',
       'According to the Health and Safety Executive (HSE), asbestos causes 5,000 deaths per year - and this number is increasing annually.',
@@ -3644,7 +3644,7 @@ export const insights = [
     date: '2025-03-03',
     excerpt: 'Social housing is meant to provide safety, security and stability for those who need it most.',
     tags: ['Social housing'],
-    image: '/images/insights/social-housing-uk-families-locked-out-of-affordable-homes-for-generations.jpg',
+    image: null,
     body: [
       'Social housing is meant to provide safety, security and stability for those who need it most.',
       'But right now, waiting lists are so overstretched that hundreds of thousands of families are being left in limbo, with some facing waits longer than a lifetime.',
@@ -3753,7 +3753,7 @@ export const insights = [
     date: '2025-02-28',
     excerpt: 'When couple Jason and Sam were evicted from their rental home in Portsmouth, they naturally began looking for a new home.',
     tags: ['Social housing'],
-    image: '/images/insights/the-uk-housing-crisis-causes-impact-and-solutions.jpg',
+    image: null,
     body: [
       '## The Scale of the Housing Crisis',
       'When couple Jason and Sam were evicted from their rental home in Portsmouth, they naturally began looking for a new home.',
@@ -3848,7 +3848,7 @@ export const insights = [
     date: '2025-01-29',
     excerpt: 'Speed matters when it comes to repairs on rented properties. But for busy landlords managing hundreds or even thousands of properties, it can be hard to prioritise repairs.',
     tags: ['Social housing'],
-    image: '/images/insights/how-long-do-landlords-have-to-fix-problems-in-the-uk.jpg',
+    image: null,
     body: [
       'Speed matters when it comes to repairs on rented properties. But for busy landlords managing hundreds or even thousands of properties, it can be hard to prioritise repairs. In this article we explore how long landlords have to fix these problems.',
       'Delays in fixing a resident\'s faulty boiler in the middle of winter doesn\'t just annoy residents - it can also damage their physical and mental health.',
@@ -3979,7 +3979,7 @@ export const insights = [
     date: '2024-10-07',
     excerpt: 'The Renters Rights Bill aims to make the private rental sector fairer for residents.',
     tags: ['Private landlords'],
-    image: '/images/insights/renters-rights-bill-how-are-labour-s-plans-for-private-rented-housing-different.jpg',
+    image: null,
     body: [
       '## Summary:',
       '- The Renters Rights Bill aims to make the private rental sector fairer for residents.',
@@ -4103,7 +4103,7 @@ export const insights = [
     date: '2024-06-14',
     excerpt: 'It\'s important to effectively manage the repairs and maintenance of your rental properties. We explain how you can create a policy that will benefit both you and your tenants.',
     tags: ['Social housing'],
-    image: '/images/insights/how-to-set-up-a-housing-association-repairs-and-maintenance-policy.jpg',
+    image: null,
     body: [
       'It\'s important to effectively manage the repairs and maintenance of your rental properties. We explain how you can create a policy that will benefit both you and your tenants.',
       'When your properties are managed effectively, your residents are more likely to have a good experience living in them.',
@@ -4314,7 +4314,7 @@ export const insights = [
     date: '2024-05-20',
     excerpt: 'The Leasehold and Freehold Reform Bill aims to strike a fairer balance between the rights of freeholders and leaseholders. This article summarises the bill, along with its legislative progress.',
     tags: ['Social housing'],
-    image: '/images/insights/what-is-the-leasehold-and-freehold-reform-act.jpg',
+    image: null,
     body: [
       'The Leasehold and Freehold Reform Bill aims to strike a fairer balance between the rights of freeholders and leaseholders. This article summarises the bill, along with its legislative progress.',
       '| **Key points** |',
@@ -4395,7 +4395,7 @@ export const insights = [
     date: '2024-05-13',
     excerpt: 'In today\'s increasingly connected world, customer service in the housing sector is undergoing a significant transformation.',
     tags: ['EVO news'],
-    image: '/images/insights/case-study-evo-and-bd-reside.jpeg',
+    image: null,
     body: [
       'In today\'s increasingly connected world, customer service in the housing sector is undergoing a significant transformation. As residents\' expectations continue to rise, it is crucial for housing providers to embrace digital innovation to enhance their services.',
       'For B&D Reside, a housing company owned by the London Borough of Barking and Dagenham, one area that demanded attention was repairs and maintenance. Previously, our residents had to ring or email the council directly to report an issue. Often, they would face long waiting times, delays in response, and a lack of transparency in the repairs reporting process. These obstacles not only hampered timely repairs, but also created stress and dissatisfaction among our residents.',
@@ -4429,7 +4429,7 @@ export const insights = [
     date: '2024-04-18',
     excerpt: 'Gardens can often spark disputes between landlords and residents.',
     tags: ['Social housing'],
-    image: '/images/insights/housing-association-garden-rules-how-to-work-with-residents-for-better-gardens.jpg',
+    image: null,
     body: [
       '## Key points:',
       '- Gardens can often spark disputes between landlords and residents.',
@@ -4526,7 +4526,7 @@ export const insights = [
     date: '2024-04-15',
     excerpt: 'The boiler is a critical part of any home. It keeps residents warm and provides them with hot water.',
     tags: ['Social housing'],
-    image: '/images/insights/why-is-the-light-on-my-boiler-flashing-a-social-housing-resident-s-guide-to-boilers.jpg',
+    image: null,
     body: [
       'The boiler is a critical part of any home. It keeps residents warm and provides them with hot water.',
       'If social housing residents understand common issues - like what to do when the light on their boiler is flashing - then they will know if it\'s something they can solve themselves or if they need a heating engineer.',
@@ -4721,7 +4721,7 @@ export const insights = [
     date: '2024-01-11',
     excerpt: 'The Social Housing (Regulation) Act became UK law in July 2023, introducing new standards and laws that social housing landlords must comply with.',
     tags: ['Social housing'],
-    image: '/images/insights/landlord-legal-requirements-a-checklist-for-social-housing-providers.jpg',
+    image: null,
     body: [
       '## Landlord Legal Requirements Introduced by the Social Housing (Regulation) Act',
       'The Social Housing (Regulation) Act became UK law in July 2023, introducing new standards and laws that social housing landlords must comply with.',
@@ -4963,7 +4963,7 @@ export const insights = [
     date: '2023-12-21',
     excerpt: 'Resident satisfaction is a measure of how happy or unhappy tenants are with:',
     tags: ['Social housing'],
-    image: '/images/insights/how-can-resident-satisfaction-be-gauged.png',
+    image: null,
     body: [
       '## What Is Resident Satisfaction?',
       'Resident satisfaction is a measure of how happy or unhappy tenants are with:',
@@ -5093,7 +5093,7 @@ export const insights = [
     date: '2023-12-04',
     excerpt: 'A housing management system (HMS) is software and technology that helps landlords manage their properties.',
     tags: ['Social housing'],
-    image: '/images/insights/housing-management-systems-how-to-effectively-manage-your-portfolio.jpg',
+    image: null,
     body: [
       '## What Is a Housing Management System?',
       'A housing management system (HMS) is software and technology that helps landlords manage their properties.',
@@ -5205,7 +5205,7 @@ export const insights = [
     date: '2023-11-30',
     excerpt: 'The Housing Health and Safety Rating System (HHSRS) is used by local authorities to assess rental accommodation.',
     tags: ['Social housing'],
-    image: '/images/insights/hhsrs-inspection-what-it-is-what-to-expect-and-how-to-avoid-one.jpg',
+    image: null,
     body: [
       '## Highlights:',
       '- The Housing Health and Safety Rating System (HHSRS) is used by local authorities to assess rental accommodation.',
@@ -5418,7 +5418,7 @@ export const insights = [
     date: '2023-11-27',
     excerpt: 'There are nearly four million social housing residents in the UK. They are shared amongst 1,500 housing associations.',
     tags: ['Social housing'],
-    image: '/images/insights/what-checks-do-housing-associations-do-how-to-find-the-right-accommodation-for-residents.jpg',
+    image: null,
     body: [
       'There are nearly four million social housing residents in the UK. They are shared amongst 1,500 housing associations.',
       'An important part of a housing association\'s role is performing checks on prospective residents.',
@@ -5618,7 +5618,7 @@ export const insights = [
     date: '2023-10-09',
     excerpt: 'Rising damp is when ground moisture travels through tiny spaces in a property\'s bricks and mortar, sometimes known as capillary action.',
     tags: ['Damp and mould'],
-    image: '/images/insights/a-landlord-s-guide-on-how-to-spot-and-treat-rising-damp.jpg',
+    image: null,
     body: [
       '## What Is Rising Damp?',
       'Rising damp is when ground moisture travels through tiny spaces in a property\'s bricks and mortar, sometimes known as capillary action. The water is sucked through these holes and up into the property\'s walls.',
@@ -5752,7 +5752,7 @@ export const insights = [
     date: '2023-10-06',
     excerpt: 'Choosing whether to provide a furnished or unfurnished property might seem like a minor consideration.',
     tags: ['Private landlords'],
-    image: '/images/insights/furnished-or-unfurnished-which-is-best-for-landlords-to-rent.jpg',
+    image: null,
     body: [
       'Choosing whether to provide a furnished or unfurnished property might seem like a minor consideration.',
       'However, it can make a big difference to the sort of tenant you get, how easy it is to find a tenant, how much money you make, and the amount of hassle involved in running your property.',
@@ -5871,7 +5871,7 @@ export const insights = [
     date: '2023-08-01',
     excerpt: 'A property inventory is a detailed record of the condition and contents of your rental unit at the beginning of a tenancy.',
     tags: ['Private landlords'],
-    image: '/images/insights/a-landlord-s-guide-on-how-to-make-a-property-inventory.png',
+    image: null,
     body: [
       '- A property inventory is a detailed record of the condition and contents of your rental unit at the beginning of a tenancy.',
       '- This provides a baseline against which you can assess any damages or changes that occur during the tenancy.',
@@ -5989,7 +5989,7 @@ export const insights = [
     date: '2023-08-01',
     excerpt: 'Damp and mould put tenants\' health at risk and could seriously damage your property.',
     tags: ['Damp and mould'],
-    image: '/images/insights/landlord-mould-responsibility-a-complete-guide.jpg',
+    image: null,
     body: [
       '## Highlights:',
       '- Damp and mould put tenants\' health at risk and could seriously damage your property.',
@@ -6384,7 +6384,7 @@ export const insights = [
     date: '2023-04-17',
     excerpt: 'A tenant welcome pack helps get the tenant-landlord relationship off to a great start. This article explains what they are and what to include in them.',
     tags: ['Private landlords'],
-    image: '/images/insights/what-to-include-in-a-tenant-welcome-pack.png',
+    image: null,
     body: [
       'A tenant welcome pack helps get the tenant-landlord relationship off to a great start. This article explains what they are and what to include in them.',
       '- Welcome packs help your tenants feel welcome, encourage them to communicate with you and make them longer-lasting tenants.',
@@ -6531,7 +6531,7 @@ export const insights = [
     date: '2023-04-14',
     excerpt: 'Landlord insurance is a type of insurance policy designed to protect landlords from financial losses or unexpected costs.',
     tags: ['Private landlords'],
-    image: '/images/insights/best-landlord-insurance-uk-which-one-is-best-for-you-in-2023.png',
+    image: null,
     body: [
       '## What Is Landlord Insurance?',
       'Landlord insurance is a type of insurance policy designed to protect landlords from financial losses or unexpected costs.',
@@ -6819,7 +6819,7 @@ export const insights = [
     date: '2022-10-26',
     excerpt: 'Both landlords and tenants usually have some degree of responsibility over pest control.',
     tags: ['Private landlords'],
-    image: '/images/insights/are-landlords-responsible-for-pest-control-uk.png',
+    image: null,
     body: [
       'Are landlords responsible for pest control UK: Do tenants or landlords pay for pest control in rented properties? This guide explains everything you need to know.',
       '### Highlights:',
@@ -6934,7 +6934,7 @@ export const insights = [
     date: '2022-10-26',
     excerpt: 'A property is a house in multiple occupation (HMO) if it has at least three tenants living in more than one household who share facilities.',
     tags: ['Private landlords'],
-    image: '/images/insights/do-i-need-an-hmo-licence-for-three-tenants-landlord-hmo-guide.png',
+    image: null,
     body: [
       '## Highlights',
       'A property is a house in multiple occupation (HMO) if it has at least three tenants living in more than one household who share facilities. Larger HMOs usually need a mandatory HMO licence. Some councils implement their own schemes, which means that you may have to hold one or more of these licences. You should contact your council to find out which licences you need. HMO landlords have several health and safety obligations and there are large fines for non-compliance.',
@@ -7046,7 +7046,7 @@ export const insights = [
     date: '2022-10-19',
     excerpt: 'Property inspections allow you to spot potential issues, fix wear and tear and check that your tenant is treating the property well.',
     tags: ['Private landlords'],
-    image: '/images/insights/landlord-inspection-checklist-a-guide-for-landlords.jpg',
+    image: null,
     body: [
       'Property inspections allow you to spot potential issues, fix wear and tear and check that your tenant is treating the property well.',
       'But if you aren\'t thorough you might miss a problem which could grow into an even bigger issue - for example, that leak that you missed could soon turn into damp and cause thousands of pounds in damage.',
@@ -7184,7 +7184,7 @@ export const insights = [
     date: '2022-09-28',
     excerpt: 'Social homes in England offer affordable housing managed by local councils or housing associations which are either not for profit or for profit organisations.',
     tags: ['Social housing'],
-    image: '/images/insights/failing-landlords-to-expect-ofsted-style-inspections-and-unlimited-fines.jpg',
+    image: null,
     body: [
       '## What is Social Housing?',
       'Social homes in England offer affordable housing managed by local councils or housing associations which are either not for profit or for profit organisations.',
@@ -7253,7 +7253,7 @@ export const insights = [
     date: '2022-08-17',
     excerpt: 'For many landlords in the UK, renting out one or more properties can be time-consuming and stressful. An experienced property management agency can do the work for you.',
     tags: ['Private landlords'],
-    image: '/images/insights/how-to-choose-the-right-property-management-company.jpg',
+    image: null,
     body: [
       'For many landlords in the UK, renting out one or more properties can be time-consuming and stressful. An experienced property management agency can do the work for you.',
       'There are many different reasons why landlords choose to hand over management services to an external agency. They might want a professional to handle the legal and financial aspects or they simply may not have the time and need assistance.',
@@ -7367,7 +7367,7 @@ export const insights = [
     date: '2022-08-10',
     excerpt: 'In October 2022, the government extended regulations on domestic smoke and carbon monoxide (CO) alarms to reduce the number of deaths from fire and CO poisoning.',
     tags: ['Social housing'],
-    image: '/images/insights/extended-regulations-on-domestic-smoke-and-carbon-monoxide-alarms.jpg',
+    image: null,
     body: [
       '- In October 2022, the government extended regulations on domestic smoke and carbon monoxide (CO) alarms to reduce the number of deaths from fire and CO poisoning.',
       '- Last year around 218 people died in fires and 20 died from CO poisoning in English homes.',
@@ -7554,7 +7554,7 @@ export const insights = [
     date: '2022-05-18',
     excerpt: 'Tenant experience is the most important phrase most landlords don\'t use. However, it is a key part of a successful rental agreement that benefits both parties.',
     tags: ['Social housing'],
-    image: '/images/insights/the-tenant-experience-and-why-it-matters.png',
+    image: null,
     body: [
       '## The Tenant Experience and Why It Matters',
       'Tenant experience is the most important phrase most landlords don\'t use. However, it is a key part of a successful rental agreement that benefits both parties.',
@@ -7746,7 +7746,7 @@ export const insights = [
     date: '2022-04-01',
     excerpt: 'Here\'s an overview of what the Renters Reform Bill covers. We\'ll explain each point in detail later in the article.',
     tags: ['Private landlords'],
-    image: '/images/insights/the-renters-reform-bill-2023-everything-you-need-to-know.jpeg',
+    image: null,
     body: [
       '## Summary: What Are the Changes to Renters\' Rights?',
       'Here\'s an overview of what the Renters Reform Bill covers. We\'ll explain each point in detail later in the article.',

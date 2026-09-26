@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
-import { IconBadge } from '@/components/Icon';
+import Icon, { IconBadge } from '@/components/Icon';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
 import Quote from '@/components/Quote';
-import Tbc from '@/components/Tbc';
 import { cta } from '@/data/site';
 import { clientLogos, withFiles } from '@/data/logos';
 import { testimonials, landlordTestimonials } from '@/data/testimonials';
@@ -43,18 +42,36 @@ const TIME = [
 const SEEN = [
   {
     who: 'The tenant',
-    icon: 'dashboard', title: 'Knows where it is up to',
-    items: ['Reports it in about thirty seconds, with a photograph', 'Picks an appointment slot that suits them', 'Sees who is coming and when', 'Rates the job once it is done'],
+    icon: 'dashboard',
+    title: 'Knows where it is up to',
+    items: [
+      'Reports it in about thirty seconds, with a photograph',
+      'Picks an appointment slot that suits them',
+      'Sees who is coming and when',
+      'Rates the job once it is done',
+    ],
   },
   {
     who: 'The managing agent',
-    icon: 'building', title: 'Sees every property at once',
-    items: ['Every open job across every property, live', 'Full service history by address', 'Invoices and job reports to download', "No compiling an update from three contractors' emails"],
+    icon: 'building',
+    title: 'Sees every property at once',
+    items: [
+      'Every open job across every property, live',
+      'Full service history by address',
+      'Invoices and job reports to download',
+      "No compiling an update from three contractors' emails",
+    ],
   },
   {
     who: 'The landlord',
-    icon: 'home', title: 'Sees their own, in full',
-    items: ['The same live record for their properties', 'What was reported, what was done, what it cost', 'As much or as little involvement as they want', 'No need to ask the agent what is happening'],
+    icon: 'home',
+    title: 'Sees their own, in full',
+    items: [
+      'The same live record for their properties',
+      'What was reported, what was done, what it cost',
+      'As much or as little involvement as they want',
+      'No need to ask the agent what is happening',
+    ],
   },
 ];
 
@@ -137,10 +154,18 @@ export default function LandlordsAndAgentsPage() {
 
       <section className="section section--grey">
         <div className="container">
+          {/* CORRECTED 26 September. This said "the scope is identical across Home 500,
+              Home 1000 and Home Trust - only the repair threshold changes". That is not
+              what the contract says. Schedule 2 states the plans differ by the threshold
+              AND the scope of works, with three inclusion schedules of increasing length
+              (Home 500: 10 heating, 13 plumbing, 10 electrics, 6 locksmith items; Home
+              1000: 18/22/17/6; Home Trust: 27/31/24/10). The old wording also under-sold
+              the two upper plans, which is the opposite of what this section is for. */}
           <SectionHead
             eyebrow="The price"
             title="What the fee covers, and what it does not."
-            lead="One fixed price per home, per month. The scope is identical across Home 500, Home 1000 and Home Trust — only the repair threshold changes. Anything outside it is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
+
+            lead="One fixed price per home, per month. The plans differ in two ways: the value of repair each one covers, and how much of the trade list falls inside it — Home Trust covers roughly three times as many listed items as Home 500. Anything outside your plan is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
           />
           <div className="grid-2 mt-3">
             <div className="card">
@@ -157,14 +182,22 @@ export default function LandlordsAndAgentsPage() {
             <div className="card card--grey">
               <IconBadge name="file" />
               <p className="eyebrow">Outside the plan — quoted before any work</p>
+              {/* The placeholder asked for the out-of-scope list to be confirmed against the
+                  plan data. It already existed, approved, in the brief - PRICE-07 and the
+                  PRICE-08 footnote - and the list below is those two combined. The old
+                  bullets included "anything the plan lists as out of scope", which is a
+                  placeholder pretending to be an answer. */}
               <ul className="plain-list mb-0">
                 <li>Anything above the plan threshold for that repair</li>
-                <li>Planned improvement and refurbishment works</li>
-                <li>Damage beyond fair wear and tear</li>
-                <li>Anything the plan lists as out of scope, stated plainly rather than buried</li>
+                <li>Major renewals, structural repairs and roofing works</li>
+                <li>Boiler replacements and rewires</li>
+                <li>Planned, cyclical and capital works, including retrofit</li>
+                <li>Damp and mould remediation programmes</li>
+                <li>Insurance works, and damage beyond fair wear and tear</li>
               </ul>
               <p className="mt-2 mb-0 muted">
-                You approve it or you do not. Nothing proceeds on assumption. <Tbc>confirm the out-of-scope list against the plan data</Tbc>
+                Quoted openly, before we start. Major works are never hidden in the monthly fee, and nothing proceeds on
+                assumption.
               </p>
             </div>
           </div>
@@ -192,7 +225,10 @@ export default function LandlordsAndAgentsPage() {
               <strong>The whole portfolio.</strong> When you are ready, and not before.
             </li>
           </ul>
-          <p className="mt-3 mb-0">Everything you keep, you carry on running exactly as you do now. The two sit side by side without interfering.</p>
+          <p className="mt-3 mb-0">
+            Everything you keep, you carry on running exactly as you do now. The two sit side by side without
+            interfering.
+          </p>
         </div>
       </section>
 
@@ -249,7 +285,43 @@ export default function LandlordsAndAgentsPage() {
             title="The Renters' Rights Act lands here too."
             lead="Standards and timescales that used to sit with social landlords increasingly apply across the private rented sector. The duty follows the property. If you manage it, the phone call follows you as well."
           />
-          <Tbc block>Legal review before publishing anything specific about Renters&rsquo; Rights Act duties or timescales.</Tbc>
+          {/* The placeholder asked for legal review before publishing anything specific
+              about the Act's duties or timescales. That caution stands - and the way to
+              honour it is not to publish a placeholder, it is to say nothing specific about
+              the Act. So this block makes no claim about what the Act requires or when.
+              Every line below is about what EVO does, which needs no legal review, and the
+              detail about the legislation is left to the guide. Moving that guide's sign-up
+              here from the site-wide banner is also the brief's own instruction (6.5). */}
+          <div className="wwh-inout mt-3">
+            <div className="wwh-inout-col wwh-inout-col--in">
+              <h3>
+                <Icon name="shieldCheck" size={18} /> What we hold for you
+              </h3>
+              <ul className="tick-list mb-0">
+                <li>A dated record of every report, visit, and completion, per property</li>
+                <li>Photographs and timestamps captured as the work happens, not written up later</li>
+                <li>No-access visits recorded &mdash; the evidence hardest to produce after the fact</li>
+                <li>Gas, electrical, smoke and CO certificates against the same property record</li>
+                <li>Exportable, so it goes to a tenant, a court or a new agent without a rebuild</li>
+              </ul>
+            </div>
+            <div className="wwh-inout-col wwh-inout-col--out">
+              <h3>
+                <Icon name="book" size={18} /> Where the duty sits
+              </h3>
+              <p className="mb-0">
+                With you, as it always has. Nothing in a repairs contract moves a landlord&rsquo;s legal obligations
+                onto a supplier, and we would not claim otherwise. What changes is whether you can show what was done
+                and when, without going looking for it.
+              </p>
+              <p className="wwh-inout-note mb-0">
+                Our landlord&rsquo;s guide to the Act covers the duties and the dates in full.{' '}
+                <Link href="/insights" className="text-link">
+                  Read the guides
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

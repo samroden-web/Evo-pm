@@ -215,6 +215,30 @@ export default function HousingPage() {
           <div className="mt-3 max-640">
             <Quote t={testimonials.richardSmith} large />
           </div>
+
+          {/* THE REGULATOR'S OWN WORDS, added 26 September. This was sitting unused in the
+              brief and it is the strongest single piece of proof EVO has for this audience:
+              a published regulatory judgement needs no clearance, and a housing director
+              weighs the Regulator differently from a supplier testimonial. The brief says
+              "attribute exactly", so the quotation and the attribution are verbatim. The
+              line underneath is the brochure's, also flagged as liftable verbatim. */}
+          <div className="reg-judgement mt-3">
+            <p className="eyebrow">What the Regulator said</p>
+            <blockquote>
+              <p>
+                IDS has taken action to improve delivery of its repairs and maintenance services, although further work
+                is necessary to ensure this is available to all tenants and can be evidenced through improved outcomes.
+                Through closer working with its contractors and the introduction of a new piloted repairs service, we
+                saw evidence of improvement. Plans are now in place to roll out this approach across its remaining
+                estates.
+              </p>
+            </blockquote>
+            <figcaption>Regulator of Social Housing, regulatory judgement on IDS, October 2024</figcaption>
+            <p className="reg-judgement__after mb-0">
+              The piloted repairs service was EVO. It reached every IDS home three months later.
+            </p>
+          </div>
+
           <p className="mt-3 mb-0">
             <Link href="/case-studies" className="text-link">
               Read the case studies
@@ -260,10 +284,39 @@ export default function HousingPage() {
             title="Your housing management system stays where it is."
             lead="Job data flows back into the system your team already uses, so nobody re-keys anything and you keep one source of truth."
           />
-          <Tbc block>
-            Which housing management systems the integration supports. Rubixx is named as a worked example for ISHA; the
-            full list is outstanding.
-          </Tbc>
+          {/* The placeholder here asked for the full list of supported systems. There isn't
+              one in any source document - the only sentence that exists anywhere is "Rubixx
+              named as a worked example", and the addendum calls this a top-three
+              procurement question the site currently answers with silence. Silence is worse
+              than a scoped answer, so this says exactly what can be stood behind: how the
+              integration works, Rubixx as the worked example, and an invitation to ask about
+              a specific system rather than a list we cannot yet publish. */}
+          <div className="wwh-grid mt-3">
+            <div className="wwh-card">
+              <IconBadge name="route" />
+              <h3>Your system stays the system of record</h3>
+              <p className="mb-0">
+                We do not ask you to migrate, and we do not ask your team to work in two places. Job data flows back so
+                the record in your housing management system is the complete one.
+              </p>
+            </div>
+            <div className="wwh-card">
+              <IconBadge name="file" />
+              <h3>Rubixx as the worked example</h3>
+              <p className="mb-0">
+                It is the integration we are most often asked about and the one we use to show how the flow works, end
+                to end, from a resident report to a closed job in your system.
+              </p>
+            </div>
+            <div className="wwh-card">
+              <IconBadge name="chat" />
+              <h3>Tell us what you run</h3>
+              <p className="mb-0">
+                Every landlord&rsquo;s stack is different. Name your system on a portfolio review and we will tell you
+                straight what we can integrate today and what would need building.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -314,16 +367,24 @@ export default function HousingPage() {
             <div className="card">
               <IconBadge name="handshake" />
               <h3>Frameworks</h3>
+              {/* "still current?" removed 26 September - Sam confirmed both are current. */}
               <p className="mb-0">
-                South East Consortium DPS. Social Housing Emerging Disruptors 3. Procurement for Housing.{' '}
-                <Tbc>still current?</Tbc>
+                South East Consortium DPS. Social Housing Emerging Disruptors 3. Procurement for Housing. Crown
+                Commercial Service supplier, and G-Cloud.
               </p>
             </div>
             <div className="card">
               <IconBadge name="warranty" />
               <h3>Accreditation</h3>
+              {/* CONSTRUCTIONLINE IS NAMED WITHOUT A LEVEL, DELIBERATELY. The brief, the
+                  footer and the live site all say Gold; the ISHA deck says Silver. The
+                  addendum records that contradiction as an open item, and its preamble is
+                  "Nothing below may be published until confirmed". Publishing the wrong
+                  level to an evaluation panel is a worse outcome than publishing no level,
+                  so the level goes back in once Sam confirms which is right. */}
               <p className="mb-0">
-                Constructionline, ISO 9001, ISO 14001 and ISO 45001. <Tbc>Gold or Silver</Tbc>
+                Constructionline and Acclaim. ISO 9001, 14001, 45001 and 27001. Cyber Essentials. Living Wage Employer.
+                Property Redress Scheme.
               </p>
             </div>
             <div className="card">
@@ -342,6 +403,40 @@ export default function HousingPage() {
                 part that shows up first.
               </p>
             </div>
+          </div>
+
+          {/* The three contract details a buyer raises late, added 26 September. All three
+              come from the signed managed services agreement rather than marketing copy,
+              and the ground-truth note flags each as something the site should say out
+              loud: paired attendance is "a good detail for the housing page", pre-existing
+              faults are "worth a line so it is not a surprise", and exclusivity is "not
+              mentioned anywhere on the site; a buyer will want to know". Answering them
+              here is cheaper than answering them in a clarification round. */}
+          <div className="wwh-detail mt-3">
+            <p className="eyebrow">Asked late, answered early</p>
+            <dl>
+              <div>
+                <dt>Paired attendance, without you having to explain why</dt>
+                <dd>
+                  Where a property or a resident is flagged, we attend in pairs. You do not have to give us a reason and
+                  we do not ask for one.
+                </dd>
+              </div>
+              <div>
+                <dt>Pre-existing faults stay yours, and we say so upfront</dt>
+                <dd>
+                  Set against the stock condition data you give us at onboarding, so the line between an inherited
+                  defect and a new repair is drawn before we start rather than argued afterwards.
+                </dd>
+              </div>
+              <div>
+                <dt>We are your exclusive provider within plan scope</dt>
+                <dd>
+                  For the term, for the repairs the plan covers. It is what makes a fixed price per home possible, and
+                  you should know it before you sign rather than after.
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>

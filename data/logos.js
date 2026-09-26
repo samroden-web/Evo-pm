@@ -8,18 +8,18 @@
 // and all, still appears on /about, which is where EVO wants to see what is outstanding.
 
 export const clientLogos = [
-  { name: 'B&D Reside', src: '/images/logos/clients/bd-reside.png', width: 320, height: 200 },
-  { name: 'IDS', src: '/images/logos/clients/ids.png', width: 320, height: 200 },
+  { name: 'B&D Reside', src: null, tbc: 'logo file to follow' },
+  { name: 'IDS', src: null, tbc: 'logo file to follow' },
   // TBC item 16: clean file to follow (the current logo shows a ghosted duplicate).
-  { name: 'Thames Reach', src: '/images/logos/clients/thames-reach.png', width: 320, height: 200 },
-  { name: 'Soho Housing', src: '/images/logos/clients/soho-housing.png', width: 320, height: 200 },
-  { name: 'LRM', src: '/images/logos/clients/lrm.png', width: 320, height: 200 },
-  { name: 'British Land', src: '/images/logos/clients/british-land.png', width: 320, height: 200 },
-  { name: 'Capital Letters', src: '/images/logos/clients/capital-letters.png', width: 320, height: 200 },
-  { name: 'Resonance', src: '/images/logos/clients/resonance.png', width: 320, height: 200 },
+  { name: 'Thames Reach', src: null, tbc: 'logo file to follow' },
+  { name: 'Soho Housing', src: null, tbc: 'logo file to follow' },
+  { name: 'LRM', src: null, tbc: 'logo file to follow' },
+  { name: 'British Land', src: null, tbc: 'logo file to follow' },
+  { name: 'Capital Letters', src: null, tbc: 'logo file to follow' },
+  { name: 'Resonance', src: null, tbc: 'logo file to follow' },
   // Added 24 Sep 2026 (addendum v2, section 1): recent wins.
   { name: 'Greenhill Housing', src: '/images/logos/clients/greenhill-housing.png', width: 551, height: 265 },
-  { name: 'Storm Housing Group', src: '/images/logos/clients/storm-housing-group.png', width: 320, height: 200 },
+  { name: 'Storm Housing Group', src: null, tbc: 'logo file to follow' },
   { name: 'J49', src: '/images/logos/clients/j49.png', width: 431, height: 440 },
 ];
 
@@ -35,8 +35,8 @@ export const frameworkLogos = [
     height: 247,
   },
   // TBC item 13: keep only if EVO confirms these are current. Set show: true to display.
-  { name: 'South East Consortium', src: '/images/logos/accreditations/south-east-consortium.png', width: 740, height: 204, show: true },
-  { name: 'Procurement for Housing', src: '/images/logos/accreditations/procurement-for-housing.png', width: 575, height: 238, show: true },
+  { name: 'South East Consortium', src: null, tbc: 'still current?', show: true },
+  { name: 'Procurement for Housing', src: null, tbc: 'still current?', show: true },
 ];
 
 export const accreditationLogos = [
@@ -59,7 +59,7 @@ export const accreditationLogos = [
   { name: 'Living Wage Employer', src: null, tbc: 'logo file to follow' },
 ];
 
-export const awardBadges = { src: '/images/awards/award-badges-light.png', width: 684, height: 99 };
+export const awardBadges = null;
 
 // Tone correction for the client strip.
 //
