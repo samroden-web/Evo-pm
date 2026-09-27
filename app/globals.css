@@ -4497,14 +4497,14 @@ textarea {
   grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
   gap: 20px;
 }
+/* The board used to be two wide columns of horizontal cards, because each one carried a full
+   biography beside the photograph. With the biographies behind a disclosure it inherits the same
+   grid as every other team, which is what Sam asked for - "put the smaller like the others".
+   Dropping the large card WITHOUT dropping this override made things worse, not better: a square
+   photo in a half-width column rendered enormous and the section grew from 3,479px to 5,163px.
+   The two changes only work together. */
 .ev3-team--board {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
-@media (min-width: 720px) {
-  .ev3-team--board {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  gap: 20px;
 }
 
 .ev3-person {
@@ -6668,4 +6668,156 @@ textarea {
 }
 .card--regulatory .eyebrow {
   color: var(--muted);
+}
+
+/* ---------- About: why-we-do-it beside the founder, the three parties, the HSE pair ---------- */
+/* Sam, 27 September: "the second banner down comes in a bit cold, i think marks quote and
+   picture part of it would make it better". The prose and the founder quote were two stacked
+   sections making one argument, the first of them a narrow column with nothing in it but text.
+   One row instead: the reasoning, and the man who lived it. */
+.why-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 3.2vw, 44px);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  /* Even columns, not 1.15/0.85. Measured at 1440px the narrower version gave the quote a
+     474px column and it ran 652px tall against 459px of prose - a tall thin card with 190px of
+     nothing beside it. Equal columns shorten the quote and square the row off. */
+  .why-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.why-split > * {
+  min-width: 0;
+}
+/* The prose measure still applies here - it is prose - but it is applied to the column rather
+   than by the .container > p rule, which only reaches direct children of a container. */
+.why-split__text p {
+  max-width: var(--measure);
+}
+
+/* A face beside the words. 56px is enough to read as a person and small enough that it never
+   competes with the quotation. */
+.quote-by {
+  display: block;
+}
+.quote-by--photo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quote-by__face {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+.quote-by__who {
+  min-width: 0;
+}
+
+/* The three parties a repair involves. Three, so the grid must divide by three or not at all -
+   a 2 + 1 row would make the third look like an afterthought, and it is the landlord. */
+.three-parties {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.2vw, 26px);
+}
+@media (min-width: 940px) {
+  .three-parties {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.three-parties > * {
+  min-width: 0;
+}
+.card--party .icon-badge {
+  float: left;
+  margin: 0 12px 0 0;
+}
+.card--party h3 {
+  clear: both;
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  margin: 4px 0 10px;
+}
+.three-parties__note {
+  max-width: var(--measure);
+  margin: clamp(20px, 2.6vw, 30px) 0 0;
+  padding-top: clamp(16px, 2vw, 22px);
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--navy-deep);
+}
+
+/* Health, safety and environment: the /compliance treatment, for the reason Sam gave there -
+   a badge stacked above its own heading wastes a line and looks unfinished. */
+.card--hse .icon-badge {
+  float: left;
+  margin: 0 12px 0 0;
+}
+.card--hse h3 {
+  margin-top: 4px;
+}
+.card--hse .tick-list {
+  clear: both;
+}
+
+/* When TrustBands carries its own intro, the first band heading needs separating from it. */
+.h-band {
+  margin-top: clamp(26px, 3vw, 38px);
+}
+
+/* Board biographies behind a disclosure, 27 September. Seven of them written out in full made
+   Who we are the deepest block on the site. A native <details>: no JavaScript, works on touch
+   and keyboard, and the text stays in the HTML so it is still indexed and still findable with
+   the browser's own search. */
+.ev3-person-more {
+  margin-top: 8px;
+}
+.ev3-person-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+  /* A tap target, not a word. 44px is the accessible minimum and a finger does not aim well. */
+  padding: 6px 0;
+  min-height: 34px;
+}
+.ev3-person-more > summary::-webkit-details-marker {
+  display: none;
+}
+.ev3-person-more > summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+/* The chevron is drawn rather than a glyph, so it turns with the disclosure instead of being
+   two different characters that never quite align. */
+.ev3-person-more__chev {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 0.15s ease;
+}
+.ev3-person-more[open] > summary .ev3-person-more__chev {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+.ev3-person-more[open] > summary {
+  color: var(--muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ev3-person-more__chev {
+    transition: none;
+  }
 }

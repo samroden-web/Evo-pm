@@ -15,7 +15,15 @@ let src = readFileSync(DATA, 'utf8');
 let set = 0;
 let cleared = 0;
 
-src = src.replace(/photo: (null|'[^']*'), file: '([^']+)'/g, (whole, current, file) => {
+// WHITESPACE-TOLERANT, and this matters more than it looks. The original pattern required
+// `photo: null, file: 'x.jpg'` on ONE line. Running Prettier over data/team.js splits that pair
+// across two lines - which it did on 27 September - and the moment it does, this linker matches
+// nothing, reports a cheerful "0 set, 0 cleared", and every team photograph silently disappears
+// from the site on the next deploy. No error, no failed build. That is precisely how the client
+// logos vanished a few days earlier.
+// A code formatter must never be able to break a data linker, so the separator is now \s* and
+// the repo carries a .prettierignore for the data files as well. Belt and braces, deliberately.
+src = src.replace(/photo:\s*(null|'[^']*'),\s*file:\s*'([^']+)'/g, (whole, current, file) => {
   const wanted = files.has(file) ? `'/images/team/${file}'` : 'null';
   if (wanted === current) return whole;
   if (wanted === 'null') cleared++;

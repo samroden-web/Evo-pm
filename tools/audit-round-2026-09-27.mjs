@@ -246,6 +246,133 @@ const CHECKS = [
     },
   },
 
+  // ---- The About page, 27 September round ----
+  {
+    page: '/about',
+    name: 'about-a. the company age is the incorporation date, not "five years old"',
+    test: () => {
+      const lead = document.querySelector('h1')?.closest('section')?.innerText || '';
+      if (/[Ff]ive years old/.test(lead)) return 'the hero still says "five years old"';
+      return /Incorporated in 2018/.test(lead) || 'the hero does not say when EVO was incorporated';
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-b. the five-year health and safety claim is untouched',
+    test: () =>
+      /Five years of operation with no serious incident/.test(document.body.innerText) ||
+      'the settled H&S claim has been altered or lost - it is a different fact from the company age',
+  },
+  {
+    page: '/about',
+    name: 'about-c. the software investment is on the page, framed as what it bought',
+    test: () => {
+      const t = document.body.innerText;
+      if (!/\u00a34m/.test(t)) return 'the 4m figure is not on the page';
+      return (
+        /not a software company/i.test(t) ||
+        'the figure is there without the line that stops it reading as a software pitch'
+      );
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-d. all three parties are named, each with its product',
+    test: () => {
+      const cards = [...document.querySelectorAll('.card--party')];
+      if (cards.length !== 3) return `${cards.length} party card(s), expected 3`;
+      const t = cards.map((c) => c.innerText).join(' ');
+      for (const p of ['EVO Living App', 'EVO Trades App', 'EVO Dashboard'])
+        if (!t.includes(p)) return `${p} is missing`;
+      const cols = getComputedStyle(document.querySelector('.three-parties')).gridTemplateColumns.split(' ').length;
+      return cols === 3 || `the grid has ${cols} columns, so three cards cannot divide evenly`;
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-e. the founder quote sits beside the prose, not in a section of its own',
+    test: () => {
+      const split = document.querySelector('.why-split');
+      if (!split) return 'the why/quote pair is not there';
+      const q = split.querySelector('.quote');
+      if (!q) return 'the founder quote is not inside the pair';
+      const cols = getComputedStyle(split).gridTemplateColumns.split(' ').length;
+      return cols === 2 || `the pair has ${cols} column(s) at this width`;
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-f. the team photograph is no longer the hero',
+    test: () => {
+      const hero = document.querySelector('h1')?.closest('section');
+      const heroHasTeam = !!hero && [...hero.querySelectorAll('img')].some((i) => /operations-team/.test(i.src));
+      if (heroHasTeam) return 'the operations team photo is still the hero image';
+      return (
+        [...document.querySelectorAll('img')].some((i) => /operations-team/.test(i.src)) ||
+        'it was removed from the hero but not placed anywhere else'
+      );
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-g. Sam Roden has a biography, and no stale team-photograph notice remains',
+    test: () => {
+      const t = document.body.innerText;
+      if (!/Storm Housing Group/.test(t)) return "Sam Roden's biography is not on the page";
+      return !/could not be pulled into this repo/.test(t) || 'the stale team-photographs TBC block is still there';
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-i. the founder quote carries his face when the photo file exists',
+    test: () => {
+      const cap = document.querySelector('.why-split .quote figcaption');
+      if (!cap) return 'the founder quote caption is not there';
+      const face = cap.querySelector('.quote-by__face');
+      // No photo file in this working copy is the normal state - they arrive with the fetch
+      // scripts. What must never happen is a face element that is there but broken.
+      if (!face) return 'SKIP-NO-FILE';
+      if (!face.complete || face.naturalWidth === 0) return 'the face is in the markup but the image did not load';
+      const r = face.getBoundingClientRect();
+      if (Math.round(r.width) !== 56 || Math.round(r.height) !== 56)
+        return `the face is ${Math.round(r.width)}x${Math.round(r.height)}, expected 56x56`;
+      return getComputedStyle(cap).display === 'flex' || 'the caption is not laying the face beside the name';
+    },
+  },
+  {
+    page: '/about',
+    name: 'about-h. the framework marks are size-equalised like every other strip',
+    test: () => {
+      const imgs = [...document.querySelectorAll('img')].filter((i) =>
+        /south-east-consortium|procurement-for-housing/.test(i.src)
+      );
+      if (!imgs.length) return 'SKIP-NO-FILE';
+      const unsized = imgs.filter((i) => !i.style.maxHeight);
+      return unsized.length === 0 || `${unsized.length} framework mark(s) are not area-normalised`;
+    },
+  },
+
+  {
+    page: '/about',
+    name: 'about-j. board biographies are behind a disclosure, and still in the HTML',
+    test: () => {
+      const board = document.querySelector('.ev3-team--board');
+      if (!board) return 'the board row is not there';
+      if (board.querySelector('.ev3-person--large')) return 'board cards are still the large variant';
+      const d = [...board.querySelectorAll('details.ev3-person-more')];
+      if (!d.length) return 'no biography disclosures on the board';
+      // Closed by default, or the whole point is lost.
+      const open = d.filter((x) => x.open);
+      if (open.length) return `${open.length} biography/ies are open by default`;
+      // The text must still be in the document - a disclosure hides it from view, it does not
+      // remove it, which is why this is not the same as deleting the biographies.
+      if (!/Notting Hill Genesis/.test(document.body.innerHTML)) return 'a known biography is not in the HTML any more';
+      const sum = d[0].querySelector('summary');
+      const h = sum ? sum.getBoundingClientRect().height : 0;
+      return h >= 30 || `the disclosure control is only ${Math.round(h)}px tall - too small to tap`;
+    },
+  },
+
   // ---- Standing: things settled earlier that a later patch could quietly undo ----
   {
     page: '/case-studies',
@@ -316,6 +443,7 @@ try {
 console.log(`Cold read of the 27 September round against ${base}\n`);
 
 const failed = [];
+const skipped = [];
 let loaded = null;
 for (const c of CHECKS) {
   if (loaded !== c.page) {
@@ -338,7 +466,12 @@ for (const c of CHECKS) {
     r = `threw: ${e.message.split('\n')[0]}`;
   }
   if (r === true) console.log(`  PASS  ${c.name}`);
-  else {
+  else if (r === 'SKIP-NO-FILE') {
+    // An asset that only exists after the Codespace fetch scripts run. Skipping is honest;
+    // counting it as a pass would claim something was checked that was not.
+    console.log(`  SKIP  ${c.name} (the file is not in this working copy - it arrives with the fetch scripts)`);
+    skipped.push(c.name);
+  } else {
     console.log(`  FAIL  ${c.name}\n          ${r === false ? 'assertion returned false' : r}`);
     failed.push(c.name);
   }
@@ -354,5 +487,7 @@ else {
 
 await browser.close();
 
-console.log(`\n${CHECKS.length + 1} assertions. ${failed.length === 0 ? 'ALL PASS.' : `${failed.length} FAILED.`}`);
+console.log(
+  `\n${CHECKS.length + 1} assertions. ${failed.length === 0 ? 'ALL PASS' : `${failed.length} FAILED`}${skipped.length ? `, ${skipped.length} skipped (assets that arrive with the fetch scripts)` : ''}.`
+);
 process.exit(failed.length ? 1 : 0);

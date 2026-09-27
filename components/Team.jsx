@@ -21,7 +21,23 @@ function Person({ p, large = false }) {
       <div className="ev3-person-text">
         <h3>{p.name}</h3>
         <p className="ev3-person-role">{p.role}</p>
-        {p.bio && <p className="ev3-person-bio">{p.bio}</p>}
+        {/* Sam, 27 September: "i also dont think we need the boards Bios all written out like
+            that ... if somebody hovers evo/ clicks a board member their bio comes up".
+            Click, not hover. Hover has no meaning on a phone, which is where a good share of
+            this traffic is, and it hides content behind a gesture a keyboard user cannot make.
+            A native <details> does exactly what he asked, works on touch and with a keyboard,
+            is readable by a screen reader, and needs no JavaScript at all - so it cannot break
+            the way a hand-rolled toggle can. The bio is still in the HTML, so it is still
+            indexed and still findable with the browser's own find-in-page. */}
+        {p.bio && (
+          <details className="ev3-person-more">
+            <summary>
+              Biography
+              <span aria-hidden="true" className="ev3-person-more__chev" />
+            </summary>
+            <p className="ev3-person-bio">{p.bio}</p>
+          </details>
+        )}
         {p.tbc && (
           <p className="mb-0">
             <Tbc>{p.tbc}</Tbc>
@@ -39,8 +55,12 @@ export default function Team({ board = [], development = [], operations = [] }) 
         <>
           <h3 className="ev3-team-head">Board</h3>
           <div className="ev3-team ev3-team--board">
+            {/* Not `large` any more. Sam: "maybe we can put the smaller like the others".
+                The board keeps its own row and heading, so it still reads as the board, but
+                seven expanded biographies were making this section 3,479px deep on a laptop
+                and 6,609px on a phone - by far the largest block on the site. */}
             {board.map((p) => (
-              <Person key={p.name} p={p} large />
+              <Person key={p.name} p={p} />
             ))}
           </div>
         </>

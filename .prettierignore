@@ -1,0 +1,13 @@
+# Data files whose shape the link-*.mjs tools depend on.
+#
+# tools/link-team-photos.mjs and friends rewrite these files with regular expressions that
+# match a specific layout. Prettier reformatting them is not cosmetic: on 27 September it split
+# `photo: null, file: 'x.jpg'` across two lines, the linker stopped matching, and it would have
+# silently unlinked all 29 team photographs on the next deploy while reporting success.
+#
+# The linkers are now whitespace-tolerant, so this is the second line of defence rather than the
+# only one. Keep both.
+data/team.js
+data/logos.js
+data/competitors.js
+data/insights.js
