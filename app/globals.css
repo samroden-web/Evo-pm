@@ -46,12 +46,11 @@
 
   --orange: #ff6600;
   --orange-ink: #b34700;
-  /* Sam, 27 September: "i dont think the black on organge works well. maybe white."
-     White on the brand orange #ff6600 is 2.94:1 - it fails AA for normal text and misses even
-     the 3:1 large-text bar, so "maybe white" is not available on that background at any size.
-     Rather than refuse, the background moves: #c74800 is the BRIGHTEST orange at which white
-     text reaches 4.5:1 (it measures 4.82:1). Anything brighter fails, anything darker stops
-     reading as orange. It is a shade of the brand orange, not a new colour. */
+  /* KEPT, BUT NOT IN USE ON ANY BAND. #c74800 is the brightest orange at which white text
+     reaches 4.5:1 (it measures 4.82:1, against 2.94:1 on the brand orange). Sam has chosen the
+     brand orange with white for every orange block, which is his call; this stays defined
+     because it is the answer to "we need white on orange AND we need it to pass", and it would
+     otherwise have to be worked out again from scratch. Do not apply it without asking him. */
   --orange-deep: #c74800;
   --orange-soft: #fff2e8;
   --orange-dark: #b34700;
@@ -892,22 +891,21 @@ p.center {
 /* Orange band 1 of 3. This is the first thing under the hero and the biggest single
    field of colour on the page, so moving it off navy does most of the work on the
    "blue is overused in this sector" note by itself. */
-/* WHITE IS NOT AVAILABLE ON THE BRAND ORANGE, and this is the rule the whole site now follows.
-   Measured: white on #ff6600 is 2.94:1. That fails AA for normal text (4.5:1) and it fails the
-   large-text allowance too (3:1) - by 0.06, which is exactly the kind of near-miss that survives
-   every eyeball review. The launch audit found 17 of them: the homepage's headline figures, the
-   numbered steps on /how-it-works, and the lead heading on five orange bands.
-   --on-orange (#3a1c00) is 5.31:1 on the same background. It reads as a deep warm brown rather
-   than black, which is what Sam disliked about black on orange - and the bands already used it
-   for their body text, so this makes them internally consistent rather than half white and half
-   dark.
-   THE ONE EXCEPTION is the residents page's registration box, which Sam wanted white. That box
-   is --orange-deep (#c74800), the brightest orange at which white reaches 4.5:1. If you want
-   white type on an orange surface anywhere else, that is the shade it has to sit on.
-   Do not put white back on #ff6600 without re-measuring. */
+/* THE ORANGE BANDS: EVO ORANGE, WHITE TEXT. Sam's call, 27 September:
+   "i want to change all the orange bloocks back to what we had in the last update, with the evo
+   orange and white text in it. i am not sure where you read not to do that, it wasnt from me."
+   He is right, and the correction matters more than the colour. I had found a comment earlier in
+   this stylesheet saying no text on the orange should be white, and treated it as settled policy
+   - but that comment was written inside this project, not by Sam. I turned my own note into a
+   rule and made a site-wide design change on the strength of it.
+   FOR THE RECORD, so nobody has to rediscover it: white on #ff6600 measures 2.94:1. The large
+   text here needs 3:1 under WCAG AA, so it misses by 0.06. Sam has seen that number and chosen
+   the brand look, which is his call to make. tools/check-final.mjs carries this as a named,
+   accepted exception rather than a failure, so the decision is recorded where the next person
+   will find it instead of being quietly re-litigated. */
 .figures {
   background: var(--orange);
-  color: var(--on-orange);
+  color: var(--white);
   padding: 30px 0 0;
 }
 /* A ROW OF HEADLINE FIGURES on the page background. Not to be confused with .figures
@@ -947,11 +945,8 @@ p.center {
   border-radius: var(--radius);
   padding: clamp(20px, 2.6vw, 32px);
 }
-/* Dark, not white. Measured 2.94:1 as white against the 3:1 large-text bar - the site's own
-   headline numbers failing by 0.06 - and 5.31:1 as --on-orange. It is the same rule the rest of
-   this band already followed. */
 .statrow--orange .stat {
-  color: var(--on-orange);
+  color: var(--white);
 }
 /* --on-orange measures 5.31:1 against the brand orange; --muted measured 1.86:1, which is
    how this band's labels were found in the first place. */
@@ -976,7 +971,7 @@ p.center {
   font-size: clamp(1.9rem, 3.8vw, 2.8rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--on-orange);
+  color: var(--white);
 }
 .figures__label {
   display: block;
@@ -3342,14 +3337,14 @@ textarea {
 /* Full-width orange band: the argument a page opens with. */
 .ev2-band {
   background: var(--orange);
-  color: var(--on-orange);
+  color: var(--white);
   padding: var(--sec-y) 0;
 }
 .ev2-band .eyebrow {
   color: var(--on-orange-soft);
 }
 .ev2-band h2 {
-  color: var(--on-orange);
+  color: var(--white);
   max-width: 24ch;
   margin: 6px 0 0;
 }
@@ -3401,7 +3396,7 @@ textarea {
   font-size: clamp(2rem, 3.4vw, 2.9rem);
   font-weight: 700;
   line-height: 0.9;
-  color: var(--on-orange);
+  color: var(--white);
   margin: 0 0 10px;
   font-variant-numeric: tabular-nums;
 }
@@ -3411,7 +3406,7 @@ textarea {
   font-size: 0.97rem;
 }
 .ev2-band-item .ev2-figure {
-  color: var(--on-orange);
+  color: var(--white);
   font-size: 2.4rem;
   font-weight: 700;
   line-height: 1;
@@ -3513,11 +3508,11 @@ textarea {
 }
 .ev2-pair--total .ev2-b {
   background: var(--orange);
-  color: var(--on-orange);
+  color: var(--white);
   box-shadow: none;
 }
 .ev2-pair--total .ev2-b::before {
-  color: var(--on-orange);
+  color: var(--white);
 }
 
 @media (max-width: 620px) {
@@ -3971,14 +3966,14 @@ textarea {
 /* See it. Try it. Start it. */
 .ev2-start {
   background: var(--orange);
-  color: var(--on-orange);
+  color: var(--white);
   padding: var(--sec-y) 0;
 }
 .ev2-start .eyebrow {
   color: var(--on-orange-soft);
 }
 .ev2-start h2 {
-  color: var(--on-orange);
+  color: var(--white);
   margin: 0;
 }
 .ev2-start h2 em {
@@ -6910,22 +6905,14 @@ textarea {
    the site where a contrast shortcut is defensible. Navy on the same orange is 5.11:1. The box
    is brighter than the navy one it replaces AND readable, which is the whole win. */
 .ev2-getapp--orange {
-  background: var(--orange-deep);
+  background: var(--orange);
   align-items: flex-start;
   gap: clamp(22px, 3vw, 40px);
-  /* A hairline of the true brand orange along the top, so the box still carries the bright
-     colour even though the field behind the text cannot. */
-  border-top: 4px solid var(--orange);
 }
 .ev2-getapp--orange h2,
 .ev2-getapp--orange p {
   color: #fff;
 }
-/* I tried a warm cream here first and measured it at 3.66:1. The 3:1 allowance is for LARGE
-   text - 24px, or 18.66px bold - and these labels are 11.68px, so they need the full 4.5:1 like
-   any other small text. My own comment justifying the tint was wrong, and the measurement caught
-   it. White it is: 4.82:1, and the label is already distinguished by being uppercase, bold,
-   small and letter-spaced, so it does not need colour to separate it from the heading. */
 .ev2-getapp--orange .eyebrow {
   color: #fff;
 }
@@ -7068,6 +7055,6 @@ input[type='radio'] {
   height: 24px;
   min-width: 24px;
   min-height: 24px;
-  accent-color: var(--orange-deep);
+  accent-color: var(--orange);
   flex: 0 0 auto;
 }

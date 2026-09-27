@@ -376,36 +376,20 @@ const CHECKS = [
   // ---- Residents page, 27 September ----
   {
     page: '/residents',
-    name: 'res-a. the top box is orange and its text passes contrast against it',
+    name: 'res-a. the top box is EVO orange with white text, as Sam asked',
     test: () => {
       const box = document.querySelector('.ev2-getapp--orange');
       if (!box) return 'the orange top box is not there';
-      const lum = (c) => {
-        const [r, g, b] = c
-          .match(/\d+/g)
-          .slice(0, 3)
-          .map((n) => n / 255);
-        const f = (x) => (x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4));
-        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
-      };
       const bg = getComputedStyle(box).backgroundColor;
-      // NOT a hex match. This started as `must be rgb(255,102,0)` and went red the moment the
-      // shade was deepened so that white text could pass - pinning the colour would have made
-      // the accessibility fix look like a regression. What matters is that it is recognisably
-      // orange and that everything on it is readable, so that is what is asserted.
-      const [R, G, B] = bg.match(/\d+/g).slice(0, 3).map(Number);
-      if (!(R > 150 && R > G * 1.8 && B < 80)) return `the box is ${bg}, which is not an orange`;
-      // Every piece of text in the box, not just the heading - white anywhere here is 2.94:1.
-      // Every element that sits DIRECTLY on the orange. The button is excluded on purpose: it
-      // carries its own background, so measuring its text against the box behind it is the
-      // 1.00:1 mistake this project has already made twice.
+      if (!/255,\s*102,\s*0/.test(bg)) return `the box is ${bg}, not EVO orange #ff6600`;
+      // This assertion used to demand 4.5:1 on this box, which is why it went red the moment the
+      // brand colour went back. Sam has seen the 2.94:1 measurement and chosen the brand look;
+      // the number is carried as a named exception in tools/check-final.mjs so it stays visible.
+      // What this now guards is that nobody quietly changes it back without him.
       for (const el of box.querySelectorAll('h2, p, .eyebrow')) {
         if (el.closest('.btn') || el.closest('.app-badge')) continue;
-        const fg = getComputedStyle(el).color;
-        const a = lum(fg);
-        const bl = lum(bg);
-        const ratio = (Math.max(a, bl) + 0.05) / (Math.min(a, bl) + 0.05);
-        if (ratio < 4.5) return `"${el.textContent.trim().slice(0, 30)}" is ${ratio.toFixed(2)}:1 on the orange`;
+        const c = getComputedStyle(el).color;
+        if (!/255,\s*255,\s*255/.test(c)) return `"${el.textContent.trim().slice(0, 24)}" is ${c}, not white`;
       }
       return true;
     },
