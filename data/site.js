@@ -146,7 +146,7 @@ export const mainNav = [
 export const utilityNav = [
   { label: 'Residents', href: '/residents' },
   { label: 'Trades', href: '/trades' },
-  { label: 'Client login', href: 'https://app.evo-pm.com', external: true },
+  { label: 'Client login (MARS)', href: 'https://app.evo-pm.com', external: true },
 ];
 
 // The footer site map MIRRORS the main navigation, in the same order. It used to be a
@@ -187,7 +187,7 @@ export const footerNav = [
       { label: 'Resident FAQs', href: '/faqs/residents' },
       { label: 'How-to guides', href: '/how-to-guides' },
       { label: 'Join the trades network', href: '/trades' },
-      { label: 'Client login', href: 'https://app.evo-pm.com' },
+      { label: 'Client login (MARS)', href: 'https://app.evo-pm.com' },
     ],
   },
 ];

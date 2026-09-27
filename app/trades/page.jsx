@@ -4,7 +4,6 @@ import SectionHead from '@/components/SectionHead';
 import { IconBadge } from '@/components/Icon';
 import AppBadges from '@/components/AppBadges';
 import Photo from '@/components/Photo';
-import Tbc from '@/components/Tbc';
 
 export const metadata = {
   title: 'Join the EVO trades network | EVO',
@@ -30,7 +29,11 @@ const WHY = [
     'Only your trade, only your area',
     'No plumbing jobs sent to an electrician, and nothing forty miles away. You stop declining work that was never suitable.',
   ],
-  ['route', 'No admin at all', 'No quotes for standard work, no invoices to raise, no month-end chasing. We self-bill and pay.'],
+  [
+    'route',
+    'No admin at all',
+    'No quotes for standard work, no invoices to raise, no month-end chasing. We self-bill and pay.',
+  ],
   [
     'phoneApp',
     'You see it before you go',
@@ -41,7 +44,11 @@ const WHY = [
 const RULES = [
   ['R', 'AMS', 'A risk assessment before work commences. Every time, not just on the big ones.'],
   ['R', 'epair works', 'Repairs are instructed by the EVO office. Nothing starts on a nod.'],
-  ['R', 'equired works', 'Anything further must link directly to the original repair, and needs our approval before you do it.'],
+  [
+    'R',
+    'equired works',
+    'Anything further must link directly to the original repair, and needs our approval before you do it.',
+  ],
   [
     'R',
     'eport an observation',
@@ -49,7 +56,11 @@ const RULES = [
   ],
   ['R', 'evisit', 'If the same issue comes back within three months, you re-attend free of charge.'],
   ['R', 'enew', 'If an item you renewed fails within twelve months, you re-attend free of charge.'],
-  ['R', 'esident request', 'Never take instruction from the resident. If they need something else, it comes through us.'],
+  [
+    'R',
+    'esident request',
+    'Never take instruction from the resident. If they need something else, it comes through us.',
+  ],
 ];
 
 const PRACTICAL = [
@@ -123,21 +134,24 @@ export default function TradesPage() {
           />
           <ul className="tick-list mt-3">
             <li>
-              <strong>You choose when you are available.</strong> Set your working hours in the app and change them whenever you need to. Jobs are only offered into
-              the time you have opened up.
+              <strong>You choose when you are available.</strong> Set your working hours in the app and change them
+              whenever you need to. Jobs are only offered into the time you have opened up.
             </li>
             <li>
-              <strong>You see the job before you accept it.</strong> Address, trade, priority, the resident&rsquo;s description and their photographs.
+              <strong>You see the job before you accept it.</strong> Address, trade, priority, the resident&rsquo;s
+              description and their photographs.
             </li>
             <li>
-              <strong>Emergencies are flagged as emergencies.</strong> Accept only if you can genuinely attend in the window.
+              <strong>Emergencies are flagged as emergencies.</strong> Accept only if you can genuinely attend in the
+              window.
             </li>
             <li>
-              <strong>The resident knows you are coming.</strong> They picked the slot and can see you on the way, so the door gets answered.
+              <strong>The resident knows you are coming.</strong> They picked the slot and can see you on the way, so
+              the door gets answered.
             </li>
             <li>
-              <strong>The history tells you what to bring.</strong> What was done last time, by whom, and what was replaced — so you load the van once rather than
-              driving back to the merchant.
+              <strong>The history tells you what to bring.</strong> What was done last time, by whom, and what was
+              replaced — so you load the van once rather than driving back to the merchant.
             </li>
             <li>
               <strong>Completion notes and photographs in the app.</strong> No paperwork afterwards.
@@ -155,8 +169,8 @@ export default function TradesPage() {
             <div>
               <h3>No quoting, and no chasing</h3>
               <p>
-                The price is agreed before you travel, against a rate card you have already seen. There is no estimate to write,
-                no client to chase for approval, and no invoice to raise afterwards.
+                The price is agreed before you travel, against a rate card you have already seen. There is no estimate
+                to write, no client to chase for approval, and no invoice to raise afterwards.
               </p>
               <p className="mb-0">
                 Good firms tell us they were spending more time quoting than working. That is the part this removes.
@@ -200,8 +214,8 @@ export default function TradesPage() {
             ))}
           </div>
           <p className="mt-3 mb-0">
-            Payment follows a quality assurance review after each job, done remotely in the system. If something needs verifying on site, our QA surveyor attends —
-            you are not asked to prove it twice.
+            Payment follows a quality assurance review after each job, done remotely in the system. If something needs
+            verifying on site, our QA surveyor attends — you are not asked to prove it twice.
           </p>
         </div>
       </section>
@@ -224,10 +238,14 @@ export default function TradesPage() {
               <strong>Trade accreditations</strong> — Gas Safe, NICEIC or equivalent, wherever the work requires them.
             </li>
             <li>
-              <strong>DBS checks</strong>, because you are going into people&rsquo;s homes. <Tbc>confirm scope</Tbc>
+              {/* The tag here asked EVO to confirm the scope of DBS checking. It is already
+                  answered in the approved facts - "vetted, DBS-checked trades" - so the claim
+                  stands as written and the query goes. */}
+              <strong>DBS checks</strong>, because you are going into people&rsquo;s homes.
             </li>
             <li>
-              <strong>A quality assurance agreement</strong> to sign, so the standard is written down rather than implied.
+              <strong>A quality assurance agreement</strong> to sign, so the standard is written down rather than
+              implied.
             </li>
           </ul>
         </div>
@@ -240,11 +258,15 @@ export default function TradesPage() {
             title="Tell us about your firm."
             lead="A short form, not the sales enquiry form. We will come back to you either way, and if it looks like a fit the next step is a conversation with Mark."
           />
-          <Tbc block>
-            The Trades application form is its own short form: company name, contact and phone, trades carried out, areas covered, team size, accreditations,
-            insurance in place, VAT registered. It should not post into the sales enquiry form. Also outstanding: which regions are currently open, so the right
-            firms apply and the wrong ones do not.
-          </Tbc>
+          {/* NOT LOST, JUST OFF THE PAGE. Sam, 27 September: remove the comments, answer what I
+              can, and do not action the rest. This one I cannot answer, so it is recorded here
+              rather than shown to a contractor who cannot act on it either:
+                - The Trades application should be its own short form (company name, contact and
+                  phone, trades carried out, areas covered, team size, accreditations, insurance
+                  in place, VAT registered) and must NOT post into the sales enquiry form, which
+                  is where the button below currently sends it.
+                - Which regions are open is still unknown, so the wrong firms will apply.
+              Both need the form build and a decision from EVO. */}
           <div className="btn-row mt-3">
             <Link href="/contact?enquiry=trades" className="btn btn-primary">
               Apply to join the network
@@ -288,8 +310,8 @@ export default function TradesPage() {
             <div>
               <AppBadges app="trades" />
               <p className="mt-2 mb-0 muted">
-                Everything runs through the app: the offer, the access details, the service history, the photographs and the
-                completion notes. There is no separate portal and no paperwork to post.
+                Everything runs through the app: the offer, the access details, the service history, the photographs and
+                the completion notes. There is no separate portal and no paperwork to post.
               </p>
             </div>
           </div>

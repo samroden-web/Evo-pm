@@ -26,29 +26,28 @@ export const board = [
     source: 'https://evo-pm.com/media/3wlb5pnf/evo_steve_n.jpg',
     // His photograph downloads with the rest. The biography is the only thing outstanding,
     // and it is tracked here rather than in a note on the page.
-    bio: null,
-    tbc: 'biography',
+    bio: "Steve Norris has spent his career where government, infrastructure and property meet. He was a government transport minister from 1992 to 1996, has served on the board of Transport for London, and has chaired businesses across property, transport and infrastructure, including Soho Estates and Driver Group plc. He is a Fellow of the Royal Institution of Chartered Surveyors. He chairs EVO's board.",
   },
   {
     name: 'Steven Rae',
     role: 'CEO and CTO',
     photo: '/images/team/steven-rae.png', file: 'steven-rae.png',
     source: 'https://evo-pm.com/media/ud3b0bcx/sgr-bio-pic.png',
-    bio: 'Steve is a successful tech entrepreneur having built STC Energy (energy software business) over a 22 year period and exited to Inspired Energy PLC, an AIM quoted company. He joined EVO in October 2021 as he sees huge potential for EVO in the UK and globally.',
+    bio: "Steve built STC Energy, an energy software business, over twenty-two years and sold it to Inspired Energy PLC, an AIM-quoted company. He joined EVO in October 2021 and leads its strategy, architecture and growth roadmap - the software EVO runs the service on is built under him.",
   },
   {
     name: 'Mark Iandoli',
     role: 'COO and Founder',
     photo: '/images/team/mark-iandoli.jpg', file: 'mark-iandoli.jpg',
     source: 'https://evo-pm.com/media/e42igqme/evo_mark_i.jpg',
-    bio: "Mark is the dynamic driving force behind EVO's service operations and customer experience. A portfolio landlord for many years and vastly experienced property services expert, he has been actively involved in delivering more than 12,500 jobs since 2013.",
+    bio: "Mark has spent more than twenty-five years in UK property maintenance and repairs, and has been a portfolio landlord for much of it. He founded EVO after watching the same system fail residents, landlords and good contractors alike, and he runs its service operations - contract rollout, delivery and performance. He has been involved in more than 12,500 jobs since 2013.",
   },
   {
     name: 'Craig Calder',
     role: 'Commercial Director',
     photo: '/images/team/craig-calder.jpg', file: 'craig-calder.jpg',
     source: 'https://evo-pm.com/media/qz2a5qtu/evo_craig.jpg',
-    bio: 'Craig Calder has spent almost all his working life in the property industry. He moved from his native South Africa to the UK in 1994 working first in the Kuwait Investment Office and then in the financial services sector for several years in management roles with Citigroup.',
+    bio: "Craig has spent almost all his working life in property. He moved from South Africa to the UK in 1994, working first at the Kuwait Investment Office and then in management roles at Citigroup. At EVO he leads the commercial side, working with housing associations, local authorities and institutional landlords on how a repairs contract is actually structured.",
   },
   {
     name: 'Kate Davies CBE',

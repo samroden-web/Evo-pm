@@ -28,6 +28,7 @@ export default function ResidentVideo() {
             <VideoPlayer
               src="/video/evo-resident-voxpop.mp4"
               poster="/images/photos/evo-resident-voxpop-poster.webp"
+              posterAlt="An EVO resident talking to camera about getting a repair done"
               width={720}
               height={1280}
               label="Play the resident video"

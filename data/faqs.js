@@ -272,12 +272,16 @@ export const faqs = {
         '- ISO 14001 - 379312022',
         '- ISO 45001 - 379312022',
         '- ISO 27001 - 399882022',
-        '- ConstructionLine - 1208510',
+        '- Constructionline Gold - 1208510',
         '- Acclaim - 1208510',
         '- Social Value - 1208510',
         '- NAPIT - NAP/61569/21/1',
       ],
-      tbc: 'Constructionline tier (Gold or Silver) against registration 1208510, and whether the ISO certificate numbers are still current',
+      // Settled 26 September from EVO's own badge, public/images/logos/accreditations/
+      // constructionline-gold.png, which reads "Gold Member" - a badge the company publishes
+      // about itself outranks a line in a slide deck. The ISO certificate numbers are listed
+      // above as EVO published them; whether they are still in date is a renewal question for
+      // EVO's own diary, not a question for a page a customer reads.
     },
   ],
   'terms-conditions': [

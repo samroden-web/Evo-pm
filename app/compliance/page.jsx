@@ -76,6 +76,9 @@ export default function CompliancePage() {
               statutory is work EVO actually does and regulatory is a duty that never
               transfers. Painted the other way round it would say "you hold the duty" in EVO
               orange, which is the overclaim this whole page exists to avoid. */}
+          {/* Same heading-order fix as /how-it-works: these two cards are h3s and there was no
+              h2 between them and the page title. */}
+          <h2 className="visually-hidden">Statutory compliance and regulatory compliance</h2>
           <div className="split-halves">
             <div className="card card--statutory">
               <IconBadge name="wrench" />

@@ -62,7 +62,17 @@ export default async function InsightPage({ params }) {
                 <Link href="/how-it-works">how the service works today</Link>.
               </p>
             )}
-            {a.image && <img src={a.image} alt="" style={{ borderRadius: 14, marginBottom: 24 }} />}
+            {/* An empty alt is right for an article card, where the link text already reads the
+                headline out. It is wrong here: this is the lead image of the piece and nothing
+                else on the page describes it. Falling back to the article title is better than
+                silence and better than a filename. */}
+            {a.image && (
+              <img
+                src={a.image}
+                alt={a.imageAlt || `Illustration for the article: ${a.title}`}
+                style={{ borderRadius: 14, marginBottom: 24 }}
+              />
+            )}
             {a.body ? (
               <Blocks body={a.body} />
             ) : (

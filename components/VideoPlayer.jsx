@@ -14,7 +14,7 @@ import { useRef, useState } from 'react';
 // preload="none" is kept, so nothing downloads until someone actually presses play: the
 // file is 10MB, and most visitors will never watch it.
 
-export default function VideoPlayer({ src, poster, width, height, label = 'Play the video' }) {
+export default function VideoPlayer({ posterAlt = '', src, poster, width, height, label = 'Play the video' }) {
   const ref = useRef(null);
   const [started, setStarted] = useState(false);
 
@@ -33,7 +33,7 @@ export default function VideoPlayer({ src, poster, width, height, label = 'Play 
         </video>
       ) : (
         <button type="button" className="ev3-player-poster" onClick={play}>
-          <img src={poster} alt="" width={width} height={height} loading="lazy" decoding="async" />
+          <img src={poster} alt={posterAlt} width={width} height={height} loading="lazy" decoding="async" />
           <span className="ev3-player-btn" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor" />

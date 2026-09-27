@@ -146,10 +146,7 @@ export default function PlanExplorer() {
   // The client standing charge always applies - it is in Schedule 4 and is not optional, so
   // it is shown as a fact rather than as a switch. The block charge appears only if communal
   // reporting is selected, because it is the other half of that add-on.
-  const separateCharges = [
-    clientStandingCharge,
-    ...(addonOn.communal ? [communalBlockCharge] : []),
-  ];
+  const separateCharges = [clientStandingCharge, ...(addonOn.communal ? [communalBlockCharge] : [])];
 
   const contactHref = useMemo(() => {
     const p = new URLSearchParams({ enquiry: 'review', type: typeId, plan: planId });
@@ -196,7 +193,12 @@ export default function PlanExplorer() {
                             <li key={i}>{i}</li>
                           ) : (
                             <li key={i.text}>
-                              {i.text} <Tbc>{i.tbc}</Tbc>
+                              {/* Guarded. This rendered <Tbc> unconditionally, so the moment a
+                                  feature's query was answered and its `tbc` removed, the line
+                                  kept an EMPTY yellow chip beside it - an annotation with
+                                  nothing to annotate, on the pricing page. Found by the
+                                  unresolved-comment sweep, which listed a TBC with no text. */}
+                              {i.text} {i.tbc ? <Tbc>{i.tbc}</Tbc> : null}
                             </li>
                           )
                         )}
@@ -368,7 +370,10 @@ export default function PlanExplorer() {
                 phone these two were most of its height. Both survive in full on the page
                 itself, under "All prices at a glance" and in the notes beneath it, which is
                 where terms belong. */}
-            <div className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`} id="summary-lines">
+            <div
+              className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`}
+              id="summary-lines"
+            >
               <ul className="summary-bar__group">
                 <li>Managed Technology {formatPrice(type.managedTechnology)}</li>
                 <li>
@@ -387,9 +392,7 @@ export default function PlanExplorer() {
                   though every property costs GBP400 more. It does not: it is charged once
                   for the whole client. */}
               <div className="summary-bar__separate">
-                <p className="summary-bar__separate-head">
-                  Charged once for the contract, not per home
-                </p>
+                <p className="summary-bar__separate-head">Charged once for the contract, not per home</p>
                 <ul className="summary-bar__group">
                   {separateCharges.map((c) => (
                     <li key={c.label}>

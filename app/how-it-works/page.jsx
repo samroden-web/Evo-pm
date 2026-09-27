@@ -53,9 +53,7 @@ const whyOwnIt = [
 // ---------------------------------------------------------------------------
 
 // Read from data/plans.js so these can never drift from the pricing page.
-const planLine = plans
-  .map((p) => `${p.name} (up to \u00a3${p.threshold.toLocaleString('en-GB')})`)
-  .join(', ');
+const planLine = plans.map((p) => `${p.name} (up to \u00a3${p.threshold.toLocaleString('en-GB')})`).join(', ');
 
 const inPlan = [
   'Heating: radiators, valves, pumps, cylinders, thermostats and controls',
@@ -125,8 +123,15 @@ export default function HowItWorksPage() {
         caption="Three apps, one record, one supplier"
       />
 
-      <section className="section" aria-label="EVO Living App, EVO Dashboard and EVO Trades App">
+      {/* The launch audit found h1 jumping straight to h3 here: the three app blocks are h3s and
+          the section had only an aria-label, so anybody navigating by heading level got a broken
+          outline. The heading is hidden rather than drawn, because the design deliberately opens
+          on the three blocks - but the document needs the level. */}
+      <section className="section" aria-labelledby="apps-title">
         <div className="container">
+          <h2 id="apps-title" className="visually-hidden">
+            The three apps: EVO Living, EVO Dashboard and EVO Trades
+          </h2>
           <Audiences />
         </div>
       </section>
@@ -181,8 +186,9 @@ export default function HowItWorksPage() {
             <div className="card card--shadow">
               <h2 style={{ fontSize: '1.4rem' }}>Who does the work</h2>
               <p className="mb-0">
-                Around 100 vetted contractors, mostly small regional firms who know their area. Each one is checked for insurance,
-                accreditation and competence before their first job, and anyone who falls below standard stops getting work.
+                Around 100 vetted contractors, mostly small regional firms who know their area. Each one is checked for
+                insurance, accreditation and competence before their first job, and anyone who falls below standard
+                stops getting work.
               </p>
             </div>
             <div className="card card--shadow">
@@ -245,8 +251,8 @@ export default function HowItWorksPage() {
               <span className="scope-tag">In your plan</span>
               <h3>Reactive repairs, however many</h3>
               <p>
-                Resident-reported, like-for-like repairs under your plan&rsquo;s value threshold. No cap on the number of
-                them, so your cost stays the same in a bad winter.
+                Resident-reported, like-for-like repairs under your plan&rsquo;s value threshold. No cap on the number
+                of them, so your cost stays the same in a bad winter.
               </p>
               <ul className="scope-list">
                 {inPlan.map((t) => (
@@ -293,8 +299,8 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
               <p className="scope-note">
-                On building safety, nothing we do transfers your statutory duties as landlord or accountable person. We hold
-                the evidence; the duty stays with you. See{' '}
+                On building safety, nothing we do transfers your statutory duties as landlord or accountable person. We
+                hold the evidence; the duty stays with you. See{' '}
                 <Link href="/compliance" className="text-link">
                   compliance
                 </Link>{' '}
@@ -320,9 +326,10 @@ export default function HowItWorksPage() {
             <p className="eyebrow">The comparison</p>
             <h2 id="compare-title">Two kinds of supplier exist. Neither of them does both.</h2>
             <p className="lead">
-              Most of what housing providers are offered is <strong>software to manage repairs across a portfolio</strong>, which
-              does not do the repair. The alternative is <strong>home emergency cover</strong>, which does the repair but only for
-              heating, plumbing and electrics, one property at a time. EVO is the only one that does both.
+              Most of what housing providers are offered is{' '}
+              <strong>software to manage repairs across a portfolio</strong>, which does not do the repair. The
+              alternative is <strong>home emergency cover</strong>, which does the repair but only for heating, plumbing
+              and electrics, one property at a time. EVO is the only one that does both.
             </p>
           </div>
           <ComparisonTable />

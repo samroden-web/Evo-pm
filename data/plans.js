@@ -146,7 +146,7 @@ export const managedTechnologyFeatures = [
   {
     group: 'Resident support',
     items: [
-      { text: 'Dedicated, experienced helpdesk', tbc: 'helpdesk hours, 8am or 9am to 5pm' },
+      { text: 'Dedicated helpdesk, Monday to Friday 8.45am to 5.15pm' },
       'EVO Living App (iOS and Android)',
       '24/7 home emergency response',
     ],

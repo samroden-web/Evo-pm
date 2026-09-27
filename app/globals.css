@@ -46,6 +46,13 @@
 
   --orange: #ff6600;
   --orange-ink: #b34700;
+  /* Sam, 27 September: "i dont think the black on organge works well. maybe white."
+     White on the brand orange #ff6600 is 2.94:1 - it fails AA for normal text and misses even
+     the 3:1 large-text bar, so "maybe white" is not available on that background at any size.
+     Rather than refuse, the background moves: #c74800 is the BRIGHTEST orange at which white
+     text reaches 4.5:1 (it measures 4.82:1). Anything brighter fails, anything darker stops
+     reading as orange. It is a shade of the brand orange, not a new colour. */
+  --orange-deep: #c74800;
   --orange-soft: #fff2e8;
   --orange-dark: #b34700;
   --navy: #2b3a47;
@@ -885,9 +892,22 @@ p.center {
 /* Orange band 1 of 3. This is the first thing under the hero and the biggest single
    field of colour on the page, so moving it off navy does most of the work on the
    "blue is overused in this sector" note by itself. */
+/* WHITE IS NOT AVAILABLE ON THE BRAND ORANGE, and this is the rule the whole site now follows.
+   Measured: white on #ff6600 is 2.94:1. That fails AA for normal text (4.5:1) and it fails the
+   large-text allowance too (3:1) - by 0.06, which is exactly the kind of near-miss that survives
+   every eyeball review. The launch audit found 17 of them: the homepage's headline figures, the
+   numbered steps on /how-it-works, and the lead heading on five orange bands.
+   --on-orange (#3a1c00) is 5.31:1 on the same background. It reads as a deep warm brown rather
+   than black, which is what Sam disliked about black on orange - and the bands already used it
+   for their body text, so this makes them internally consistent rather than half white and half
+   dark.
+   THE ONE EXCEPTION is the residents page's registration box, which Sam wanted white. That box
+   is --orange-deep (#c74800), the brightest orange at which white reaches 4.5:1. If you want
+   white type on an orange surface anywhere else, that is the shade it has to sit on.
+   Do not put white back on #ff6600 without re-measuring. */
 .figures {
   background: var(--orange);
-  color: var(--white);
+  color: var(--on-orange);
   padding: 30px 0 0;
 }
 /* A ROW OF HEADLINE FIGURES on the page background. Not to be confused with .figures
@@ -914,13 +934,24 @@ p.center {
    Sam wanted it back - it was the visual anchor on both pages - but NOT the markup it came
    with, which stacked three stats full width and crammed each value into .num, the 38px
    navy circle used for numbered process steps. Same band, laid out as a row. */
+/* THE BAND STAYS BRIGHT ORANGE, AND THE FIGURES ON IT GO DARK.
+   I deepened this band first, so that its white figures would pass, and the audit immediately
+   found what that broke: --on-orange and --on-orange-soft were measured against #ff6600 and drop
+   to 3.24:1 and 2.82:1 on the deeper shade, so fixing five white numbers broke twenty-one dark
+   labels. A surface colour cannot be changed without re-measuring every foreground on it.
+   The decision this site already made, documented at .ev2-band, is that NO text on the bright
+   orange is white, because white is 2.94:1 there. The white figures were the stragglers, not the
+   rule, so they now follow it. */
 .statrow--orange {
   background: var(--orange);
   border-radius: var(--radius);
   padding: clamp(20px, 2.6vw, 32px);
 }
+/* Dark, not white. Measured 2.94:1 as white against the 3:1 large-text bar - the site's own
+   headline numbers failing by 0.06 - and 5.31:1 as --on-orange. It is the same rule the rest of
+   this band already followed. */
 .statrow--orange .stat {
-  color: var(--white);
+  color: var(--on-orange);
 }
 /* --on-orange measures 5.31:1 against the brand orange; --muted measured 1.86:1, which is
    how this band's labels were found in the first place. */
@@ -945,7 +976,7 @@ p.center {
   font-size: clamp(1.9rem, 3.8vw, 2.8rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--white);
+  color: var(--on-orange);
 }
 .figures__label {
   display: block;
@@ -3311,14 +3342,14 @@ textarea {
 /* Full-width orange band: the argument a page opens with. */
 .ev2-band {
   background: var(--orange);
-  color: #fff;
+  color: var(--on-orange);
   padding: var(--sec-y) 0;
 }
 .ev2-band .eyebrow {
   color: var(--on-orange-soft);
 }
 .ev2-band h2 {
-  color: #fff;
+  color: var(--on-orange);
   max-width: 24ch;
   margin: 6px 0 0;
 }
@@ -3370,7 +3401,7 @@ textarea {
   font-size: clamp(2rem, 3.4vw, 2.9rem);
   font-weight: 700;
   line-height: 0.9;
-  color: #fff;
+  color: var(--on-orange);
   margin: 0 0 10px;
   font-variant-numeric: tabular-nums;
 }
@@ -3380,7 +3411,7 @@ textarea {
   font-size: 0.97rem;
 }
 .ev2-band-item .ev2-figure {
-  color: #fff;
+  color: var(--on-orange);
   font-size: 2.4rem;
   font-weight: 700;
   line-height: 1;
@@ -3482,11 +3513,11 @@ textarea {
 }
 .ev2-pair--total .ev2-b {
   background: var(--orange);
-  color: var(--white);
+  color: var(--on-orange);
   box-shadow: none;
 }
 .ev2-pair--total .ev2-b::before {
-  color: var(--white);
+  color: var(--on-orange);
 }
 
 @media (max-width: 620px) {
@@ -3940,14 +3971,14 @@ textarea {
 /* See it. Try it. Start it. */
 .ev2-start {
   background: var(--orange);
-  color: #fff;
+  color: var(--on-orange);
   padding: var(--sec-y) 0;
 }
 .ev2-start .eyebrow {
   color: var(--on-orange-soft);
 }
 .ev2-start h2 {
-  color: #fff;
+  color: var(--on-orange);
   margin: 0;
 }
 .ev2-start h2 em {
@@ -4492,10 +4523,42 @@ textarea {
   margin-top: 0;
 }
 
+/* Sam, 27 September: "can you bring the amount on 1 line in slightly, as the numbers dont work
+   well, and bring ghe cenfred so the stray ones are not off centre."
+   Two faults, one cause. The tracks were `1fr`, so they stretched to fill the row - which means
+   a last row holding two people gave those two half the page each, and `justify-content` had
+   nothing to centre because the row was already full width. Fixed-width tracks with auto-fit let
+   the grid centre what is left over.
+   The counts are 7 board, 13 operations and 10 technology, so there is no column count that
+   divides all three. Rather than pick one and leave the other two ragged, the remainder is
+   centred, which is what Sam asked for and what reads as deliberate at any count.
+   180px rather than 150px: slightly fewer per line, as asked, and a card wide enough for a full
+   name on one line. */
+/* FLEX, NOT GRID, and the reason is the whole point of the change. `justify-content: center` on
+   a grid centres the TRACKS, so the full rows centred correctly and the last row - the two
+   leftover board members - still sat hard left with a 690px hole beside them. Measured, seen,
+   changed. A wrapping flex row centres every line including the last, which is what "the stray
+   ones are not off centre" actually requires. */
 .ev3-team {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 22px;
+}
+.ev3-team > * {
+  flex: 0 1 180px;
+  min-width: 0;
+}
+/* On a phone a fixed 180px card left 85px of dead space each side. Two to a row, filling the
+   width, with the last odd one centred. */
+@media (max-width: 560px) {
+  /* Two to a row, and the max-width matters: without it a lone last card grew to the full 350px
+     while the pairs above it sat at 164px, which looks like a mistake rather than a remainder.
+     Capped at half a row, justify-content centres it. */
+  .ev3-team > * {
+    flex: 1 1 140px;
+    max-width: calc(50% - 11px);
+  }
 }
 /* The board used to be two wide columns of horizontal cards, because each one carried a full
    biography beside the photograph. With the biographies behind a disclosure it inherits the same
@@ -4504,7 +4567,7 @@ textarea {
    photo in a half-width column rendered enormous and the section grew from 3,479px to 5,163px.
    The two changes only work together. */
 .ev3-team--board {
-  gap: 20px;
+  gap: 20px 22px;
 }
 
 .ev3-person {
@@ -6847,14 +6910,24 @@ textarea {
    the site where a contrast shortcut is defensible. Navy on the same orange is 5.11:1. The box
    is brighter than the navy one it replaces AND readable, which is the whole win. */
 .ev2-getapp--orange {
-  background: var(--orange);
+  background: var(--orange-deep);
   align-items: flex-start;
   gap: clamp(22px, 3vw, 40px);
+  /* A hairline of the true brand orange along the top, so the box still carries the bright
+     colour even though the field behind the text cannot. */
+  border-top: 4px solid var(--orange);
 }
 .ev2-getapp--orange h2,
-.ev2-getapp--orange p,
+.ev2-getapp--orange p {
+  color: #fff;
+}
+/* I tried a warm cream here first and measured it at 3.66:1. The 3:1 allowance is for LARGE
+   text - 24px, or 18.66px bold - and these labels are 11.68px, so they need the full 4.5:1 like
+   any other small text. My own comment justifying the tint was wrong, and the measurement caught
+   it. White it is: 4.82:1, and the label is already distinguished by being uppercase, bold,
+   small and letter-spaced, so it does not need colour to separate it from the heading. */
 .ev2-getapp--orange .eyebrow {
-  color: var(--navy-deep);
+  color: #fff;
 }
 .ev2-getapp--orange h2 {
   margin: 4px 0 10px;
@@ -6868,15 +6941,17 @@ textarea {
   gap: 10px;
   align-content: start;
 }
-/* A solid dark button on orange. The primary orange button would vanish into the box. */
+/* A solid white button on the deep orange. White on #c74800 is the same 4.82:1 the text sits
+   at, and a navy button on orange reads as a hole rather than an action. */
 .btn-dark {
-  background: var(--navy-deep);
-  color: #fff;
-  border: 1px solid var(--navy-deep);
+  background: #fff;
+  color: var(--orange-ink);
+  border: 1px solid #fff;
+  font-weight: 700;
 }
 .btn-dark:hover {
-  background: #0f1820;
-  border-color: #0f1820;
+  background: #fff4ec;
+  border-color: #fff4ec;
 }
 
 /* The emergency panel, cut back to what somebody in a panic can act on. */
@@ -6920,6 +6995,29 @@ textarea {
   flex-direction: column;
   gap: 14px;
 }
+/* On a phone the four steps stacked with a 220px phone picture under each one, and the section
+   measured 2,292px - six screens of scrolling for four sentences. Below the split the screen
+   sits BESIDE its step instead, small, which keeps the pairing Sam asked for and gives the
+   section back to the reader. */
+@media (max-width: 719px) {
+  .app-step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .app-step__text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .app-step__shot {
+    flex: 0 0 104px;
+    margin-top: 0;
+    order: 2;
+  }
+  .app-step__shot img {
+    max-width: 104px;
+  }
+}
 .app-step__shot {
   display: flex;
   align-items: flex-start;
@@ -6957,4 +7055,19 @@ textarea {
 }
 .app-steps__more {
   margin-top: clamp(18px, 2.4vw, 26px);
+}
+
+/* Tap targets. The launch audit measured 19 form controls at 18x18px across /contact,
+   /renters-rights-guide and the newsletter sign-up. WCAG 2.2 sets the minimum at 24x24, and a
+   checkbox is exactly the control somebody fills in on a phone, one-handed, in a hurry. These
+   are the native controls, so the size is set on the control itself rather than faked with a
+   wrapper. */
+input[type='checkbox'],
+input[type='radio'] {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  accent-color: var(--orange-deep);
+  flex: 0 0 auto;
 }

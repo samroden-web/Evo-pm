@@ -389,9 +389,18 @@ const CHECKS = [
         return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
       };
       const bg = getComputedStyle(box).backgroundColor;
-      if (!/255,\s*102,\s*0/.test(bg)) return `the box is ${bg}, not EVO orange`;
+      // NOT a hex match. This started as `must be rgb(255,102,0)` and went red the moment the
+      // shade was deepened so that white text could pass - pinning the colour would have made
+      // the accessibility fix look like a regression. What matters is that it is recognisably
+      // orange and that everything on it is readable, so that is what is asserted.
+      const [R, G, B] = bg.match(/\d+/g).slice(0, 3).map(Number);
+      if (!(R > 150 && R > G * 1.8 && B < 80)) return `the box is ${bg}, which is not an orange`;
       // Every piece of text in the box, not just the heading - white anywhere here is 2.94:1.
+      // Every element that sits DIRECTLY on the orange. The button is excluded on purpose: it
+      // carries its own background, so measuring its text against the box behind it is the
+      // 1.00:1 mistake this project has already made twice.
       for (const el of box.querySelectorAll('h2, p, .eyebrow')) {
+        if (el.closest('.btn') || el.closest('.app-badge')) continue;
         const fg = getComputedStyle(el).color;
         const a = lum(fg);
         const bl = lum(bg);
