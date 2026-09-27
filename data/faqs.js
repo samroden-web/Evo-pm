@@ -58,12 +58,13 @@ export const faqs = {
         'total loss of power',
         'pest infestations that cause a health risk',
       ],
-      tbc: 'should damp and mould presenting a serious risk be listed here?',
+      // Asked whether damp and mould presenting a serious risk should be listed here as well.
+      // Sam, 27 September: the FAQs are fine as they are. /damp-and-mould covers it in full and
+      // is linked from the resident pages, so this stays as it is.
     },
     {
       q: 'Can I choose my appointment time?',
-      a: 'Yes. Once your repair is approved, you choose the timeslots that suit you in the app. You can manage your appointments in the app under Appointments, or contact the helpdesk.',
-      tbc: 'number of timeslots: "three or more" or "up to 5"',
+      a: 'Yes. Once your repair is approved, you are offered up to five timeslots to choose from. You can manage your appointments in the app under Appointments, or contact the helpdesk.',
     },
     {
       q: 'Where can I find information about my home?',
@@ -319,7 +320,10 @@ export const faqs = {
     {
       q: 'How is out-of-hours work charged?',
       a: 'During normal operating hours (8am to 5pm, Monday to Friday) every emergency response job is charged at your standard contracted rate for services, as set out in your service plan. Work outside those hours carries an agreed uplift on your contracted rate, also set out in your service plan.',
-      tbc: 'whether to publish the out-of-hours uplift percentages here. They are on the current site and have been verified word for word, but they sit alongside rate card material that is not for publication, so this is a commercial decision rather than a migration one',
+      // DECIDED, 27 September: Sam - "dont publish the uplift %'s". They stay off the site.
+      // Recording it here rather than deleting the note, because the percentages are on the
+      // CURRENT site, so the question will look like an oversight to anyone comparing the two.
+      // It was not an oversight; it was a decision.
     },
     {
       q: 'What is excluded from the 24/7 Safe & Secure Response service?',

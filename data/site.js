@@ -50,9 +50,11 @@ export const contact = {
   // Published alongside the main number on EVO's company-information page.
   smsNumber: '07441 471580',
   whatsappNumber: '07723 502080',
-  // Brief section 2 lists helpdesk@ as the resident helpdesk. TBC item 2 is whether living@ is also used.
+  // Confirmed by Sam, 27 September, and it matches what evo-pm.com/contact says today:
+  // hello@ for general enquiries, helpdesk@ for repairs. Closes TBC item 2, which was showing
+  // on four pages.
   residentEmail: 'helpdesk@evo-pm.com',
-  residentEmailConfirmed: false,
+  residentEmailConfirmed: true,
   // Confirmed by Sam, 27 September. Closes TBC item 12, which was showing a visible tag on
   // /residents, /pricing and /faqs/residents.
   helpdeskHours: 'Monday to Friday, 8.45am to 5.15pm',

@@ -19,8 +19,9 @@ export const livingAppGuide = {
     },
     {
       title: 'Choose your timeslots',
-      text: 'Once the repair is approved, choose the timeslots that suit you.',
-      tbc: 'number of timeslots: "three or more" or "up to 5"',
+      // Sam, 27 September: up to five, and he is right that this belongs in the how-to guide
+      // rather than only in an FAQ - it is the step where somebody is actually choosing.
+      text: 'Once the repair is approved, you are offered up to five timeslots. Choose the one that suits you.',
     },
     {
       title: 'Use our key solution if no one is home',
@@ -70,7 +71,10 @@ export const fullJourney = [
     who: 'EVO',
     text: 'The repair is approved, the resident picks appointment slots, and the job is matched to the next available, suitably qualified tradesperson.',
   },
-  { who: 'EVO', text: 'A video call may be set up to resolve the issue remotely, or to help the resident fix it themselves.' },
+  {
+    who: 'EVO',
+    text: 'A video call may be set up to resolve the issue remotely, or to help the resident fix it themselves.',
+  },
   {
     who: 'Trades',
     text: 'The tradesperson accepts the job in the EVO Trades App and sends arrival updates to the resident on the day.',

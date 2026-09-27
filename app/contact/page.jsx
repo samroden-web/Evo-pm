@@ -40,7 +40,10 @@ export default function ContactPage() {
               <div className="card card--grey">
                 <h2 style={{ fontSize: '1.1rem' }}>General enquiries</h2>
                 <p>
-                  Email: <a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a>
+                  {/* Sam, 27 September: hello@ for normal comms, helpdesk@ for repairs, worded
+                      the way evo-pm.com/contact does it today. Saying which is which on the page
+                      is the point - two addresses with no explanation is worse than one. */}
+                  General enquiries: <a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a>
                   <br />
                   Phone: <a href="tel:+442086919293">{contact.salesPhone}</a>
                   <br />
@@ -63,7 +66,10 @@ export default function ContactPage() {
               </div>
               <div className="card card--grey">
                 <h2 style={{ fontSize: '1.1rem' }}>Are you a resident?</h2>
-                <p>This form is not to be used for reporting repair or maintenance issues.</p>
+                <p>
+                  This form is not to be used for reporting repair or maintenance issues. Report it in the EVO Living
+                  App, or email <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>.
+                </p>
                 <Link href="/residents" className="text-link">
                   Report a repair
                 </Link>
