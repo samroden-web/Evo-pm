@@ -63,7 +63,15 @@ export default function LogoStrip({
               loading="lazy"
               decoding="async"
               style={{
-                ...(normalise ? { maxHeight: normalisedHeight(l, normaliseArea), maxWidth: '100%' } : null),
+                /* A CUSTOM PROPERTY, NOT maxHeight. Setting max-height inline beat every cap in
+                   the stylesheet, because inline styles win - so a strip that allows 40px would
+                   happily render a 64px logo and clip it. It never showed up until the first
+                   PORTRAIT mark arrived (Cyber Essentials, 95x114): every logo before it was
+                   wide, so equal-area sizing produced something shorter than the cap anyway.
+                   Handing the number to CSS as a variable lets each strip clamp it with
+                   min(var(--logo-h), its own cap), so equal area still governs the look and the
+                   row still governs the height. */
+                ...(normalise ? { '--logo-h': `${normalisedHeight(l, normaliseArea)}px`, maxWidth: '100%' } : null),
                 ...(toneOpacity(l.name, color) ? { opacity: toneOpacity(l.name, color) } : null),
               }}
             />

@@ -1290,7 +1290,7 @@ p.center {
   mix-blend-mode: multiply;
 }
 .logo-strip img {
-  max-height: 84px;
+  max-height: min(var(--logo-h, 84px), 84px);
   max-width: 190px;
   width: auto;
   height: auto;
@@ -2700,7 +2700,7 @@ table.data tbody th {
   height: 56px;
 }
 .footer-logos .logo-strip img {
-  max-height: 44px;
+  max-height: min(var(--logo-h, 44px), 44px);
   max-width: 120px;
 }
 .footer-bottom {
@@ -4921,7 +4921,7 @@ textarea {
   align-items: center;
 }
 .footer-logos .logo-strip img {
-  max-height: 40px;
+  max-height: min(var(--logo-h, 40px), 40px);
   max-width: 116px;
   width: auto;
   height: auto;
@@ -4950,7 +4950,7 @@ textarea {
   align-items: center;
 }
 .ev3-accreds .logo-strip img {
-  max-height: 46px;
+  max-height: min(var(--logo-h, 46px), 46px);
   max-width: 130px;
   width: auto;
   height: auto;

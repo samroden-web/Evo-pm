@@ -55,8 +55,8 @@ export const accreditationLogos = [
   },
   { name: 'Acclaim Accreditation', src: '/images/logos/accreditations/acclaim.png', width: 357, height: 121 },
   { name: 'Property Redress Scheme', src: '/images/logos/accreditations/prs.webp', width: 600, height: 170 },
-  { name: 'Cyber Essentials', src: null, tbc: 'logo file to follow' },
-  { name: 'Living Wage Employer', src: null, tbc: 'logo file to follow' },
+  { name: 'Cyber Essentials', src: '/images/logos/accreditations/cyber-essentials.png', width: 95, height: 114 },
+  { name: 'Living Wage Employer', src: '/images/logos/accreditations/living-wage-employer.png', width: 140, height: 111 },
 ];
 
 export const awardBadges = { src: '/images/awards/award-badges-light.png', width: 684, height: 99 };
