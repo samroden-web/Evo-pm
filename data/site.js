@@ -53,8 +53,9 @@ export const contact = {
   // Brief section 2 lists helpdesk@ as the resident helpdesk. TBC item 2 is whether living@ is also used.
   residentEmail: 'helpdesk@evo-pm.com',
   residentEmailConfirmed: false,
-  // TBC item 12: Mon to Fri, 8am or 9am to 5pm
-  helpdeskHours: null,
+  // Confirmed by Sam, 27 September. Closes TBC item 12, which was showing a visible tag on
+  // /residents, /pricing and /faqs/residents.
+  helpdeskHours: 'Monday to Friday, 8.45am to 5.15pm',
   callsRecorded: true,
 };
 

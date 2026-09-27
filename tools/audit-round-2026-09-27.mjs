@@ -373,6 +373,92 @@ const CHECKS = [
     },
   },
 
+  // ---- Residents page, 27 September ----
+  {
+    page: '/residents',
+    name: 'res-a. the top box is orange and its text passes contrast against it',
+    test: () => {
+      const box = document.querySelector('.ev2-getapp--orange');
+      if (!box) return 'the orange top box is not there';
+      const lum = (c) => {
+        const [r, g, b] = c
+          .match(/\d+/g)
+          .slice(0, 3)
+          .map((n) => n / 255);
+        const f = (x) => (x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4));
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      };
+      const bg = getComputedStyle(box).backgroundColor;
+      if (!/255,\s*102,\s*0/.test(bg)) return `the box is ${bg}, not EVO orange`;
+      // Every piece of text in the box, not just the heading - white anywhere here is 2.94:1.
+      for (const el of box.querySelectorAll('h2, p, .eyebrow')) {
+        const fg = getComputedStyle(el).color;
+        const a = lum(fg);
+        const bl = lum(bg);
+        const ratio = (Math.max(a, bl) + 0.05) / (Math.min(a, bl) + 0.05);
+        if (ratio < 4.5) return `"${el.textContent.trim().slice(0, 30)}" is ${ratio.toFixed(2)}:1 on the orange`;
+      }
+      return true;
+    },
+  },
+  {
+    page: '/residents',
+    name: 'res-b. registration and both app badges are in that top box',
+    test: () => {
+      const box = document.querySelector('.ev2-getapp--orange');
+      if (!box) return 'no orange box';
+      if (!/First time here/i.test(box.innerText)) return 'the First time here block did not move up';
+      if (!/Register/i.test(box.innerText)) return 'no registration call to action in the box';
+      // Count the badge LINKS, not images: AppBadges draws the Apple and Play marks as inline
+      // SVG, so an img-based count reports zero on a page that is correct. Second time an
+      // assertion of mine has been wrong rather than the page - worth the note.
+      const badges = [...box.querySelectorAll('a.app-badge')];
+      if (badges.length < 2) return `${badges.length} app badge link(s) in the box, expected 2`;
+      const dead = badges.filter((a) => !a.getAttribute('href') || !a.querySelector('svg'));
+      return dead.length === 0 || `${dead.length} badge(s) have no link or no mark`;
+    },
+  },
+  {
+    page: '/residents',
+    name: 'res-c. the four step headings sit on one line, with their screens',
+    test: () => {
+      const heads = [...document.querySelectorAll('.app-step__text h3')];
+      if (heads.length !== 4) return `${heads.length} steps, expected 4`;
+      const tops = heads.map((h) => Math.round(h.getBoundingClientRect().top));
+      // One row on a wide viewport: all four headings level. This is the fault that was found by
+      // measuring - the step with no screenshot rode 459px above the rest.
+      const spread = Math.max(...tops) - Math.min(...tops);
+      if (spread > 4) return `the step headings are ${spread}px apart`;
+      const shots = [...document.querySelectorAll('.app-step__shot img')];
+      if (shots.length !== 3) return `${shots.length} screenshots, expected 3`;
+      const broken = shots.filter((i) => !i.complete || i.naturalWidth === 0);
+      return broken.length === 0 || `${broken.length} screenshot(s) did not load`;
+    },
+  },
+  {
+    page: '/residents',
+    name: 'res-d. the helpdesk hours are published, not a TBC',
+    test: () => {
+      const t = document.body.innerText;
+      if (!/8\.45am to 5\.15pm/.test(t)) return 'the confirmed hours are not on the page';
+      return !/8am or 9am to 5pm/.test(t) || 'the old TBC placeholder is still showing';
+    },
+  },
+  {
+    page: '/residents',
+    name: 'res-e. the emergency panel is trimmed, and the guide is linked',
+    test: () => {
+      const em = document.querySelector('.ev2-emergency');
+      if (!em) return 'the emergency panel is gone entirely';
+      if (!em.querySelector('a[href*="reporting-an-emergency"]')) return 'the emergency guide is not linked from it';
+      if (em.querySelector('ul')) return 'the what-counts-as-an-emergency list is still duplicated here';
+      // Still carries the three things that matter in a panic.
+      const t = em.innerText;
+      for (const must of ['0800 111 999', '999']) if (!t.includes(must)) return `${must} is missing`;
+      return true;
+    },
+  },
+
   // ---- Standing: things settled earlier that a later patch could quietly undo ----
   {
     page: '/case-studies',

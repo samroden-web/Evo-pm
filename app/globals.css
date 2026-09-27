@@ -6821,3 +6821,140 @@ textarea {
     transition: none;
   }
 }
+
+/* A logo published as WHITE artwork on transparent. Every band on this site is light, so the
+   lettering was invisible and the mark read as a symbol with nothing beside it - Sam spotted it
+   on the live site before I could, because neither this container nor his machine can reach the
+   deployed images to look.
+   brightness(0) collapses the non-transparent pixels to black and leaves the alpha channel
+   alone, so white lettering becomes dark lettering with no edit to the file. The opacity that
+   lifts it back off pure black is set per logo in data/logos.js. */
+.logo-strip img[data-tone='light-artwork'] {
+  filter: brightness(0);
+}
+/* On a dark band the artwork is already correct, so the filter must come off or it disappears
+   the other way round. */
+.section--navy .logo-strip img[data-tone='light-artwork'],
+.footer .logo-strip img[data-tone='light-artwork'] {
+  filter: none;
+  opacity: 1;
+}
+
+/* ---------- Residents: the orange top box, and steps paired with their screens ---------- */
+/* ORANGE, AND WHY THE TEXT IS NAVY. White on EVO orange measures 2.94:1. That fails WCAG AA for
+   normal text (4.5:1) and even the large-text bar (3:1). This is the page a resident reads when
+   something has gone wrong at home, often on a phone, often not young, so it is the last page on
+   the site where a contrast shortcut is defensible. Navy on the same orange is 5.11:1. The box
+   is brighter than the navy one it replaces AND readable, which is the whole win. */
+.ev2-getapp--orange {
+  background: var(--orange);
+  align-items: flex-start;
+  gap: clamp(22px, 3vw, 40px);
+}
+.ev2-getapp--orange h2,
+.ev2-getapp--orange p,
+.ev2-getapp--orange .eyebrow {
+  color: var(--navy-deep);
+}
+.ev2-getapp--orange h2 {
+  margin: 4px 0 10px;
+  max-width: 22ch;
+}
+.ev2-getapp--orange .ev2-getapp__text p {
+  max-width: 52ch;
+}
+.ev2-getapp__apps {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+/* A solid dark button on orange. The primary orange button would vanish into the box. */
+.btn-dark {
+  background: var(--navy-deep);
+  color: #fff;
+  border: 1px solid var(--navy-deep);
+}
+.btn-dark:hover {
+  background: #0f1820;
+  border-color: #0f1820;
+}
+
+/* The emergency panel, cut back to what somebody in a panic can act on. */
+.ev2-emergency--tight {
+  padding: 18px 20px;
+}
+.ev2-emergency__lead {
+  margin: 6px 0 0;
+  max-width: var(--measure);
+}
+
+/* Each step with the screen it describes.
+   TEXT FIRST, PICTURE SECOND, and that order is the fix rather than a preference. With the
+   picture on top, the fourth step - the one with no screenshot - had nothing to stand on and its
+   heading rode 459px above the other three, measured at 1440px. Reserving an empty phone-sized
+   slot to hold the row straight would have been 463px of white space under a step that simply
+   has no picture. Leading with the text aligns all four headings on the top edge for free, and a
+   cell that ends early at the bottom is unremarkable. */
+.app-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(22px, 3vw, 40px);
+}
+@media (min-width: 720px) {
+  .app-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1040px) {
+  /* Four steps, so four columns or two - never three, which would leave one stranded. */
+  .app-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.app-step {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.app-step__shot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.app-step__shot img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.app-step__text .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--navy-deep);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+}
+.app-step__text h3 {
+  font-size: 1.02rem;
+  margin: 0 0 6px;
+}
+.app-step__text p {
+  font-size: 0.95rem;
+}
+.app-steps__more {
+  margin-top: clamp(18px, 2.4vw, 26px);
+}

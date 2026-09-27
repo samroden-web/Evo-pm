@@ -1,5 +1,5 @@
 import Tbc from './Tbc';
-import { logoOpacity } from '@/data/logos';
+import { logoOpacity, logoTone } from '@/data/logos';
 
 // row: keep every logo on one line, scrolling sideways if they don't all fit.
 //
@@ -20,6 +20,9 @@ import { logoOpacity } from '@/data/logos';
 // are blended toward the page to match. See the note in data/logos.js for the measurements
 // and for why this is opacity rather than a brightness filter.
 function toneOpacity(name, color) {
+  // A light-artwork mark is dimmed on every strip, coloured or not: once brightness(0) has
+  // flattened it to black it needs lifting back to the weight of the marks beside it.
+  if (logoTone[name] === 'light-artwork') return logoOpacity[name];
   if (color) return undefined;
   return logoOpacity[name];
 }
@@ -56,6 +59,7 @@ export default function LogoStrip({
               alt={l.name}
               width={l.width}
               height={l.height}
+              data-tone={logoTone[l.name] || undefined}
               loading="lazy"
               decoding="async"
               style={{

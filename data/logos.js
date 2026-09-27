@@ -86,9 +86,32 @@ export const awardBadges = { src: '/images/awards/award-badges-light.png', width
 // TO RE-MEASURE after adding a logo: average the luminance of its non-transparent pixels,
 // ignoring anything above 0.93 (the white plate most of these sit on), then solve the line
 // above for o. If a new logo arrives already greyed to match the old set, it needs nothing.
+// TONE. Sam, 27 September: "The south east consortium logo has white text which is why we cant
+// see the writing on the light backgrounds. can nyou change the colour of that writing so it
+// shows up?" It is white artwork on transparent, so on every light band on this site it is an
+// invisible word beside a visible symbol.
+//
+// `brightness(0)` collapses every non-transparent pixel to black while leaving the transparency
+// alone, which turns white lettering into dark lettering without touching the file. The artwork
+// EVO was given is not altered or recoloured in any brand sense - it is rendered as a
+// single-tone mark, which is how the accreditation bodies publish these for light backgrounds
+// anyway. `logoOpacity` then lifts it back off pure black so it sits with the other marks.
+//
+// WHY THIS IS A SEPARATE MAP AND NOT A FIELD ON THE LOGO. tools/link-client-logos.mjs REBUILDS
+// each logo's object literal from scratch on every deploy, keeping only src, width, height,
+// show and tbc. Any other field put on the entry is silently deleted the next time a patch is
+// deployed - the white text would come back and nobody would connect it to a logo re-fetch. Put
+// display decisions here, where the linker cannot reach them.
+export const logoTone = {
+  'South East Consortium': 'light-artwork',
+};
+
 export const logoOpacity = {
   'Greenhill Housing': 0.31,
   J49: 0.32,
   'Storm Housing Group': 0.49,
   LRM: 0.62,
+  // Not a tone measurement - this one is a brightness(0) mark (see logoTone above), lifted off
+  // pure black so it reads as the same weight as the greyed logos beside it.
+  'South East Consortium': 0.72,
 };
