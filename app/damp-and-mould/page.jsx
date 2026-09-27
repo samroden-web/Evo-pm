@@ -168,6 +168,28 @@ export default function DampAndMouldPage() {
               meter. We only continue once it reads 20% or below. If it is wetter than that, it is left to dry further.
             </p>
           </div>
+          {/* Sam, 27 September: we had these and were not using them. The 20% threshold is
+              the mechanic this whole page turns on, and a sentence about it is far weaker
+              than the two readings side by side - 24% against 18%, on EVO kit, one job
+              stopped and one proceeding. */}
+          <figure className="meter-pair mt-3">
+            <img
+              src="/images/photos/evo-moisture-meter-pair.webp"
+              alt="Two moisture meter readings taken on a wall: 24% on damp plaster, and 18% after drying"
+              width="1500"
+              height="857"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span>
+                <strong>24%</strong> Too wet. The job stops and the wall is left to dry.
+              </span>
+              <span>
+                <strong>18%</strong> Below the threshold. Treatment proceeds.
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 

@@ -69,7 +69,7 @@ export default function HousingPage() {
     <>
       <PageHero
         eyebrow="Housing associations &amp; councils"
-        title="Repairs, compliance and the evidence — from one supplier."
+        title="Repairs, compliance and the evidence, from one supplier."
         lead="For housing associations and councils working to the consumer standards, Awaab's Law and the Housing Ombudsman."
         crumbs={[{ label: 'Who we help' }, { label: 'Housing associations & councils' }]}
         image="/images/photos/evo-operative-arriving-terraced-street.webp"
@@ -212,8 +212,11 @@ export default function HousingPage() {
           <div className="mt-3">
             <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" />
           </div>
-          <div className="mt-3 max-640">
+          <div className="quote-band mt-3">
             <Quote t={testimonials.richardSmith} large />
+            <div className="quote-band__mark">
+              <LogoStrip logos={withFiles(clientLogos).filter((l) => /^IDS$/i.test(l.name))} color hideMissing />
+            </div>
           </div>
 
           {/* THE REGULATOR'S OWN WORDS, added 26 September. This was sitting unused in the
@@ -317,10 +320,11 @@ export default function HousingPage() {
             </div>
             <div className="wwh-card">
               <IconBadge name="file" />
-              <h3>Rubixx as the worked example</h3>
+              <h3>Built to connect, whatever you run</h3>
               <p className="mb-0">
-                It is the integration we are most often asked about and the one we use to show how the flow works, end
-                to end, from a resident report to a closed job in your system.
+                We integrate through the routes housing management systems actually offer &mdash; API where there is one,
+                scheduled file exchange where there is not. Rubixx is the worked example we demonstrate end to end, from
+                a resident report to a closed job in your system.
               </p>
             </div>
             <div className="wwh-card">

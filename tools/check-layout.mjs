@@ -26,6 +26,7 @@
 // Legitimate exceptions are listed in ALLOW below, with a reason each.
 
 import { createRequire } from 'node:module';
+import { assertStylesLoaded, assertServingThisBuild } from './lib/assert-styles.mjs';
 const require_ = createRequire(import.meta.url);
 
 function loadChromium() {
@@ -84,17 +85,19 @@ async function urlsFromSitemap() {
 function audit({ allow, allowTags, slack }) {
   const out = [];
   const label = (el) => {
-    const cls = el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : '';
+    const cls =
+      el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : '';
     return el.tagName.toLowerCase() + cls;
   };
   for (const el of document.querySelectorAll('body *')) {
     const cs = getComputedStyle(el);
-    if (cs.display !== 'grid' && cs.display !== 'flex' && cs.display !== 'inline-grid' && cs.display !== 'inline-flex') continue;
+    if (cs.display !== 'grid' && cs.display !== 'flex' && cs.display !== 'inline-grid' && cs.display !== 'inline-flex')
+      continue;
     if (cs.maxWidth === 'none') continue;
     if (el.children.length < 2) continue;
     if (allowTags.includes(el.tagName.toLowerCase())) continue;
 
-    const names = (el.className && typeof el.className === 'string' ? el.className.trim().split(/\s+/) : []);
+    const names = el.className && typeof el.className === 'string' ? el.className.trim().split(/\s+/) : [];
     if (names.some((n) => Object.prototype.hasOwnProperty.call(allow, n))) continue;
 
     const parent = el.parentElement;
@@ -116,6 +119,22 @@ function audit({ allow, allowTags, slack }) {
 
 const urls = await urlsFromSitemap();
 const browser = await chromium.launch({ executablePath: EXECUTABLE, args: ['--no-sandbox'] });
+
+// Before reporting anything, prove the stylesheet is actually in force. A checker that runs
+// against an unstyled page reports confident nonsense - see tools/lib/assert-styles.mjs.
+{
+  const probe = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  try {
+    await assertServingThisBuild(base);
+    await assertStylesLoaded(probe, base);
+  } catch (e) {
+    await probe.close();
+    await browser.close();
+    console.error(`\n${e.message}\n`);
+    process.exit(1);
+  }
+  await probe.close();
+}
 console.log(`Checking ${urls.length} URLs at ${WIDTHS.map((w) => w + 'px').join(' and ')} against ${base}\n`);
 
 const fail = [];
@@ -147,4 +166,6 @@ if (fail.length) {
   console.log(`\n${checks} page loads checked. FAILED.`);
   process.exit(1);
 }
-console.log(`${checks} page loads checked across ${urls.length} URLs. No layout container is carrying a prose max-width.`);
+console.log(
+  `${checks} page loads checked across ${urls.length} URLs. No layout container is carrying a prose max-width.`
+);

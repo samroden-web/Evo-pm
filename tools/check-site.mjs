@@ -134,6 +134,18 @@ async function checkPage(path) {
   for (const t of tbcs) note(warn, path, `TBC: ${t.slice(0, 90)}`);
 }
 
+// Before believing a single result, prove the server is serving THIS build. This checker ran
+// first in two failed Codespace deploys and reported a missing image that was demonstrably on
+// disk - because a next-server from the previous run still held the port. See
+// tools/lib/assert-styles.mjs for the full account.
+import { assertServingThisBuild } from './lib/assert-styles.mjs';
+try {
+  await assertServingThisBuild(base);
+} catch (e) {
+  console.error(`\n${e.message}\n`);
+  process.exit(1);
+}
+
 const urls = await urlsFromSitemap();
 console.log(`Checking ${urls.length} URLs from the sitemap against ${base}\n`);
 for (const u of urls) await checkPage(u);

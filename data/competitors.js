@@ -21,19 +21,6 @@
 // src is filled in by tools/link-competitor-logos.mjs from whatever actually downloaded.
 // Null means the column renders the name alone, which is why the name is always present
 // and the logo never carries meaning on its own.
-// Help Me Fix rides in the Fixflo column rather than having one of its own. It is kept out
-// of the competitors array deliberately - it is not a seventh supplier - but it is shaped
-// like one so tools/link-competitor-logos.mjs can point it at whatever downloads.
-export const extraMarks = {
-  helpmefix: {
-    key: 'helpmefix',
-    name: 'Help Me Fix',
-    src: null,
-    width: null,
-    height: null,
-  },
-};
-
 export const competitors = [
   {
     key: 'plentific',
@@ -56,13 +43,13 @@ export const competitors = [
   {
     key: 'fixflo',
     name: 'Fixflo',
-    // TWO MARKS, NO NOTE (Sam, 27 September). Aareon acquired Help Me Fix on 1 September
-    // 2025 and Fixflo's AI triage IS Help Me Fix's Aidenn, so they are one column. That was
-    // being carried by a line of small print under the name, which pushed this column a row
-    // deeper than every other and threw the whole header bar out. Both marks now sit in the
-    // mark slot instead, which says the same thing in the row where the logos already are.
-    // The Aareon acquisition stays footnoted under the table.
-    extraMark: 'helpmefix',
+    // ONE MARK, NO NOTE. This column covers Fixflo and Help Me Fix, because Aareon owns both
+    // and Fixflo's AI triage IS Help Me Fix's Aidenn. That used to be a line of small print
+    // under the name, which pushed this column a row deeper than every other and threw the
+    // header bar out, so it was replaced with a second logo in the mark slot. Help Me Fix
+    // publishes no mark the fetch script can reach - it failed on every attempt - and Sam's
+    // call on 27 September was to show Fixflo alone rather than keep chasing it. The Aareon
+    // acquisition stays footnoted under the table, which is where the substance lives.
     group: 'Platform',
     domain: 'fixflo.com',
     src: '/images/logos/competitors/fixflo.png',
@@ -210,23 +197,21 @@ export const comparisonFootnotes = [
   '“A fixed price that covers the repairs themselves” is the test in the fifth row. Every supplier here has fixed pricing for its own software or policy; only EVO’s fixed price includes the cost of the repairs.',
 ];
 
-export const comparisonSource = 'EVO competitor analysis, March 2026, from each supplier’s own published material. Reviewed every six months.';
+export const comparisonSource =
+  'EVO competitor analysis, March 2026, from each supplier’s own published material. Reviewed every six months.';
 
 export const comparisonVerdicts = [
   {
     title: 'Software manages. It does not mend.',
-    body:
-      'Plentific’s own contractor terms state, in capitals, that Plentific is not a party to any contract between the client and the contractor. That is the whole category in one sentence.',
+    body: 'Plentific’s own contractor terms state, in capitals, that Plentific is not a party to any contract between the client and the contractor. That is the whole category in one sentence.',
   },
   {
     title: 'Emergency cover mends, but narrowly.',
-    body:
-      'HomeServe genuinely attends, genuinely guarantees the work for twelve months and genuinely runs 24/7. For boilers, pipes and wiring, one property at a time, within claim limits. Not for a door, a roof, a worktop or damp.',
+    body: 'HomeServe genuinely attends, genuinely guarantees the work for twelve months and genuinely runs 24/7. For boilers, pipes and wiring, one property at a time, within claim limits. Not for a door, a roof, a worktop or damp.',
   },
   {
     title: 'EVO is both, for a whole portfolio, at one price per home.',
-    body:
-      'Every trade, every home, one fixed monthly fee, a twelve-month warranty on the repair itself, and the evidence trail your Regulator will ask for.',
+    body: 'Every trade, every home, one fixed monthly fee, a twelve-month warranty on the repair itself, and the evidence trail your Regulator will ask for.',
     win: true,
   },
 ];

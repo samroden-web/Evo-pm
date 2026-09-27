@@ -306,7 +306,13 @@ p.center {
 }
 
 .section-head {
-  max-width: 760px;
+  /* 760px before, which measured 63 characters a line on every page. That is inside the
+     comfortable 45-75 band, so the narrowness was deliberate - but at the low end, and Sam
+     is right that it costs a line on most leads. 900px lands at about 75: the top of the
+     band, a line shorter on nearly every lead, and still well short of the full 1160px
+     container, which would be about 96 characters - the same fault that had prose running
+     114 characters a line on ten pages. */
+  max-width: 900px;
   margin-bottom: var(--head-gap);
 }
 /* The eyebrow belongs to the heading under it, so it sits close. */
@@ -5257,10 +5263,6 @@ textarea {
   min-height: 1em;
   line-height: 1.2;
 }
-/* Two marks in one slot, for the column that carries a second brand. */
-.cmp-mark--pair {
-  gap: 7px;
-}
 .cmp th.cmp-cap {
   vertical-align: bottom;
   text-align: left;
@@ -6452,6 +6454,135 @@ textarea {
   margin: 0 0 14px;
 }
 
+/* ---------- Case study: the banner, and start against finish ---------- */
+/* Sam, 27 September, items 9 and 10. The old IDS order was: intro, logo and award, the
+   figures, then the problem list beside a photograph. The figures sat ABOVE the problem
+   list, so "halved" and "95%" were read before there was anything for them to be better
+   than, and the two were never on screen together. Both studies now open with a banner and
+   then put the starting position and the finishing position in one row. */
+.cs-banner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(22px, 3vw, 40px);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .cs-banner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+.cs-banner > * {
+  min-width: 0;
+}
+.cs-banner .lead {
+  margin-bottom: 0;
+}
+/* The IDS engagement-day photograph is portrait, 1000x1333, and it is the only IDS picture
+   that is not the awards shot - which Sam wants at the FOOT of the study, so it cannot be
+   borrowed for the banner. A portrait photograph in a banner slot wants capping, but the cap
+   has to be set by how much of the frame survives, not by what suits the text: at 430px the
+   crop checker measured 64% of the picture gone-to-visible against a 65% floor, which is the
+   same fault as the 16/9 rule that cropped these portraits earlier in the week. 560px keeps
+   83% of the frame, and at every viewport below about 1250px the photograph is narrow enough
+   that it never reaches the cap and is not cropped at all. The B&D team shot is 1285x704 and
+   never reaches it either. */
+.cs-banner .photo img {
+  max-height: 560px;
+  object-fit: cover;
+  object-position: center 24%;
+}
+/* Inside the banner the logo-and-award line is a credentials row under the lead, so the rule
+   goes above it rather than below. */
+.cs-head--banner {
+  margin-top: clamp(20px, 2.4vw, 28px);
+  padding-top: clamp(16px, 2vw, 22px);
+  padding-bottom: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 0;
+}
+
+.cs-startend {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.2vw, 28px);
+}
+@media (min-width: 900px) {
+  .cs-startend {
+    /* The right column is wider because it carries four figures and a sentence; the left
+       carries a short list. Both stretch to the same height so the pair reads as one row. */
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    align-items: stretch;
+  }
+}
+.cs-startend__col {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2.6vw, 30px);
+}
+/* Quiet on the left, so the orange on the right is the thing the eye lands on. Both cards
+   carry the same padding, which is what makes the two eyebrow labels line up - that
+   alignment is the whole point of the pair. */
+.cs-startend__before {
+  background: var(--grey-50);
+}
+.cs-startend__after {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.8vw, 20px);
+}
+/* .eyebrow is an inline-block, so in a plain block card it sits on a line box and inherits
+   the parent's descender space - measured 7px lower than the identical label in the flex
+   column opposite it. The two labels being exactly level is the whole point of the pair, so
+   both are blockified. */
+.cs-startend__col .eyebrow {
+  display: block;
+}
+.cs-startend__h {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  margin: 6px 0 14px;
+}
+.cs-startend__after .cs-startend__h {
+  margin-bottom: 0;
+}
+/* Nested inside a card, so it does not need the full standalone padding. */
+.cs-startend__after .statrow--orange {
+  padding: clamp(18px, 2.2vw, 26px);
+  margin: 0;
+}
+/* On a phone the nested figures fell to a single column - the 190px floor does not fit twice
+   in a 272px track - which made the "where they are now" card 653px tall. That is the most
+   useful block on the page and it was costing three thumb-swipes. Two by two below the split,
+   floors removed so the tracks can be as narrow as the screen requires. */
+@media (max-width: 899px) {
+  .cs-startend__after .statrow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(14px, 4vw, 20px);
+  }
+}
+.cs-startend__note {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+/* B&D's starting position is a single approved sentence. Set at lead size it holds its own
+   against the four figures beside it, which a 16px line in a big card would not. */
+.cs-startend__was {
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.5;
+  color: var(--navy-deep);
+}
+/* A list of faults must not carry ticks - a ticked list of problems reads as a list of
+   things the client got. A short rule instead. */
+.tick-list--was li::before {
+  top: 12px;
+  left: 1px;
+  width: 13px;
+  height: 2px;
+  border-radius: 0;
+  background: var(--orange);
+}
+
 /* A photograph shown at something near its own size rather than stretched across the
    container. The gas safety shot is 900x675; run full-bleed at 1160 and capped in height it
    lost 40% of the frame, and it was being upscaled to do it. */
@@ -6462,4 +6593,79 @@ textarea {
   width: 100%;
   height: auto;
   max-height: none;
+}
+
+/* The two moisture readings. One image, two labels beneath it, split down the middle so
+   each caption sits under the reading it describes. Same discipline as the before/during/
+   after triptych: one photograph, labelled, rather than separate crops that drift apart. */
+.meter-pair {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.meter-pair img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.meter-pair figcaption {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+}
+.meter-pair figcaption span {
+  background: var(--grey-50);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.meter-pair figcaption strong {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--navy-deep);
+  margin-bottom: 2px;
+}
+
+/* CARD ICONS SIT BESIDE THE LABEL, NOT ABOVE IT. Sam on the compliance page: "the icons
+   above the titles waste a lot of space". A 42px badge on its own row, above a small-caps
+   label, above a heading, above body, is four stacked elements and about a fifth of the
+   card height spent on a decorative disc. Beside the label it reads as one unit and gives
+   the height back to the content. */
+.card--statutory .icon-badge,
+.card--regulatory .icon-badge,
+.compliance-cards .card .icon-badge {
+  float: left;
+  margin: 0 12px 0 0;
+}
+
+/* The two kinds of compliance, as opposites. Orange goes on STATUTORY - work EVO does. */
+.split-halves {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 1.8vw, 20px);
+}
+@media (min-width: 820px) {
+  .split-halves {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+.split-halves > * {
+  min-width: 0;
+}
+.card--statutory {
+  background: var(--orange-soft);
+  border-color: rgba(255, 102, 0, 0.22);
+}
+.card--statutory .eyebrow {
+  color: var(--orange-ink);
+}
+.card--regulatory {
+  background: var(--grey-50);
+}
+.card--regulatory .eyebrow {
+  color: var(--muted);
 }

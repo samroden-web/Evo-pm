@@ -1,6 +1,5 @@
 import {
   competitors,
-  extraMarks,
   comparisonBands,
   comparisonFootnotes,
   comparisonSource,
@@ -68,8 +67,8 @@ export default function ComparisonTable() {
       <div className="cmp-wrap" tabIndex={0} role="group" aria-label="Comparison table, scrolls sideways">
         <table className="cmp">
           <caption className="visually-hidden">
-            EVO compared with five named suppliers across eleven capabilities, grouped into what most
-            suppliers give you, where home emergency cover stops, and where software stops.
+            EVO compared with five named suppliers across eleven capabilities, grouped into what most suppliers give
+            you, where home emergency cover stops, and where software stops.
           </caption>
           <thead>
             <tr>
@@ -105,11 +104,7 @@ export default function ComparisonTable() {
                       Rendering the empty slots means every header has the same structure and
                       the names sit on one line whatever each column happens to carry. */}
                   <span className="cmp-grp">{c.group}</span>
-                  {/* A column may carry a SECOND mark - Fixflo carries Help Me Fix, because
-                      Aareon owns both and they are one supplier. It used to be a line of
-                      small print under the name, which made this column a row deeper than
-                      the rest. Two marks sit in the slot the logos already occupy. */}
-                  <span className={`cmp-mark${c.extraMark ? ' cmp-mark--pair' : ''}`}>
+                  <span className="cmp-mark">
                     {c.src && !c.markIsWordmark ? (
                       <img
                         src={c.src}
@@ -119,17 +114,6 @@ export default function ComparisonTable() {
                         loading="lazy"
                         decoding="async"
                         style={{ maxHeight: markHeight(c), maxWidth: 58 }}
-                      />
-                    ) : null}
-                    {c.extraMark && extraMarks[c.extraMark]?.src ? (
-                      <img
-                        src={extraMarks[c.extraMark].src}
-                        alt=""
-                        width={extraMarks[c.extraMark].width}
-                        height={extraMarks[c.extraMark].height}
-                        loading="lazy"
-                        decoding="async"
-                        style={{ maxHeight: markHeight(extraMarks[c.extraMark]), maxWidth: 58 }}
                       />
                     ) : null}
                   </span>

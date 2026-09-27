@@ -16,10 +16,15 @@
 // visible is the ratio of the two aspect ratios. Below 65% is reported.
 
 import { createRequire } from 'node:module';
+import { assertStylesLoaded, assertServingThisBuild } from './lib/assert-styles.mjs';
 const require_ = createRequire(import.meta.url);
 function loadChromium() {
   for (const c of ['playwright', 'playwright-core', `${process.env.HOME}/.npm-global/lib/node_modules/playwright`]) {
-    try { return require_(c).chromium; } catch { /* next */ }
+    try {
+      return require_(c).chromium;
+    } catch {
+      /* next */
+    }
   }
   return null;
 }
@@ -53,7 +58,7 @@ function audit(floor) {
     // this to silence a real finding would be the wrong fix.
     if (r.width < 200 || r.height < 120) continue;
     const cs = getComputedStyle(i);
-    if (cs.objectFit !== 'cover') continue;                  // contain and fill do not crop
+    if (cs.objectFit !== 'cover') continue; // contain and fill do not crop
     const src = decodeURIComponent(i.currentSrc || i.src);
     if (/\/logos?\//.test(src) || /favicon/.test(src)) continue;
     const boxRatio = r.width / r.height;
@@ -72,6 +77,22 @@ function audit(floor) {
 
 const list = await urls();
 const browser = await chromium.launch({ executablePath: EXECUTABLE, args: ['--no-sandbox'] });
+
+// Before reporting anything, prove the stylesheet is actually in force. A checker that runs
+// against an unstyled page reports confident nonsense - see tools/lib/assert-styles.mjs.
+{
+  const probe = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  try {
+    await assertServingThisBuild(base);
+    await assertStylesLoaded(probe, base);
+  } catch (e) {
+    await probe.close();
+    await browser.close();
+    console.error(`\n${e.message}\n`);
+    process.exit(1);
+  }
+  await probe.close();
+}
 console.log(`Checking photo framing on ${list.length} URLs at 1440px and 390px against ${base}\n`);
 const fail = [];
 let checks = 0;
@@ -80,10 +101,15 @@ for (const width of [1440, 390]) {
   for (const u of list) {
     await page.goto(base + u, { waitUntil: 'networkidle' });
     await page.evaluate(async () => {
-      for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); }
+      for (let y = 0; y < document.body.scrollHeight; y += 400) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 60));
+      }
     });
     // naturalWidth, not .complete - .complete is true for a lazy image that has not started.
-    await page.waitForFunction(() => [...document.images].every((i) => i.naturalWidth > 0), null, { timeout: 20000 }).catch(() => {});
+    await page
+      .waitForFunction(() => [...document.images].every((i) => i.naturalWidth > 0), null, { timeout: 20000 })
+      .catch(() => {});
     for (const f of await page.evaluate(audit, KEPT_FLOOR)) fail.push(`${u}  [${width}px]\n    ${f}`);
     checks++;
   }
@@ -99,4 +125,6 @@ if (fail.length) {
   console.log(`\n${checks} page loads checked. FAILED.`);
   process.exit(1);
 }
-console.log(`${checks} page loads checked across ${list.length} URLs. No photograph is cropped past ${Math.round(KEPT_FLOOR * 100)}%.`);
+console.log(
+  `${checks} page loads checked across ${list.length} URLs. No photograph is cropped past ${Math.round(KEPT_FLOOR * 100)}%.`
+);

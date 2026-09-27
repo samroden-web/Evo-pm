@@ -72,8 +72,12 @@ export default function CompliancePage() {
 
       <section className="section">
         <div className="container">
-          <div className="grid-2">
-            <div className="card">
+          {/* Orange on STATUTORY, quiet on REGULATORY - the design system's rule, because
+              statutory is work EVO actually does and regulatory is a duty that never
+              transfers. Painted the other way round it would say "you hold the duty" in EVO
+              orange, which is the overclaim this whole page exists to avoid. */}
+          <div className="split-halves">
+            <div className="card card--statutory">
               <IconBadge name="wrench" />
               <p className="eyebrow">Statutory</p>
               <h3>Gas, electrical, alarms.</h3>
@@ -83,7 +87,7 @@ export default function CompliancePage() {
               </p>
               <p className="mb-0">Available as an add-on to any plan, or as variable works.</p>
             </div>
-            <div className="card card--grey">
+            <div className="card card--regulatory">
               <IconBadge name="clipboard" />
               <p className="eyebrow">Regulatory</p>
               <h3>The Regulator, TSMs, Awaab&rsquo;s Law.</h3>
@@ -126,6 +130,19 @@ export default function CompliancePage() {
               </ul>
             </div>
           </div>
+          {/* Sam, 27 September: the gas safety photograph belongs with the statutory work it
+              shows, not in the regulatory section further down where it had no connection to
+              the text beside it. */}
+          <div className="mt-3 photo-inset">
+            <Photo
+              src="/images/photos/evo-engineer-gas-safety-check.webp"
+              alt="An EVO engineer completing a gas safety check at a boiler, recording it on a tablet"
+              caption="Statutory checks recorded on the job, against the property, as the work happens."
+              width={900}
+              height={675}
+              sizes="(min-width: 900px) 820px, 100vw"
+            />
+          </div>
           <p className="mt-3 mb-0">
             <Link href="/pricing" className="text-link">
               Electrical and gas cover pricing
@@ -164,47 +181,51 @@ export default function CompliancePage() {
               drier than the pages either side of it. The gas safety check is the right one:
               the shot list calls it the image that proves statutory work is delivered rather
               than just recorded, which is this page's whole argument. */}
-          <div className="mt-3 photo-inset">
+          {/* Sam, 27 September: TP02 to TP05 are all tenant PERCEPTION measures - what the
+              resident thinks - so the section should show a resident rather than only a
+              table of codes. */}
+          <div className="ev3-split ev3-split--narrow mt-3">
             <Photo
-              src="/images/photos/evo-engineer-gas-safety-check.webp"
-              alt="An EVO engineer completing a gas safety check at a boiler, recording it on a tablet"
-              caption="Statutory checks recorded on the job, against the property, as the work happens."
+              src="/images/photos/evo-team-member-helping-resident.webp"
+              alt="An EVO team member helping a resident with a repair on their doorstep"
+              caption="The measures below are what this resident would say about us."
               width={1400}
-              height={700}
-              sizes="100vw"
+              height={787}
+              sizes="(min-width: 880px) 40vw, 100vw"
             />
-          </div>
-
-          <div className="tsm mt-3">
-            <p className="eyebrow">The measures a repairs service moves</p>
-            <ul className="tsm-list">
-              <li>
-                <span className="tsm-code">TP02</span>
-                <span className="tsm-name">Satisfaction with the overall repairs service in the last 12 months</span>
-              </li>
-              <li>
-                <span className="tsm-code">TP03</span>
-                <span className="tsm-name">Satisfaction with the time taken to complete the most recent repair</span>
-              </li>
-              <li>
-                <span className="tsm-code">TP04</span>
-                <span className="tsm-name">Satisfaction that the landlord provides a home that is well maintained</span>
-              </li>
-              <li>
-                <span className="tsm-code">TP05</span>
-                <span className="tsm-name">Satisfaction that the landlord provides a home that is safe</span>
-              </li>
-              <li>
-                <span className="tsm-code">RP02</span>
-                <span className="tsm-name">Repairs completed within the target timescale you have set</span>
-              </li>
-            </ul>
-            <p className="tsm-note mb-0">
-              TP02 to TP05 are tenant perception measures and RP02 is management information. There is no TSM for damp
-              and mould specifically &mdash; it reaches the framework through TP04, TP05 and the complaints measures.
-              Your monthly pack carries the underlying data for each of these, by property and by month, so the annual
-              return is assembled from a record rather than reconstructed.
-            </p>
+            <div className="tsm">
+              <p className="eyebrow">The measures a repairs service moves</p>
+              <ul className="tsm-list">
+                <li>
+                  <span className="tsm-code">TP02</span>
+                  <span className="tsm-name">Satisfaction with the overall repairs service in the last 12 months</span>
+                </li>
+                <li>
+                  <span className="tsm-code">TP03</span>
+                  <span className="tsm-name">Satisfaction with the time taken to complete the most recent repair</span>
+                </li>
+                <li>
+                  <span className="tsm-code">TP04</span>
+                  <span className="tsm-name">
+                    Satisfaction that the landlord provides a home that is well maintained
+                  </span>
+                </li>
+                <li>
+                  <span className="tsm-code">TP05</span>
+                  <span className="tsm-name">Satisfaction that the landlord provides a home that is safe</span>
+                </li>
+                <li>
+                  <span className="tsm-code">RP02</span>
+                  <span className="tsm-name">Repairs completed within the target timescale you have set</span>
+                </li>
+              </ul>
+              <p className="tsm-note mb-0">
+                TP02 to TP05 are tenant perception measures and RP02 is management information. There is no TSM for damp
+                and mould specifically &mdash; it reaches the framework through TP04, TP05 and the complaints measures.
+                Your monthly pack carries the underlying data for each of these, by property and by month, so the annual
+                return is assembled from a record rather than reconstructed.
+              </p>
+            </div>
           </div>
         </div>
       </section>

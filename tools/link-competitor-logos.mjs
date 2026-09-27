@@ -12,8 +12,9 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const DATA = 'data/competitors.js';
 const DIR = 'public/images/logos/competitors';
-// helpmefix is not a seventh column - it shares the Fixflo column. See data/competitors.js.
-const KEYS = ['plentific', 'askporter', 'fixflo', 'checkatrade', 'homeserve', 'helpmefix'];
+// Five marks for five columns. Help Me Fix shares the Fixflo column and publishes no mark
+// the fetch script can reach, so it is not chased - see the note in data/competitors.js.
+const KEYS = ['plentific', 'askporter', 'fixflo', 'checkatrade', 'homeserve'];
 
 function pngSize(buf) {
   if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
@@ -39,7 +40,10 @@ function jpegSize(buf) {
   if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return null;
   let i = 2;
   while (i < buf.length - 9) {
-    if (buf[i] !== 0xff) { i++; continue; }
+    if (buf[i] !== 0xff) {
+      i++;
+      continue;
+    }
     const marker = buf[i + 1];
     const len = buf.readUInt16BE(i + 2);
     if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {

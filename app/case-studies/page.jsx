@@ -61,81 +61,97 @@ export default function CaseStudiesPage() {
 
       {/* ---------------- IDS ---------------- */}
 
+      {/* Sam, 27 September, item 9: "the order of the page should be 1. The picture and the
+          text we already have at the top, as the top banner line 2. The where they started
+          on the left underneath, and then the highlight bar for where they finished next to
+          it on the right, so in 1 shot we can see where they started and end position
+          clearly. The tesimonials can go under that and the awards picture under that."
+          Built exactly that, and it fixes a real fault rather than only moving things. The
+          figures used to sit ABOVE the problem list, so the before and the after were never
+          on screen at the same time: you read the result first, then scrolled past it to
+          find out what it was a result of. They are now one row, two columns, same height.
+          The single sentence that had a whole warm-grey section to itself ("Full compliance
+          visibility, better data...") now sits under the figures it describes, which removes
+          a section of scrolling rather than adding one.
+          The timeline and the Regulator's judgement stay BETWEEN the pair and the
+          testimonials: they are how the left column became the right one, so they only make
+          sense once both are read. */}
       <section className="section" id="ids" aria-labelledby="ids-title">
         <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Case study one</p>
-            <h2 id="ids-title">Industrial Dwellings Society</h2>
-            <p className="lead">
-              Pioneers of affordable housing since 1885, and running repairs until 2023 the way everyone else did. 1,414
-              homes, now on a five-year contract.
-            </p>
-          </div>
-
-          {/* Sam, 27 September: the client's logo and the award visual belong at the top of
-              each case study, not buried. Both are here. The logo strip renders the ONE
-              client's mark, filtered by name, and hides itself if that file has not
-              downloaded - so a missing logo costs polish rather than leaving a hole.
-              GLOBAL-06: an award only ever appears against the client it was won with, so
-              the Housing Executive award sits here and the Housing Digital award sits with
-              B&D Reside. */}
-          <div className="cs-head mt-3">
-            <div className="cs-head__logo">
-              <LogoStrip logos={withFiles(clientLogos).filter((l) => /^IDS$/i.test(l.name))} color hideMissing />
-            </div>
-            <div className="cs-head__award">
-              <IconBadge name="star" />
-              <div>
-                <span className="cs-head__award-name">Housing Executive Awards 2025</span>
-                <span className="cs-head__award-what">Partnership of the Year, won with IDS</span>
+          <div className="cs-banner">
+            <div className="cs-banner__text">
+              <p className="eyebrow">Case study one</p>
+              <h2 id="ids-title">Industrial Dwellings Society</h2>
+              <p className="lead">
+                Pioneers of affordable housing since 1885, and running repairs until 2023 the way everyone else did.
+                1,414 homes, now on a five-year contract.
+              </p>
+              {/* The client's logo and the award they were won with, at the top of the study
+                  rather than buried. The logo strip renders the ONE client's mark, filtered
+                  by name, and hides itself if that file has not downloaded - so a missing
+                  logo costs polish rather than leaving a hole. GLOBAL-06: an award only ever
+                  appears against the client it was won with, so the Housing Executive award
+                  sits here and the Housing Digital award sits with B&D Reside. */}
+              <div className="cs-head cs-head--banner">
+                <div className="cs-head__logo">
+                  <LogoStrip logos={withFiles(clientLogos).filter((l) => /^IDS$/i.test(l.name))} color hideMissing />
+                </div>
+                <div className="cs-head__award">
+                  <IconBadge name="star" />
+                  <div>
+                    <span className="cs-head__award-name">Housing Executive Awards 2025</span>
+                    <span className="cs-head__award-what">Partnership of the Year, won with IDS</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* AT A GLANCE, moved up 26 September. Sam: the layout makes the key points hard to
-              get to while scrolling. He was right, and the two case studies were doing
-              opposite things - B&D put its figures immediately under the intro, while IDS
-              buried the same information roughly 1,800px down, after the problem list, the
-              photograph, the timeline and the Regulator quote. A reader scrolling for the
-              headline result had to travel the length of the story to find it.
-              The figures now sit here on both, in the same shape, so the two can be compared
-              at a glance and the narrative below them is optional reading rather than the
-              only route to the numbers. */}
-          <div className="statrow statrow--orange mt-3">
-            <div>
-              <span className="stat">Halved</span>
-              <span className="stat-label">Repair resolution times</span>
-            </div>
-            <div>
-              <span className="stat">95%</span>
-              <span className="stat-label">First-time fix rate</span>
-            </div>
-            <div>
-              <span className="stat">90%+</span>
-              <span className="stat-label">Resident satisfaction, regularly</span>
-            </div>
-            <div>
-              <span className="stat">1,414</span>
-              <span className="stat-label">Homes, pilot to five-year contract</span>
-            </div>
-          </div>
-
-          <div className="ev3-split ev3-split--narrow mt-3">
             <Photo
               src="/images/photos/ids-resident-engagement-day.webp"
               alt="EVO and IDS staff at the IDS resident engagement day, Navarino Mansions"
               caption="IDS resident engagement day, Navarino Mansions."
               width={1000}
               height={1333}
-              sizes="(min-width: 880px) 38vw, 100vw"
+              sizes="(min-width: 900px) 42vw, 100vw"
             />
-            <div>
-              <h3>Where they started</h3>
-              <ul className="tick-list mb-0">
+          </div>
+
+          <div className="cs-startend mt-4">
+            <div className="cs-startend__col cs-startend__before">
+              <p className="eyebrow">Where they started</p>
+              <h3 className="cs-startend__h">Until 2023</h3>
+              {/* Not a tick list. A ticked list of faults reads as a list of things the
+                  client got. */}
+              <ul className="tick-list tick-list--was tick-list--compact mb-0">
                 {IDS_START.map((s) => (
                   <li key={s}>{s}</li>
                 ))}
               </ul>
+            </div>
+            <div className="cs-startend__col cs-startend__after">
+              <p className="eyebrow">Where they are now</p>
+              <h3 className="cs-startend__h">On a five-year contract, across every home</h3>
+              <div className="statrow statrow--orange">
+                <div>
+                  <span className="stat">Halved</span>
+                  <span className="stat-label">Repair resolution times</span>
+                </div>
+                <div>
+                  <span className="stat">95%</span>
+                  <span className="stat-label">First-time fix rate</span>
+                </div>
+                <div>
+                  <span className="stat">90%+</span>
+                  <span className="stat-label">Resident satisfaction, regularly</span>
+                </div>
+                <div>
+                  <span className="stat">1,414</span>
+                  <span className="stat-label">Homes, pilot to five-year contract</span>
+                </div>
+              </div>
+              <p className="cs-startend__note mb-0">
+                Full compliance visibility, better data, more trust from residents, and a shift from reacting to
+                planning.
+              </p>
             </div>
           </div>
         </div>
@@ -193,23 +209,15 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="section section--warm" aria-labelledby="ids-results">
+      {/* The "What changed." section that sat here was a heading and one sentence - a whole
+          screen of scrolling for a line that belongs next to the figures it summarises. It
+          is now the closing line of the "where they are now" column above. */}
+      <section className="section" aria-labelledby="ids-voices">
         <div className="container">
           <div className="section-head">
             <p className="eyebrow">IDS, eighteen months later</p>
-            <h2 id="ids-results">What changed.</h2>
+            <h2 id="ids-voices">What they say about it.</h2>
           </div>
-          {/* The figures that were here now open the IDS section - see the note there. What
-              stays is the sentence they were illustrating, which is the part that does not
-              fit in a tile. */}
-          <p className="lead mb-0">
-            Full compliance visibility, better data, more trust from residents, and a shift from reacting to planning.
-          </p>
-        </div>
-      </section>
-
-      <section className="section section--grey" aria-label="What IDS says">
-        <div className="container">
           <div className="grid-3 swipe-mobile">
             <Quote t={testimonials.garethBrown} card />
             <Quote t={testimonials.richardSmithPartnership} card />
@@ -228,7 +236,9 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="ids-award">
+      {/* Last in the IDS study, per Sam's order: "the awards picture under that". Warm rather
+          than white so it separates from the testimonials above it. */}
+      <section className="section section--warm" aria-labelledby="ids-award">
         <div className="container">
           <div className="ev3-split">
             <div>
@@ -260,82 +270,113 @@ export default function CaseStudiesPage() {
 
       {/* ---------------- B&D Reside ---------------- */}
 
+      {/* Sam, 27 September, item 10: "the B&D case study is layed out ok, but take anythings
+          you think good from the IDS comments and replicate."
+          Four things carried across. (1) The banner: text, client mark and the award won with
+          them on the left, the team photograph on the right, instead of an intro section with
+          no picture in it followed by a separate full-width photograph two sections later.
+          (2) The start-against-finish pair, so the before and the after are on screen
+          together here too. (3) The figures keep the same orange bar in the same position in
+          that pair, so the two studies can be read against each other rather than in two
+          different shapes. (4) The duplicate award has gone: it was a chip at the top AND a
+          card in the quote row. It now appears once, in the banner, like IDS.
+          The left column here is one sentence rather than IDS's six-line list, because that
+          is all the approved facts give about B&D's starting position. See the note on it.
+          Nothing has been added to pad it out. */}
       <section className="section section--grey" id="bd-reside" aria-labelledby="bd-title">
         <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Case study two</p>
-            <h2 id="bd-title">B&amp;D Reside, Barking and Dagenham</h2>
-            <p className="lead mb-0">
-              Residents used to ring or email the council and wait. A 380-home pilot began in June 2023 and was covered
-              by Inside Housing in April 2024. EVO now holds an eight-year contract with B&amp;D Reside for more than
-              4,500 homes, onboarding in phases.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--warm" aria-labelledby="bd-results">
-        <div className="container">
-          <h2 id="bd-results" className="visually-hidden">
-            B&amp;D Reside results
-          </h2>
-
-          <div className="cs-head mt-3">
-            <div className="cs-head__logo">
-              <LogoStrip logos={withFiles(clientLogos).filter((l) => /B&D/i.test(l.name))} color hideMissing />
-            </div>
-            <div className="cs-head__award">
-              <IconBadge name="star" />
-              <div>
-                <span className="cs-head__award-name">Housing Digital Innovation Awards 2024</span>
-                <span className="cs-head__award-what">
-                  Best Repairs and Maintenance Innovation, won with B&amp;D Reside
-                </span>
+          <div className="cs-banner">
+            <div className="cs-banner__text">
+              <p className="eyebrow">Case study two</p>
+              <h2 id="bd-title">B&amp;D Reside, Barking and Dagenham</h2>
+              <p className="lead">
+                A 380-home pilot began in June 2023 and was covered by Inside Housing in April 2024. EVO now holds an
+                eight-year contract with B&amp;D Reside for more than 4,500 homes, onboarding in phases.
+              </p>
+              <div className="cs-head cs-head--banner">
+                <div className="cs-head__logo">
+                  <LogoStrip logos={withFiles(clientLogos).filter((l) => /B&D/i.test(l.name))} color hideMissing />
+                </div>
+                <div className="cs-head__award">
+                  <IconBadge name="star" />
+                  <div>
+                    <span className="cs-head__award-name">Housing Digital Innovation Awards 2024</span>
+                    <span className="cs-head__award-what">
+                      Best Repairs and Maintenance Innovation, won with B&amp;D Reside
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Same treatment as the IDS figures, so the two case studies can be read against
-              each other instead of in two different shapes. */}
-          <div className="statrow statrow--orange">
-            <div>
-              <span className="stat">96%</span>
-              <span className="stat-label">First-time fix in the pilot</span>
-            </div>
-            <div>
-              <span className="stat">Under 6 days</span>
-              <span className="stat-label">Average damp and mould resolution</span>
-            </div>
-            <div>
-              <span className="stat">80%</span>
-              <span className="stat-label">App adoption in nine months</span>
-            </div>
-            <div>
-              <span className="stat">380 to 4,500+</span>
-              <span className="stat-label">Pilot homes to contracted homes</span>
-            </div>
-          </div>
-          <div className="mt-3 cs-photo">
             <Photo
               src="/images/photos/evo-bd-reside-team.webp"
               alt="The EVO and B&D Reside teams together outdoors, many wearing pink B&D Reside t-shirts"
               caption="EVO and the B&D Reside team."
               width={1285}
               height={704}
-              sizes="(min-width: 1200px) 1160px, 100vw"
+              sizes="(min-width: 900px) 42vw, 100vw"
             />
+          </div>
+
+          <div className="cs-startend mt-4">
+            <div className="cs-startend__col cs-startend__before">
+              <p className="eyebrow">Where they started</p>
+              <h3 className="cs-startend__h">Until June 2023</h3>
+              {/* One sentence, not a list, and this is worth reading before you change it.
+                  The approved facts give exactly ONE thing about B&D's starting position:
+                  "Residents used to ring or email the council and wait." The brief also gives
+                  "under 6 days (from 28-plus)", which would have been the perfect second
+                  line - but "28-plus" is in BANNED_TEXT in tools/check-site.mjs, retired
+                  earlier as an unsourced comparison, and the site checker caught me putting
+                  it back. It is not reinstated on a hunch.
+                  Sam: if the 28-plus day figure is B&D's own prior average and you can source
+                  it, say so and it goes in here and in the figure opposite - it is the single
+                  strongest before-and-after on this page. Until then, one stark sentence
+                  against four figures does the job without inventing anything. */}
+              <p className="cs-startend__was mb-0">Residents rang or emailed the council, and waited.</p>
+            </div>
+            <div className="cs-startend__col cs-startend__after">
+              <p className="eyebrow">Where they are now</p>
+              <h3 className="cs-startend__h">An eight-year contract, onboarding in phases</h3>
+              <div className="statrow statrow--orange">
+                <div>
+                  <span className="stat">96%</span>
+                  <span className="stat-label">First-time fix in the pilot</span>
+                </div>
+                <div>
+                  <span className="stat">Under 6 days</span>
+                  <span className="stat-label">Average damp and mould resolution</span>
+                </div>
+                <div>
+                  <span className="stat">80%</span>
+                  <span className="stat-label">App adoption in nine months</span>
+                </div>
+                <div>
+                  <span className="stat">380 to 4,500+</span>
+                  <span className="stat-label">Pilot homes to contracted homes</span>
+                </div>
+              </div>
+              <p className="cs-startend__note mb-0">
+                B&amp;D Reside kept its own teams throughout. The pilot ran alongside them, measured the same way.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section" aria-label="What B&D Reside says">
+      {/* Testimonials under the pair, as on IDS. The Managing Director's quote gets the
+          full-width band with the client's own mark beside it rather than sharing a row with
+          an award card that repeated the chip in the banner above. */}
+      <section className="section" aria-labelledby="bd-voices">
         <div className="container">
-          <div className="ev3-split">
+          <div className="section-head">
+            <p className="eyebrow">B&amp;D Reside</p>
+            <h2 id="bd-voices">What they say about it.</h2>
+          </div>
+          <div className="quote-band">
             <Quote t={testimonials.michaelWestbrookLong} large />
-            <div className="card card--grey">
-              <p className="eyebrow">Award</p>
-              <h3>Housing Digital Innovation Awards 2024</h3>
-              <p className="mb-0">Best Repairs and Maintenance Innovation, won with B&amp;D Reside.</p>
+            <div className="quote-band__mark">
+              <LogoStrip logos={withFiles(clientLogos).filter((l) => /B&D/i.test(l.name))} color hideMissing />
             </div>
           </div>
           <div className="grid-2 mt-3">

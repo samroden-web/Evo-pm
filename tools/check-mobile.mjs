@@ -31,6 +31,7 @@
 // with a clear message rather than failing. The gate that matters is that this runs before
 // a patch is packaged, on a machine that has it - not that it runs in the Codespace.
 import { createRequire } from 'node:module';
+import { assertStylesLoaded, assertServingThisBuild } from './lib/assert-styles.mjs';
 const require_ = createRequire(import.meta.url);
 
 function loadChromium() {
@@ -105,7 +106,10 @@ function audit() {
   const smallInputs = [];
 
   const label = (el) => {
-    const cls = el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '';
+    const cls =
+      el.className && typeof el.className === 'string'
+        ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.')
+        : '';
     return el.tagName.toLowerCase() + cls;
   };
 
@@ -124,8 +128,14 @@ function audit() {
       let clips = false;
       for (let a = el.parentElement; a && a !== document.documentElement; a = a.parentElement) {
         const ox = getComputedStyle(a).overflowX;
-        if (ox === 'auto' || ox === 'scroll') { scrolls = true; break; }
-        if (ox === 'hidden' || ox === 'clip') { clips = true; break; }
+        if (ox === 'auto' || ox === 'scroll') {
+          scrolls = true;
+          break;
+        }
+        if (ox === 'hidden' || ox === 'clip') {
+          clips = true;
+          break;
+        }
       }
       if (clips) clipped.push(`${label(el)} is ${Math.round(r.width)}px wide and CLIPPED by an ancestor`);
       else if (!scrolls) over.push(`${label(el)} is ${Math.round(r.width)}px wide`);
@@ -144,6 +154,22 @@ function audit() {
 
 const urls = await urlsFromSitemap();
 const browser = await chromium.launch({ executablePath: EXECUTABLE, args: ['--no-sandbox'] });
+
+// Before reporting anything, prove the stylesheet is actually in force. A checker that runs
+// against an unstyled page reports confident nonsense - see tools/lib/assert-styles.mjs.
+{
+  const probe = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  try {
+    await assertServingThisBuild(base);
+    await assertStylesLoaded(probe, base);
+  } catch (e) {
+    await probe.close();
+    await browser.close();
+    console.error(`\n${e.message}\n`);
+    process.exit(1);
+  }
+  await probe.close();
+}
 console.log(`Checking ${urls.length} URLs at ${SIZES.map((s) => s.width + 'px').join(' and ')} against ${base}\n`);
 
 let checks = 0;
