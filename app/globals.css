@@ -5257,6 +5257,10 @@ textarea {
   min-height: 1em;
   line-height: 1.2;
 }
+/* Two marks in one slot, for the column that carries a second brand. */
+.cmp-mark--pair {
+  gap: 7px;
+}
 .cmp th.cmp-cap {
   vertical-align: bottom;
   text-align: left;
@@ -5721,11 +5725,24 @@ textarea {
    shape, filled, centred. Any pair now matches whatever it is given.
    ========================================================================== */
 @media (min-width: 880px) {
-  .ev3-split > .photo img {
+  /* ONLY WHEN THERE IS ACTUALLY A PAIR. This rule was written for two photographs side by
+     side and applied to every photograph in a split, including single PORTRAIT ones. A
+     547x729 portrait forced into 16:9 rendered at 478x269 - 62% of the picture cropped
+     away, which is Sam's "the picture itself looks out of frame". The pairing problem it
+     solved is real, so the rule stays; it just has to know a pair when it sees one. */
+  .ev3-split:has(> .photo ~ .photo) > .photo img {
     aspect-ratio: 16 / 9;
     object-fit: cover;
     width: 100%;
     height: auto;
+  }
+  /* A single photograph keeps its own shape. Capped so a tall portrait does not tower over
+     the column beside it, and biased upward on the rare crop because that is where faces
+     are. */
+  .ev3-split:not(:has(> .photo ~ .photo)) > .photo img {
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center 30%;
   }
 }
 
@@ -6270,7 +6287,179 @@ textarea {
    width - the largest single element on an 8,000px page, and it read as a gap rather than a
    photograph when scrolling. Capped and cropped to a band. */
 .cs-photo .photo img {
-  max-height: 420px;
+  /* 420px before, which threw away half of a 4:3 photograph. The point of the cap is to
+     stop one picture dominating an 8,000px page, not to reframe it. 520px keeps about
+     three quarters of a 4:3 source, and the crop is biased upward because that is where
+     faces and headlines are. */
+  max-height: 520px;
   object-fit: cover;
+  object-position: center 30%;
   width: 100%;
+}
+
+/* A SCREENSHOT IS NOT A PHOTOGRAPH. Cropping a photo loses scenery; cropping a user
+   interface loses the thing it was put there to show - half the EVO Dashboard record was
+   being cut off. Screenshots are never cropped, only bounded. */
+.ui-shot .photo img {
+  max-height: 560px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin-inline: auto;
+  background: var(--grey-50);
+}
+
+/* The Regulator's judgement, with a photograph beside it. The quotation is five lines of
+   regulatory prose and has to keep a readable measure, so the picture fills the width
+   rather than the text stretching to a hundred characters a line. */
+@media (min-width: 900px) {
+  .reg-judgement--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(24px, 3vw, 40px);
+    align-items: start;
+  }
+  .reg-judgement--split .eyebrow,
+  .reg-judgement--split blockquote,
+  .reg-judgement--split figcaption,
+  .reg-judgement--split .reg-judgement__after {
+    grid-column: 1;
+  }
+  .reg-judgement--split .reg-judgement__pic {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin-top: 0;
+  }
+}
+.reg-judgement__pic {
+  margin-top: 22px;
+}
+.reg-judgement__pic img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
+.reg-judgement__pic span {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* A client quote given the full width of the container, with that client's own mark beside
+   it. The words keep their measure; the band is what runs across. */
+.quote-band {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 2.4vw, 32px);
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: clamp(22px, 3vw, 36px);
+}
+@media (min-width: 860px) {
+  .quote-band {
+    grid-template-columns: minmax(0, 1fr) minmax(140px, 200px);
+  }
+}
+.quote-band .quote {
+  min-width: 0;
+}
+.quote-band__mark {
+  min-width: 0;
+}
+.quote-band__mark .logo-strip,
+.quote-band__mark ul {
+  justify-content: flex-start;
+}
+
+/* The header of a case study: the client's own mark, and the award won with them. Colour
+   here rather than greyscale, because a single client logo beside that client's own story
+   is doing individual work - the greyscale rule is for a logo WALL, which is a pattern
+   claim. */
+.cs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+  padding-bottom: clamp(16px, 2vw, 22px);
+  border-bottom: 1px solid var(--line);
+}
+.cs-head__logo {
+  min-width: 0;
+  flex: 0 1 auto;
+  max-width: 180px;
+}
+.cs-head__logo:empty {
+  display: none;
+}
+.cs-head__award {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.cs-head__award-name {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+.cs-head__award-what {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.95rem;
+  color: var(--navy-deep);
+  font-weight: 600;
+}
+
+/* The IDS story and the Regulator's judgement, side by side. Two different kinds of
+   evidence, so they are separated rather than run together. */
+.cs-evidence {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 3.4vw, 48px);
+}
+@media (min-width: 980px) {
+  .cs-evidence {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+.cs-evidence > div {
+  min-width: 0;
+}
+.cs-evidence__reg {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2.6vw, 30px);
+}
+.cs-evidence__reg h3 {
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+/* A photograph shown at something near its own size rather than stretched across the
+   container. The gas safety shot is 900x675; run full-bleed at 1160 and capped in height it
+   lost 40% of the frame, and it was being upscaled to do it. */
+.photo-inset {
+  max-width: 820px;
+}
+.photo-inset .photo img {
+  width: 100%;
+  height: auto;
+  max-height: none;
 }

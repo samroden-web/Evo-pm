@@ -362,10 +362,12 @@ export default function PlanExplorer() {
               {total == null ? <strong>Price on application</strong> : <strong>{formatPrice(total)}</strong>}{' '}
               {total != null && 'plus VAT'}
             </div>
-            <div className="summary-bar__plus">
-              Plus a {formatPrice(clientStandingCharge.amount)} {clientStandingCharge.label.toLowerCase()} &mdash; once
-              for the whole contract, not per home
-            </div>
+            {/* The standing-charge line and the CPI review line were both removed from this
+                bar on 27 September. A sticky bar is the one place on the site where every
+                extra line is taken off the screen the reader is trying to use, and on a
+                phone these two were most of its height. Both survive in full on the page
+                itself, under "All prices at a glance" and in the notes beneath it, which is
+                where terms belong. */}
             <div className={`summary-bar__lines ${linesOpen ? '' : 'summary-bar__lines--collapsed'}`} id="summary-lines">
               <ul className="summary-bar__group">
                 <li>Managed Technology {formatPrice(type.managedTechnology)}</li>
@@ -409,7 +411,6 @@ export default function PlanExplorer() {
                 </ul>
               </div>
             </div>
-            <p className="summary-bar__note">{priceReview}</p>
           </div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
             <button

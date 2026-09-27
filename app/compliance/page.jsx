@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import Photo from '@/components/Photo';
 import { IconBadge } from '@/components/Icon';
 import { cta } from '@/data/site';
 
@@ -158,6 +159,22 @@ export default function CompliancePage() {
               Worth knowing: there is NO TSM for damp and mould. It reaches the framework
               through TP04, TP05 and the complaints measures, which is why the row below says
               so rather than inventing a code. */}
+          {/* Sam, 27 September: does this page need a picture? It had NONE - not one
+              photograph on the whole page, only logos and icons, which is why it reads as
+              drier than the pages either side of it. The gas safety check is the right one:
+              the shot list calls it the image that proves statutory work is delivered rather
+              than just recorded, which is this page's whole argument. */}
+          <div className="mt-3 photo-inset">
+            <Photo
+              src="/images/photos/evo-engineer-gas-safety-check.webp"
+              alt="An EVO engineer completing a gas safety check at a boiler, recording it on a tablet"
+              caption="Statutory checks recorded on the job, against the property, as the work happens."
+              width={1400}
+              height={700}
+              sizes="100vw"
+            />
+          </div>
+
           <div className="tsm mt-3">
             <p className="eyebrow">The measures a repairs service moves</p>
             <ul className="tsm-list">

@@ -122,7 +122,12 @@ export default function BuildToRentPage() {
               </div>
             ))}
           </div>
-          <div className="ev3-screens ev3-screens--narrow mt-3">
+          {/* Sam, 27 September: "this strip of icons looks like its missing some pictures next to
+              it. lots of white space". It was - ev3-screens--narrow caps the group at 420px, so
+              two phones sat as an island on the left of a 1160px row. A third screen was already
+              in the repo and it completes the sequence the section describes: report it, pick a
+              slot, watch it happen. */}
+          <div className="ev3-screens mt-3">
             <figure>
               <img
                 src="/images/app/living-app-home.webp"
@@ -144,6 +149,17 @@ export default function BuildToRentPage() {
                 decoding="async"
               />
               <figcaption>Reported without a phone call</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="/images/app/living-app-appointments.webp"
+                alt="The appointments screen in the EVO Living App, showing a booked repair slot"
+                width="420"
+                height="884"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>A slot they chose themselves</figcaption>
             </figure>
           </div>
         </div>

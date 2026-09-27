@@ -12,7 +12,8 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const DATA = 'data/competitors.js';
 const DIR = 'public/images/logos/competitors';
-const KEYS = ['plentific', 'askporter', 'fixflo', 'checkatrade', 'homeserve'];
+// helpmefix is not a seventh column - it shares the Fixflo column. See data/competitors.js.
+const KEYS = ['plentific', 'askporter', 'fixflo', 'checkatrade', 'homeserve', 'helpmefix'];
 
 function pngSize(buf) {
   if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {

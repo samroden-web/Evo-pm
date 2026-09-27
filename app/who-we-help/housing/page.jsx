@@ -222,7 +222,7 @@ export default function HousingPage() {
               weighs the Regulator differently from a supplier testimonial. The brief says
               "attribute exactly", so the quotation and the attribution are verbatim. The
               line underneath is the brochure's, also flagged as liftable verbatim. */}
-          <div className="reg-judgement mt-3">
+          <div className="reg-judgement reg-judgement--split mt-3">
             <p className="eyebrow">What the Regulator said</p>
             <blockquote>
               <p>
@@ -237,6 +237,21 @@ export default function HousingPage() {
             <p className="reg-judgement__after mb-0">
               The piloted repairs service was EVO. It reached every IDS home three months later.
             </p>
+            {/* Sam, 27 September: this block should run the full width or carry a picture.
+                The quotation itself has to stay at a readable measure - it is five lines of
+                regulatory prose - so the picture is what fills the rest, rather than letting
+                the text run to a hundred characters a line. */}
+            <div className="reg-judgement__pic">
+              <img
+                src="/images/photos/ids-evo-housing-executive-awards-2025.webp"
+                alt="IDS and EVO accepting the Housing Executive Awards 2025 Partnership of the Year"
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+              <span>IDS and EVO, Housing Executive Awards 2025.</span>
+            </div>
           </div>
 
           <p className="mt-3 mb-0">

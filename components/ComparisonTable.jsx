@@ -1,5 +1,6 @@
 import {
   competitors,
+  extraMarks,
   comparisonBands,
   comparisonFootnotes,
   comparisonSource,
@@ -90,7 +91,6 @@ export default function ComparisonTable() {
                   <img src="/images/brand/evo-logo-horizontal-white.png" alt="EVO" width="91" height="40" />
                 </span>
                 <span className="cmp-name">&nbsp;</span>
-                <span className="cmp-note">&nbsp;</span>
               </th>
               {competitors.map((c) => (
                 <th scope="col" key={c.key}>
@@ -105,7 +105,11 @@ export default function ComparisonTable() {
                       Rendering the empty slots means every header has the same structure and
                       the names sit on one line whatever each column happens to carry. */}
                   <span className="cmp-grp">{c.group}</span>
-                  <span className="cmp-mark">
+                  {/* A column may carry a SECOND mark - Fixflo carries Help Me Fix, because
+                      Aareon owns both and they are one supplier. It used to be a line of
+                      small print under the name, which made this column a row deeper than
+                      the rest. Two marks sit in the slot the logos already occupy. */}
+                  <span className={`cmp-mark${c.extraMark ? ' cmp-mark--pair' : ''}`}>
                     {c.src && !c.markIsWordmark ? (
                       <img
                         src={c.src}
@@ -117,9 +121,21 @@ export default function ComparisonTable() {
                         style={{ maxHeight: markHeight(c), maxWidth: 58 }}
                       />
                     ) : null}
+                    {c.extraMark && extraMarks[c.extraMark]?.src ? (
+                      <img
+                        src={extraMarks[c.extraMark].src}
+                        alt=""
+                        width={extraMarks[c.extraMark].width}
+                        height={extraMarks[c.extraMark].height}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ maxHeight: markHeight(extraMarks[c.extraMark]), maxWidth: 58 }}
+                      />
+                    ) : null}
                   </span>
                   <span className="cmp-name">{c.name}</span>
-                  <span className="cmp-note">{c.note || '\u00a0'}</span>
+                  {/* The note slot is gone. It existed for one column and cost every column
+                      a row of height. */}
                 </th>
               ))}
             </tr>

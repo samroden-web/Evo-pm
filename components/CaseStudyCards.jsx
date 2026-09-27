@@ -8,8 +8,11 @@ export const caseStudies = [
     client: 'Industrial Dwellings Society (IDS)',
     summary: 'Repair resolution times halved. 95% first-time fix. 1,414 homes, from a 25% pilot.',
     stat: { value: 'Halved', label: 'Repair resolution times' },
-    image: '/images/photos/ids-resident-engagement-day.webp',
-    alt: 'EVO and IDS staff at the IDS resident engagement day at Navarino Mansions',
+    // ids-resident-engagement-day is 1000x1333, PORTRAIT, and this card is a landscape
+    // box - half the picture was being cropped away. This one is landscape and is also an
+    // IDS photograph, so the card still shows the right client.
+    image: '/images/photos/ids-evo-housing-executive-awards-2025.webp',
+    alt: 'The IDS and EVO teams with their award at the Housing Executive Awards 2025',
   },
   {
     id: 'bd-reside',

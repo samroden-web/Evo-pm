@@ -194,7 +194,7 @@ export default function DampAndMouldPage() {
           {/* The placeholder asked for a damp and mould case view. We do not have that exact
               screen, but we do have the Dashboard job record, which is the same evidence
               trail against a property and makes the point the paragraph above it makes. */}
-          <div className="mt-3 cs-photo">
+          <div className="mt-3 ui-shot">
             <Photo
               src="/images/app/evo-dashboard-job-record.webp"
               alt="The EVO Dashboard showing a job record with its full history, photographs and costs"

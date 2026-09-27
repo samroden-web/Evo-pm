@@ -69,11 +69,15 @@ export default function GettingStarted() {
               ))}
             </div>
           </div>
+          {/* WAS ids-resident-engagement-day at width={1200} height={800}. That file is
+              1000x1333 - PORTRAIT - so the declared landscape box plus object-fit: cover
+              threw away half the picture. This slot is a wide band beside a column of text,
+              which wants a landscape photograph, so it gets one, at its real size. */}
           <Image
-            src="/images/photos/ids-resident-engagement-day.webp"
-            alt="An EVO team member with residents at an engagement day"
-            width={1200}
-            height={800}
+            src="/images/photos/evo-operative-resident-doorstep.webp"
+            alt="An EVO operative talking with a resident on their doorstep"
+            width={900}
+            height={675}
             sizes="(min-width: 900px) 40vw, 100vw"
           />
         </div>

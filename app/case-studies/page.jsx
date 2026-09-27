@@ -4,6 +4,9 @@ import Photo from '@/components/Photo';
 import Quote from '@/components/Quote';
 import PilotSection from '@/components/PilotSection';
 import ClosingCta from '@/components/ClosingCta';
+import LogoStrip from '@/components/LogoStrip';
+import { IconBadge } from '@/components/Icon';
+import { clientLogos, withFiles } from '@/data/logos';
 import { testimonials, regulatorQuote } from '@/data/testimonials';
 
 export const metadata = {
@@ -33,15 +36,17 @@ const IDS_START = [
 export default function CaseStudiesPage() {
   return (
     <>
+      {/* The hero photograph was evo-bd-reside-team, which is also the B&D section image
+          further down the same page - the same picture twice. */}
       <PageHero
         eyebrow="Case studies"
         title="Two landlords, two pilots, two full contracts."
         lead="Neither started with a commitment. Both started on a share of the homes, ran for long enough to produce their own numbers, and then widened."
         crumbs={[{ label: 'Case studies' }]}
-        image="/images/photos/evo-bd-reside-team.webp"
-        imageAlt="The EVO and B&D Reside teams together outdoors"
-        imageWidth={1285}
-        imageHeight={704}
+        image="/images/photos/evo-team-member-helping-resident.webp"
+        imageAlt="An EVO team member helping a resident with a repair"
+        imageWidth={1400}
+        imageHeight={787}
         priority
       >
         <div className="btn-row mt-3">
@@ -65,6 +70,26 @@ export default function CaseStudiesPage() {
               Pioneers of affordable housing since 1885, and running repairs until 2023 the way everyone else did. 1,414
               homes, now on a five-year contract.
             </p>
+          </div>
+
+          {/* Sam, 27 September: the client's logo and the award visual belong at the top of
+              each case study, not buried. Both are here. The logo strip renders the ONE
+              client's mark, filtered by name, and hides itself if that file has not
+              downloaded - so a missing logo costs polish rather than leaving a hole.
+              GLOBAL-06: an award only ever appears against the client it was won with, so
+              the Housing Executive award sits here and the Housing Digital award sits with
+              B&D Reside. */}
+          <div className="cs-head mt-3">
+            <div className="cs-head__logo">
+              <LogoStrip logos={withFiles(clientLogos).filter((l) => /^IDS$/i.test(l.name))} color hideMissing />
+            </div>
+            <div className="cs-head__award">
+              <IconBadge name="star" />
+              <div>
+                <span className="cs-head__award-name">Housing Executive Awards 2025</span>
+                <span className="cs-head__award-what">Partnership of the Year, won with IDS</span>
+              </div>
+            </div>
           </div>
 
           {/* AT A GLANCE, moved up 26 September. Sam: the layout makes the key points hard to
@@ -100,8 +125,8 @@ export default function CaseStudiesPage() {
               src="/images/photos/ids-resident-engagement-day.webp"
               alt="EVO and IDS staff at the IDS resident engagement day, Navarino Mansions"
               caption="IDS resident engagement day, Navarino Mansions."
-              width={900}
-              height={1200}
+              width={1000}
+              height={1333}
               sizes="(min-width: 880px) 38vw, 100vw"
             />
             <div>
@@ -116,48 +141,55 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
+      {/* Sam, 27 September: the timeline and the Regulator quote were two full sections,
+          each in a narrow container, one after the other - "they both take up a lot of
+          scrolling space currently". They are now one section, side by side on a laptop and
+          stacked on a phone, each under its own heading so it is obvious they are two
+          different kinds of evidence: what happened, and what the Regulator said about it. */}
       <section className="section section--grey" aria-labelledby="ids-timeline">
-        <div className="container container--narrow">
-          <h3 id="ids-timeline">From a quarter of the homes to every one</h3>
-          <ol className="vtimeline vtimeline--dates mt-2">
-            <li>
-              <span className="num" aria-hidden="true">
-                1
-              </span>
-              <span className="date">October 2023</span>
-              <h3>Pilot across 25% of homes</h3>
-              <p>
-                The Living App in residents&apos; hands, automated triage and appointment scheduling, digital
-                satisfaction surveys, and one repairs, property and compliance platform — with non-digital channels kept
-                for residents who wanted them.
-              </p>
-            </li>
-            <li>
-              <span className="num" aria-hidden="true">
-                2
-              </span>
-              <span className="date">October 2024</span>
-              <h3>The Regulator records evidence of improvement</h3>
-              <p>
-                The Regulator records evidence of improvement from the new pilot service, and notes plans to roll it out
-                across the remaining estates.
-              </p>
-            </li>
-            <li>
-              <span className="num" aria-hidden="true">
-                3
-              </span>
-              <span className="date">January 2025</span>
-              <h3>Rolled out across all 1,414 IDS homes</h3>
-              <p>On a five-year contract.</p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="section" aria-label="Regulator of Social Housing judgement">
-        <div className="container container--narrow">
-          <Quote t={regulatorQuote} large />
+        <div className="container">
+          <div className="cs-evidence">
+            <div className="cs-evidence__story">
+              <h3 id="ids-timeline">From a quarter of the homes to every one</h3>
+              <ol className="vtimeline vtimeline--dates mt-2">
+                <li>
+                  <span className="num" aria-hidden="true">
+                    1
+                  </span>
+                  <span className="date">October 2023</span>
+                  <h3>Pilot across 25% of homes</h3>
+                  <p>
+                    The Living App in residents&apos; hands, automated triage and appointment scheduling, digital
+                    satisfaction surveys, and one repairs, property and compliance platform — with non-digital channels
+                    kept for residents who wanted them.
+                  </p>
+                </li>
+                <li>
+                  <span className="num" aria-hidden="true">
+                    2
+                  </span>
+                  <span className="date">October 2024</span>
+                  <h3>The Regulator records evidence of improvement</h3>
+                  <p>
+                    The Regulator records evidence of improvement from the new pilot service, and notes plans to roll it
+                    out across the remaining estates.
+                  </p>
+                </li>
+                <li>
+                  <span className="num" aria-hidden="true">
+                    3
+                  </span>
+                  <span className="date">January 2025</span>
+                  <h3>Rolled out across all 1,414 IDS homes</h3>
+                  <p>On a five-year contract.</p>
+                </li>
+              </ol>
+            </div>
+            <div className="cs-evidence__reg">
+              <h3>What the Regulator said</h3>
+              <Quote t={regulatorQuote} large />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -247,6 +279,22 @@ export default function CaseStudiesPage() {
           <h2 id="bd-results" className="visually-hidden">
             B&amp;D Reside results
           </h2>
+
+          <div className="cs-head mt-3">
+            <div className="cs-head__logo">
+              <LogoStrip logos={withFiles(clientLogos).filter((l) => /B&D/i.test(l.name))} color hideMissing />
+            </div>
+            <div className="cs-head__award">
+              <IconBadge name="star" />
+              <div>
+                <span className="cs-head__award-name">Housing Digital Innovation Awards 2024</span>
+                <span className="cs-head__award-what">
+                  Best Repairs and Maintenance Innovation, won with B&amp;D Reside
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Same treatment as the IDS figures, so the two case studies can be read against
               each other instead of in two different shapes. */}
           <div className="statrow statrow--orange">

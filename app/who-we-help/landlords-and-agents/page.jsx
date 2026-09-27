@@ -252,8 +252,16 @@ export default function LandlordsAndAgentsPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="Proof" title="Agents already running this way." />
-          <div className="mt-3">
+          {/* Sam, 27 September: this quote should go all the way across. It now sits in a
+              full-width band with LRM's own mark beside it - the skill's rule is that colour
+              earns its place where a single logo does individual work, and a client's mark
+              next to that client's own words is exactly that. The words stay at a readable
+              measure; the band is what runs the width. */}
+          <div className="quote-band mt-3">
             <Quote t={testimonials.craigJackson} large />
+            <div className="quote-band__mark">
+              <LogoStrip logos={withFiles(clientLogos).filter((l) => /lrm/i.test(l.name))} color hideMissing />
+            </div>
           </div>
           <div className="mt-3">
             <LogoStrip logos={withFiles(clientLogos)} label="EVO clients" />

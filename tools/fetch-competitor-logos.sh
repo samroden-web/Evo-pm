@@ -74,6 +74,8 @@ try askporter   www.askporter.com  /apple-touch-icon.png /favicon.svg /android-c
 try fixflo      www.fixflo.com     /apple-touch-icon.png /favicon.svg /android-chrome-192x192.png /favicon-192x192.png
 try checkatrade www.checkatrade.com /apple-touch-icon.png /favicon.svg /android-chrome-192x192.png /favicon-192x192.png
 try homeserve   www.homeserve.com  /apple-touch-icon.png /favicon.svg /android-chrome-192x192.png /favicon-192x192.png
+# Shares the Fixflo column rather than having one of its own - Aareon owns both.
+try helpmefix   www.helpmefix.co.uk /apple-touch-icon.png /favicon.svg /android-chrome-192x192.png /favicon-192x192.png
 
 echo
 echo "Downloaded $ok, failed $fail."
