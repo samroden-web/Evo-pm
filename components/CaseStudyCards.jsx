@@ -18,7 +18,7 @@ export const caseStudies = [
     id: 'bd-reside',
     href: '/case-studies#bd-reside',
     client: 'B&D Reside, Barking and Dagenham',
-    summary: '96% first-time fix in the pilot. From 380 pilot homes to more than 4,500 contracted.',
+    summary: '96% first-time fix in the pilot. From 380 pilot homes to more than 2,500 contracted.',
     stat: { value: '96%', label: 'First-time fix in the pilot' },
     image: '/images/photos/evo-bd-reside-team.webp',
     alt: 'The EVO and B&D Reside teams together outside',

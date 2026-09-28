@@ -41,7 +41,7 @@ export default function CaseStudiesPage() {
       <PageHero
         eyebrow="Case studies"
         title="A housing association and a council&rsquo;s housing company, both turned around."
-        lead="Two of the landlords we work with, written up in full: a 1,414-home housing association and a local authority housing company with more than 4,500 homes. Neither started with a commitment. Both began with a pilot on a share of their stock, ran it long enough to produce their own numbers, and then widened."
+        lead="Two landlords, written up in full: 1,414 homes and 2,500-plus. Both started with a pilot on part of their stock, and both widened once the numbers came in."
         crumbs={[{ label: 'Case studies' }]}
         image="/images/photos/evo-team-member-helping-resident.webp"
         imageAlt="An EVO team member helping a resident with a repair"
@@ -282,6 +282,12 @@ export default function CaseStudiesPage() {
 
       {/* ---------------- B&D Reside ---------------- */}
 
+      {/* THE CONTRACTED HOME COUNT IS 2,500+, NOT 4,500. Corrected by Sam on 28 September.
+          Worth flagging rather than just changing: the developer brief (section 2, and again in
+          6.4) says "more than 4,500 homes", so the number came from EVO's own document and is
+          wrong there too. It appeared in four places on this site - the hero lead, the B&D
+          intro, the pilot-to-contract figure and the case study card on other pages - and all
+          four are now 2,500+. Anyone working from the brief will reintroduce it. */}
       {/* Sam, 27 September, item 10: "the B&D case study is layed out ok, but take anythings
           you think good from the IDS comments and replicate."
           Four things carried across. (1) The banner: text, client mark and the award won with
@@ -303,7 +309,7 @@ export default function CaseStudiesPage() {
               <h2 id="bd-title">B&amp;D Reside, Barking and Dagenham</h2>
               <p className="lead">
                 A 380-home pilot began in June 2023 and was covered by Inside Housing in April 2024. EVO now holds an
-                eight-year contract with B&amp;D Reside for more than 4,500 homes, onboarding in phases.
+                eight-year contract with B&amp;D Reside for more than 2,500 homes, onboarding in phases.
               </p>
               <div className="cs-head cs-head--banner">
                 <div className="cs-head__logo">
@@ -364,7 +370,7 @@ export default function CaseStudiesPage() {
                   <span className="stat-label">App adoption in nine months</span>
                 </div>
                 <div>
-                  <span className="stat">380 to 4,500+</span>
+                  <span className="stat">380 to 2,500+</span>
                   <span className="stat-label">Pilot homes to contracted homes</span>
                 </div>
               </div>
