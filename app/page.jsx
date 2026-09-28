@@ -51,9 +51,21 @@ export default function HomePage() {
             <h1>
               A fully managed, <em>fixed-price</em> repairs service for housing landlords.
             </h1>
+            {/* Sam, 28 September: "on the opening para under the title, is it also worth
+                saying our purpose built technology is end-to end". Yes - it is EVO's own
+                language (their live site: "fully managed, end-to-end digital solution"), and
+                it is the actual differentiator, because owning the whole system is what makes
+                a fixed price possible. It is also already evidenced rather than asserted:
+                /how-it-works says every report, message, appointment, photograph and sign-off
+                lives in one system.
+
+                Of three wordings tested at 1512px, this one and "Purpose-built, end-to-end
+                technology" held at three lines; "technology that runs a repair end to end"
+                spilled to four and would have pushed the buttons further down the very fold
+                this patch is trying to tidy. */}
             <p className="lead">
-              Purpose-built technology, repairs expertise and a fully managed service, so landlords get control and
-              residents get a repair that actually happens.
+              End-to-end purpose-built technology, repairs expertise and a fully managed service, so landlords get
+              control and residents get a repair that actually happens.
             </p>
             <div className="btn-row">
               <Link href={cta.review.href} className="btn btn-primary">

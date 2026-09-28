@@ -845,10 +845,31 @@ p.center {
    The draft's dark navy radial gradient was the single biggest reason the site read
    blue — it is the first screen anyone sees, and no amount of warming further down
    the page can undo it. */
+/* HERO PADDING, TIGHTENED 28 SEPTEMBER. Sam: "when you open the homepage, you cant quite see
+   all the visuals / buttons ... maybe at the spacing above the photo?"
+
+   It was 80px above and 64px below on a laptop, which put 81px of empty space between the
+   header and the top of the photograph. 48/44 takes 52px off the whole hero and loses
+   nothing - the section still has more air above it than any other on the page.
+
+   WHAT THIS DOES AND DOES NOT FIX, measured at four screen sizes:
+     15" laptop and up   the whole hero now fits without scrolling. It did not before.
+     14" and 13"         it does not, and cannot without damage. The floor is the text
+                         column at 599px: shrinking the headline does not help, because the
+                         photograph column is within 2px of it and simply becomes the
+                         constraint instead. Clearing a 14" needs the headline down to
+                         3.1rem, which drops it from four lines to three - trading the
+                         strongest element on the page for 90px of fold, which is a bad deal.
+                         Sam has the numbers and chose not to.
+
+   The two buttons are fully visible at every size tested INCLUDING a 13" laptop, which is
+   the part that actually matters. What falls below the fold on a small laptop is the award
+   marks and the drawing - reassurance, not action. A hero that exactly fills the screen also
+   reads as the end of the page, so a little of the next thing showing is not a fault. */
 .home-hero {
   background: linear-gradient(170deg, var(--orange-soft) 0%, var(--white) 88%);
   color: var(--text);
-  padding: clamp(44px, 6vw, 80px) 0 clamp(40px, 5vw, 64px);
+  padding: clamp(36px, 4vw, 48px) 0 clamp(32px, 3.4vw, 44px);
   border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
