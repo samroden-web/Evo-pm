@@ -1,27 +1,58 @@
 /* EVO website styles
    Brand (GLOBAL-08): EVO orange #FF6600 for signals only (eyebrows, key numbers,
    one callout per section). Dark slate/navy for text and structure. White and light
-   grey backgrounds. Orange text on white fails WCAG contrast, so small orange text
-   on light backgrounds uses --orange-ink, and bright orange is kept for large
-   figures on navy, accents and button fills (with dark text). */
+   grey backgrounds. */
 
-/* TREATMENT B, 24 September 2026 — the palette agreed on the homepage mockup.
-   Written on the mockup's own swatch strip: "Orange leads, navy is text only, and the
-   cold greys are replaced with warm ones. Three full orange bands break up the page:
-   the figures, the pilot and the close."
+/* ==========================================================================
+   BRAND MATCH, 28 September 2026 — THE LIVE SITE IS THE SPEC
+   --------------------------------------------------------------------------
+   Sam, 28 September: "the CEO really doesnt want us to change his branding ...
+   match their banners, and header, font style etc. they havent asked me to re-brand."
 
-   Three rules follow from that, and they are the whole system:
-     1. ORANGE LEADS. It is a field colour, not a highlighter. Three full-bleed orange
-        bands on the homepage (figures, statutory panel, getting started) plus the
-        buttons. Everything else on the page is quiet so those three land.
-     2. NAVY IS TEXT ONLY. It stays cool — #2B3A47 for type, #1C2833 for the dark
-        bands. An earlier pass warmed it to brown; that was wrong. Warm brown type on
-        warm grey has no separation and reads muddy rather than warm.
-     3. THE GREYS ARE WARM. #FBF8F5 / #F3EDE7 / #E6DCD3 replace the blue-biased
-        #f5f7f9 / #eaeef2 / #d9e0e6. This is what takes the blue cast out of the white
-        sections, without touching the type colour.
+   So this stylesheet no longer invents a palette. Every value below was MEASURED off
+   the rendered evo-pm.com, not taken from a brief, a mockup or a PDF. Where this file
+   and the live site disagree, the live site wins. If you are about to change one of
+   these, go and sample the live site first.
 
-   The --navy-* names are kept so no component has to change; only the values move. */
+   WHAT WAS MEASURED, 28 September 2026, sampling computed styles on the rendered pages:
+
+     Typeface      Quicksand throughout. We already had this - it was the one thing
+                   that already matched.
+     Headings      #3C5265 at weight 600. We had #1C2833 at 700: darker and heavier.
+     Body copy     #71777C at weight 400-500. We had #2B3A47. Theirs is a warm grey,
+                   not a navy at all - this is the single biggest reason our pages
+                   read as a different brand.
+     Small print   #979EA3.
+     Bands         #3C5265. The top notification bar, the process band and the
+                   illustrations are all this colour.
+     Footer        #2C3C49. Ours was #231A15, a warm near-black - a bigger departure
+                   from their brand than the navy ever was.
+     Orange        #FF6600. Already exact, and the illustrations are drawn in it.
+     Buttons       4px radius, 12px, weight 700, UPPERCASE, letter-spaced. Ours were
+                   999px pills at 16px sentence case.
+     Cards         10px radius. Ours were 14px.
+     Circles       100px radius, 58 of them - the dominant shape on their site. Team
+                   headshots are 156px circles and the illustrations are circular
+                   vignettes. THE CIRCLE IS THE BRAND DEVICE. See .brand-circle.
+
+   TWO DARK BLUES, AND THEY ARE NOT INTERCHANGEABLE. #3C5265 does all the visible work
+   - headings, the bands, the artwork. #2C3C49 is effectively a footer colour, used on
+   the footer and the slide-over menu panel and almost nowhere else. An earlier draft of
+   this change had them the other way round, on the strength of measuring which covered
+   more PIXELS rather than which covered more of the page you actually look at. Sam
+   caught it. Area is not the same as prominence.
+
+   NO ORANGE TEXT ON A DARK GROUND. Orange on #3C5265 measures 2.78:1, which fails even
+   the 3:1 floor for large text and graphics. The live site never does it - dark bands
+   there are white text with #979EA3 small print. So eyebrows, stat figures and tick
+   marks on .section--navy are white here. This is a case where matching their brand and
+   passing WCAG happen to want the same thing.
+
+   THE GREYS STAY WARM. #FBF8F5 / #F3EDE7 / #E6DCD3. The live site's page grounds are
+   plain white; these warm greys are the one thing kept from Treatment B, because they
+   sit under the warm body grey without a colour clash and give sections something to
+   separate against. Nothing on the live site contradicts them.
+   ========================================================================== */
 
 :root {
   /* Vertical rhythm. See .section below. */
@@ -42,7 +73,9 @@
      more than double this site's own .lead at 47. */
   --measure: 72ch;
 
-  --footer-bg: #231a15;
+  /* Their footer colour, measured. Was #231A15, a warm near-black that belonged to no
+     part of their brand. */
+  --footer-bg: #2c3c49;
 
   --orange: #ff6600;
   --orange-ink: #b34700;
@@ -54,11 +87,62 @@
   --orange-deep: #c74800;
   --orange-soft: #fff2e8;
   --orange-dark: #b34700;
-  --navy: #2b3a47;
-  --navy-deep: #1c2833;
-  --navy-darker: #141d26;
-  --text: #2b3a47;
+  /* MEASURED OFF THE LIVE SITE. --navy-deep is the brand navy: headings, dark bands,
+     and the colour the illustrations are drawn in. --navy is the deeper footer/overlay
+     blue. Do not swap these round - see the note at the top of this file. */
+  --navy: #2c3c49;
+  --navy-deep: #3c5265;
+  --navy-darker: #23303b;
+  /* Their body copy is a warm grey, not a navy. 4.57:1 on white - past the 4.5:1 floor,
+     but not by much, which is why nothing smaller than 15px uses it. */
+  /* THEIR BODY GREY IS #71777C. THIS IS #686E72, NINE POINTS DARKER. Do not "correct"
+     it back without reading this.
+
+     #71777C measures 4.57:1 on white - it passes, but only just, and their site is the
+     only place that is true, because their page grounds are plain white. Ours are not.
+     This site puts body copy on five different light grounds, and the brand grey fails
+     on three of them:
+
+       #FFFFFF  plain                 4.57:1  passes
+       #FBF8F5  --grey-50 sections    4.32:1  FAILS
+       #FFF2E8  --orange-soft panels  4.44:1  FAILS
+       #F3EDE7  --grey-100           ~4.25:1  FAILS
+       #FCEDEB  the emergency panel   4.29:1  FAILS
+
+     Chasing those one panel at a time is how you end up with six greys and no system.
+     #686E72 is the single value that clears the DARKEST ground the site uses (#F3EDE7,
+     at 4.59:1) and therefore clears all of them - 5.30:1 on white. Nine points on a
+     warm neutral grey is not a difference you can see next to theirs, and it is still
+     unmistakably their grey rather than a navy, which is the thing that actually makes
+     the page read as their brand.
+
+     If the warm greys are ever dropped for plain white, this can go back to their exact
+     #71777C. Until then it cannot. */
+  --text: #686e72;
+  /* NOT their #979EA3, and this is deliberate. Their #979EA3 small print appears on the
+     DARK footer, where it measures 4.25:1. Ours is caption and helper text on LIGHT
+     grounds, where the same grey would be 2.71:1 - a real failure, not a marginal one,
+     and it would not even be matching them, because they never put that grey on white.
+     Their grey is used where they use it: --muted-on-dark, in the footer.
+
+     Note this is DARKER than the body grey, which looks backwards and is not. Small
+     text needs more contrast than body text, not less; on this site "muted" means
+     quieter by size and weight, not by colour. */
   --muted: #5d6b78;
+  /* Quiet text on the brand navy - captions, stat labels, sources, kickers. One token,
+     because there were three different answers to this question before (#A9B6C3 and two
+     alpha-white values), and on the lighter brand navy all three landed between 3.9:1
+     and 4.3:1 against a 4.5:1 requirement. This is 5.16:1 on #3C5265. Anything quiet on
+     a dark band uses it; nothing invents its own. */
+  --on-navy-quiet: #c8cfd5;
+  /* Their footer small print is #979EA3, which on #2C3C49 measures 4.25:1 - fine for
+     the copyright line, short of the 4.5:1 that the Terms and Privacy LINKS sitting on
+     the same line need. This is #A4ABB0: the same grey lifted far enough to pass at
+     4.96:1, and not a difference you can see next to theirs. */
+  --muted-on-dark: #a4abb0;
+  /* Kept for the few places that need type darker than the brand grey without going to
+     a heading: table figures, form labels, anything dense. 8.2:1 on white. */
+  --ink-strong: #3c5265;
   --grey-50: #fbf8f5;
   --grey-100: #f3ede7;
   --line: #e6dcd3;
@@ -72,8 +156,15 @@
   --tbc-line: #c99a00;
   --tbc-text: #5c4400;
 
-  --radius: 14px;
-  --radius-sm: 8px;
+  /* Their card radius, measured: 10px, used 29 times. Buttons are 4px. Ours were 14px
+     and 999px pills, which is most of why our components read as a different brand
+     even where the colours matched. */
+  --radius: 10px;
+  --radius-sm: 4px;
+  --radius-btn: 4px;
+  /* The brand device. Their site draws 58 circles: 156px team headshots and the
+     circular illustration vignettes. See .brand-circle. */
+  --circle: 100%;
   --shadow: 0 1px 2px rgba(31, 45, 61, 0.06), 0 8px 24px rgba(31, 45, 61, 0.08);
   --container: 1200px;
   --gutter: 20px;
@@ -144,12 +235,14 @@ a:hover {
   border-radius: 4px;
 }
 
+/* Weight 600, measured off their headings. We were at 700, which with the darker ink we
+   had made every page read heavier and more corporate than theirs. */
 h1,
 h2,
 h3,
 h4 {
   color: var(--navy-deep);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
   margin: 0 0 0.5em;
   letter-spacing: -0.01em;
@@ -303,12 +396,17 @@ p.center {
 .section--navy a:not(.btn) {
   color: var(--white);
 }
+/* WHITE, NOT ORANGE, AND THIS IS THE BRAND-FAITHFUL CHOICE. Orange on #3C5265 is
+   2.78:1 - under even the 3:1 floor for large text and graphics. The live site never
+   puts orange type on a dark ground: its dark bands are white text with #979EA3 small
+   print. So this follows them and passes at 8.2:1. It was orange when the dark band was
+   #1C2833, where orange measured 5.0:1 and was fine. */
 .section--navy .eyebrow {
-  color: var(--orange);
+  color: var(--white);
 }
 .section--navy .muted,
 .section--navy .source {
-  color: #a9b6c3;
+  color: var(--on-navy-quiet);
 }
 
 .section-head {
@@ -418,21 +516,40 @@ p.center {
 
 /* ---------- Buttons ---------- */
 
+/* THEIR BUTTON, MEASURED: 4px radius, 12px, weight 700, UPPERCASE, letter-spaced,
+   12px/18px padding. Primary is an orange fill with white text; secondary is a SOLID
+   navy fill, not an outline. Ours were 999px pills at 16px sentence case, which is the
+   single most visible "different brand" signal on the site - a pill reads as a
+   different company before you have read a word of it.
+
+   THE ONE PLACE THEIR BRAND AND WCAG DISAGREE. White on #FF6600 measures 2.94:1. At
+   12px that needs 4.5:1, so the primary button misses by a wide margin - not the 0.06
+   the orange bands miss by. Their live site does exactly this, and the instruction is
+   to match their brand, so that is what is built here and it is carried in
+   tools/check-final.mjs as a NAMED, ACCEPTED exception rather than a silent pass.
+   Sam has the number. If he wants it fixed, one line does it: give .btn-primary
+   `color: var(--on-orange)` for 5.3:1, which keeps the orange fill and the shape and
+   changes only the ink. Do not make that change without asking him. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  /* Their buttons come out around 39px tall. 48px is kept because it is the tap-target
+     floor this site committed to, and at this font size the extra height is padding
+     rather than anything you can see. */
   min-height: 48px;
-  padding: 12px 22px;
-  border-radius: 999px;
+  padding: 12px 18px;
+  border-radius: var(--radius-btn);
   font: inherit;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   transition:
     background-color 0.15s,
     color 0.15s,
@@ -443,26 +560,45 @@ p.center {
 .btn:hover {
   transform: translateY(-1px);
 }
-/* Orange fill with dark text: 4.8:1 contrast */
+/* ACCEPTED EXCEPTION: white on #FF6600 is 2.94:1. See the note above. */
 .btn-primary {
   background: var(--orange);
-  color: var(--navy-deep);
+  color: var(--white);
+  border-color: var(--orange);
 }
 .btn-primary:hover {
-  background: #ff7a22;
-  color: var(--navy-deep);
+  background: #e65c00;
+  border-color: #e65c00;
+  color: var(--white);
 }
+/* Solid navy, as theirs is. White on #3C5265 is 8.2:1. */
 .btn-secondary {
-  background: transparent;
-  color: var(--navy-deep);
+  background: var(--navy-deep);
+  color: var(--white);
   border-color: var(--navy-deep);
 }
 .btn-secondary:hover {
-  background: var(--navy-deep);
+  background: var(--navy);
+  border-color: var(--navy);
   color: var(--white);
 }
+/* Their third button: white fill, navy ink. For use on orange and navy grounds, where
+   a solid navy button would disappear into the band. */
+.btn-tertiary {
+  background: var(--white);
+  color: var(--navy-deep);
+  border-color: var(--white);
+}
+.btn-tertiary:hover {
+  background: var(--grey-100);
+  border-color: var(--grey-100);
+  color: var(--navy-deep);
+}
+/* On a dark band the solid navy secondary has nothing to sit against, so it becomes
+   their white-on-navy button instead. */
 .section--navy .btn-secondary,
 .btn-on-dark {
+  background: transparent;
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.7);
 }
@@ -470,6 +606,7 @@ p.center {
 .btn-on-dark:hover {
   background: var(--white);
   color: var(--navy-deep);
+  border-color: var(--white);
 }
 .btn-small {
   min-height: 40px;
@@ -573,11 +710,15 @@ p.center {
   border-bottom: 1px solid var(--line);
   backdrop-filter: saturate(1.4) blur(6px);
 }
+/* Wider than the page container. Their header is full-bleed rather than held to the
+   text column, and once the nav went to their letter-spaced caps the 1200px container
+   could not hold logo + six items + three utility links + the CTA. */
 .header-inner {
   display: flex;
   align-items: center;
   gap: 16px;
   height: var(--header-h);
+  max-width: 1400px;
 }
 .logo {
   display: inline-flex;
@@ -602,14 +743,34 @@ p.center {
 .main-nav li {
   position: relative;
 }
+/* THEIR NAV, MEASURED: uppercase, weight 600, letter-spaced 1.7px at 17px - about
+   0.1em. Ours was 15.2px sentence case at weight 700 with no tracking.
+
+   SIZED DOWN FROM THEIRS, AND THE REASON IS ARITHMETIC. Uppercase plus 0.1em tracking
+   is far wider than sentence case, and this site's top-level items are longer words
+   than theirs - "How it works", "Plans & pricing", "Who we help", "Case studies"
+   against their "About", "Sectors". Set at their 17px with 0.1em, the bar measured
+   1388px of content inside a 1200px container and pushed the "Book a portfolio review"
+   button clean off the right edge of a 1440px screen. It looked fine in the CSS and
+   only showed up in a screenshot.
+
+   So: 0.78rem at 0.06em, tighter item padding, and the header gets a wider container
+   than the page content - which is what their header does anyway, it is full-bleed
+   rather than held to the text column. The CAPS AND THE TRACKING are the part you
+   recognise as their brand; the exact point size is not. Verified by screenshot at
+   1440, 1280, 1180 and 1100px, not by a DOM measurement - two different DOM probes
+   reported this header as five rows when it is one, because they counted the hidden
+   phone menu and the absolutely-positioned submenus. Look at the picture. */
 .main-nav a,
 .main-nav .nav-parent {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 10px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  padding: 10px 7px;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--navy-deep);
   text-decoration: none;
   border-radius: var(--radius-sm);
@@ -649,10 +810,15 @@ p.center {
   visibility: visible;
   transform: translateY(0);
 }
+/* Their submenu items are sentence case at 15px/600 with lighter tracking than the top
+   level - the caps stop at the top row, which is what keeps a long dropdown readable. */
 .submenu a {
   display: block;
   padding: 10px 12px;
   font-weight: 600;
+  font-size: 0.94rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 .submenu a:hover {
   background: var(--grey-50);
@@ -698,12 +864,23 @@ p.center {
 .mobile-nav > ul > li {
   border-bottom: 1px solid var(--grey-100);
 }
+/* Same treatment as the desktop bar, so the phone menu reads as the same brand. Their
+   overlay menu is uppercase and letter-spaced at the top level too. */
 .mobile-nav a {
   display: block;
   padding: 13px 0;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--navy-deep);
   text-decoration: none;
+}
+/* Second level stays sentence case, as theirs does. */
+.mobile-nav ul ul a {
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-size: 0.95rem;
 }
 .mobile-nav ul ul a {
   padding: 9px 0 9px 16px;
@@ -775,8 +952,9 @@ p.center {
 .page-hero--navy h1 {
   color: var(--white);
 }
+/* 2.78:1 in orange on this navy. White, as their dark bands are. */
 .page-hero--navy .eyebrow {
-  color: var(--orange);
+  color: var(--white);
 }
 
 .breadcrumbs {
@@ -881,7 +1059,7 @@ p.center {
 .award-strip p {
   margin: 0;
   font-size: 0.85rem;
-  color: #a9b6c3;
+  color: var(--on-navy-quiet);
   max-width: 420px;
   line-height: 1.45;
 }
@@ -1077,11 +1255,13 @@ p.center {
 .stat--orange {
   color: var(--orange-ink);
 }
+/* Same reason as the eyebrow: orange is 2.78:1 on this navy. A stat figure is large
+   text, so it needs 3:1, and orange misses that too. */
 .section--navy .stat {
-  color: var(--orange);
+  color: var(--white);
 }
 .section--navy .stat-label {
-  color: #a9b6c3;
+  color: var(--on-navy-quiet);
 }
 
 .tile {
@@ -1202,7 +1382,7 @@ p.center {
   color: var(--white);
 }
 .section--navy .quote figcaption {
-  color: #a9b6c3;
+  color: var(--on-navy-quiet);
 }
 .quote--large blockquote {
   font-size: clamp(1.15rem, 2vw, 1.45rem);
@@ -1261,7 +1441,156 @@ p.center {
   margin-top: 8px;
 }
 .section--navy .photo figcaption {
-  color: #a9b6c3;
+  color: var(--on-navy-quiet);
+}
+
+/* ==========================================================================
+   THE BRAND CIRCLE — how the cartoons and the real photography live together
+   --------------------------------------------------------------------------
+   Sam, 28 September: "if we can mix real people and cartoons on the website, that
+   would be good."
+
+   The answer was already in their design system rather than anything invented here. A
+   sweep of the live site's computed styles found 58 elements at a 100px radius - by a
+   wide margin the most common shape on the site. Every team headshot is a 156px circle,
+   and every illustration is a circular vignette. THE CIRCLE IS THE BRAND DEVICE.
+
+   So a photograph and a cartoon do not have to be reconciled: put them in the same
+   circle, at the same diameter, in the same rhythm, with the same orange accent, and
+   they read as one family, because on EVO's own site they already are. That is the
+   whole mechanism. It also means the mix is reversible - swapping a cartoon for a photo
+   later is a change of src, not a change of layout.
+
+   TWO VARIANTS, AND THE DIFFERENCE MATTERS:
+     .brand-circle--photo  a rectangular photograph, CROPPED to the circle. Needs a
+                           subject near the centre; tools/check-photos.mjs already
+                           refuses a crop that loses more than 35% of the picture.
+     .brand-circle--art    an illustration. These are drawn as circular vignettes on
+                           transparency, with small orange squares and dots deliberately
+                           floating OUTSIDE the circle. Cropping one to a circle would
+                           cut those off and flatten the drawing against its own edge,
+                           so art is contained, never cropped, and carries no radius of
+                           its own - the drawing brings its own.
+
+   The white inside each vignette is painted, not transparent, so art sits correctly on
+   white, on the warm greys and on an orange band (a white disc on orange is how their
+   hero does it), but would read as a hard white blob on a dark band. .section--navy
+   .brand-circle--art below is the guard for that.
+   ========================================================================== */
+
+.brand-circle {
+  position: relative;
+  width: 100%;
+  max-width: var(--circle-size, 320px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+.brand-circle img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.brand-circle--photo img {
+  border-radius: var(--circle);
+  object-fit: cover;
+}
+.brand-circle--art img {
+  border-radius: 0;
+  object-fit: contain;
+}
+
+/* The accent. Their illustrations carry loose orange squares and circles off the edge
+   of the vignette; this gives a photographed circle the same punctuation so the two
+   sit in a row without one looking like a visitor. Decorative only - it is a
+   pseudo-element, so it is never announced, and it is suppressed where it would
+   collide with a caption. */
+.brand-circle--photo::after {
+  content: '';
+  position: absolute;
+  right: 4%;
+  top: 8%;
+  width: 14%;
+  height: 14%;
+  border-radius: var(--circle);
+  background: var(--orange);
+  pointer-events: none;
+}
+.brand-circle--photo.no-accent::after {
+  content: none;
+}
+
+/* A row of circles, cartoons and photographs together. Wrapping flex rather than grid,
+   because a grid centres its TRACKS and leaves a partial last row hanging left - the
+   fault already fixed on the logo strips and the team grid. */
+.circle-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 32px;
+}
+.circle-row > * {
+  flex: 0 1 260px;
+  min-width: 0;
+}
+/* .brand-circle carries `margin-inline: auto` so it centres when it is used on its own.
+   Inside a flex row that is actively harmful: an auto margin on a flex item absorbs ALL the
+   free space on the line, so two circles that should sit together with a 32px gap were
+   shoved to opposite ends of a 1200px container. justify-content never got a look in,
+   because there was no free space left for it to distribute. */
+.circle-row > .brand-circle {
+  margin-inline: 0;
+}
+.circle-row figcaption,
+.brand-circle + figcaption {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .circle-row > * {
+    flex: 1 1 140px;
+    max-width: calc(50% - 16px);
+  }
+}
+
+/* A drawing and a photograph as a pair, with one line of copy under both. The caption is
+   given the full width so it sits under the pair rather than beside one of them - it is
+   about the relationship between the two, which is the whole point of putting them
+   together. */
+.mixed-pair {
+  margin-block: 26px;
+}
+.mixed-pair__row {
+  align-items: start;
+}
+.mixed-pair figure {
+  margin: 0;
+}
+/* Outside the flex row, so it is simply a block and lands underneath. See the note in
+   MixedPair.jsx for why the in-row version could not work. */
+.mixed-pair__caption {
+  max-width: 52ch;
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 0.92rem;
+}
+@media (max-width: 560px) {
+  /* Two circles at half width each, so the pairing survives on a phone rather than
+     stacking into two unrelated pictures. */
+  .mixed-pair__row > .brand-circle {
+    flex: 1 1 130px;
+    max-width: calc(50% - 16px);
+  }
+}
+
+/* Art on a dark band: the painted white inside the vignette would read as a blob, so
+   the band gives it a white disc to sit on deliberately rather than by accident. */
+.section--navy .brand-circle--art,
+.page-hero--navy .brand-circle--art {
+  background: var(--white);
+  border-radius: var(--circle);
 }
 
 /* ---------- Logos ---------- */
@@ -1636,7 +1965,9 @@ p.center {
 }
 .summary-bar__total strong {
   font-size: 1.7rem;
-  color: var(--orange);
+  /* The running total on the pricing page - the single most-read number on the site.
+     Orange is 2.76:1 on the brand navy bar, under the 3:1 floor even at this size. */
+  color: var(--white);
   font-weight: 700;
 }
 /* The breakdown is now a container, not a list: per-home lines first, then the charges
@@ -1812,8 +2143,11 @@ p.center {
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
     center / 11px no-repeat;
 }
+/* A tick disc is a graphic, so the floor is 3:1, and orange on this navy is 2.78:1.
+   White disc with the navy checkmark showing through instead. */
 .section--navy .tick-list li::before {
-  background-color: var(--orange);
+  background-color: var(--white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233c5265' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
 }
 .tick-list--compact li {
   margin-bottom: 6px;
@@ -2137,6 +2471,16 @@ table.data tbody th {
   transition:
     transform 0.15s,
     box-shadow 0.15s;
+}
+/* The tile with EVO's own drawing at the top of it. The drawing is centred and the text
+   stays left, because centring the copy too would make three tiles of ragged, hard-to-scan
+   prose - the picture is the thing that wants symmetry, not the sentence. margin-bottom is
+   negative at the top so the vignette's own transparent margin does not read as a gap. */
+.sector-tile--art {
+  padding-top: 18px;
+}
+.sector-tile--art .brand-circle {
+  margin-bottom: 2px;
 }
 .sector-tile:hover {
   transform: translateY(-2px);
@@ -2611,14 +2955,18 @@ table.data tbody th {
    Treatment B exists to move away from. It stays dark — a footer should anchor the page
    — but on a warm ground taken from the same family as --orange-ink, so it reads as part
    of the brand rather than as a default. */
+/* THEIR FOOTER. #2C3C49, white links, grey small print. Ours was #231A15 with warm
+   beige type - a warm near-black that appeared nowhere in their brand, and the largest
+   single block of colour on every page. Warm beige on a cool navy reads muddy, so the
+   type goes cool with the ground. */
 .site-footer {
   background: var(--footer-bg);
-  color: #cbbcae;
+  color: var(--white);
   padding: var(--sec-y) 0 28px;
   font-size: 0.95rem;
 }
 .site-footer a {
-  color: #f0e6dc;
+  color: var(--white);
   text-decoration: none;
 }
 .site-footer a:hover {
@@ -2703,6 +3051,7 @@ table.data tbody th {
   max-height: min(var(--logo-h, 44px), 44px);
   max-width: 120px;
 }
+/* Their copyright line: the quiet grey, with the legal links on it. 4.96:1. */
 .footer-bottom {
   margin-top: 32px;
   display: flex;
@@ -2710,6 +3059,13 @@ table.data tbody th {
   gap: 12px 24px;
   justify-content: space-between;
   font-size: 0.85rem;
+  color: var(--muted-on-dark);
+}
+.footer-bottom a {
+  color: var(--muted-on-dark);
+}
+.footer-bottom a:hover {
+  color: var(--white);
 }
 .footer-bottom ul {
   list-style: none;
@@ -2823,10 +3179,28 @@ table.data tbody th {
 .header-cta {
   white-space: nowrap;
 }
+/* THE TIGHT BAND: 1180px, where the desktop nav first appears, up to 1320px. Everything
+   is in the bar at once here and there is the least room for it.
+
+   This rule used to set .main-nav a to 0.9rem, which was a NUDGE DOWN from the old
+   0.95rem. After the brand match it was a nudge UP from 0.78rem, and because it is
+   later in the file it won - so the nav went back to being too wide in exactly the band
+   that had the least room, and pushed the CTA off the edge at 1180px. The rule had not
+   changed; what it was overriding had. Worth remembering when a value moves globally:
+   every local override of it silently changes meaning.
+
+   The utility links go rather than the button. "Residents", "Trades" and "Client login"
+   are all reachable from the footer and the phone menu; "Book a portfolio review" is
+   the one thing on the header that is there to be clicked. */
 @media (min-width: 1180px) and (max-width: 1320px) {
-  .main-nav a {
-    padding: 10px 7px;
-    font-size: 0.9rem;
+  .main-nav a,
+  .main-nav .nav-parent {
+    padding: 10px 5px;
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+  }
+  .ev3-util {
+    display: none !important;
   }
 }
 
@@ -3452,13 +3826,14 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--on-navy-quiet);
   padding: 13px 18px;
   border-top: 0;
 }
 .ev2-pair-head > div + div {
   background: var(--navy-deep);
-  color: var(--orange);
+  /* Orange is 2.76:1 on the brand navy. */
+  color: var(--white);
   box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.14);
 }
 
@@ -3643,6 +4018,10 @@ textarea {
   border-left: 5px solid #c02a1e;
   border-radius: var(--radius);
   padding: 24px 22px;
+  /* The brand body grey is 4.29:1 on this peach, which fails. Safety information is the
+     last thing on the site that should be set in the lightest ink available, so this
+     panel takes the strong ink: 7.2:1. */
+  color: var(--ink-strong);
 }
 .ev2-emergency .eyebrow {
   color: #8e1c13;
@@ -3905,31 +4284,52 @@ textarea {
    block exists to avoid. */
 
 /* Who we help strip. */
+/* WHO WE HELP. Was a one-line strip - a sentence and three inline links. Now three of
+   EVO's own drawings, one per audience, as their site does it. */
 .ev2-whostrip {
   background: var(--white);
   border-block: 1px solid var(--line);
-  padding: 20px 0;
-}
-.ev2-whostrip .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 26px;
-  align-items: baseline;
+  padding: var(--sec-y-tight) 0;
 }
 .ev2-whostrip-t {
   font-weight: 600;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 0 0 22px;
 }
-.ev2-whostrip-links {
+.ev2-whostrip-row {
+  align-items: start;
+}
+.ev2-whostrip-card {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 22px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--navy-deep);
+  padding: 10px;
+  border-radius: var(--radius);
+  transition:
+    transform 0.15s,
+    background-color 0.15s;
 }
-.ev2-whostrip-links a {
+.ev2-whostrip-card:hover {
+  transform: translateY(-2px);
+  background: var(--grey-50);
+}
+.ev2-whostrip-name {
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+}
+/* The link affordance stays orange, but --orange-ink rather than the brand orange: orange
+   on white is 2.9:1 and this is small text. */
+.ev2-whostrip-card .go {
   color: var(--orange-ink);
   font-weight: 600;
-  text-decoration: none;
+  font-size: 0.85rem;
 }
-.ev2-whostrip-links a::after {
+.ev2-whostrip-card .go::after {
   content: ' \2192';
 }
 
@@ -3968,6 +4368,47 @@ textarea {
   background: var(--orange);
   color: var(--white);
   padding: var(--sec-y) 0;
+}
+/* Heading and drawing side by side on the orange band. The drawing sits second in the
+   source so a screen reader and a phone both get the words first; on a wide screen it
+   moves to the right of them. */
+.ev2-start-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 36px;
+}
+.ev2-start-head__copy {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+.ev2-start-art {
+  flex: 0 0 auto;
+}
+@media (max-width: 720px) {
+  /* On a phone the drawing under a full-width heading is a lot of vertical space for a
+     decoration, so it shrinks rather than stacking at full size. */
+  .ev2-start-art {
+    --circle-size: 150px !important;
+    margin-inline: auto;
+  }
+}
+
+/* The drawing beside the board and team photographs on /about. */
+.ev3-who-art {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 28px;
+  margin-top: 22px;
+}
+.ev3-who-art p {
+  flex: 1 1 280px;
+  min-width: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy-deep);
+  max-width: 34ch;
 }
 .ev2-start .eyebrow {
   color: var(--on-orange-soft);
@@ -4261,11 +4702,11 @@ textarea {
   display: none;
 }
 .ev3-util a {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--muted);
   text-decoration: none;
-  padding: 10px 8px;
+  padding: 10px 6px;
   white-space: nowrap;
 }
 .ev3-util a:hover {
@@ -4942,8 +5383,11 @@ textarea {
   text-transform: uppercase;
   margin-bottom: 12px;
 }
+/* This overrides the .footer-bottom colour set earlier in the file, so it has to move
+   too. #A3948A was the warm beige that went with the old near-black footer; on the
+   brand navy it measures 3.87:1 and fails at 13.6px. */
 .footer-bottom {
-  color: #a3948a;
+  color: var(--muted-on-dark);
 }
 
 /* The accreditation strip on the homepage trust block, same treatment as the footer
@@ -5665,8 +6109,9 @@ textarea {
   width: 29px;
   height: 29px;
 }
+/* 2.78:1 in orange on this navy; an icon is a graphic and needs 3:1. */
 .section--navy .icon-badge {
-  color: var(--orange);
+  color: var(--white);
 }
 .card--grey .icon-badge {
   background: var(--white);
@@ -5923,15 +6368,18 @@ textarea {
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
-  /* 4.3:1 on the navy - comfortably past the 3:1 floor for text this size. */
-  color: var(--orange);
+  /* Was orange, and the comment here used to read "4.3:1 on the navy - comfortably past
+     the 3:1 floor". That was true of the old #1C2833 band and is not true of the brand
+     navy, where orange is 2.76:1. A measurement is only valid against the ground it was
+     taken on; when the ground moves, the number moves with it. White: 8.2:1. */
+  color: var(--white);
 }
 .pa-theme {
   font-size: var(--label);
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--on-navy-quiet);
 }
 /* Centred as a group against the answer card, which is the taller half on three rows out of
    four. Left top-aligned it produced up to 80px of empty navy under a two-line problem. */
@@ -6010,7 +6458,7 @@ textarea {
 }
 .pa-tag--problem {
   display: block;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--on-navy-quiet);
   margin-bottom: 7px;
 }
 .pa-tag--evo {
@@ -6220,7 +6668,8 @@ textarea {
   color: #fff;
 }
 .reg-judgement .eyebrow {
-  color: var(--orange);
+  /* Orange is 2.76:1 on the brand navy. */
+  color: var(--white);
 }
 .reg-judgement blockquote {
   margin: 0;
@@ -6238,7 +6687,7 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--on-navy-quiet);
 }
 .reg-judgement__after {
   margin-top: 18px;
@@ -6246,7 +6695,9 @@ textarea {
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   font-size: 1.02rem;
   font-weight: 600;
-  color: var(--orange);
+  /* Orange is 2.76:1 on the brand navy. This line is the payoff of the quote, so it
+     keeps its emphasis through weight rather than colour. */
+  color: var(--white);
   max-width: 52ch;
 }
 
@@ -6416,7 +6867,7 @@ textarea {
   display: block;
   margin-top: 10px;
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--on-navy-quiet);
 }
 
 /* A client quote given the full width of the container, with that client's own mark beside

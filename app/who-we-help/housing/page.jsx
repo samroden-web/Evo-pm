@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import MixedPair from '@/components/MixedPair';
 import { IconBadge } from '@/components/Icon';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
@@ -176,6 +177,17 @@ export default function HousingPage() {
       <section className="section">
         <div className="container">
           <SectionHead eyebrow="Scale" title="What EVO replaces depends on your size." />
+          {/* The drawing and the photograph, same circle, same size. The stock on the left,
+              the people who turn up to it on the right - the argument neither picture makes
+              on its own. See components/MixedPair.jsx. */}
+          <MixedPair
+            art="evo-local-authority"
+            photo="/images/photos/evo-operative-resident-doorstep-square.webp"
+            photoAlt="An EVO operative talking to a resident on her doorstep"
+            photoWidth={675}
+            photoHeight={675}
+            caption="Council terraces, low-rise blocks or a mixed portfolio — the stock varies, the service does not."
+          />
           <div className="grid-3 mt-3">
             {SIZES.map((s) => (
               <div className="card" key={s.when}>

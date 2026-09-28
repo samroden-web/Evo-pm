@@ -8,12 +8,14 @@
     "start": "next start",
     "check": "node tools/check-site.mjs ${CHECK_URL:-http://localhost:3999}",
     "check:mobile": "node tools/check-mobile.mjs ${CHECK_URL:-http://localhost:3999}",
-    "check:all": "npm run check && npm run check:layout && npm run check:photos && npm run check:mobile && npm run check:nav && npm run audit && npm run check:final",
+    "check:all": "npm run check:art && npm run check && npm run check:layout && npm run check:photos && npm run check:mobile && npm run check:nav && npm run audit && npm run check:final",
     "check:layout": "node tools/check-layout.mjs ${CHECK_URL:-http://localhost:3999}",
     "check:photos": "node tools/check-photos.mjs ${CHECK_URL:-http://localhost:3999}",
     "audit": "node tools/audit-round-2026-09-27.mjs ${CHECK_URL:-http://localhost:3999}",
     "check:final": "node tools/check-final.mjs ${CHECK_URL:-http://localhost:3999}",
-    "check:nav": "node tools/check-nav.mjs ${CHECK_URL:-http://localhost:3999}"
+    "check:nav": "node tools/check-nav.mjs ${CHECK_URL:-http://localhost:3999}",
+    "check:art": "node tools/check-illustrations.mjs",
+    "fetch:art": "node tools/fetch-illustrations.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

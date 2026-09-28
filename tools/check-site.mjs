@@ -43,6 +43,28 @@ const BANNED_TEXT = [
   'British Gas', // named in a draft but never verified, so it must not reappear in a cell
 ];
 
+// Text banned only on CERTAIN pages, because the same string is legitimate elsewhere.
+//
+// WHY THIS LIST IS SEPARATE FROM BANNED_TEXT. B&D Reside is contracted for 2,500-plus homes,
+// not 4,500. The developer brief says 4,500 in sections 2 and 6.4, so the wrong figure came
+// from EVO's own document and will be reintroduced by anyone working from it - which is
+// exactly what a check is for. But "4,500" is a perfectly ordinary number: an insights article
+// quotes the NRLA on 4,500 garden disputes a year, and banning the string site-wide would fail
+// the build over a sourced statistic about something else entirely.
+//
+// AND WHY IT CHECKS THE SERVED PAGE RATHER THAN THE SOURCE. The first version of this guard
+// grepped the repo, and the deploy stopped on 28 September because the file carries a COMMENT
+// explaining that the figure is 2,500 and must not be changed back. The guard read its own
+// warning as the fault it was warning about. Comments, alt text in a data file, a git message -
+// none of those are the page. What a customer reads is the page, so that is what gets checked.
+const BANNED_ON_PAGE = [
+  {
+    path: '/case-studies',
+    text: '4,500',
+    why: "B&D Reside is 2,500+ homes. The developer brief says 4,500 in sections 2 and 6.4 and is wrong - the brief needs correcting, not this page.",
+  },
+];
+
 const fail = [];
 const warn = [];
 let pagesChecked = 0;
@@ -123,6 +145,16 @@ async function checkPage(path) {
 
   // --- retired claims and cost-base figures ---
   const text = html.replace(/<script[\s\S]*?<\/script>/g, '');
+  for (const rule of BANNED_ON_PAGE) {
+    if (path !== rule.path) continue;
+    // Strip HTML comments first: a note in the markup explaining why a figure is wrong is
+    // not the figure appearing on the page, and treating it as one is what stopped the
+    // deploy on 28 September.
+    const visible = text.replace(/<!--[\s\S]*?-->/g, '');
+    if (visible.includes(rule.text)) {
+      note(fail, path, `"${rule.text}" is on this page and must not be. ${rule.why}`);
+    }
+  }
   for (const banned of BANNED_TEXT) {
     if (text.includes(banned)) note(fail, path, `banned text present: "${banned}"`);
   }

@@ -69,10 +69,26 @@ async function urlsFromSitemap() {
 const auditPage = () => {
   // fg-on-bg pairs signed off by the site's owner, with who decided and when. Anything not on
   // this list is still a failure.
+  // KEYED ON THE PAIR *AND* THE REQUIREMENT, AND THAT IS THE WHOLE POINT. Sam signed off
+  // white on EVO orange for LARGE text on the orange bands, where the bar is 3:1 and the
+  // measurement misses it by 0.06. The brand match on 28 September put the same pair on the
+  // buttons at 12px, where the bar is 4.5:1 and the same 2.94:1 misses by a mile.
+  //
+  // Keyed on the colour pair alone, that second case would have inherited the first one's
+  // sign-off in silence - a decision Sam made about one thing quietly widened into a
+  // different thing he was never asked about. An exception list that grows by itself is
+  // worse than no exception list, because it looks like diligence.
   const ACCEPTED = {
-    '#ffffff on #ff6600': 'white on EVO orange, 2.94:1 - Sam, 27 September: the brand look on every orange block',
+    '#ffffff on #ff6600 @3':
+      'white on EVO orange, 2.94:1 against a 3:1 bar - Sam, 27 September: the brand look on every orange block',
   };
-  const out = { contrast: [], accepted: [], unmeasurable: [], alt: [], headings: [], links: [], lang: null };
+  // Measured, below the bar, and NOT yet signed off by anyone. Reported in a block of its
+  // own on every run, loudly, until Sam says one way or the other.
+  const AWAITING = {
+    '#ffffff on #ff6600 @4.5':
+      'white on EVO orange at button size, 2.94:1 against a 4.5:1 bar - this is exactly what the live evo-pm.com does, and it came in with the 28 September brand match. NOT the same decision as the one above: that one misses by 0.06, this one misses by 1.56. Sam has the number. One line changes it if he wants it changed - give .btn-primary color: var(--on-orange) for 5.3:1, same fill, same shape, different ink.',
+  };
+  const out = { contrast: [], accepted: [], awaiting: [], unmeasurable: [], alt: [], headings: [], links: [], lang: null };
 
   // --- colour helpers -------------------------------------------------------
   const parse = (c) => {
@@ -174,7 +190,9 @@ const auditPage = () => {
       // it here keeps three things true at once: the deploy is not blocked by a decision already
       // taken, the number is still printed on every run so nobody forgets it, and any NEW
       // failure still fails the build loudly.
-      if (ACCEPTED[pair]) out.accepted.push(line);
+      const key = `${pair} @${need}`;
+      if (ACCEPTED[key]) out.accepted.push(line);
+      else if (AWAITING[key]) out.awaiting.push(line);
       else out.contrast.push(line);
     }
   }
@@ -186,16 +204,27 @@ const auditPage = () => {
     const alt = img.getAttribute('alt');
     if (alt === null) out.alt.push(`no alt attribute at all: ${img.currentSrc || img.src}`);
     else if (alt.trim() === '') {
-      // An empty alt is CORRECT in two common cases, and the first version of this check called
-      // 21 of them faults: an image inside a link whose own text already names it (every article
-      // card on the site), and an image in a figure with a caption. Announcing the same title
-      // twice is worse than not announcing it. So it is only a finding when nothing else names
-      // the image AND it is big enough to be carrying meaning.
+      // An empty alt is CORRECT in three cases, and this check has now called two of them
+      // faults. First it flagged 21 article cards - an image inside a link whose own text
+      // already names it - and an image in a figure with a caption. Announcing the same title
+      // twice is worse than not announcing it.
+      //
+      // The third, added 28 September: an image explicitly marked aria-hidden="true" or
+      // role="presentation". The illustrations went in that day sitting beside headings that
+      // already name what they show, so they carry alt="" AND aria-hidden="true" - the
+      // standard, unambiguous way of saying "this is decoration, skip it". The check flagged
+      // four of them purely for being over 200px, which is INFERRING intent from size when the
+      // author has stated it in the markup. A stated declaration beats a guess about pixels:
+      // if it is wrong, it is wrong in the page and a size threshold would not have found it
+      // either. Marking something aria-hidden that is genuinely informative is still a fault -
+      // it is just not one this rule can detect, and pretending otherwise made it noisy enough
+      // to start ignoring.
+      const declaredDecorative = img.getAttribute('aria-hidden') === 'true' || img.getAttribute('role') === 'presentation';
       const link = img.closest('a');
       const named = !!(link && ((link.textContent || '').trim().length > 1 || link.getAttribute('aria-label')));
       const fig = img.closest('figure');
       const capt = !!(fig && fig.querySelector('figcaption') && fig.querySelector('figcaption').textContent.trim());
-      if (!named && !capt && r.width > 200 && r.height > 150)
+      if (!declaredDecorative && !named && !capt && r.width > 200 && r.height > 150)
         out.alt.push(
           `empty alt on a ${Math.round(r.width)}x${Math.round(r.height)} image: ${img.currentSrc || img.src}`
         );
@@ -293,6 +322,7 @@ const external = new Set();
 const weights = [];
 const tbcs = [];
 const accepted = [];
+const awaiting = [];
 const note = (bucket, page, msg) => bucket.push(`  ${page}\n    ${msg}`);
 
 const page = await browser.newPage({ viewport: DESKTOP });
@@ -319,6 +349,7 @@ for (const u of urls) {
 
   for (const c of r.contrast) note(fail, u, `contrast ${c}`);
   for (const c of r.accepted || []) accepted.push(`  ${u}\n    ${c}`);
+  for (const c of r.awaiting || []) awaiting.push(`  ${u}\n    ${c}`);
   for (const a of r.alt) note(fail, u, `image ${a}`);
   for (const h of r.headings) note(fail, u, `headings: ${h}`);
   for (const x of r.unmeasurable) note(warn, u, `contrast not measurable: ${x}`);
@@ -369,6 +400,25 @@ if (accepted.length) {
   console.log('reported here every run rather than failing the build or being forgotten:');
   console.log("  white on EVO orange = 2.94:1, against a 3:1 requirement. Sam's call, 27 September.");
   console.log('  Re-measure every one of these if the brand orange ever changes.');
+  console.log('');
+}
+
+if (awaiting.length) {
+  console.log(`>>> BELOW THE BAR AND NOT YET DECIDED (${awaiting.length} elements) <<<`);
+  console.log('These are NOT signed off. They came in with the 28 September brand match, where');
+  console.log('the instruction was to match the live evo-pm.com rather than re-brand it.');
+  console.log('');
+  console.log('  White on EVO orange at BUTTON size = 2.94:1, against a 4.5:1 requirement.');
+  console.log('  This is what the live site does. It is NOT the same call as the one above:');
+  console.log('  that one misses by 0.06 on large band text, this one misses by 1.56 on 12px');
+  console.log('  button labels. It is listed separately so one decision cannot quietly stand');
+  console.log('  in for another.');
+  console.log('');
+  console.log('  To change it, one line: .btn-primary { color: var(--on-orange) } = 5.3:1,');
+  console.log('  same orange fill, same shape, darker ink. Ask Sam before applying it.');
+  console.log('');
+  awaiting.slice(0, 4).forEach((a) => console.log(a));
+  if (awaiting.length > 4) console.log(`    ... and ${awaiting.length - 4} more`);
   console.log('');
 }
 

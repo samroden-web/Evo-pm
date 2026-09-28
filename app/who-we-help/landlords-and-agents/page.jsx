@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import MixedPair from '@/components/MixedPair';
 import Icon, { IconBadge } from '@/components/Icon';
 import EveryPlan from '@/components/EveryPlan';
 import LogoStrip from '@/components/LogoStrip';
@@ -225,6 +226,16 @@ export default function LandlordsAndAgentsPage() {
             Everything you keep, you carry on running exactly as you do now. The two sit side by side without
             interfering.
           </p>
+          {/* Drawing and photograph in the same circle: the office the instruction comes
+              from, and the trade who arrives because of it. */}
+          <MixedPair
+            art="evo-letting-agents"
+            photo="/images/photos/evo-trades-accepting-job-in-van-square.webp"
+            photoAlt="An EVO trade accepting a job on his phone in the cab of his van"
+            photoWidth={675}
+            photoHeight={675}
+            caption="You take the instruction. We take the repair — and the tenant, the agent and the landlord all watch the same record."
+          />
         </div>
       </section>
 

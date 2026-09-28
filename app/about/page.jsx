@@ -7,6 +7,7 @@ import LatestInsights from '@/components/LatestInsights';
 import ClosingCta from '@/components/ClosingCta';
 import Team from '@/components/Team';
 import { IconBadge } from '@/components/Icon';
+import Illustration from '@/components/Illustration';
 import { board, development, operations } from '@/data/team';
 
 // Mark's photograph comes from his team record, so the quote and the team grid can never
@@ -209,6 +210,17 @@ export default function AboutPage() {
             <p className="lead">
               An operations business first. Most of our people come from trades, housing or repairs management rather
               than from technology, and the company is still run by the people who started it.
+            </p>
+          </div>
+          {/* EVO's own drawing, alongside the real headshots. This is exactly how their
+              live /about/who-we-are page does it - one illustration and twenty-eight
+              photographs of actual people on the same page - and it is the clearest
+              statement of the rule the whole site now follows: drawings carry the idea,
+              photographs carry the people. */}
+          <div className="ev3-who-art">
+            <Illustration name="evo-hero-home" size={210} />
+            <p className="mb-0">
+              An operations business with a technology arm, not the other way round.
             </p>
           </div>
           <div className="mt-3">

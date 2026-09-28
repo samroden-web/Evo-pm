@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Illustration from '@/components/Illustration';
 import PageHero from '@/components/PageHero';
 import Audiences from '@/components/Audiences';
 import PhoneStepStrip from '@/components/PhoneStepStrip';
@@ -132,6 +133,11 @@ export default function HowItWorksPage() {
           <h2 id="apps-title" className="visually-hidden">
             The three apps: EVO Living, EVO Dashboard and EVO Trades
           </h2>
+          {/* EVO's own end-to-end drawing, which is what it does on their site too - it heads
+              the explanation of the service rather than decorating it. Not decorative here:
+              the drawing is the only thing on the page that shows the whole journey in one
+              picture, so it carries real alt text. */}
+          <Illustration name="evo-what-we-do" size={230} decorative={false} className="mb-3" />
           <Audiences />
         </div>
       </section>

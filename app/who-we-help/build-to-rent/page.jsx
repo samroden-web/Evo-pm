@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import SectionHead from '@/components/SectionHead';
+import MixedPair from '@/components/MixedPair';
 import EveryPlan from '@/components/EveryPlan';
 import Icon, { IconBadge } from '@/components/Icon';
 import Photo from '@/components/Photo';
@@ -113,6 +114,16 @@ export default function BuildToRentPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="The resident experience" title="Four things, and none of them is a phone call." />
+          {/* Drawing and photograph in the same circle: the building, and the person who
+              arrives at the flat inside it. */}
+          <MixedPair
+            art="evo-build-to-rent"
+            photo="/images/photos/evo-operative-radiator-repair-square.webp"
+            photoAlt="An EVO operative in branded kit repairing a radiator in a modern flat"
+            photoWidth={750}
+            photoHeight={750}
+            caption="Newer stock, communal areas and plant included — and the same trade at the flat door either way."
+          />
           <div className="steps-row mt-3">
             {STEPS.map(([t, d], i) => (
               <div className="step-card" key={t}>
