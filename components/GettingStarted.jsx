@@ -38,25 +38,20 @@ export default function GettingStarted() {
   return (
     <section className="ev2-start" aria-labelledby="start-title">
       <div className="container">
-        {/* EVO's own closing drawing - the family at home - on the orange band. This is the
-            one place the painted white inside the vignette is doing real work rather than
-            being tolerated: a white disc on orange is exactly the treatment their own hero
-            uses, so the section lands as theirs. It would be a blot on a dark band, which is
-            why globals.css guards that case. Decorative: the heading beside it already says
-            what the section is. */}
-        <div className="ev2-start-head">
-          <div className="ev2-start-head__copy">
-            <p className="eyebrow">Getting started</p>
-            <h2 id="start-title">
-              See it. Try it. <em>Or start straight away.</em>
-            </h2>
-            <p className="ev2-start-lead">
-              However you want to begin, you see the results on your own homes, with your own residents and your own
-              numbers.
-            </p>
-          </div>
-          <Illustration name="evo-closing" size={200} className="ev2-start-art" />
-        </div>
+        <p className="eyebrow">Getting started</p>
+        <h2 id="start-title">
+          See it. Try it. <em>Or start straight away.</em>
+        </h2>
+        <p className="ev2-start-lead">
+          However you want to begin, you see the results on your own homes, with your own residents and your own
+          numbers.
+        </p>
+        {/* EVO's own closing drawing on the orange band. This is the one place the painted
+            white inside the vignette is doing real work rather than being tolerated: a white
+            disc on orange is exactly the treatment their own hero uses. Added under the lead
+            rather than beside the heading, so nothing already in this section moves or
+            changes width. Decorative - the heading above already says what this is. */}
+        <Illustration name="evo-closing" size={190} className="ev2-start-art" />
 
         <div className="ev2-doors">
           {DOORS.map((d) => (
