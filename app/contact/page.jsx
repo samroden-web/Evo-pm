@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Illustration from '@/components/Illustration';
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
 import { contact, company } from '@/data/site';
@@ -47,6 +48,11 @@ export default function ContactPage() {
                   call <a href="tel:+442086919293">{contact.salesPhone}</a>.
                 </p>
               </div>
+              {/* Their own drawing of two people at a laptop, under the "which are you?"
+                  card. A contact page is the one page where every visitor has already
+                  decided to talk to somebody, so nothing here is a claim under scrutiny -
+                  and a page that is otherwise addresses and phone numbers can carry it. */}
+              <Illustration name="evo-team-group" size={190} className="section-art" />
               {/* All of this was TBC until EVO's own company-information page was migrated
                   on 25 September 2026. That page is the authority on it. */}
               <div className="card card--grey">

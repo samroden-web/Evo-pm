@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Illustration from '@/components/Illustration';
 
 // Homepage, section 4. The regulatory context sits in its own thin band rather than
 // under "the problem". It sets the stakes before anyone is told they have a problem,
@@ -31,6 +32,13 @@ export default function WhyNow() {
       <div className="container">
         <p className="eyebrow">Why repairs matter more than ever</p>
         <h2 id="whynow-title">Repairs stopped being a maintenance line. It became a governance one.</h2>
+        {/* The earliest drawing on the homepage after the hero, and the only one on the
+            buying path. It is ARCHITECTURAL on purpose - a street of terraced stock, not
+            people. This section is about regulatory grading, Awaab's Law deadlines and a
+            budget that has stopped stretching; a drawing of a smiling family on a sofa
+            beside "your grade turns on repairs" would read as tone-deaf. Buildings are
+            safe here, cheerful people are not. */}
+        <Illustration name="evo-local-authority" size={170} className="ev2-whynow-art" />
         <div className="ev2-whynow-grid">
           {CONTEXT.map((c) => (
             <div className="ev2-whynow-item" key={c.label}>

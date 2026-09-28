@@ -3856,10 +3856,13 @@ textarea {
 }
 
 /* Why repairs matter more than ever. */
+/* position: relative so the drawing added on 28 September can sit in the dead space beside
+   the heading without entering the flow. */
 .ev2-whynow {
   background: var(--grey-100);
   padding: var(--sec-y) 0;
   border-block: 1px solid var(--line);
+  position: relative;
 }
 .ev2-whynow h2 {
   margin: 0;
@@ -7290,4 +7293,59 @@ input[type='radio'] {
 .page-hero--navy .brand-circle--art {
   background: var(--white);
   border-radius: var(--circle);
+}
+
+/* The small drawing under the hero photograph. The hero grid centres its two columns, so on
+   a wide screen the taller copy column leaves dead space beside the picture - this fills it
+   without moving the photograph or the copy. Below 960px the columns stack and that space
+   stops existing, so it goes away rather than becoming another thing to scroll past on a
+   phone. */
+.home-hero__visual {
+  flex-direction: column;
+  gap: 18px;
+}
+.home-hero__art {
+  display: none;
+}
+@media (min-width: 960px) {
+  .home-hero__art {
+    display: block;
+    margin-inline: auto;
+  }
+}
+
+/* A drawing sitting on its own inside an existing section, between the heading and whatever
+   the section already had. Centred, with its own breathing room, so it reads as a pause
+   rather than as something bolted onto the element above or below it. */
+.section-art {
+  margin: 4px auto 26px;
+}
+/* On the "why repairs matter" band the heading is capped at 26ch, which leaves most of the
+   right-hand side of a wide screen empty. Centred under the heading the drawing looked
+   stranded in a gap of its own making and pushed the three figures down; absolutely
+   positioned it fills space that was already dead and costs the section nothing. Hidden
+   below 1100px, where the heading wraps wider and that space stops existing. */
+.ev2-whynow-art {
+  display: none;
+}
+@media (min-width: 1240px) {
+  .ev2-whynow-art {
+    display: block;
+    position: absolute;
+    right: max(24px, calc((100% - var(--container)) / 2));
+    /* Anchored to the TOP, level with the heading. Vertically centred it sat over the third
+       figure's copy: the dead space in this band is beside the heading only, because the
+       figures below run the full width. Measured, not eyeballed - see the overlap probe. */
+    top: var(--sec-y);
+    margin: 0;
+    pointer-events: none;
+  }
+}
+@media (max-width: 560px) {
+  /* Smaller on a phone. Each of these is additive, so at full size they would push the
+     thing the reader came for further down every page that has one. */
+  .section-art {
+    --circle-size: 140px !important;
+    margin-bottom: 18px;
+  }
 }

@@ -48,6 +48,35 @@ export const illustrations = {
     height: 1470,
     alt: 'Illustration of an EVO operative at the door of a house, with the family who live there and their dog.',
   },
+  // Added 28 September with the second round of placements.
+  'evo-app-services': {
+    remote: '/media/s5tlj3rm/evo_07.png',
+    file: 'evo-app-services.webp',
+    width: 3001,
+    height: 2766,
+    alt: 'Illustration of a phone showing the repair categories a resident can choose from — plumbing, heating, electrics, locks and appliances.',
+  },
+  'evo-tracking': {
+    remote: '/media/jkjl2r20/evo_08.png',
+    file: 'evo-tracking.webp',
+    width: 1818,
+    height: 1456,
+    alt: 'Illustration of a resident in an armchair watching their phone track an EVO van, seven minutes away.',
+  },
+  'evo-couple-laptop': {
+    remote: '/media/po2jylwo/evo_12.png',
+    file: 'evo-couple-laptop.webp',
+    width: 1612,
+    height: 1494,
+    alt: 'Illustration of two people at a laptop together.',
+  },
+  'evo-team-group': {
+    remote: '/media/aecpgn1i/evo_05.png',
+    file: 'evo-team-group.webp',
+    width: 1884,
+    height: 1124,
+    alt: 'Illustration of the EVO team standing together under the outline of a house.',
+  },
   'evo-letting-agents': {
     remote: '/media/xwfpdesj/evo_02.png',
     file: 'evo-letting-agents.webp',
@@ -98,5 +127,20 @@ export const illustrations = {
     alt: 'Illustration of two Build to Rent blocks with a resident walking a dog past them.',
   },
 };
+
+// ONE OF THEIR DRAWINGS IS DELIBERATELY NOT HERE, AND IT SHOULD STAY THAT WAY.
+//
+// evo_09.png (/media/ktnlhhmv/evo_09.png) is a line chart: a dotted line labelled
+// "Traditional" climbing away, an orange line labelled "EVO" flattening off, and a £ on the
+// axis. It is a cost-saving claim drawn as a picture, with no data behind it and no source.
+//
+// This site has a BANNED_TEXT list in tools/check-site.mjs precisely so unsourced savings
+// claims cannot come back - "35-60%" and "15p a day" are on it. A chart making the same
+// claim in a shape rather than a sentence would walk straight past that check, and would be
+// the single most quotable thing on the page it appeared on. It is EVO's own artwork and it
+// is on their live site, so it is not out of bounds - but it needs a number behind it and
+// Sam's sign-off, not a quiet inclusion because it came in the same folder as the others.
+//
+// If it is ever wanted, it needs the underlying figures first.
 
 export const ILLUSTRATION_DIR = '/images/illustrations';

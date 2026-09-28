@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import Illustration from '@/components/Illustration';
 import SectionHead from '@/components/SectionHead';
 import { IconBadge } from '@/components/Icon';
 import AppBadges from '@/components/AppBadges';
@@ -132,6 +133,7 @@ export default function TradesPage() {
             title="Matched to you, with the history attached."
             lead="Jobs come through the EVO Trades App, matched to your trade and your area. You accept or you do not. What arrives with it is the part most firms never get: the property's service history, the access details, and what was done last time by whoever was there."
           />
+
           <ul className="tick-list mt-3">
             <li>
               <strong>You choose when you are available.</strong> Set your working hours in the app and change them
@@ -183,6 +185,11 @@ export default function TradesPage() {
       <section className="section section--grey">
         <div className="container">
           <SectionHead eyebrow="The practical things" title="The bits that cost you a day a month." />
+          {/* Moved out of "How the work arrives", which already carries a real photograph of
+              a trade accepting a job in his van - the drawing was saying the same thing one
+              scroll above the photograph of it. This section is a list of admin, and has
+              nothing competing. */}
+          <Illustration name="evo-app-services" size={180} className="section-art" />
           <div className="grid grid-2 mt-3">
             {PRACTICAL.map(([icon, t, d]) => (
               <div className="card" key={t}>

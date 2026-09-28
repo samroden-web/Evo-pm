@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Illustration from '@/components/Illustration';
 import PageHero from '@/components/PageHero';
 import AppBadges from '@/components/AppBadges';
 import { livingAppGuide, emergencyGuide } from '@/data/guides';
@@ -22,6 +23,9 @@ export default function HowToGuidesPage() {
       />
       <section className="section">
         <div className="container">
+          {/* Resident-facing and instructional, so a drawing softens a page that is otherwise
+              a wall of links to PDFs. */}
+          <Illustration name="evo-couple-laptop" size={180} className="section-art" />
           <div className="grid-2">
             {guides.map((g) => (
               <div className="card card--shadow" key={g.slug}>

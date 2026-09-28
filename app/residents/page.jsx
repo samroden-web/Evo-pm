@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import ClosingCta from '@/components/ClosingCta';
+import Illustration from '@/components/Illustration';
 import SectionHead from '@/components/SectionHead';
 import { IconBadge } from '@/components/Icon';
 import AppBadges from '@/components/AppBadges';
@@ -224,6 +225,12 @@ export default function ResidentsPage() {
       <section className="section">
         <div className="container">
           <SectionHead eyebrow="Other things you might need" title="Guides, questions and damp." />
+          {/* THE DRAWING IS HERE RATHER THAN IN THE SECTION ABOVE, AND THE RULE IS WORTH
+              keeping: a drawing only goes where nothing is already showing the same thing
+              better. "Four steps, and no phone call" carries three real screenshots of the
+              app - a cartoon of the same phone grid next to photographs of the real one is
+              worse than either alone. This section is links and text, so it has room. */}
+          <Illustration name="evo-tracking" size={180} className="section-art" />
           <div className="grid grid-2 mt-3">
             {HELP.map((h) => (
               <div className="card" key={h.title}>

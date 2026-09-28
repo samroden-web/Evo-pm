@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Illustration from '@/components/Illustration';
 import Figures from '@/components/Figures';
 import LogoStrip from '@/components/LogoStrip';
 import WhyNow from '@/components/WhyNow';
@@ -95,6 +96,22 @@ export default function HomePage() {
                 A repair, reported in <strong>under 30 seconds</strong>
               </figcaption>
             </figure>
+            {/* Sam, 28 September: "is there a way of incorporating a small one as well as
+                the picture on the homepage?"
+
+                Yes, and this is the only place it costs nothing. The hero grid is
+                align-items: center, so on a wide screen the copy column - eyebrow, headline,
+                lead, two buttons and two award marks - runs taller than the photograph beside
+                it, leaving dead space under the picture. The drawing goes in that space.
+
+                The photograph is untouched and stays the first thing the eye lands on. That
+                is deliberate: an operative sitting with an elderly resident showing her the
+                app is the strongest credibility signal on the site, and it is doing its work
+                at the exact moment a housing director is deciding whether EVO is a real
+                operator. The drawing sits underneath it as brand, not instead of it as
+                proof. Hidden below 960px, where the columns stack and the space it fills
+                no longer exists. */}
+            <Illustration name="evo-hero-home" size={150} className="home-hero__art" />
           </div>
         </div>
       </section>
