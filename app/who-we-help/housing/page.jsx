@@ -322,9 +322,9 @@ export default function HousingPage() {
               <IconBadge name="file" />
               <h3>Built to connect, whatever you run</h3>
               <p className="mb-0">
-                We integrate through the routes housing management systems actually offer &mdash; API where there is one,
-                scheduled file exchange where there is not. Rubixx is the worked example we demonstrate end to end, from
-                a resident report to a closed job in your system.
+                We integrate through the routes housing management systems actually offer &mdash; API where there is
+                one, scheduled file exchange where there is not. Rubixx is the worked example we demonstrate end to end,
+                from a resident report to a closed job in your system.
               </p>
             </div>
             <div className="wwh-card">
@@ -442,6 +442,8 @@ export default function HousingPage() {
               swipe
               hideMissing
               normalise
+              normaliseArea={2900}
+              normaliseArea={2900}
             />
           </div>
 

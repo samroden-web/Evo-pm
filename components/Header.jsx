@@ -28,9 +28,20 @@ export default function Header() {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
 
+  // Closing the menu on a route change is the BACKSTOP, not the mechanism. Sam, 28 September:
+  // "on the phone, when i clicked compliance, it didnt open the page straight away (i had to
+  // click close)". The menu is a tall in-flow panel, so while it is open the page sits below it:
+  // the navigation had happened, but the panel was still covering the screen until this effect
+  // ran, which reads as a dead link.
+  // Worse, and definitely broken: tapping the link for the page you are ALREADY on never changes
+  // pathname, so this effect never fires and the menu stays open with no way out but the X.
+  // Both are fixed by closing on the tap itself - see closeMenu below. This stays as a second
+  // line of defence for navigations that start somewhere else.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return;
@@ -113,14 +124,20 @@ export default function Header() {
           <ul>
             {mainNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} aria-current={isActive(pathname, item.href) ? 'page' : undefined}>
+                <Link
+                  href={item.href}
+                  onClick={closeMenu}
+                  aria-current={isActive(pathname, item.href) ? 'page' : undefined}
+                >
                   {item.label}
                 </Link>
                 {item.children && (
                   <ul>
                     {item.children.map((c) => (
                       <li key={c.href}>
-                        <Link href={c.href}>{c.label}</Link>
+                        <Link href={c.href} onClick={closeMenu}>
+                          {c.label}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -131,17 +148,17 @@ export default function Header() {
           <div className="ev3-util-mobile">
             {utilityNav.map((u) =>
               u.external ? (
-                <a key={u.href} href={u.href} rel="noopener">
+                <a key={u.href} href={u.href} rel="noopener" onClick={closeMenu}>
                   {u.label}
                 </a>
               ) : (
-                <Link key={u.href} href={u.href}>
+                <Link key={u.href} href={u.href} onClick={closeMenu}>
                   {u.label}
                 </Link>
               )
             )}
           </div>
-          <Link href={cta.review.href} className="btn btn-primary">
+          <Link href={cta.review.href} className="btn btn-primary" onClick={closeMenu}>
             {cta.review.label}
           </Link>
         </nav>

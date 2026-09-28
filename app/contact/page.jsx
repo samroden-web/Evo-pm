@@ -23,16 +23,28 @@ export default function ContactPage() {
           <div className="split split--top split--wide-left">
             <ContactForm />
             <aside className="stack">
+              {/* Sam, 28 September: "take marks details off. they should use the generic routes
+                  to report things. make it easier upfront to distinguish if its a resident, or
+                  something else."
+                  Mark's direct line and personal address are gone - a named individual at the top
+                  of a contact page collects everything, including the repair reports this page
+                  explicitly is not for, and it does not scale past him. What replaces it is the
+                  question the page should have asked first: which of the two are you? Residents
+                  go one way, everybody else the other, before they reach the form. */}
               <div className="contact-card">
-                <h2 style={{ fontSize: '1.3rem' }}>Talk to Mark</h2>
+                <h2 style={{ fontSize: '1.3rem' }}>Which are you?</h2>
+                <p>
+                  <strong style={{ color: '#fff' }}>A resident with a repair?</strong>
+                  <br />
+                  Report it in the EVO Living App, or email{' '}
+                  <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>. Do not use the form on this
+                  page &mdash; it does not reach the repairs team.
+                </p>
                 <p className="mb-0">
-                  <strong style={{ color: '#fff' }}>{contact.sales.name}</strong>
+                  <strong style={{ color: '#fff' }}>A landlord, agent or supplier?</strong>
                   <br />
-                  {contact.sales.title}
-                  <br />
-                  <a href={`mailto:${contact.sales.email}`}>{contact.sales.email}</a>
-                  <br />
-                  Phone: <a href="tel:+442086919293">{contact.salesPhone}</a>
+                  The form is for you. Or email <a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a>, or
+                  call <a href="tel:+442086919293">{contact.salesPhone}</a>.
                 </p>
               </div>
               {/* All of this was TBC until EVO's own company-information page was migrated
@@ -64,14 +76,14 @@ export default function ContactPage() {
                   <span className="muted">Registered office: {company.registeredOffice}.</span>
                 </p>
               </div>
+              {/* The "Are you a resident?" card that was here said the same thing as the card at
+                  the top of this column, two boxes apart. One place, at the top, where the
+                  question is actually asked. */}
               <div className="card card--grey">
-                <h2 style={{ fontSize: '1.1rem' }}>Are you a resident?</h2>
-                <p>
-                  This form is not to be used for reporting repair or maintenance issues. Report it in the EVO Living
-                  App, or email <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>.
-                </p>
+                <h2 style={{ fontSize: '1.1rem' }}>Residents</h2>
+                <p>Everything about reporting a repair, the app, and what happens next.</p>
                 <Link href="/residents" className="text-link">
-                  Report a repair
+                  Go to the residents page
                 </Link>
               </div>
             </aside>

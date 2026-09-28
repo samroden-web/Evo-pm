@@ -33,7 +33,7 @@ export const board = [
     role: 'CEO and CTO',
     photo: '/images/team/steven-rae.png', file: 'steven-rae.png',
     source: 'https://evo-pm.com/media/ud3b0bcx/sgr-bio-pic.png',
-    bio: "Steve built STC Energy, an energy software business, over twenty-two years and sold it to Inspired Energy PLC, an AIM-quoted company. He joined EVO in October 2021 and leads its strategy, architecture and growth roadmap - the software EVO runs the service on is built under him.",
+    bio: "Steven built STC Energy, an energy software business, over twenty-two years and sold it to Inspired Energy PLC, an AIM-quoted company. He joined EVO in October 2021 and leads its strategy, architecture and growth roadmap - the software EVO runs the service on is built under him.",
   },
   {
     name: 'Mark Iandoli',
@@ -54,7 +54,7 @@ export const board = [
     role: 'Non-Executive Director',
     photo: '/images/team/kate-davies.jpg', file: 'kate-davies.jpg',
     source: 'https://evo-pm.com/media/z1pd3qzq/kate-davies-pic.jpg',
-    bio: 'Kate Davies has worked in the social housing sector for 35 years. Kate was the CEO of Notting Hill Genesis for 18 years. She has also served as a non-executive director in the housebuilding, modular, insurance and technology sectors. Kate was awarded a CBE for services to housing in 2022.',
+    bio: "Kate spent eighteen years as chief executive of Notting Hill Genesis and has worked in social housing for thirty-five. She has also been a non-executive director in housebuilding, modular construction, insurance and technology. She was awarded a CBE for services to housing in 2022.",
   },
   {
     name: 'Sam Roden',
@@ -79,7 +79,7 @@ export const board = [
     role: 'Investor Director',
     photo: '/images/team/tim-marchant.png', file: 'tim-marchant.png',
     source: 'https://evo-pm.com/media/y22j5cbq/tim-marchant.png',
-    bio: 'Tim Marchant is a General Partner at Moscar Capital with over 15 years of experience specialising in due diligence, financial modelling and cap table analysis. He has served on multiple boards through various Series A funding rounds and has extensive expertise managing relationships with both institutional and private investors.',
+    bio: "Tim is a General Partner at Moscar Capital and has spent more than fifteen years in venture and growth finance, on boards through successive funding rounds. He represents EVO's investors on the board and covers its governance, funding and financial reporting.",
   },
 ];
 

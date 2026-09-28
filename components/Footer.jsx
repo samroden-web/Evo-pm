@@ -99,6 +99,7 @@ export default function Footer() {
             swipe
             hideMissing
             normalise
+            normaliseArea={2900}
           />
         </div>
 

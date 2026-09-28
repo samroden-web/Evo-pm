@@ -40,8 +40,8 @@ export default function CaseStudiesPage() {
           further down the same page - the same picture twice. */}
       <PageHero
         eyebrow="Case studies"
-        title="Two landlords, two pilots, two full contracts."
-        lead="Neither started with a commitment. Both started on a share of the homes, ran for long enough to produce their own numbers, and then widened."
+        title="A housing association and a council&rsquo;s housing company, both turned around."
+        lead="Two of the landlords we work with, written up in full: a 1,414-home housing association and a local authority housing company with more than 4,500 homes. Neither started with a commitment. Both began with a pilot on a share of their stock, ran it long enough to produce their own numbers, and then widened."
         crumbs={[{ label: 'Case studies' }]}
         image="/images/photos/evo-team-member-helping-resident.webp"
         imageAlt="An EVO team member helping a resident with a repair"
@@ -49,6 +49,18 @@ export default function CaseStudiesPage() {
         imageHeight={787}
         priority
       >
+        {/* Sam, 28 September: "dont make it look like they are our only 2 clients". It did -
+            a page called Case studies showing exactly two landlords reads as the whole client
+            list. EVO looks after around 6,000 homes across housing associations, councils,
+            charities and institutional landlords; these two are the ones written up in detail,
+            and the line below says so before the buttons do. */}
+        <p className="mt-3 mb-0">
+          We look after around 6,000 homes for housing associations, local authorities, charities and institutional
+          landlords.{' '}
+          <Link href="/about#trust" className="text-link">
+            See who we work with
+          </Link>
+        </p>
         <div className="btn-row mt-3">
           <Link href="#ids" className="btn btn-secondary">
             Industrial Dwellings Society

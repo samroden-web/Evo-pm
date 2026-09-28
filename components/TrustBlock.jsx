@@ -57,6 +57,7 @@ export default function TrustBlock() {
             swipe
             hideMissing
             normalise
+            normaliseArea={2900}
           />
         </div>
         <p className="mt-2 mb-0 muted">

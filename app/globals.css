@@ -4910,8 +4910,14 @@ textarea {
   border-radius: var(--radius);
   padding: 16px 20px;
 }
+/* Sam, 28 September: "2 of the logos fall to a second line i think we should put them all
+   closer so they fit on 1 band." Reproduced at 1440px - eleven marks, nine and two. Adding
+   Cyber Essentials and Living Wage took the row past what a 1120px strip holds at a 30px gap.
+   18px, and a smaller normalise area at the call sites, puts all eleven on one line down to
+   about 1180px. Below that they still wrap, which is the right trade: eleven marks shrunk to
+   fit a tablet would be too small to recognise, and recognising them is their whole job. */
 .footer-logos .logo-strip {
-  gap: 10px 30px;
+  gap: 10px 18px;
   align-items: center;
   justify-content: flex-start;
 }
@@ -4940,8 +4946,9 @@ textarea {
 
 /* The accreditation strip on the homepage trust block, same treatment as the footer
    panel so the two read as the same object in two places. */
+/* Same change as the footer band, same reason. */
 .ev3-accreds .logo-strip {
-  gap: 12px 30px;
+  gap: 12px 18px;
   align-items: center;
 }
 .ev3-accreds .logo-strip li {
