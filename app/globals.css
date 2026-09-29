@@ -608,13 +608,39 @@ p.center {
   z-index: 100;
   background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid var(--line);
+  /* Safari only accepts the prefixed form until version 18 (late 2024), so on iOS 17
+     and earlier the unprefixed line silently does nothing and the bar renders flat. */
+  -webkit-backdrop-filter: saturate(1.4) blur(6px);
   backdrop-filter: saturate(1.4) blur(6px);
 }
+/* THE HEADER GETS A WIDER CONTAINER THAN THE PAGE, AND IT HAS TO.
+   Sam, 29 September: "when i look at the homepage the book a portfolio review at the top
+   right is cut off".
+
+   Measured across every width from 1180px to 1920px in 20px steps: the header's contents -
+   logo, six nav items, three utility links and the button - come to 1280px, inside a
+   container capped at 1200px. They were spilling 118px past its right edge at EVERY desktop
+   width. Above about 1310px that reads as a header mysteriously wider than the page under
+   it; below it the button runs off the side of the window and is genuinely cut in half,
+   which is what Sam saw at his browser zoom.
+
+   This is long-standing rather than new - the content has been wider than the container
+   since before the brand work. It was fixed on 27 September by widening the header and
+   dropping the utility links in the tight band, and then un-fixed on the 28th when that
+   patch was reverted wholesale at Sam's request; the revert was right, but it took this
+   with it. Hence measuring the whole range this time rather than the one width that was
+   complained about.
+
+   1360px fits the 1280px of content with room either side, and `min()` keeps it inside the
+   window on anything narrower so it can never be the cause of a horizontal scrollbar. Their
+   own site's header is full-bleed rather than held to the text column, so a header wider
+   than the page content is their pattern, not a compromise. */
 .header-inner {
   display: flex;
   align-items: center;
   gap: 16px;
   height: var(--header-h);
+  max-width: min(1360px, 100%);
 }
 .logo {
   display: inline-flex;
@@ -752,7 +778,14 @@ p.center {
   margin-top: 16px;
 }
 
-@media (min-width: 1180px) {
+/* THE DESKTOP HEADER STARTS AT 1260px, NOT 1180px.
+   With the wider header container the contents fit from 1260px up. Between 1180 and 1259
+   they do not - measured at 1216px of content in 1140px of usable width - and the button
+   ran off the side of the window. Rather than hide the utility links in that band, which
+   would leave Residents, Trades and Client login unreachable from the header, the phone
+   menu simply stays on for another 80px. It already carries all three (.ev3-util-mobile
+   lives inside #mobile-nav), so nothing becomes unreachable and nothing is cut in half. */
+@media (min-width: 1260px) {
   .main-nav {
     display: block;
   }
@@ -2897,7 +2930,18 @@ table.data tbody th {
 .header-cta {
   white-space: nowrap;
 }
-@media (min-width: 1180px) and (max-width: 1320px) {
+/* THE TIGHTEST DESKTOP BAND, where everything is in the bar at once and there is least room
+   for it. Measured at 1260px: logo 74 + nav 596 + utility 296 + button 203 = 1168, which
+   looks like it fits inside 1220px of usable width until you add the three 16px flex gaps
+   and the 18px of margins on the utility group and the button - 1234 in 1220, so the button
+   sat 14px outside its column. Counting the parts and forgetting the space between them is
+   how a header overflows while every individual measurement looks fine.
+
+   Gap down to 8px in this band only buys 24px back and is not a difference anyone can see. */
+@media (min-width: 1260px) and (max-width: 1360px) {
+  .header-inner {
+    gap: 8px;
+  }
   .main-nav a {
     padding: 10px 7px;
     font-size: 0.9rem;
@@ -3851,6 +3895,9 @@ textarea {
   left: 12px;
   bottom: 12px;
   background: rgba(255, 255, 255, 0.95);
+  /* Safari only accepts the prefixed form until version 18 (late 2024), so on iOS 17
+     and earlier the unprefixed line silently does nothing and the bar renders flat. */
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   border-radius: 999px;
   padding: 7px 15px 7px 12px;
@@ -4356,7 +4403,7 @@ textarea {
   color: var(--navy-deep);
   font-weight: 700;
 }
-@media (min-width: 1180px) {
+@media (min-width: 1260px) {
   .ev3-util {
     display: inline-flex;
     align-items: center;
@@ -4383,7 +4430,7 @@ textarea {
   text-decoration: none;
   padding: 6px 0;
 }
-@media (min-width: 1180px) {
+@media (min-width: 1260px) {
   .ev3-util-mobile {
     display: none;
   }
