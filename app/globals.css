@@ -995,10 +995,22 @@ p.center {
    the brand look, which is his call to make. tools/check-final.mjs carries this as a named,
    accepted exception rather than a failure, so the decision is recorded where the next person
    will find it instead of being quietly re-litigated. */
+/* THE HIGHLIGHT BAND. Sam, 30 September: "centre the highlight bank and make slightly more
+   prominent."
+
+   It was left-aligned inside the container with 30px of padding above it, so on a wide screen
+   four figures sat in the left two-thirds with a third of the band empty - which made the most
+   persuasive thing on the page look like a caption. Centred, with the numbers a size up and
+   more room around them.
+
+   SLIGHTLY, though. These four figures already sit directly under the hero on a full-bleed
+   orange band; the job here is to stop them reading as an afterthought, not to make them
+   shout over the headline above them. */
 .figures {
   background: var(--orange);
   color: var(--white);
-  padding: 30px 0 0;
+  padding: clamp(34px, 4vw, 48px) 0 0;
+  text-align: center;
 }
 /* A ROW OF HEADLINE FIGURES on the page background. Not to be confused with .figures
    above, which is the homepage's full-bleed ORANGE band and brings its own background,
@@ -1048,19 +1060,29 @@ p.center {
 .figures__list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px 16px;
+  gap: 28px 16px;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 1000px;
 }
 @media (min-width: 800px) {
+  /* AUTO COLUMNS, NOT FOUR EQUAL ONES. With `repeat(4, 1fr)` each figure gets an identical
+     cell and centres inside it, so the SPACE between them varies with how wide each number
+     happens to be - "6,000+" is far wider than "90%+", and the row read as unevenly spaced
+     even though the columns were perfectly equal. Sizing the columns to their content and
+     centring the group gives one gap, the same everywhere. */
   .figures__list {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    align-items: start;
+    gap: 28px clamp(34px, 5vw, 76px);
+    max-width: none;
   }
 }
 .figures__value {
   display: block;
-  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.1rem);
   font-weight: 700;
   line-height: 1.1;
   color: var(--white);
@@ -1070,12 +1092,15 @@ p.center {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--on-orange);
-  margin-top: 4px;
+  margin-top: 6px;
+  /* Keeps a two-word label under its own number rather than running the width of the cell. */
+  max-width: 18ch;
+  margin-inline: auto;
 }
 /* Full-bleed deeper-orange footer strip, so the qualifier is attached to the figures
    rather than floating under them. GLOBAL: the four figures never appear without it. */
 .figures__note {
-  margin: 26px 0 0;
+  margin: 30px 0 0;
   background: var(--orange-dark);
   color: rgba(255, 255, 255, 0.92);
   font-size: 0.76rem;
@@ -7416,4 +7441,22 @@ input[type='radio'] {
     --circle-size: 140px !important;
     margin-bottom: 18px;
   }
+}
+
+/* The transparency line under the plans teaser. Sized between the caveat above it and the
+   button below: enough to be read rather than skimmed past, not so much that it becomes a
+   second paragraph of pricing copy on a page that is already dense. */
+.ev3-transparency {
+  /* Left-aligned with the caveat above it and the button below it. Centred with `auto`
+     margins it sat indented from both and read as a pull-quote rather than a note. */
+  margin: 18px 0 0;
+  max-width: 68ch;
+  padding: 14px 18px;
+  border-left: 4px solid var(--orange);
+  background: var(--white);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.95rem;
+}
+.ev3-transparency strong {
+  color: var(--navy-deep);
 }

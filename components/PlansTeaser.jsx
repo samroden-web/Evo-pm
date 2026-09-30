@@ -90,9 +90,33 @@ export default function PlansTeaser({
         </div>
 
         <p className="mt-2 muted">{priceCaveat}</p>
+
+        {/* TRANSPARENCY, SIGNALLED HERE AND PROVED ON /pricing. Sam, 30 September: "show under
+            pricing that on our pricing page we show everything that is included/excluded and
+            the price. we are transparent about everything. (but not over dense the homepage
+            again)".
+
+            One line, not a section. The objection this answers is the one a procurement lead
+            has the moment they see a fixed price - what is the catch, and does £48 turn into
+            something else once I speak to sales. The answer is that the catch is already
+            published, which is a stronger claim than any adjective.
+
+            EVERY CLAUSE IS ALREADY TRUE AND ALREADY ON /pricing: the standard exclusions list
+            in data/plans.js, the stock review behind priceCaveat, and the CPI plus 1% cap in
+            priceReview. Nothing new is asserted here - it points at what is already there.
+
+            IT NAMES NOTHING IT SHOULD NOT. The variable-works uplift, the materials uplift,
+            the out-of-hours rates and the abortive fee stay off the site. "What is excluded"
+            means the published exclusions list, not the rate card. */}
+        <p className="ev3-transparency">
+          <strong>No surprises.</strong> The pricing page carries the whole thing &mdash; every plan, every price, what
+          is included and what is excluded, and how the price is reviewed. Your own price is set after a stock review,
+          fixed for the first year, and any review after that is capped at CPI plus 1%.
+        </p>
+
         <div className="mt-2">
           <Link href="/pricing" className="btn btn-primary">
-            See plans and prices
+            See plans, prices and what is included
           </Link>
         </div>
       </div>

@@ -11,7 +11,6 @@ import ResidentVideo from '@/components/ResidentVideo';
 import ComplianceBand from '@/components/ComplianceBand';
 import WhoStrip from '@/components/WhoStrip';
 import TrustBlock from '@/components/TrustBlock';
-import LatestInsights from '@/components/LatestInsights';
 import GettingStarted from '@/components/GettingStarted';
 import { LaurelIcon } from '@/components/Icons2';
 import { clientLogos, withFiles } from '@/data/logos';
@@ -51,21 +50,37 @@ export default function HomePage() {
             <h1>
               A fully managed, <em>fixed-price</em> repairs service for housing landlords.
             </h1>
-            {/* Sam, 28 September: "on the opening para under the title, is it also worth
-                saying our purpose built technology is end-to end". Yes - it is EVO's own
-                language (their live site: "fully managed, end-to-end digital solution"), and
-                it is the actual differentiator, because owning the whole system is what makes
-                a fixed price possible. It is also already evidenced rather than asserted:
-                /how-it-works says every report, message, appointment, photograph and sign-off
-                lives in one system.
+            {/* THE OPENING LINE. Sam, 30 September: "hard think about the opening wording to
+                make it clearer (using the basis of what we have already said)".
 
-                Of three wordings tested at 1512px, this one and "Purpose-built, end-to-end
-                technology" held at three lines; "technology that runs a repair end to end"
-                spilled to four and would have pushed the buttons further down the very fold
-                this patch is trying to tidy. */}
+                The words are EVO's own, lifted from the sentence that already opens the
+                problem-and-solution section further down the page: "EVO takes the repairs
+                function off your hands and runs it end to end." That is the clearest statement
+                of what the company does anywhere on the site, and it was sitting in section
+                five. This puts it in the first thing anyone reads.
+
+                WHAT CHANGED AND WHY. The previous version opened "End-to-end purpose-built
+                technology, repairs expertise and a fully managed service..." - three words in
+                and the page led on technology. A review of the site made the point that its
+                whole job is to stop EVO reading as a software company, and the opening line
+                was working against that. "End to end" is kept, because Sam asked for it on 28
+                September; it has moved from describing the software to describing the service,
+                which is where it earns more.
+
+                The four things named - helpdesk, trades, resident communication, evidence -
+                are the four the service actually covers, in the order the reader meets them.
+                Technology comes last in the sentence, as the reason the rest is possible,
+                which is the hierarchy the rest of the site already argues.
+
+                LENGTH IS PART OF THE EDIT. The first draft of this ran to four lines, which
+                put 31px back onto the hero and cost a 14-inch laptop the award marks that the
+                29 September spacing work had just won back. Four wordings were measured at
+                1512, 1440 and 1280px; this one says the same thing in three lines at all of
+                them. Anything longer than about 165 characters spills to a fourth line and
+                pushes the buttons down the fold. */}
             <p className="lead">
-              End-to-end purpose-built technology, repairs expertise and a fully managed service, so landlords get
-              control and residents get a repair that actually happens.
+              We run your repairs service end to end &mdash; helpdesk, trades, resident communication and the evidence
+              &mdash; for one fixed monthly price per home, powered by our own technology.
             </p>
             <div className="btn-row">
               <Link href={cta.review.href} className="btn btn-primary">
@@ -168,8 +183,30 @@ export default function HomePage() {
       {/* 11. Trust */}
       <TrustBlock />
 
-      {/* 12. Insights */}
-      <LatestInsights />
+      {/* 12. Insights — REMOVED FROM THE HOMEPAGE, 30 September.
+             Sam: "the homepage is very dense... also do we need insights on the homepage?"
+             No. Of the thirteen sections this was the only one doing nothing for somebody
+             deciding whether to buy: three article cards, below the trust block, between a
+             reader and the closing invitation. The articles are in the top nav and at
+             /insights, nothing links here expecting them, and the section cost the page its
+             whole length for a freshness signal a buyer never asked for.
+
+             WHY NOT MORE THAN THIS ONE. Sam also asked about moving "Why repairs matter" and
+             the problem-and-solution section to the housing page. Neither moved, for
+             different reasons:
+
+               PROBLEM AND SOLUTION STAYS because it contains the clearest sentence on the
+               site - "EVO takes the repairs function off your hands and runs it end to end"
+               - and the line that stops EVO being mistaken for software. Two separate
+               reviews have asked for that to be MORE prominent. Taking it off the homepage
+               would be solving density by removing the argument.
+
+               WHY REPAIRS MATTER CANNOT MOVE TO THE HOUSING PAGE, because that page already
+               opens on "The change: same repairs, different consequences" - the same
+               argument in the same place. It would be duplication, not relocation. It also
+               sets the stakes for landlords and Build to Rent readers, who never reach the
+               housing page. It is a thin three-figure band, so it is not what makes this
+               page long. */}
 
       {/* 13. See it. Try it. Start it. */}
       <GettingStarted />
