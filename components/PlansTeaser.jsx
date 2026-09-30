@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { plans, orgTypes, defaultOrgType, combinedPrice, priceCaveat } from '@/data/plans';
+import { plans, orgTypes, defaultOrgType, combinedPrice, priceCaveatShort } from '@/data/plans';
 
 // HOME-08 / GLOBAL-01: the plans teaser.
 //
@@ -89,50 +89,54 @@ export default function PlansTeaser({
           })}
         </div>
 
-        <p className="mt-2 muted">{priceCaveat}</p>
+        {/* ==================================================================================
+            THREE FACTS, FULL WIDTH, EACH POINTING SOMEWHERE. Sam, 30 September: "i also think
+            this section takes up too much space on the homepage, can we make it much more
+            concise (maybe even full width). take the key bit and point to the relevant places,
+            rather than lots of writing."
 
-        {/* TRANSPARENCY, SIGNALLED HERE AND PROVED ON /pricing. Sam, 30 September: "show under
-            pricing that on our pricing page we show everything that is included/excluded and
-            the price. we are transparent about everything. (but not over dense the homepage
-            again)".
+            What was here: three stacked paragraphs in a 68ch column - the price caveat, a
+            "No surprises" note and a sentence on everything beyond reactive repairs. About 110
+            words, running down the left of the page with the right half empty.
 
-            One line, not a section. The objection this answers is the one a procurement lead
-            has the moment they see a fixed price - what is the catch, and does £48 turn into
-            something else once I speak to sales. The answer is that the catch is already
-            published, which is a stronger claim than any adjective.
+            AND ONE OF THEM SAID THE SAME THING TWICE. "Your own price is set after a stock
+            review" appeared in the caveat AND in the transparency note, three lines apart.
+            That is the sort of thing prose hides and a three-up strip cannot.
 
-            EVERY CLAUSE IS ALREADY TRUE AND ALREADY ON /pricing: the standard exclusions list
-            in data/plans.js, the stock review behind priceCaveat, and the CPI plus 1% cap in
-            priceReview. Nothing new is asserted here - it points at what is already there.
+            Now: the same three claims in about 45 words, full width, each ending at the page
+            that proves it. Nothing is dropped - the detail moves to where a reader who wants
+            it is already going.
 
-            IT NAMES NOTHING IT SHOULD NOT. The variable-works uplift, the materials uplift,
-            the out-of-hours rates and the abortive fee stay off the site. "What is excluded"
-            means the published exclusions list, not the rate card. */}
-        <p className="ev3-transparency">
-          <strong>No surprises.</strong> The pricing page carries the whole thing: every plan, every price, what
-          is included and what is excluded, and how the price is reviewed. Your own price is set after a stock review,
-          fixed for the first year, and any review after that is capped at CPI plus 1%.
-        </p>
-
-        {/* THE ADDITIONAL WORKS, MENTIONED RATHER THAN LISTED. Sam, 30 September: "we also
-            need somewhere on a homepage to point to all the additional work we do... i dont
-            think we need to duplicate the data, just make sure we link to the relevant part of
-            the websites when we are talking about the plans".
-
-            So: one sentence, three examples, two links. It sits inside the plans teaser rather
-            than in a section of its own because this is the moment a reader is working out what
-            the fixed price does and does not buy - which is also the moment they wonder whether
-            EVO only does reactive repairs. The full lists stay on /how-it-works and the prices
-            stay on /pricing. Naming everything here would be a third copy of the same content
-            to keep in step, and would undo the density work on this page. */}
-        <p className="ev3-beyond">
-          The plan covers reactive repairs. We also handle planned and cyclical maintenance, voids, capital and
-          retrofit works, insurance works, and gas and electrical compliance, quoted or priced separately.{' '}
-          <Link href="/how-it-works" className="text-link">
-            See what else we cover
-          </Link>
-          .
-        </p>
+            NOTHING HERE NAMES WHAT IT SHOULD NOT. "What is excluded" means the published
+            exclusions list on /pricing. The variable-works uplift, the materials uplift, the
+            out-of-hours rates and the abortive fee stay off the site.
+            ================================================================================== */}
+        <ul className="ev3-facts">
+          <li>
+            <span className="ev3-fact-k">Your own price</span>
+            <p>
+              {priceCaveatShort} Fixed for the first year, and any review after that is capped at CPI plus 1%.
+            </p>
+          </li>
+          <li>
+            <span className="ev3-fact-k">Nothing hidden</span>
+            <p>
+              Every plan, every price, and the full included and excluded lists are published.{' '}
+              <Link href="/pricing" className="text-link">
+                See what is included
+              </Link>
+            </p>
+          </li>
+          <li>
+            <span className="ev3-fact-k">Beyond reactive repairs</span>
+            <p>
+              Planned and cyclical maintenance, voids, capital and retrofit, insurance works and compliance.{' '}
+              <Link href="/how-it-works" className="text-link">
+                See what else we cover
+              </Link>
+            </p>
+          </li>
+        </ul>
 
         <div className="mt-2">
           <Link href="/pricing" className="btn btn-primary">

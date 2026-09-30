@@ -1,0 +1,30 @@
+Patch 51: problem-and-answer grid stripped back, pricing tail cut to three facts
+
+Contains patch 50 (the stacked two-by-two) in full.
+
+The number and the theme word are deleted, not hidden. Three of the four
+theme words restated a word already in the sentence under them. Worth 78px
+at 1440 and 74px at 900 - more than either run-in idea tested against it,
+and stable where they were not.
+
+WITH EVO runs in beside the answer as a grid, not a float: floated, the
+second line of a two-line answer wrapped back under the label instead of
+aligning with the first.
+
+The problem width cap goes 30ch to 42ch, so all four fit one line and all
+four navy panels are the same height. Both type sizes are now flat: above
+1200px the container stops growing but a vw clamp did not, so the problem
+set at 22.7px in the same 516px column at 1920px that held 19.4px at 1440.
+
+The theme icon moves from inside the WITH EVO label to the card's top-right
+corner at 34px in orange.
+
+The pricing tail goes from three stacked paragraphs (about 110 words, one of
+which repeated the stock-review line from the caveat three lines above it)
+to three full-width facts of about 45 words, each linking to the page that
+proves it. priceCaveatShort added to data/plans.js.
+
+Homepage 9767px to 9456px, from 10020px before patch 50.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_018goVZYEnxrKsGfPnm4K3qi

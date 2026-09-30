@@ -35,8 +35,8 @@ export const frameworkLogos = [
     height: 247,
   },
   // TBC item 13: keep only if EVO confirms these are current. Set show: true to display.
-  { name: 'South East Consortium', src: '/images/logos/accreditations/south-east-consortium.png', width: 740, height: 204, show: true },
-  { name: 'Procurement for Housing', src: '/images/logos/accreditations/procurement-for-housing.png', width: 575, height: 238, show: true },
+  { name: 'South East Consortium', src: null, tbc: 'logo file to follow', show: true },
+  { name: 'Procurement for Housing', src: null, tbc: 'logo file to follow', show: true },
 ];
 
 export const accreditationLogos = [
@@ -59,7 +59,7 @@ export const accreditationLogos = [
   { name: 'Living Wage Employer', src: '/images/logos/accreditations/living-wage-employer.png', width: 140, height: 111 },
 ];
 
-export const awardBadges = { src: '/images/awards/award-badges-light.png', width: 684, height: 99 };
+export const awardBadges = null;
 
 // Tone correction for the client strip.
 //

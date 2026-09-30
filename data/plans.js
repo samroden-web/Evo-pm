@@ -30,6 +30,18 @@ export const vatNote = 'All prices are per home per month, plus VAT.';
 export const priceCaveat =
   'These are our standard prices, based on London. Your own price is set after a stock review: the age and condition of the homes, the size of the portfolio and where they are can all move it, up or down.';
 
+// The homepage version. Sam, 30 September: "i also think this section takes up too much space
+// on the homepage, can we make it much more concise (maybe even full width). take the key bit
+// and point to the relevant places, rather than lots of writing."
+//
+// Same two facts as priceCaveat above - the prices shown are London standard, and yours is set
+// after a stock review - in 18 words rather than 42. The detail of what moves it (age,
+// condition, size, location) is on /pricing, which is one click away and is where somebody
+// actually working out their own number will be. It lives here rather than in the component so
+// the two versions cannot drift apart unnoticed.
+export const priceCaveatShort =
+  'Standard London prices. Yours is set after a stock review of your homes.';
+
 export const orgTypes = [
   {
     id: 'standard',

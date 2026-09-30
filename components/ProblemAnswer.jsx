@@ -100,28 +100,21 @@ const PAIRS = [
     lead: 'The evidence builds itself, as the work happens.',
     body: 'Photographs, timestamps and no-access visits recorded against the property in the EVO Dashboard, alongside live repairs and compliance for every home. We built the technology, and we run it for you.',
   },
-  // THE COST PAIR WAS REMOVED ON 30 SEPTEMBER, AND THE REASON IS THE REORDER OF THE DAY
-  // BEFORE, not a judgement that the argument is weak.
+  {
+    key: 'Cost',
+    icon: 'wallet',
+    // HOME-05 problem 3 and HOME-06 answer 3, with the Dashboard added to the tail.
+    problem: 'Nobody can tell the board what next year will cost.',
+    lead: 'A clear monthly cost per property.',
+    body: 'No per-job pricing and no limit on the number of repairs in your plan. Anything outside it is scoped and approved before we start, and the Dashboard gives the board the same numbers we work to.',
+  },
+  // RESTORED 30 SEPTEMBER. It came out earlier the same day to save height; Sam's stacked
+  // two-by-two layout buys that height back from the design instead, so all four stay.
   //
-  // It read: "Nobody can tell the board what next year will cost." / "A clear monthly cost
-  // per property. No per-job pricing and no limit on the number of repairs in your plan.
-  // Anything outside it is scoped and approved before we start."
-  //
-  // Every clause of that is now made, in more detail and with the actual number, by the plans
-  // teaser - which on 29 September moved to sit DIRECTLY ABOVE this section. The comment at
-  // the top of this file still says Cost was placed last so it would "hand straight over to
-  // the plans teaser below". There is no plans teaser below any more. Its whole job was to
-  // set up a section that now precedes it, so it was arguing to a reader who had just been
-  // given the answer.
-  //
-  // Sam asked whether the section could be made smaller by design rather than by cutting.
-  // Measured: the layout levers give 138px on a laptop and 100px on a phone, and dropping one
-  // pair gives 235px and 450px. Both were taken. Of the four, this is the only one whose
-  // removal costs a reader nothing they have not just read.
-  //
-  // The other three stay. Ownership is the root cause of all of them, Quality is what
-  // residents feel, and Evidence is the regulatory escalation - none of which is made
-  // anywhere else on the homepage.
+  // The editorial point that justified removing it still stands and is worth leaving here:
+  // every clause of this pair is also made, with the actual number, by the plans teaser that
+  // now sits directly above this section. If the page ever needs to lose one again, this is
+  // the one whose removal costs a reader least.
 ];
 
 export default function ProblemAnswer() {
@@ -155,12 +148,6 @@ export default function ProblemAnswer() {
                   fell below the problem as up to 80px of empty navy. In one element the pair
                   centres against the card as a group. */}
               <div className="pa-row__problem">
-                <span className="pa-row__head">
-                  <span className="pa-num" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="pa-theme">{key}</span>
-                </span>
                 {/* Visible on a phone, where the halves stack and the dark-to-light change
                     is no longer a left-to-right movement. Screen-reader only on a laptop. */}
                 <span className="pa-tag pa-tag--problem">The problem</span>
@@ -168,15 +155,21 @@ export default function ProblemAnswer() {
               </div>
 
               <div className="pa-row__answer">
-                {/* Decorative. It sits on the card's left edge on a laptop and above it on a
-                    phone, so it always points the way the eye is about to travel. */}
+                {/* Decorative. It sits above the card on a phone, pointing the way the eye is
+                    about to travel. Hidden on a laptop - see the note on .pa-turn. */}
                 <span className="pa-turn" aria-hidden="true">
                   <span className="pa-chev" />
                 </span>
-                <span className="pa-tag pa-tag--evo">
-                  <Icon name={icon} size={17} />
-                  With EVO
+                {/* Out of the label and up into the card's top corner, at double the size.
+                    Sam, 30 September: "the little icon next to the with evo doesnt work. if we
+                    need an icon they could fit in the top right and may break up the design/
+                    be a bit larger". At 17px inside a 11.68px small-caps label it was neither
+                    a picture nor punctuation - too small to read as either, and it made the
+                    label the busiest thing in a card whose job is to be the calm half. */}
+                <span className="pa-answer-icon" aria-hidden="true">
+                  <Icon name={icon} size={34} />
                 </span>
+                <span className="pa-tag pa-tag--evo">With EVO</span>
                 <p className="pa-lead">{lead}</p>
                 <p className="pa-body">{body}</p>
               </div>

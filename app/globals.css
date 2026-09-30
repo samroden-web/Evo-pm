@@ -6043,55 +6043,24 @@ textarea {
   border-radius: var(--radius);
   box-shadow: 0 2px 12px rgba(28, 40, 51, 0.12);
 }
-/* Laptop: the dark half on the left, the answer card alongside it. The answer takes the
-   greater share because it carries a lead-in and a supporting sentence against the
-   problem's single line. */
-@media (min-width: 860px) {
-  /* 0.91 to 1, not 0.82 to 1.3. The wider answer column ran the body to 70 characters a
-     line. Nothing else on this site runs past about 50, and long grey lines are most of
-     what "basic" looks like. This split lands the body near 58. */
-  .pa-row {
-    grid-template-columns: minmax(0, 0.91fr) minmax(0, 1fr);
-  }
-  /* Screen-reader only. On a laptop the dark panel, the number and the theme word say
-     "problem" between them; a fourth label saying it again is the repetition that made the
-     block read as a template. On a phone it comes back - see the query at the foot. */
-  .pa-tag--problem {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-}
-.pa-row__head {
-  display: flex;
-  align-items: baseline;
-  gap: 11px;
-  margin-bottom: 12px;
-}
-/* Smaller than the problem, not larger. At 30px against the problem's 24px the decorative
-   numeral was the biggest thing in the panel, which is the wrong thing to shout. */
-.pa-num {
-  font-size: clamp(1.35rem, 1.75vw, 1.55rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  /* This comment used to read "4.3:1 on the navy - comfortably past the 3:1 floor". That was
-     true of the old #1C2833 band and is not true of the brand navy, where orange is 2.76:1.
-     A measurement is only valid against the ground it was taken on. White: 8.2:1. */
-  color: var(--white);
-}
-.pa-theme {
-  font-size: var(--label);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--on-navy-quiet);
-}
+/* THE NUMBER AND THE THEME WORD ARE GONE, 30 September. .pa-row__head, .pa-num and .pa-theme
+   are deleted rather than hidden, so nothing is carrying dead weight.
+
+   Sam: "do we need the number and word next to it at all. do they add value?"
+
+   The number said "there are four of these, this is one of them". In the old single-column
+   stack of four wide rows that was worth a line; a two-by-two grid says it at a glance, so
+   the numeral was answering a question the layout had stopped asking.
+
+   The theme word was worse: three of the four restated a word already in the sentence under
+   it - OWNERSHIP over "Nobody OWNS a repair", COST over "what next year will COST", EVIDENCE
+   over "PROVING what happened". Only QUALITY added a word the sentence did not have, and it
+   was the loosest fit of the four. A label that repeats the line beneath it is most of what
+   makes a block read as a template.
+
+   Measured: 74-78px off the list, identical at every width from 900px to 1920px, with no
+   wrapping penalty anywhere - more than either of the run-in ideas tested against it, and
+   stable where they were not. */
 /* Centred as a group against the answer card, which is the taller half on three rows out of
    four. Left top-aligned it produced up to 80px of empty navy under a two-line problem. */
 .pa-row__problem {
@@ -6128,11 +6097,6 @@ textarea {
   margin: 10px;
   padding: clamp(18px, 2vw, 24px) clamp(18px, 2.2vw, 26px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-}
-@media (min-width: 860px) {
-  .pa-row__answer {
-    margin: 12px 12px 12px 14px;
-  }
 }
 /* The answer side was under-scaled against the dark half, which is what made it look like
    body copy sitting next to a headline. Measured against the rest of the page: the section
@@ -6176,9 +6140,27 @@ textarea {
   color: var(--orange-ink);
 }
 
-/* The turn. Anchored inside the answer card rather than to a column of its own, so it sits
-   exactly on the seam at any width: on the card's left edge on a laptop, on its top edge on
-   a phone, pointing the way the eye is about to travel in each case. */
+/* The theme icon, out of the label and into the card's top corner at double the size.
+   Orange, because it is now the only orange on a card and the section had almost none left
+   once the chevron went. Decorative and aria-hidden: the label and the copy say everything
+   it says, so a screen reader gains nothing from it. Absolutely positioned rather than a
+   grid cell, so it cannot push the lead around when the lead runs to two lines. */
+.pa-answer-icon {
+  position: absolute;
+  top: clamp(14px, 1.5vw, 18px);
+  right: clamp(14px, 1.6vw, 20px);
+  display: block;
+  color: var(--orange);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* The turn. A phone-only device now. It was drawn for the side-by-side arrangement, where it
+   sat on the answer card's left edge and marked a left-to-right move that the layout did not
+   otherwise announce. Every width from 860px up is stacked, where the move is downward and
+   the navy-to-white seam already announces it; a 30px orange disc on the seam there reads as
+   an accordion toggle, which invites a click that does nothing. Hidden at 860px up, kept
+   below it where the halves stack under a full-width navy panel and the seam is less obvious. */
 .pa-turn {
   position: absolute;
   width: 30px;
@@ -6202,17 +6184,6 @@ textarea {
   border-right: 2px solid var(--on-orange);
   border-bottom: 2px solid var(--on-orange);
 }
-@media (min-width: 860px) {
-  .pa-turn {
-    left: -15px;
-    top: 50%;
-    margin-top: -15px;
-  }
-  .pa-chev::after {
-    margin: -5px 0 0 -6px;
-    transform: rotate(-45deg);
-  }
-}
 @media (max-width: 859px) {
   .pa-turn {
     top: -15px;
@@ -6225,6 +6196,135 @@ textarea {
   }
   .pa-row__answer {
     margin-top: 22px;
+  }
+}
+
+/* ==========================================================================
+   FOUR PAIRS IN THE SPACE TWO USED TO TAKE
+   --------------------------------------------------------------------------
+   Sam, 30 September: "i think its the design wasting space... if you moved the white box all
+   the way to the left where the blue text stopped, you can move the evo (still in white box)
+   under the blue writing, and you could fit all 4 boxes in the same space we have 2."
+
+   He is right, and it is a better idea than the two measured the day before. That test kept
+   the problem and the answer SIDE BY SIDE and simply set two rows next to each other, which
+   saved only 156px, because halving the width doubled how far the answer text wrapped.
+
+   THE WASTE WAS NEVER THE WRAPPING. It was that the navy panel had to be as tall as the white
+   card beside it. Two lines of problem text sat in a 191px panel because the answer next to it
+   needed 191px. Stack them instead and the navy shrinks to its own content: the empty blue
+   stops existing, and it no longer matters how tall the answer is.
+
+   Measured on the built page, four pairs: the list goes 949px to 696px and the section 1827px
+   to 1574px at 1440px wide - 253px, against 156px for two columns of the old row and 235px
+   for deleting a pair outright. It is the only one of the three that keeps all four.
+
+   THE SIDE-BY-SIDE ARRANGEMENT IS GONE, not kept for a middle band. It was left in place for
+   860-1059px in the first cut of this, and the screenshot at 1000px is the clearest picture of
+   the fault Sam reported: a navy panel carrying six words, stretched to the height of the card
+   beside it, with 120px of empty blue under the text on two rows out of four. The same
+   arrangement is now used from 860px up, two across from 900px and one column below that.
+   ========================================================================== */
+@media (min-width: 860px) {
+  /* THE SLACK GOES INTO THE WHITE CARD, NOT THE NAVY, and this is the whole trick. Side by
+     side, two cards stretch to the taller one. Left alone, that extra height lands above the
+     card as more empty blue - the exact fault being fixed. `auto 1fr` gives the problem only
+     the height it needs and hands the remainder to the answer, where it reads as breathing
+     room inside a white card rather than a gap in a dark one. Measured after: 22-27px of
+     slack inside each card and 14px of navy between the problem and the card, on all four. */
+  .pa-row {
+    grid-template-rows: auto 1fr;
+  }
+  .pa-row__problem {
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
+  /* FLAT SIZES, NOT clamp(), AND THE REASON IS THE CONTAINER. Above 1200px the container
+     stops growing but a vw-based clamp does not, so the problem set at 19.4px in a 516px
+     column at 1440px and at 22.7px in the SAME 516px column at 1920px. That is the one width
+     where the longest problem broke back onto two lines - the type outgrowing a column that
+     had stopped growing. Below 1200px the clamp was barely moving anyway (18.9px to 19.4px),
+     so there is nothing to lose by fixing it.
+
+     THE WIDTH CAP WAS THE REAL CULPRIT. Sam: "that first box could fit the title on one line
+     too?" It could, and only the cap was stopping it. Measured: the longest problem needs
+     406px and the column has 516px, but 30ch capped it at 355px. 42ch clears all four on one
+     line from 1024px up, and nothing runs past 42 characters anyway - the cap is now a
+     backstop against a future problem statement being written too long, not a working
+     constraint. All four panels are the same height as a result, which is most of why the
+     grid now reads as a grid. */
+  .pa-row__problem p {
+    font-size: 1.2rem;
+    max-width: 42ch;
+  }
+  .pa-lead {
+    font-size: 1.05rem;
+  }
+
+  /* WITH EVO RUNS IN BESIDE THE ANSWER rather than sitting on a line of its own. Sam asked
+     for this and it is worth 62px, but NOT as a float: floated, the second line of a
+     two-line answer wraps back UNDER the label to the card's left edge instead of aligning
+     with the first line, which is visibly broken at 1024px. A two-column grid gives the
+     proper hanging indent and costs nothing. The body spans both columns underneath. */
+  .pa-row__answer {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: baseline;
+  }
+  .pa-tag--evo {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  .pa-lead {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none;
+  }
+  .pa-body {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  /* Room for the icon in the corner, so a long answer cannot run under it. */
+  .pa-row__answer {
+    padding-right: clamp(62px, 5vw, 72px);
+  }
+  /* Symmetric now the card sits under the problem rather than beside it. The extra 2px on
+     the left was there to balance the old gutter column. */
+  .pa-row__answer {
+    margin: 12px;
+  }
+  /* Screen-reader only. The number, the theme word and the dark panel say "problem" between
+     them; a fourth label saying it again is the repetition that made the block read as a
+     template. It comes back below 860px, where the panel runs the full width and the colour
+     change alone is doing less work. */
+  .pa-tag--problem {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* See the note on .pa-turn above: a phone-only device. */
+  .pa-turn {
+    display: none;
+  }
+}
+
+/* Two across. 900px rather than 1060px: at 900 the container is 852px, so a column is 418px
+   and the answer body sets at about 46 characters a line - inside the 50-58 the rest of the
+   site runs at. Below it the cards stay stacked in one column, which is what they do on a
+   phone, so there is no third arrangement to maintain. */
+@media (min-width: 900px) {
+  .pa-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 }
 
@@ -7460,61 +7560,86 @@ input[type='radio'] {
   }
 }
 
-/* The transparency line under the plans teaser. Sized between the caveat above it and the
-   button below: enough to be read rather than skimmed past, not so much that it becomes a
-   second paragraph of pricing copy on a page that is already dense. */
-.ev3-transparency {
-  /* Left-aligned with the caveat above it and the button below it. Centred with `auto`
-     margins it sat indented from both and read as a pull-quote rather than a note. */
-  margin: 18px 0 0;
-  max-width: 68ch;
-  padding: 14px 18px;
-  border-left: 4px solid var(--orange);
-  background: var(--white);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 0.95rem;
+/* ==========================================================================
+   THE THREE FACTS UNDER THE PLANS TEASER
+   --------------------------------------------------------------------------
+   Replaces .ev3-transparency and .ev3-beyond, which were two stacked paragraphs in a 68ch
+   column with the right half of the page empty beside them. Sam: "can we make it much more
+   concise (maybe even full width). take the key bit and point to the relevant places, rather
+   than lots of writing."
+
+   Full width and three across, so the strip is one band the eye crosses rather than three
+   things it reads down. The key word leads in small caps - the same label token as every
+   other on the site - so the three are scannable without reading the sentences at all, which
+   is the point of the format: most readers need to know these exist, not what they say.
+
+   No box, no rule, no tint. The orange bar and white panel that .ev3-transparency used were
+   emphasis competing with the price above it, which is the one thing in this section that
+   should be shouting.
+   ========================================================================== */
+.ev3-facts {
+  list-style: none;
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  padding: clamp(18px, 2vw, 22px) 0 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: clamp(16px, 2.4vw, 32px);
 }
-.ev3-transparency strong {
-  color: var(--navy-deep);
-}
-
-/* The one-line mention of everything outside a reactive repair, inside the plans teaser.
-   Quieter than the transparency note above it: that one answers an objection, this one just
-   widens the picture, and two emphasised panels in a row would compete. */
-.ev3-beyond {
-  margin: 14px 0 0;
-  max-width: 68ch;
-  font-size: 0.95rem;
-  color: var(--muted);
-}
-
-
-/* THE PROBLEM AND ANSWER ROWS, TIGHTENED 30 SEPTEMBER. Sam: "i imagine the design may be
-   able to be improved to take up less space on point 3 instead/ as well as cutting the
-   content?"
-
-   Partly, and the honest answer is less than either of us expected. Four layouts were
-   measured against the live section at 1827px:
-
-     two columns of two   saves 156px on a laptop and NOTHING on a phone
-     tighter padding       saves  82px on a laptop and nothing on a phone
-     padding + smaller body saves 138px on a laptop and 100px on a phone
-     dropping one pair     saves 235px on a laptop and 450px on a phone
-
-   THE REASON THE DESIGN LEVER IS WEAK is worth keeping. A row's height is set by how far the
-   answer card's text wraps, not by wasted vertical space. Halving the width doubles the
-   lines, so two columns very nearly cancels itself out. What looks empty in those dark panels
-   is WIDTH - the band is far too wide for 68 characters of problem - and width is free.
-   On a phone the layout levers do nothing at all, because it is already one column, and the
-   phone is where the section costs the most: 3074px of a 16000px page.
-
-   So this takes the 138px the design can honestly give, and the content cut does the rest. */
-.pa-row p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-@media (min-width: 860px) {
-  .pa-list {
-    gap: 12px;
+@media (min-width: 820px) {
+  .ev3-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+.ev3-facts li {
+  margin: 0;
+  padding: 0;
+}
+.ev3-facts li::before {
+  content: none;
+}
+.ev3-facts + .mt-2 {
+  margin-top: clamp(22px, 2.6vw, 30px) !important;
+}
+.ev3-fact-k {
+  display: block;
+  font-size: var(--label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  margin-bottom: 7px;
+}
+.ev3-facts p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 42ch;
+}
+/* The link on its own line rather than running on from the sentence. Inline, "See what is
+   included" wrapped with its arrow stranded on the next line in one column and broke
+   mid-phrase in another - and a link is the one thing in this strip a reader is looking FOR,
+   so it should not have to be found inside a sentence. */
+.ev3-facts .text-link {
+  display: inline-block;
+  margin-top: 7px;
+}
+
+/* WHAT USED TO BE HERE, AND WHY IT IS GONE. A block added earlier on 30 September set
+   `.pa-row p { font-size: 0.95rem }` to buy 138px of height off the problem-and-answer
+   section. It is removed because it did something other than what it said.
+
+   `.pa-row p` is one class and one element, which is exactly the same specificity as
+   `.pa-row__problem p` - and it sat 1,400 lines further down the file, so it won on order.
+   It also beat `.pa-lead` and `.pa-body`, which are bare classes. The result was that the
+   problem statement, the answer's lead-in and the answer's body all rendered at 15.2px:
+   one flat size where the design has three, so the only thing distinguishing a statement
+   from its answer was the colour behind it. That is what read as "empty blue space" in the
+   screenshot Sam sent. The panels were the size the type asked for; the type had collapsed.
+
+   The height it was bought to save is now saved properly by the stacked two-by-two, which
+   takes the section from 1827px to a measured 1639px at 1440px wide without touching a
+   font size. The `gap: 12px` that came with it is folded into the arrangement queries.
+
+   The lesson, since it has now cost two patches: a blanket descendant selector aimed at a
+   component is not a tweak. On this stylesheet, size type on the element that owns it. */
