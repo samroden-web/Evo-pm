@@ -7460,3 +7460,13 @@ input[type='radio'] {
 .ev3-transparency strong {
   color: var(--navy-deep);
 }
+
+/* The one-line mention of everything outside a reactive repair, inside the plans teaser.
+   Quieter than the transparency note above it: that one answers an objection, this one just
+   widens the picture, and two emphasised panels in a row would compete. */
+.ev3-beyond {
+  margin: 14px 0 0;
+  max-width: 68ch;
+  font-size: 0.95rem;
+  color: var(--muted);
+}

@@ -3,6 +3,22 @@ import Caretaker from './Caretaker';
 
 // Homepage: the problem and the answer to it.
 //
+// THE TECHNOLOGY SENTENCES, ADDED 30 SEPTEMBER, CARRY A FINE BALANCE. Sam: "we should also
+// emphasise the technology we created is end to end bespoke. (otherwise it looks like we just
+// built a crm. you know what i mean. a fine balance)".
+//
+// Both failure modes are real and they pull in opposite directions. Undersell it and EVO is a
+// managing agent with a spreadsheet, which is not worth a fixed price. Oversell it and EVO is
+// a software company, which is the thing GLOBAL-04 exists to prevent and which the old
+// evo-pm.com already taught the market to believe.
+//
+// The balance is in the order: what it covers, then what it is for, then what it is not. Three
+// named surfaces - resident's app, trade's app, dashboard - prove end-to-end better than the
+// adjective does. "Built for repairs rather than adapted from something built for something
+// else" is the anti-CRM line without using the word. And it closes on "it is not what you are
+// buying", so the sentence that establishes the technology also puts it back in its place,
+// one line before "we are not a software company".
+//
 // THE ORDER IS NOT THE BRIEF'S, AND THAT IS DELIBERATE. HOME-05 lists the four problems
 // Evidence, Ownership, Cost, Quality. That opens on the most abstract of the four, and the
 // opening line has to be the one a housing director recognises in a second. The order here
@@ -73,7 +89,7 @@ const PAIRS = [
     // HOME-05 problem 4 verbatim. The answer is rewritten - see the note above.
     problem: 'The same jobs keep coming back.',
     lead: 'More repairs fixed on the first visit.',
-    body: 'The full history of the home reaches the trade before they arrive, so the right person turns up with the right parts. Every repair is warrantied, and a return visit costs us rather than you — we are paid to get it right, not to find more work.',
+    body: 'The full history of the home reaches the trade before they arrive, so the right person turns up with the right parts. Every repair is warrantied, and a return visit costs us rather than you. We are paid to get it right, not to find more work.',
   },
   {
     key: 'Evidence',
@@ -107,8 +123,11 @@ export default function ProblemAnswer() {
             EVO provides a fully managed, end-to-end repairs and maintenance service. The helpdesk, contractor
             management, resident communication and performance oversight come together in one service, from one
             supplier, for one fixed monthly price per property. We take responsibility for managing and delivering
-            every repair, supported by our own technology, our operations team and our approved contractor network. We
-            are not a software company.
+            every repair, supported by our own technology, our operations team and our approved contractor network.
+            That technology is ours and it covers the whole job: the resident&rsquo;s app, the trade&rsquo;s app and
+            your dashboard, built for repairs rather than adapted from something built for something else. It is the
+            reason the service works and the reason the price can be fixed. It is not what you are buying. We are not a
+            software company.
           </p>
         </div>
 

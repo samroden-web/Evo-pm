@@ -28,7 +28,7 @@ export const vatNote = 'All prices are per home per month, plus VAT.';
 // portfolio review. It must never read as a promise that newer stock, or any particular
 // part of the country, is cheaper.
 export const priceCaveat =
-  'These are our standard prices, based on London. Your own price is set after a stock review \u2014 the age and condition of the homes, the size of the portfolio and where they are can all move it, up or down.';
+  'These are our standard prices, based on London. Your own price is set after a stock review: the age and condition of the homes, the size of the portfolio and where they are can all move it, up or down.';
 
 export const orgTypes = [
   {
@@ -286,6 +286,63 @@ export const planScope = [
   },
 ];
 
+// EVERYTHING EVO DOES BEYOND A REACTIVE REPAIR, IN ONE PLACE.
+//
+// Sam, 30 September: "we also need somewhere on a homepage to point to all the additional work
+// we do. at the moment it is buried on the how it works page, but a mention of it from the
+// homepage, and pricing page, to show the full suite of additional works we can help with
+// would be useful."
+//
+// These two lists used to be typed into app/how-it-works/page.jsx and nowhere else, which is
+// why they were buried: there was no way to mention them anywhere else without copying them,
+// and a copied list is one that goes out of date on every page but the one somebody remembers
+// to edit. They live here now and three pages read them.
+//
+// THE SPLIT MATTERS MORE THAN THE ITEMS. One group has a published monthly price and goes on
+// the same invoice as the plan; the other is quoted before anything starts. Presenting them as
+// one undifferentiated list of "other services" is what makes a reader suspect the fixed price
+// is not really fixed - the honest answer is that there are two different things here and the
+// difference is exactly how you pay for them.
+
+export const priceAddOns = [
+  {
+    id: 'electrical',
+    what: 'Electrical Compliance Cover',
+    sub: 'EICRs and statutory inspection of the fixed installation, to BS 7671. Minimum three-year term.',
+  },
+  {
+    id: 'gasBoiler',
+    what: 'Gas Boiler Cover',
+    sub: 'Annual service, safety certification and breakdown cover on the boiler itself.',
+  },
+  {
+    id: 'communal',
+    what: 'Communal reporting for blocks',
+    sub: 'Residents report communal issues in the same app, tracked against the block rather than a home.',
+  },
+];
+
+export const variableWorks = [
+  {
+    what: 'Any repair above your plan threshold',
+    sub: 'Scoped and quoted before anything starts, and only done with your approval.',
+  },
+  {
+    what: 'Communal areas and plant',
+    sub: 'Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.',
+  },
+  { what: 'Voids', sub: 'Turnaround works between tenancies, on the same trades network and the same record.' },
+  {
+    what: 'Capital and retrofit works',
+    sub: 'Defined projects, scoped and scheduled, evidenced the same way a repair is.',
+  },
+  {
+    what: 'Insurance works',
+    sub: 'Escape of water, fire and impact damage, managed alongside the reactive service.',
+  },
+  { what: 'Damp and mould', sub: 'A defined three-stage procedure that sits outside every plan.' },
+];
+
 export const addons = [
   {
     id: 'electrical',
@@ -374,7 +431,7 @@ export const addons = [
     name: 'Communal reporting',
     note: 'Charged in two parts: per home for the software, and per block. The per-block charge is shown separately because it is not a per-home cost.',
     intro:
-      'Residents report communal issues \u2014 lighting, doors, lifts, bin stores, grounds \u2014 in the same app they use for their own home, and those reports are tracked and evidenced against the block rather than against a tenancy. Block managers and housing officers see the position for the whole building in one place.',
+      'Residents report communal issues (lighting, doors, lifts, bin stores, grounds) in the same app they use for their own home, and those reports are tracked and evidenced against the block rather than against a tenancy. Block managers and housing officers see the position for the whole building in one place.',
     includes: [
       'Residents report communal issues themselves, in the EVO Living App',
       'Reports tracked against the block, not against a home',

@@ -72,6 +72,21 @@ export default function HomePage() {
                 Technology comes last in the sentence, as the reason the rest is possible,
                 which is the hierarchy the rest of the site already argues.
 
+                NO EM DASHES, AND THAT IS AN EDITORIAL RULE NOW. Sam, 30 September: "can we
+                take the M dashes off the homepage. it looks like AI wrote it." He is right,
+                and the two in the first draft of this line were mine. A colon and a full stop
+                do the same work here and read as though a person wrote them. Anywhere a dash
+                is reached for on this page, use a colon, a full stop or brackets instead.
+
+                "ON TECHNOLOGY WE BUILT FOR REPAIRS" is carrying a fine balance Sam named: the
+                site must not read as a software company, but it must not undersell the
+                platform either, "otherwise it looks like we just built a crm". Two words do
+                most of that work - "built" says bespoke, "for repairs" says purpose-made
+                rather than a general system with a repairs module bolted on. The full version
+                of that argument sits in the problem-and-solution section, next to "we are not
+                a software company", where it can be made properly instead of crowding the
+                hero with it.
+
                 LENGTH IS PART OF THE EDIT. The first draft of this ran to four lines, which
                 put 31px back onto the hero and cost a 14-inch laptop the award marks that the
                 29 September spacing work had just won back. Four wordings were measured at
@@ -79,8 +94,8 @@ export default function HomePage() {
                 them. Anything longer than about 165 characters spills to a fourth line and
                 pushes the buttons down the fold. */}
             <p className="lead">
-              We run your repairs service end to end &mdash; helpdesk, trades, resident communication and the evidence
-              &mdash; for one fixed monthly price per home, powered by our own technology.
+              We run your repairs service end to end: helpdesk, trades, resident communication and the evidence. One
+              fixed monthly price per home, on technology we built for repairs.
             </p>
             <div className="btn-row">
               <Link href={cta.review.href} className="btn btn-primary">
@@ -161,11 +176,21 @@ export default function HomePage() {
       {/* 4. Why repairs matter more than ever */}
       <WhyNow />
 
-      {/* 5. The problem, the solution, and the Caretaker that closes it */}
-      <ProblemAnswer />
+      {/* 5. Plans teaser — MOVED ABOVE THE PROBLEM AND SOLUTION, 30 September.
+             Sam: "should we move the plans above the problem and solution".
 
-      {/* 7. Plans teaser */}
+             Yes, and only because the hero changed first. Price before proposition is a
+             number with nothing to attach to: "£48 per home per month" invites "for what?".
+             But the hero now says outright that EVO runs the whole repairs service for one
+             fixed monthly price, the figures band proves the scale and the logos prove the
+             customers, so by the time a reader reaches this they already know what the number
+             buys. Putting it here lands the most interesting thing about EVO while attention
+             is still high, and leaves the detailed argument below for the reader who wants it
+             rather than making everyone walk through it first. */}
       <PlansTeaser grey={false} />
+
+      {/* 6. The problem, the solution, and the Caretaker that closes it */}
+      <ProblemAnswer />
 
       {/* 8. Proof: case studies, each with its photograph, its client's logo and that
              client's own words, then three shorter voices. */}

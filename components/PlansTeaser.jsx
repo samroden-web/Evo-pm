@@ -38,7 +38,7 @@ export default function PlansTeaser({
           <h2 id="plans-teaser-title">{headline}</h2>
           <p className="lead mb-0">
             One fixed monthly fee per property, with no limit on the number of repairs in your plan. The plans differ by
-            the repair value threshold — how much a single repair can cost before it is quoted separately.
+            the repair value threshold: how much a single repair can cost before it is quoted separately.
           </p>
         </div>
 
@@ -109,9 +109,29 @@ export default function PlansTeaser({
             the out-of-hours rates and the abortive fee stay off the site. "What is excluded"
             means the published exclusions list, not the rate card. */}
         <p className="ev3-transparency">
-          <strong>No surprises.</strong> The pricing page carries the whole thing &mdash; every plan, every price, what
+          <strong>No surprises.</strong> The pricing page carries the whole thing: every plan, every price, what
           is included and what is excluded, and how the price is reviewed. Your own price is set after a stock review,
           fixed for the first year, and any review after that is capped at CPI plus 1%.
+        </p>
+
+        {/* THE ADDITIONAL WORKS, MENTIONED RATHER THAN LISTED. Sam, 30 September: "we also
+            need somewhere on a homepage to point to all the additional work we do... i dont
+            think we need to duplicate the data, just make sure we link to the relevant part of
+            the websites when we are talking about the plans".
+
+            So: one sentence, three examples, two links. It sits inside the plans teaser rather
+            than in a section of its own because this is the moment a reader is working out what
+            the fixed price does and does not buy - which is also the moment they wonder whether
+            EVO only does reactive repairs. The full lists stay on /how-it-works and the prices
+            stay on /pricing. Naming everything here would be a third copy of the same content
+            to keep in step, and would undo the density work on this page. */}
+        <p className="ev3-beyond">
+          The plan covers reactive repairs. We also handle planned and cyclical maintenance, voids, capital and
+          retrofit works, insurance works, and gas and electrical compliance, quoted or priced separately.{' '}
+          <Link href="/how-it-works" className="text-link">
+            See what else we cover
+          </Link>
+          .
         </p>
 
         <div className="mt-2">

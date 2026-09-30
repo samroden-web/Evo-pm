@@ -70,12 +70,21 @@ export default function PricingPage() {
                 <li>Planned and cyclical work</li>
                 <li>Capital and retrofit works</li>
                 <li>
-                  Damp and mould programmes &mdash; see our <Link href="/damp-and-mould">damp and mould page</Link>
+                  Damp and mould programmes: see our <Link href="/damp-and-mould">damp and mould page</Link>
                 </li>
                 <li>Insurance works</li>
                 <li>Any job above your threshold</li>
               </ul>
-              <p className="wwh-inout-note mb-0">Major works are never hidden in the monthly fee.</p>
+              <p className="wwh-inout-note">Major works are never hidden in the monthly fee.</p>
+              {/* Sam, 30 September: point people from the relevant places to what else EVO
+                  does. This is the relevant place - a reader looking at what falls outside a
+                  plan is asking whether EVO can do it at all, and the answer is yes. Voids and
+                  planned maintenance are named because neither appears in the list above. */}
+              <p className="mb-0">
+                <Link href="/how-it-works" className="text-link">
+                  Voids, planned maintenance and the rest of what we cover
+                </Link>
+              </p>
             </div>
           </div>
         </div>

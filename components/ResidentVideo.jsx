@@ -40,7 +40,7 @@ export default function ResidentVideo() {
             <h2 id="voxpop-title">Ask the people who live there.</h2>
             <p className="lead">
               Residents in their own kitchens and doorways, talking about reporting a repair on the EVO Living App. Not
-              a scripted case study &mdash; we asked, and this is what they said.
+              a scripted case study. We asked, and this is what they said.
             </p>
             <p>
               Resident satisfaction is one of the Tenant Satisfaction Measures you are reported against, and repairs is

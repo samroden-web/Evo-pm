@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { priceAddOns, variableWorks } from '@/data/plans';
 import Illustration from '@/components/Illustration';
 import PageHero from '@/components/PageHero';
 import Audiences from '@/components/Audiences';
@@ -65,47 +66,10 @@ const inPlan = [
   'General household fixtures and fittings',
 ];
 
-const addOns = [
-  {
-    what: 'Electrical Compliance Cover',
-    sub: 'EICRs and statutory inspection of the fixed installation, to BS 7671. Minimum three-year term.',
-  },
-  {
-    what: 'Gas Boiler Cover',
-    sub: 'Annual service, safety certification and breakdown cover on the boiler itself.',
-  },
-  {
-    what: 'Communal reporting for blocks',
-    sub: 'Residents report communal issues in the same app, tracked against the block rather than a home.',
-  },
-];
-
-const variable = [
-  {
-    what: 'Any repair above your plan threshold',
-    sub: 'Scoped and quoted before anything starts, and only done with your approval.',
-  },
-  {
-    what: 'Communal areas and plant',
-    sub: 'Reactive and planned. Lifts, plant rooms, amenity space, car parks and roofs.',
-  },
-  {
-    what: 'Voids',
-    sub: 'Turnaround works between tenancies, on the same trades network and the same record.',
-  },
-  {
-    what: 'Capital and retrofit works',
-    sub: 'Defined projects, scoped and scheduled, evidenced the same way a repair is.',
-  },
-  {
-    what: 'Insurance works',
-    sub: 'Escape of water, fire and impact damage, managed alongside the reactive service.',
-  },
-  {
-    what: 'Damp and mould',
-    sub: 'A defined three-stage procedure that sits outside every plan.',
-  },
-];
+// The two lists that were here moved to data/plans.js on 30 September so the homepage and
+// the pricing page could point at them too. Same content, one source.
+const addOns = priceAddOns;
+const variable = variableWorks;
 
 export default function HowItWorksPage() {
   return (
