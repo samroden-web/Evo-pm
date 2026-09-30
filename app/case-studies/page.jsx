@@ -188,7 +188,7 @@ export default function CaseStudiesPage() {
                   <h3>Pilot across 25% of homes</h3>
                   <p>
                     The Living App in residents&apos; hands, automated triage and appointment scheduling, digital
-                    satisfaction surveys, and one repairs, property and compliance platform — with non-digital channels
+                    satisfaction surveys, and one repairs, property and compliance platform, with non-digital channels
                     kept for residents who wanted them.
                   </p>
                 </li>

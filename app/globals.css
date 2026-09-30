@@ -7081,12 +7081,29 @@ textarea {
   align-items: flex-start;
   gap: clamp(22px, 3vw, 40px);
 }
-.ev2-getapp--orange h2,
-.ev2-getapp--orange p {
+/* THE ORANGE BOX ON /residents, CORRECTED 30 SEPTEMBER. Sam agreed the fix after the
+   measurement was put in front of him.
+
+   Everything here was white, which on #FF6600 is 2.94:1. That is the number Sam signed off
+   on 27 September for the orange BANDS, where the text is large and the bar is 3:1. This box
+   carries an eyebrow at 11.68px, a body paragraph at 17px and a second eyebrow, all of which
+   need 4.5:1 - so three pieces of small type sat at 2.94:1 against a 4.5:1 requirement, on
+   the one page residents read on a phone, often in the middle of something going wrong.
+
+   It was hidden for days because tools/check-final.mjs keyed its accepted exception on the
+   COLOUR PAIR alone, so a sign-off given for large text silently covered small text too.
+   Splitting the key by requirement on 28 September is what surfaced it.
+
+   The design system already had the answer: --on-orange is documented as the colour for
+   anything under 18.66px bold on a bright orange field, at 5.3:1. The h2 stays white - it is
+   large text, it is inside Sam's existing sign-off, and it is what keeps the box looking like
+   the brand. Large white, small dark, which is the rule the token was written for. */
+.ev2-getapp--orange h2 {
   color: #fff;
 }
+.ev2-getapp--orange p,
 .ev2-getapp--orange .eyebrow {
-  color: #fff;
+  color: var(--on-orange);
 }
 .ev2-getapp--orange h2 {
   margin: 4px 0 10px;
@@ -7469,4 +7486,35 @@ input[type='radio'] {
   max-width: 68ch;
   font-size: 0.95rem;
   color: var(--muted);
+}
+
+
+/* THE PROBLEM AND ANSWER ROWS, TIGHTENED 30 SEPTEMBER. Sam: "i imagine the design may be
+   able to be improved to take up less space on point 3 instead/ as well as cutting the
+   content?"
+
+   Partly, and the honest answer is less than either of us expected. Four layouts were
+   measured against the live section at 1827px:
+
+     two columns of two   saves 156px on a laptop and NOTHING on a phone
+     tighter padding       saves  82px on a laptop and nothing on a phone
+     padding + smaller body saves 138px on a laptop and 100px on a phone
+     dropping one pair     saves 235px on a laptop and 450px on a phone
+
+   THE REASON THE DESIGN LEVER IS WEAK is worth keeping. A row's height is set by how far the
+   answer card's text wraps, not by wasted vertical space. Halving the width doubles the
+   lines, so two columns very nearly cancels itself out. What looks empty in those dark panels
+   is WIDTH - the band is far too wide for 68 characters of problem - and width is free.
+   On a phone the layout levers do nothing at all, because it is already one column, and the
+   phone is where the section costs the most: 3074px of a 16000px page.
+
+   So this takes the 138px the design can honestly give, and the content cut does the rest. */
+.pa-row p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+@media (min-width: 860px) {
+  .pa-list {
+    gap: 12px;
+  }
 }

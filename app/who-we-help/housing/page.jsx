@@ -186,7 +186,7 @@ export default function HousingPage() {
             photoAlt="An EVO operative talking to a resident on her doorstep"
             photoWidth={675}
             photoHeight={675}
-            caption="Council terraces, low-rise blocks or a mixed portfolio — the stock varies, the service does not."
+            caption="Council terraces, low-rise blocks or a mixed portfolio: the stock varies, the service does not."
           />
           <div className="grid-3 mt-3">
             {SIZES.map((s) => (
@@ -294,9 +294,9 @@ export default function HousingPage() {
               decoding="async"
             />
             <figcaption>
-              <span>Before &mdash; moisture reading taken</span>
-              <span>During &mdash; three-stage treatment</span>
-              <span>After &mdash; made good, and recorded</span>
+              <span>Before: moisture reading taken</span>
+              <span>During: three-stage treatment</span>
+              <span>After: made good, and recorded</span>
             </figcaption>
           </figure>
           <p className="mt-2">
@@ -334,7 +334,7 @@ export default function HousingPage() {
               <IconBadge name="file" />
               <h3>Built to connect, whatever you run</h3>
               <p className="mb-0">
-                We integrate through the routes housing management systems actually offer &mdash; API where there is
+                We integrate through the routes housing management systems actually offer: API where there is
                 one, scheduled file exchange where there is not. Rubixx is the worked example we demonstrate end to end,
                 from a resident report to a closed job in your system.
               </p>

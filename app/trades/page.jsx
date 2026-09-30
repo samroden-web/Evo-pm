@@ -53,7 +53,7 @@ const RULES = [
   [
     'R',
     'eport an observation',
-    'Spot something that will cause trouble later — a tired bathroom, a failing seal — and flag it. It is an observation for the client to consider, not a quote.',
+    'Spot something that will cause trouble later (a tired bathroom, a failing seal) and flag it. It is an observation for the client to consider, not a quote.',
   ],
   ['R', 'evisit', 'If the same issue comes back within three months, you re-attend free of charge.'],
   ['R', 'enew', 'If an item you renewed fails within twelve months, you re-attend free of charge.'],
@@ -93,7 +93,7 @@ export default function TradesPage() {
       <PageHero
         eyebrow="Trades"
         title="Turn up, fix it, get paid in 14 days."
-        lead="Guaranteed reactive work for housing associations, councils and Build to Rent — in your area, for your trade, in the hours you make available. Priced before you set off, and no invoice to raise."
+        lead="Guaranteed reactive work for housing associations, councils and Build to Rent, in your area, for your trade, in the hours you make available. Priced before you set off, and no invoice to raise."
         crumbs={[{ label: 'Trades' }]}
         image="/images/photos/evo-trades-two-operatives-van.webp"
         imageAlt="Two tradesmen at the back of their own van on a residential street"
@@ -153,7 +153,7 @@ export default function TradesPage() {
             </li>
             <li>
               <strong>The history tells you what to bring.</strong> What was done last time, by whom, and what was
-              replaced — so you load the van once rather than driving back to the merchant.
+              replaced, so you load the van once rather than driving back to the merchant.
             </li>
             <li>
               <strong>Completion notes and photographs in the app.</strong> No paperwork afterwards.
@@ -222,7 +222,7 @@ export default function TradesPage() {
           </div>
           <p className="mt-3 mb-0">
             Payment follows a quality assurance review after each job, done remotely in the system. If something needs
-            verifying on site, our QA surveyor attends — you are not asked to prove it twice.
+            verifying on site, our QA surveyor attends. You are not asked to prove it twice.
           </p>
         </div>
       </section>
@@ -242,7 +242,7 @@ export default function TradesPage() {
               <strong>Public liability and employer&rsquo;s liability insurance</strong>, current and evidenced.
             </li>
             <li>
-              <strong>Trade accreditations</strong> — Gas Safe, NICEIC or equivalent, wherever the work requires them.
+              <strong>Trade accreditations</strong>: Gas Safe, NICEIC or equivalent, wherever the work requires them.
             </li>
             <li>
               {/* The tag here asked EVO to confirm the scope of DBS checking. It is already

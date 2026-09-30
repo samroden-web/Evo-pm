@@ -376,20 +376,34 @@ const CHECKS = [
   // ---- Residents page, 27 September ----
   {
     page: '/residents',
-    name: 'res-a. the top box is EVO orange with white text, as Sam asked',
+    name: 'res-a. the top box is EVO orange, heading white, small text readable',
     test: () => {
       const box = document.querySelector('.ev2-getapp--orange');
       if (!box) return 'the orange top box is not there';
       const bg = getComputedStyle(box).backgroundColor;
       if (!/255,\s*102,\s*0/.test(bg)) return `the box is ${bg}, not EVO orange #ff6600`;
-      // This assertion used to demand 4.5:1 on this box, which is why it went red the moment the
-      // brand colour went back. Sam has seen the 2.94:1 measurement and chosen the brand look;
-      // the number is carried as a named exception in tools/check-final.mjs so it stays visible.
-      // What this now guards is that nobody quietly changes it back without him.
-      for (const el of box.querySelectorAll('h2, p, .eyebrow')) {
+      // WHAT THIS GUARDS CHANGED ON 30 SEPTEMBER, and the history matters.
+      //
+      // It first demanded 4.5:1 everywhere in the box. Then it demanded WHITE everywhere,
+      // after Sam chose the brand look on 27 September. That second version was too broad:
+      // his decision was about the large heading on a bright orange field, and demanding
+      // white for everything quietly locked in 2.94:1 for an 11.68px eyebrow and a 17px
+      // paragraph, both of which need 4.5:1. Three pieces of small type on the page
+      // residents actually use sat below the bar for three days because a test asserted it.
+      //
+      // The rule now is the one the design system was written for, and the one Sam agreed on
+      // 30 September: the heading stays white, and anything smaller uses --on-orange at
+      // 5.3:1. This guards both halves, so neither can drift back.
+      const heading = box.querySelector('h2');
+      if (heading && !/255,\s*255,\s*255/.test(getComputedStyle(heading).color)) {
+        return `the heading is ${getComputedStyle(heading).color}, not white`;
+      }
+      for (const el of box.querySelectorAll('p, .eyebrow')) {
         if (el.closest('.btn') || el.closest('.app-badge')) continue;
         const c = getComputedStyle(el).color;
-        if (!/255,\s*255,\s*255/.test(c)) return `"${el.textContent.trim().slice(0, 24)}" is ${c}, not white`;
+        if (/255,\s*255,\s*255/.test(c)) {
+          return `"${el.textContent.trim().slice(0, 24)}" is white on orange (2.94:1) and needs --on-orange`;
+        }
       }
       return true;
     },

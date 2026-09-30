@@ -28,7 +28,8 @@ import Caretaker from './Caretaker';
 //   Quality follows as its direct consequence, and it is the one residents feel.
 //   Evidence third is the escalation from operational to regulatory, and it picks up the
 //     WhyNow band directly above it ("Meeting them is one job. Evidencing them is another").
-//   Cost closes in the boardroom and hands straight over to the plans teaser below.
+//   Cost closed in the boardroom and handed over to the plans teaser below. REMOVED on 30
+//     September: the plans teaser is no longer below, it is above. See the note in PAIRS.
 //
 // Operational, then regulatory, then financial. The brief's requirement is that problem n
 // is paired with answer n, and every pair below is intact - only the running order moved.
@@ -99,14 +100,28 @@ const PAIRS = [
     lead: 'The evidence builds itself, as the work happens.',
     body: 'Photographs, timestamps and no-access visits recorded against the property in the EVO Dashboard, alongside live repairs and compliance for every home. We built the technology, and we run it for you.',
   },
-  {
-    key: 'Cost',
-    icon: 'wallet',
-    // HOME-05 problem 3 and HOME-06 answer 3, with the Dashboard added to the tail.
-    problem: 'Nobody can tell the board what next year will cost.',
-    lead: 'A clear monthly cost per property.',
-    body: 'No per-job pricing and no limit on the number of repairs in your plan. Anything outside it is scoped and approved before we start, and the Dashboard gives the board the same numbers we work to.',
-  },
+  // THE COST PAIR WAS REMOVED ON 30 SEPTEMBER, AND THE REASON IS THE REORDER OF THE DAY
+  // BEFORE, not a judgement that the argument is weak.
+  //
+  // It read: "Nobody can tell the board what next year will cost." / "A clear monthly cost
+  // per property. No per-job pricing and no limit on the number of repairs in your plan.
+  // Anything outside it is scoped and approved before we start."
+  //
+  // Every clause of that is now made, in more detail and with the actual number, by the plans
+  // teaser - which on 29 September moved to sit DIRECTLY ABOVE this section. The comment at
+  // the top of this file still says Cost was placed last so it would "hand straight over to
+  // the plans teaser below". There is no plans teaser below any more. Its whole job was to
+  // set up a section that now precedes it, so it was arguing to a reader who had just been
+  // given the answer.
+  //
+  // Sam asked whether the section could be made smaller by design rather than by cutting.
+  // Measured: the layout levers give 138px on a laptop and 100px on a phone, and dropping one
+  // pair gives 235px and 450px. Both were taken. Of the four, this is the only one whose
+  // removal costs a reader nothing they have not just read.
+  //
+  // The other three stay. Ownership is the root cause of all of them, Quality is what
+  // residents feel, and Evidence is the regulatory escalation - none of which is made
+  // anywhere else on the homepage.
 ];
 
 export default function ProblemAnswer() {

@@ -39,7 +39,7 @@ export default function ContactPage() {
                   <br />
                   Report it in the EVO Living App, or email{' '}
                   <a href={`mailto:${contact.residentEmail}`}>{contact.residentEmail}</a>. Do not use the form on this
-                  page &mdash; it does not reach the repairs team.
+                  page. It does not reach the repairs team.
                 </p>
                 <p className="mb-0">
                   <strong style={{ color: '#fff' }}>A landlord, agent or supplier?</strong>

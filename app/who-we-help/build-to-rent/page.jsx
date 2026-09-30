@@ -74,7 +74,7 @@ export default function BuildToRentPage() {
           <SectionHead
             eyebrow="The standard you are actually held to"
             title="You are not being compared to another landlord."
-            lead="Your residents compare the repair to every other service on their phone — the delivery they can track, the appointment they can move, the driver they can see approaching. That is a higher bar than the sector standard, and it is the one they apply when they decide whether to stay."
+            lead="Your residents compare the repair to every other service on their phone: the delivery they can track, the appointment they can move, the driver they can see approaching. That is a higher bar than the sector standard, and it is the one they apply when they decide whether to stay."
           />
           {/* The brochure's "What good repairs are worth" six, which had not been used
               anywhere on the site. This section was a single paragraph before. */}
@@ -122,7 +122,7 @@ export default function BuildToRentPage() {
             photoAlt="An EVO operative in branded kit repairing a radiator in a modern flat"
             photoWidth={750}
             photoHeight={750}
-            caption="Newer stock, communal areas and plant included — and the same trade at the flat door either way."
+            caption="Newer stock, communal areas and plant included, and the same trade at the flat door either way."
           />
           <div className="steps-row mt-3">
             {STEPS.map(([t, d], i) => (
@@ -195,7 +195,7 @@ export default function BuildToRentPage() {
                 <ul className="tick-list">
                   <li>Communal reporting for every block, so residents raise it themselves</li>
                   <li>Reactive repairs in the homes, to your plan threshold</li>
-                  <li>Statutory compliance &mdash; gas, electrical, smoke and CO, PAT</li>
+                  <li>Statutory compliance: gas, electrical, smoke and CO, PAT</li>
                   <li>24/7 emergency cover across the building, every night of the year</li>
                   <li>One helpdesk, one record and one invoice for all of it</li>
                 </ul>
@@ -239,7 +239,7 @@ export default function BuildToRentPage() {
           <SectionHead
             eyebrow="The plan"
             title="Home Trust, written for newer stock."
-            lead="Newer systems, fixtures and infrastructure fail differently from ageing ones, so Home Trust covers everything in scope up to £2,500 plus VAT per repair — roughly 99% of reactive work — without the layered thresholds older stock needs. One fixed price per home, per month."
+            lead="Newer systems, fixtures and infrastructure fail differently from ageing ones, so Home Trust covers everything in scope up to £2,500 plus VAT per repair, roughly 99% of reactive work, without the layered thresholds older stock needs. One fixed price per home, per month."
           />
           <div className="wwh-grid mt-3">
             {[

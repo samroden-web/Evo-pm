@@ -82,7 +82,7 @@ export default function LandlordsAndAgentsPage() {
       <PageHero
         eyebrow="Landlords &amp; managing agents"
         title="Repairs, handled. Without the phone calls."
-        lead="Your tenant reports it on the app. An accredited trade is matched, priced and dispatched. Everyone who needs to see it can — without a single round of email and telephone tennis."
+        lead="Your tenant reports it on the app. An accredited trade is matched, priced and dispatched. Everyone who needs to see it can, without a single round of email and telephone tennis."
         crumbs={[{ label: 'Who we help' }, { label: 'Landlords & managing agents' }]}
         image="/images/photos/evo-operative-at-front-door.webp"
         imageAlt="A tradesman arriving at a resident's front door, phone in hand"
@@ -123,7 +123,7 @@ export default function LandlordsAndAgentsPage() {
           <SectionHead
             eyebrow="The bit that usually goes missing"
             title="Everyone sees the same job."
-            lead="Where an agent sits between the landlord and the property, information normally stops at whoever happened to receive the email. It does not here. The same live record is open to all three parties — nobody waits for a monthly update, and nobody has to ask."
+            lead="Where an agent sits between the landlord and the property, information normally stops at whoever happened to receive the email. It does not here. The same live record is open to all three parties. Nobody waits for a monthly update, and nobody has to ask."
           />
           <div className="ev2-seen mt-3">
             {SEEN.map((c) => (
@@ -162,12 +162,12 @@ export default function LandlordsAndAgentsPage() {
             eyebrow="The price"
             title="What the fee covers, and what it does not."
 
-            lead="One fixed price per home, per month. The scope is identical across Home 500, Home 1000 and Home Trust — only the repair threshold changes. Anything outside it is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
+            lead="One fixed price per home, per month. The scope is identical across Home 500, Home 1000 and Home Trust. Only the repair threshold changes. Anything outside it is quoted in writing before anyone starts, so there are no invoices to argue about afterwards."
           />
           <div className="grid-2 mt-3">
             <div className="card">
               <IconBadge name="shieldCheck" />
-              <p className="eyebrow">In the plan — covered by the monthly fee</p>
+              <p className="eyebrow">In the plan: covered by the monthly fee</p>
               <ul className="tick-list mb-0">
                 <li>Reactive repairs up to the plan threshold, parts and labour</li>
                 <li>All in-scope trades: plumbing, electrical, heating, carpentry, locks, drainage and the rest</li>
@@ -178,7 +178,7 @@ export default function LandlordsAndAgentsPage() {
             </div>
             <div className="card card--grey">
               <IconBadge name="file" />
-              <p className="eyebrow">Outside the plan — quoted before any work</p>
+              <p className="eyebrow">Outside the plan: quoted before any work</p>
               {/* The placeholder asked for the out-of-scope list to be confirmed against the
                   plan data. It already existed, approved, in the brief - PRICE-07 and the
                   PRICE-08 footnote - and the list below is those two combined. The old
@@ -206,7 +206,7 @@ export default function LandlordsAndAgentsPage() {
           <SectionHead
             eyebrow="Where to start"
             title="Start with some of the properties, not some of the service."
-            lead="The model only works if we run the whole repairs service for a property. Dispatch, delivery, out-of-hours and the record are one thing, not four — so we do not take out-of-hours on its own, or act as overflow for someone else's team. What does scale is how many properties you hand over."
+            lead="The model only works if we run the whole repairs service for a property. Dispatch, delivery, out-of-hours and the record are one thing, not four, so we do not take out-of-hours on its own, or act as overflow for someone else's team. What does scale is how many properties you hand over."
           />
           <ul className="tick-list mt-3">
             <li>
@@ -234,7 +234,7 @@ export default function LandlordsAndAgentsPage() {
             photoAlt="An EVO trade accepting a job on his phone in the cab of his van"
             photoWidth={675}
             photoHeight={675}
-            caption="You take the instruction. We take the repair — and the tenant, the agent and the landlord all watch the same record."
+            caption="You take the instruction. We take the repair, and the tenant, the agent and the landlord all watch the same record."
           />
         </div>
       </section>
@@ -315,7 +315,7 @@ export default function LandlordsAndAgentsPage() {
               <ul className="tick-list mb-0">
                 <li>A dated record of every report, visit, and completion, per property</li>
                 <li>Photographs and timestamps captured as the work happens, not written up later</li>
-                <li>No-access visits recorded &mdash; the evidence hardest to produce after the fact</li>
+                <li>No-access visits recorded: the evidence hardest to produce after the fact</li>
                 <li>Gas, electrical, smoke and CO certificates against the same property record</li>
                 <li>Exportable, so it goes to a tenant, a court or a new agent without a rebuild</li>
               </ul>

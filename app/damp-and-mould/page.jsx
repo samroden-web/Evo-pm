@@ -246,7 +246,7 @@ export default function DampAndMouldPage() {
               {/* £129 was cleared for publication on 25 September (addendum section 10),
                   so the placeholder was out of date rather than waiting on anything. */}
               <p className="dm-charge">
-                <strong>&pound;129 plus VAT</strong> for the initial visit &mdash; survey, moisture readings, the first
+                <strong>&pound;129 plus VAT</strong> for the initial visit: survey, moisture readings, the first
                 treatment stage and a written report.{' '}
                 <Link href="/pricing" className="text-link">
                   All charges in full

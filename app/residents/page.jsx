@@ -75,7 +75,7 @@ const HELP = [
   {
     icon: 'droplet',
     title: 'Damp and mould',
-    body: 'How to report it, what we check when we visit, and what we do about it. Please report it early — it is easier to treat.',
+    body: 'How to report it, what we check when we visit, and what we do about it. Please report it early. It is easier to treat.',
     href: '/damp-and-mould',
     link: 'Damp and mould',
   },
@@ -94,7 +94,7 @@ export default function ResidentsPage() {
       <PageHero
         eyebrow="Residents"
         title="Something needs fixing?"
-        lead="Report it in the EVO Living App in about thirty seconds — any time of day or night, from wherever you are."
+        lead="Report it in the EVO Living App in about thirty seconds, any time of day or night, from wherever you are."
         crumbs={[{ label: 'Residents' }]}
       >
         {/* Sam, 27 September: "I like the First time here? bit. would that be better right at the

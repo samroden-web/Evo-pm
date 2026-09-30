@@ -8,7 +8,7 @@ import { cta } from '@/data/site';
 export const metadata = {
   title: 'Compliance: statutory and regulatory | EVO',
   description:
-    'Statutory compliance is work we do — gas, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you, and we hold the evidence for it.',
+    'Statutory compliance is work we do: gas, EICRs, PAT, alarms. Regulatory compliance is a duty that stays with you, and we hold the evidence for it.',
   alternates: { canonical: '/compliance' },
 };
 
@@ -35,7 +35,7 @@ const REGULATORY = [
     icon: 'scales',
     k: 'The Housing Ombudsman',
     h: 'Determinations turn on the record.',
-    b: 'Complaint handling is judged on whether you can show what happened and when — not on whether the repair was eventually done.',
+    b: 'Complaint handling is judged on whether you can show what happened and when, not on whether the repair was eventually done.',
   },
 ];
 
@@ -86,7 +86,7 @@ export default function CompliancePage() {
               <h3>Gas, electrical, alarms.</h3>
               <p>
                 <strong>We do the work.</strong> Inspection, certification and the remedials that follow, carried out by
-                the same trades who do your repairs — so a failed check becomes a job rather than a letter.
+                the same trades who do your repairs, so a failed check becomes a job rather than a letter.
               </p>
               <p className="mb-0">Available as an add-on to any plan, or as variable works.</p>
             </div>
@@ -224,7 +224,7 @@ export default function CompliancePage() {
               </ul>
               <p className="tsm-note mb-0">
                 TP02 to TP05 are tenant perception measures and RP02 is management information. There is no TSM for damp
-                and mould specifically &mdash; it reaches the framework through TP04, TP05 and the complaints measures.
+                and mould specifically: it reaches the framework through TP04, TP05 and the complaints measures.
                 Your monthly pack carries the underlying data for each of these, by property and by month, so the annual
                 return is assembled from a record rather than reconstructed.
               </p>

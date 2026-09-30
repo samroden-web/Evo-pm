@@ -15,7 +15,7 @@ import { board, development, operations } from '@/data/team';
 const mark = board.find((m) => m.name === 'Mark Iandoli');
 
 export const metadata = {
-  title: 'About EVO',
+  title: 'About EVO | Repairs run end to end, by people who have done the work',
   description:
     'Why EVO exists, the people behind it, the social value a repairs contract puts back, and the health, safety and environment record a PQQ asks about.',
   alternates: { canonical: '/about' },
@@ -180,7 +180,7 @@ export default function AboutPage() {
             <p className="lead">
               Nothing on the market did what we needed, so we built it ourselves rather than licensing somebody
               else&rsquo;s. That is what makes a single fixed monthly price possible, and what makes the evidence exist
-              without anybody having to assemble it. We are not a software company &mdash; we are the company that had
+              without anybody having to assemble it. We are not a software company. We are the company that had
               to write the software to run the service properly.
             </p>
           </div>
